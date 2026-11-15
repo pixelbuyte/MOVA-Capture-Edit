@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Photo editor</title>
+<link rel="stylesheet" href="../mova.css">
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#000}</style>
+<div class="scr safe" style="background: #000">
+  <div class="nav">
+    <a href="Library.html" class="chip" style="height: 34px">Cancel</a>
+    <div class="row2" style="gap: 2px">
+      <button class="ib" aria-label="Undo"><svg class="i" viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"></path><path d="M4 9h10a6 6 0 0 1 0 12h-3"></path></svg></button>
+      <button class="ib" aria-label="Redo" style="color: #55555E"><svg class="i" viewBox="0 0 24 24"><path d="M15 14l5-5-5-5"></path><path d="M20 9H10a6 6 0 0 0 0 12h3"></path></svg></button>
+      <button class="ib" aria-label="More: send to AI Studio, export, reset"><svg class="i" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.2"></circle><circle cx="12" cy="12" r="1.2"></circle><circle cx="19" cy="12" r="1.2"></circle></svg></button>
+    </div>
+    <button class="chip on" style="height: 34px">Save copy</button>
+  </div>
+
+  <div style="position: relative; margin: 10px 0 0; height: 440px">
+    <img src="../assets/img/hiker.jpg" alt="Edited photo: hiker above the clouds" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: contrast(1.12) saturate(1.15) brightness(1.02)">
+    <div style="position: absolute; top: 0; bottom: 0; left: 0; width: 140px; overflow: hidden">
+      <img src="../assets/img/hiker.jpg" alt="Original" style="position: absolute; top: 0; left: 0; width: 390px; height: 440px; object-fit: cover; filter: contrast(.92) saturate(.85) brightness(.95)">
+    </div>
+    <div style="position: absolute; top: 0; bottom: 0; left: 139px; width: 2px; background: #fff"></div>
+    <span class="badge" style="position: absolute; left: 10px; top: 10px">Before</span>
+    <span class="badge" style="position: absolute; right: 10px; top: 10px">After</span>
+    <span class="badge mono" style="position: absolute; right: 10px; bottom: 10px; font-weight: 500">ProRAW · 48MP</span>
+  </div>
+
+  <div style="margin-top: 16px; text-align: center">
+    <div style="font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #FFD60A">Highlights</div>
+    <div class="mono" style="font-size: 22px; margin-top: 2px">−32</div>
+  </div>
+  <div style="position: relative; height: 40px; margin: 6px 0 0; overflow: hidden" aria-label="Value ruler">
+    <div style="position: absolute; left: 0; right: 0; top: 10px; height: 20px; background: repeating-linear-gradient(90deg, rgba(255,255,255,.45) 0 1px, transparent 1px 10px)"></div>
+    <div style="position: absolute; left: 194px; top: 4px; width: 2px; height: 32px; border-radius: 1px; background: #FFD60A"></div>
+  </div>
+
+  <div style="display: flex; gap: 14px; justify-content: center; margin-top: 12px">
+    <button aria-label="Exposure" style="width: 44px; height: 44px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.3); display: flex; align-items: center; justify-content: center"><svg class="i s" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><path d="M12 4v16" ></path></svg></button>
+    <button aria-label="Contrast" style="width: 44px; height: 44px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.3); display: flex; align-items: center; justify-content: center"><svg class="i s" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><path d="M12 4a8 8 0 0 1 0 16z" style="fill: currentColor"></path></svg></button>
+    <button aria-label="Highlights, selected" style="width: 52px; height: 52px; margin-top: -4px; border-radius: 50%; box-shadow: inset 0 0 0 2px #FFD60A; color: #FFD60A; display: flex; align-items: center; justify-content: center"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"></path></svg></button>
+    <button aria-label="Shadows" style="width: 44px; height: 44px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.3); display: flex; align-items: center; justify-content: center"><svg class="i s" viewBox="0 0 24 24"><path d="M20 14A8 8 0 1 1 10 4a6 6 0 0 0 10 10z"></path></svg></button>
+    <button aria-label="Temperature" style="width: 44px; height: 44px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.3); display: flex; align-items: center; justify-content: center"><svg class="i s" viewBox="0 0 24 24"><path d="M10 14V5a2 2 0 0 1 4 0v9a4 4 0 1 1-4 0z"></path></svg></button>
+  </div>
+  <div class="xs" style="text-align: center; margin-top: 8px">Exposure · Brightness · Contrast · Highlights · Shadows · Saturation · Temperature · Tint · Sharpness</div>
+
+  <div style="position: absolute; left: 16px; right: 16px; bottom: 30px; display: flex; justify-content: space-around; font-size: 11px; font-weight: 600; color: #8B8B96">
+    <span class="col" style="align-items: center; gap: 4px; color: #F5F5F7"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg>Adjust</span>
+    <span class="col" style="align-items: center; gap: 4px"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="10" r="5"></circle><circle cx="15" cy="10" r="5"></circle><circle cx="12" cy="15" r="5"></circle></svg>Filters</span>
+    <span class="col" style="align-items: center; gap: 4px"><svg class="i" viewBox="0 0 24 24"><path d="M6 2v16h16M2 6h16v16"></path></svg>Crop</span>
+    <span class="col" style="align-items: center; gap: 4px"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" stroke-dasharray="3 3"></circle><circle cx="12" cy="12" r="2"></circle></svg>Selective</span>
+    <a href="Animate.html" class="col" style="align-items: center; gap: 4px; color: #8F7FFF"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18.5 9.5l-4.7 1.9L12 16l-1.8-4.6L5.5 9.5l4.7-1.9z"></path></svg>AI Studio</a>
+  </div>
+  <div class="home-ind"></div>
+</div>
+</body>
+</html>

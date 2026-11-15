@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Photo animation</title>
+<link rel="stylesheet" href="../mova.css">
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#000}</style>
+<div class="scr safe">
+  <div class="nav">
+    <a href="Home.html" class="ib e" aria-label="Close"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg></a>
+    <span class="ttl">Animate</span>
+    <a href="Subscription.html" class="credit" aria-label="240 credits"><svg class="i s" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"></path><path d="M2 9h20"></path></svg>240</a>
+  </div>
+  <div class="pad" style="margin-top: 4px">
+    <h1 class="lt" style="font-size: 36px">Bring a photo to life.</h1>
+  </div>
+
+  <div class="pad" style="margin-top: 14px">
+    <div class="m" style="height: 300px; border-radius: 20px; box-shadow: 0 0 0 2px #fff">
+      <img src="../assets/img/dog.jpg" alt="Your photo: beagle smiling">
+      <svg viewBox="0 0 350 300" width="350" height="300" style="position: absolute; inset: 0" fill="none" aria-label="Camera orbit path">
+        <ellipse cx="175" cy="170" rx="140" ry="40" stroke="#fff" stroke-width="2" stroke-dasharray="6 6" opacity=".9"></ellipse>
+        <path d="M300 186l15-4-5 14" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+      <span class="badge tag" style="left: 12px; top: 12px">Camera orbit · right</span>
+      <button class="ib g" aria-label="Change photo" style="position: absolute; right: 10px; bottom: 10px; width: 36px; height: 36px"><svg class="i s" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-15 6.7L3 16"></path><path d="M3 21v-5h5"></path></svg></button>
+    </div>
+  </div>
+
+  <div class="cap pad" style="margin-top: 16px">Motion</div>
+  <div style="display: flex; gap: 8px; margin-top: 8px; padding-left: 20px; overflow: hidden">
+    <div style="width: 84px; flex: none"><div class="m" style="height: 84px; box-shadow: 0 0 0 2px #8F7FFF"><img src="../assets/img/dog.jpg" alt=""><svg class="i" viewBox="0 0 24 24" style="position: absolute; left: 31px; top: 31px; color: #fff"><ellipse cx="12" cy="12" rx="9" ry="4"></ellipse><circle cx="12" cy="12" r="2"></circle></svg></div><div style="font-size: 11px; font-weight: 600; margin-top: 6px">Camera orbit</div></div>
+    <div style="width: 84px; flex: none"><div class="m" style="height: 84px"><img src="../assets/img/port_red.jpg" alt=""></div><div style="font-size: 11px; font-weight: 600; margin-top: 6px; color: #A9A9B3">Cinematic portrait</div></div>
+    <div style="width: 84px; flex: none"><div class="m" style="height: 84px"><img src="../assets/img/forest.jpg" alt=""></div><div style="font-size: 11px; font-weight: 600; margin-top: 6px; color: #A9A9B3">Natural movement</div></div>
+    <div style="width: 84px; flex: none"><div class="m" style="height: 84px"><img src="../assets/img/stars.jpg" alt=""></div><div style="font-size: 11px; font-weight: 600; margin-top: 6px; color: #A9A9B3">Slow zoom</div></div>
+    <div style="width: 84px; flex: none"><div class="m" style="height: 84px"><img src="../assets/img/watch.jpg" alt=""></div><div style="font-size: 11px; font-weight: 600; margin-top: 6px; color: #A9A9B3">Product spin</div></div>
+  </div>
+  <div style="display: flex; gap: 6px; margin-top: 10px; padding-left: 20px; overflow: hidden">
+    <span class="chip" style="height: 28px; font-size: 12px">Dramatic reveal</span><span class="chip" style="height: 28px; font-size: 12px">Fantasy</span><span class="chip" style="height: 28px; font-size: 12px">Dance</span><span class="chip dis" style="height: 28px; font-size: 12px">Talking · needs a face</span>
+  </div>
+
+  <div class="pad" style="margin-top: 12px">
+    <label class="field" style="padding: 12px 14px">
+      <svg class="i s acc" viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18.5 9.5l-4.7 1.9L12 16l-1.8-4.6L5.5 9.5l4.7-1.9z"></path></svg>
+      <span style="flex: 1; font-size: 14px; color: #A9A9B3">Ears catch the wind, tail wags, golden light…</span>
+    </label>
+  </div>
+
+  <div style="position: absolute; left: 20px; right: 20px; bottom: 34px">
+    <div style="display: flex; gap: 6px; margin-bottom: 10px; align-items: center">
+      <span class="chip" style="height: 28px; font-size: 12px">5s</span><span class="chip" style="height: 28px; font-size: 12px">9:16</span><span class="chip" style="height: 28px; font-size: 12px">1080p</span>
+      <span style="margin-left: auto; font-size: 13px; font-weight: 600">18 credits</span>
+    </div>
+    <a href="Result.html" class="btn"><svg class="i s" viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18.5 9.5l-4.7 1.9L12 16l-1.8-4.6L5.5 9.5l4.7-1.9z"></path></svg>Animate photo</a>
+  </div>
+  <div class="home-ind"></div>
+</div>
+</body>
+</html>

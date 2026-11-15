@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MOVA demo stage</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#0A0A0C;color:#F5F5F7;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  #glow{position:absolute;inset:0;background:radial-gradient(900px 700px at 1320px 560px,rgba(91,71,240,.22),transparent 70%),radial-gradient(700px 500px at 300px 900px,rgba(143,127,255,.08),transparent 70%)}
+  #phone{position:absolute;left:1120px;top:58px;width:420px;height:908px;border-radius:64px;background:#1a1a1f;box-shadow:0 0 0 2px #2c2c34,0 0 0 12px #0f0f12,0 0 0 13px #2c2c34,0 60px 120px rgba(0,0,0,.7)}
+  #screen{position:absolute;left:15px;top:32px;width:390px;height:844px;border-radius:50px;overflow:hidden;background:#000}
+  #screen iframe{position:absolute;inset:0;width:390px;height:844px;border:0;opacity:0;will-change:transform,opacity}
+  #island{position:absolute;left:150px;top:44px;width:120px;height:34px;border-radius:20px;background:#000;z-index:5}
+  .cap{position:absolute;left:180px;width:780px;opacity:0}
+  .eb{font:500 15px/1 'JetBrains Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:#8F7FFF}
+  .h{margin-top:22px;font-family:'Instrument Serif',Georgia,serif;font-size:96px;line-height:.98;letter-spacing:-.02em}
+  .b{margin-top:26px;font-size:26px;line-height:1.45;color:#A9A9B3;max-width:30em}
+  #intro,#outro{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;text-align:center}
+  .word{font-size:64px;font-weight:700;letter-spacing:.3em;margin-left:.3em}
+  #flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:6;pointer-events:none}
+  #scan{position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#8F7FFF,transparent);box-shadow:0 0 24px 6px rgba(143,127,255,.6);opacity:0;z-index:6}
+  #prog{position:absolute;left:180px;bottom:90px;display:flex;gap:8px;opacity:0}
+  #prog i{display:block;width:44px;height:4px;border-radius:2px;background:#30303A}
+  #prog i.on{background:#8F7FFF}
+</style>
+</head>
+<body>
+<div id="glow"></div>
+
+<div id="intro">
+  <svg viewBox="0 0 64 64" width="150" height="150" fill="none" stroke-linecap="round" stroke-linejoin="round"><path id="echo" d="M14 46V20l18 18 18-18v26" stroke="#8F7FFF" stroke-width="6" opacity=".6"></path><path d="M14 46V20l18 18 18-18v26" stroke="#fff" stroke-width="6"></path></svg>
+  <div class="word" style="margin-top:30px">MOVA</div>
+  <div style="margin-top:26px;font-family:'Instrument Serif',Georgia,serif;font-size:58px;color:#A9A9B3"><em>Show it a video. Make it yours.</em></div>
+</div>
+
+<div id="phone"><div id="screen"><div id="flash"></div><div id="scan"></div></div><div id="island"></div></div>
+<div id="caps"></div>
+<div id="prog"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+<div id="outro">
+  <svg viewBox="0 0 64 64" width="120" height="120" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 46V20l18 18 18-18v26" stroke="#8F7FFF" stroke-width="6" opacity=".6" transform="translate(5 5)"></path><path d="M14 46V20l18 18 18-18v26" stroke="#fff" stroke-width="6"></path></svg>
+  <div class="word" style="margin-top:26px">MOVA</div>
+  <div style="margin-top:24px;font-size:30px;color:#A9A9B3">Professional camera · AI studio · Editor</div>
+  <div style="margin-top:46px;font:500 20px/1 'JetBrains Mono',monospace;letter-spacing:.2em;color:#8F7FFF">COMING TO IPHONE · PLAYLOCAL.SPACE</div>
+</div>
+
+<script>
+// Timeline: [screen, start, end, eyebrow, headline, body, step]
+const S = [
+  ['Home',4,8.2,'Home','Create something.','A professional camera and an AI creative studio, in one app.'],
+  ['CameraPhoto',8.2,12,'Camera','A real pro camera.','Manual focus and exposure, RAW, histogram and level. Free, always — no credits, no subscription.'],
+  ['CameraVideo',12,15.6,'Camera · Video','Shoot like a cinema rig.','4K, Log where supported, zebras, peaking, external mics and live audio meters.'],
+  ['RefImport',15.6,19.2,'Signature · 1','Show it a reference.','Pick any video whose look and movement you love.',1],
+  ['RefAnalysis',19.2,23.4,'Signature · 2','It learns how it was made.','Shots, camera moves, light, color, transitions and pacing — scene by scene.',2],
+  ['ChooseMedia',23.4,26.8,'Signature · 3','Now make it yours.','Add your own selfie, pet, product, landscape or footage.',3],
+  ['Customize',26.8,30.2,'Signature · 4','Keep what you love.','Choose what carries over, then direct the rest in plain words.',4],
+  ['Generate',30.2,33.4,'Signature · 5','Know the cost first.','Duration, aspect, resolution and credits — before you tap Generate.',5],
+  ['Result',33.4,37.8,'Signature · 6','A genuinely new video.','Not a filter over the reference. Your media, its direction.',6],
+  ['Discover',37.8,41.4,'Discover','Templates are recipes.','Reusable scene structures, moves and looks — and you can save your own.'],
+  ['VideoEditor',41.4,45.4,'Editor','Finish it properly.','Multitrack timeline, captions, color, audio and AI tools when you want them.'],
+];
+const D = 49;
+const scr = document.getElementById('screen'), caps = document.getElementById('caps');
+const frames = S.map(s => { const f = document.createElement('iframe'); f.src = 'screens/' + s[0] + '.html'; f.setAttribute('scrolling','no'); scr.appendChild(f); return f; });
+const capEls = S.map(s => { const d = document.createElement('div'); d.className = 'cap'; d.innerHTML = `<div class="eb">${s[3]}</div><div class="h">${s[4]}</div><div class="b">${s[5]}</div>`; caps.appendChild(d); return d; });
+const clamp = (x,a=0,b=1) => Math.max(a, Math.min(b, x));
+const ease = x => x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x+2, 3)/2;
+const T = 0.55; // transition seconds
+function render(t){
+  // intro / outro
+  const iIn = ease(clamp(t/0.9)), iOut = ease(clamp((t-3.2)/0.8));
+  const intro = document.getElementById('intro');
+  intro.style.opacity = iIn * (1-iOut);
+  intro.style.transform = `scale(${0.96 + 0.04*iIn + 0.04*iOut})`;
+  document.getElementById('echo').setAttribute('transform', `translate(${5*ease(clamp((t-.6)/1.2))} ${5*ease(clamp((t-.6)/1.2))})`);
+  const oIn = ease(clamp((t-45.6)/0.9));
+  const outro = document.getElementById('outro');
+  outro.style.opacity = oIn; outro.style.transform = `scale(${1.04 - 0.04*oIn})`;
+  // phone presence
+  const pIn = ease(clamp((t-3.4)/0.9)), pOut = ease(clamp((t-45.2)/0.7));
+  const phone = document.getElementById('phone');
+  phone.style.opacity = pIn*(1-pOut);
+  phone.style.transform = `translateY(${(1-pIn)*80 + Math.sin(t*0.9)*6 - pOut*40}px)`;
+  // screens: push transition
+  S.forEach((s,i) => {
+    const [ , a, b] = s; const f = frames[i];
+    let o = 0, x = 0, sc = 1;
+    if (t >= a - T && t < b + T) {
+      const inP = i === 0 ? 1 : ease(clamp((t - (a - T/2)) / T));
+      const outP = i === S.length-1 ? 0 : ease(clamp((t - (b - T/2)) / T));
+      o = Math.min(inP, 1 - outP);
+      x = (1-inP)*60 - outP*60; sc = 1 - (1-inP)*0.03 - outP*0.03;
+      if (i === S.length-1) o = inP;
+    }
+    f.style.opacity = o; f.style.transform = `translateX(${x}px) scale(${sc})`;
+    // captions
+    const c = capEls[i];
+    const ci = ease(clamp((t - a - 0.1)/0.6)), co = ease(clamp((t - b + 0.45)/0.4));
+    const show = t > a - 0.1 && t < b + 0.1;
+    c.style.opacity = show ? Math.min(ci, 1-co) : 0;
+    c.style.top = '360px';
+    c.style.transform = `translateY(${(1-ci)*24 - co*16}px)`;
+  });
+  // signature step progress
+  const prog = document.getElementById('prog');
+  const cur = S.findIndex(s => t >= s[1] && t < s[2]);
+  const step = cur >= 0 ? (S[cur][6] || 0) : 0;
+  prog.style.opacity = step ? 1 : 0;
+  [...prog.children].forEach((el,k) => el.className = k < step ? 'on' : '');
+  // camera shutter flash
+  const fl = document.getElementById('flash');
+  fl.style.opacity = t > 10.4 && t < 10.75 ? (1 - (t-10.4)/0.35) * 0.85 : 0;
+  // analysis scan
+  const sc2 = document.getElementById('scan');
+  if (t > 19.6 && t < 22.8) { sc2.style.opacity = 1; sc2.style.top = (140 + ((t-19.6)/3.2) * 640) + 'px'; } else sc2.style.opacity = 0;
+}
+if (/screen/.test(location.search)) {
+  // Screen-only mode: a 390x844 portrait clip of the app itself (for embedding in a phone frame).
+  document.documentElement.style.cssText = document.body.style.cssText = 'width:390px;height:844px';
+  document.body.appendChild(scr);
+  scr.style.cssText = 'left:0;top:0;border-radius:0';
+  ['glow','phone','caps','prog','intro','outro'].forEach(id => document.getElementById(id).style.display = 'none');
+}
+window.render = render;
+window.ready = () => frames.every(f => f.contentDocument && f.contentDocument.readyState === 'complete' && [...f.contentDocument.images].every(im => im.complete)) && document.fonts.status === 'loaded';
+render(0);
+if (!/capture/.test(location.search)) { const t0 = performance.now(); (function loop(){ render(((performance.now()-t0)/1000) % D); requestAnimationFrame(loop); })(); }
+</script>
+</body>
+</html>

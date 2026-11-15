@@ -1,0 +1,35 @@
+<!--
+  MOVA card for playlocal.space (Doberg) — paste inside <section id="apps"> after the Blith card,
+  right before <div class="lab" ...>. Copy the CSS rules below into the page stylesheet.
+  Assets to upload next to the site: assets/mova-icon.png, assets/mova-demo.mp4, assets/mova-demo-poster.jpg
+-->
+<style>
+.mv-card{background:#0B0B0E;color:#F5F5F7;box-shadow:inset 0 1px 1px rgba(255,255,255,.08),0 18px 40px -28px rgba(0,0,0,.6)}
+.mv-card .kind,.mv-card .status{color:#A79BFF}
+.mv-card p,.mv-card li{color:#A9A9B3}
+.mv-card .btn{background:#5B47F0;color:#fff}
+.mv-card .btn .ic{background:rgba(255,255,255,.16)}
+.mv-phone{width:248px;aspect-ratio:390/844;border-radius:38px;padding:8px;background:#1a1a1f;box-shadow:0 0 0 1px #2c2c34,0 30px 60px -20px rgba(0,0,0,.7);margin:0 auto}
+.mv-phone video{width:100%;height:100%;object-fit:cover;border-radius:30px;display:block;background:#000}
+@media (max-width:767px){.mv-phone{width:210px}}
+</style>
+
+<div class="bezel" data-reveal id="mova" style="margin-top:28px">
+  <article class="app core mv-card" aria-labelledby="mv-t">
+    <div>
+      <span class="kind">Camera &amp; creative studio</span>
+      <h3 id="mv-t" class="serif">MOVA</h3>
+      <p>A professional iPhone camera and editor. Show it a reference video and it learns how the video was made, then builds a new one from your own photo or footage.</p>
+      <ul>
+        <li>Pro camera controls, free to use with no credits</li>
+        <li>Recreate a reference's camera moves, light and pacing</li>
+        <li>Multitrack editor with AI tools when you want them</li>
+      </ul>
+      <div class="foot">
+        <a class="btn" href="mova.html">See MOVA<span class="ic" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span></a>
+        <span class="status">iPhone · in design</span>
+      </div>
+    </div>
+    <div class="mv-phone"><video src="assets/mova-demo.mp4" poster="assets/mova-demo-poster.jpg" autoplay muted loop playsinline aria-label="MOVA app demo"></video></div>
+  </article>
+</div>

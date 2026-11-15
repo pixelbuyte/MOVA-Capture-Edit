@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Video restyle</title>
+<link rel="stylesheet" href="../mova.css">
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#000}</style>
+<div class="scr safe">
+  <div class="nav">
+    <a href="Home.html" class="ib e" aria-label="Close"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg></a>
+    <span class="ttl">Restyle video</span>
+    <a href="Subscription.html" class="credit" aria-label="240 credits"><svg class="i s" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"></path><path d="M2 9h20"></path></svg>240</a>
+  </div>
+
+  <div class="pad" style="margin-top: 8px">
+    <div style="position: relative; height: 340px; border-radius: 20px; overflow: hidden; background: #1B1B20">
+      <img src="../assets/img/street.jpg" alt="Original footage: city street" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+      <div style="position: absolute; top: 0; bottom: 0; left: 175px; right: 0; overflow: hidden">
+        <img src="../assets/img/street.jpg" alt="Restyled preview frame: futuristic neon city" style="position: absolute; top: 0; left: -175px; width: 350px; height: 340px; object-fit: cover; filter: hue-rotate(190deg) saturate(1.9) contrast(1.25) brightness(.8)">
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(91,71,240,.35), rgba(255,69,140,.18))"></div>
+      </div>
+      <div style="position: absolute; top: 0; bottom: 0; left: 174px; width: 2px; background: #fff"></div>
+      <div style="position: absolute; left: 157px; top: 152px; width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #0A0A0C; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,.4)"><svg class="i s" viewBox="0 0 24 24"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"></path></svg></div>
+      <span class="badge" style="position: absolute; left: 10px; top: 10px">Original</span>
+      <span class="badge" style="position: absolute; right: 10px; top: 10px; background: rgba(91,71,240,.85)">Preview frame</span>
+      <span class="dur">0:24</span>
+    </div>
+  </div>
+
+  <div class="pad" style="margin-top: 12px">
+    <label class="field" style="padding: 12px 14px">
+      <svg class="i s acc" viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18.5 9.5l-4.7 1.9L12 16l-1.8-4.6L5.5 9.5l4.7-1.9z"></path></svg>
+      <span style="flex: 1; font-size: 14px; line-height: 1.4">Transform the environment into a futuristic city at night. Keep the traffic moving.</span>
+    </label>
+  </div>
+
+  <div style="display: flex; gap: 6px; margin-top: 12px; padding-left: 20px; overflow: hidden">
+    <span class="chip on">Style</span><span class="chip">Lighting</span><span class="chip">Background</span><span class="chip">Camera</span><span class="chip">Color</span><span class="chip">Audio</span>
+  </div>
+  <div class="pad" style="margin-top: 10px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+    <div><div class="m" style="height: 58px; border-radius: 10px; box-shadow: 0 0 0 2px #8F7FFF"><img src="../assets/img/skyline.jpg" alt="" style="filter: hue-rotate(190deg) saturate(1.8)"></div><div style="font-size: 11px; font-weight: 600; margin-top: 5px">Future city</div></div>
+    <div><div class="m" style="height: 58px; border-radius: 10px"><img src="../assets/img/cinema.jpg" alt=""></div><div style="font-size: 11px; font-weight: 600; margin-top: 5px; color: #A9A9B3">Film noir</div></div>
+    <div><div class="m" style="height: 58px; border-radius: 10px"><img src="../assets/img/watch.jpg" alt=""></div><div style="font-size: 11px; font-weight: 600; margin-top: 5px; color: #A9A9B3">Luxury ad</div></div>
+    <div><div class="m" style="height: 58px; border-radius: 10px"><img src="../assets/img/forest.jpg" alt=""></div><div style="font-size: 11px; font-weight: 600; margin-top: 5px; color: #A9A9B3">Fantasy</div></div>
+  </div>
+
+  <div class="pad" style="margin-top: 12px; display: grid; grid-template-columns: 96px 1fr; align-items: center; gap: 8px 12px; font-size: 13px">
+    <span style="color: #A9A9B3">Intensity</span><div class="sld"><div class="tr"></div><div class="fi" style="width: 72%"></div><div class="kn" style="left: 72%"></div></div>
+    <span style="color: #A9A9B3">Keep people</span><div style="display: flex; justify-content: flex-end"><span class="tog on"></span></div>
+  </div>
+
+  <div style="position: absolute; left: 20px; right: 20px; bottom: 34px; display: flex; gap: 10px">
+    <button class="btn sec" style="width: 128px; flex: none; font-size: 14px">Free preview</button>
+    <a href="Result.html" class="btn">Restyle · 48 cr</a>
+  </div>
+  <div class="home-ind"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Customize recreation</title>
+<link rel="stylesheet" href="../mova.css">
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#000}</style>
+<div class="scr safe">
+  <div class="nav">
+    <a href="ChooseMedia.html" class="ib e" aria-label="Back"><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"></path></svg></a>
+    <div class="step" style="width: 150px"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+    <span class="ib"></span>
+  </div>
+  <div class="pad" style="margin-top: 6px">
+    <span class="cap acc">Step 4 · Direction</span>
+    <h1 class="lt" style="font-size: 34px; margin-top: 6px">What should carry over?</h1>
+  </div>
+
+  <div class="pad" style="margin-top: 14px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+    <button class="card" style="height: 70px; padding: 10px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: inset 0 0 0 1.5px #8F7FFF; background: rgba(143,127,255,.1)"><span class="row2" style="justify-content: space-between; width: 100%"><svg class="i s acc" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"></path></svg><svg class="i xs acc" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"></path></svg></span><span style="font-size: 12px; font-weight: 600">Camera moves</span></button>
+    <button class="card" style="height: 70px; padding: 10px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: inset 0 0 0 1.5px #8F7FFF; background: rgba(143,127,255,.1)"><span class="row2" style="justify-content: space-between; width: 100%"><svg class="i s acc" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"></circle><path d="M12 7v6l-3 7M12 13l3 7M8 10h8"></path></svg><svg class="i xs acc" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"></path></svg></span><span style="font-size: 12px; font-weight: 600">Subject motion</span></button>
+    <button class="card" style="height: 70px; padding: 10px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: inset 0 0 0 1.5px #8F7FFF; background: rgba(143,127,255,.1)"><span class="row2" style="justify-content: space-between; width: 100%"><svg class="i s acc" viewBox="0 0 24 24"><path d="M12 3c4 5 7 8 7 12a7 7 0 0 1-14 0c0-4 3-7 7-12z"></path></svg><svg class="i xs acc" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"></path></svg></span><span style="font-size: 12px; font-weight: 600">Visual style</span></button>
+    <button class="card" style="height: 70px; padding: 10px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: inset 0 0 0 1.5px #FFB340"><span class="row2" style="justify-content: space-between; width: 100%"><svg class="i s" viewBox="0 0 24 24" style="color: #FFB340"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"></path></svg><span style="font-size: 10px; font-weight: 700; color: #FFB340">EDITED</span></span><span style="font-size: 12px; font-weight: 600">Lighting</span></button>
+    <button class="card" style="height: 70px; padding: 10px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: inset 0 0 0 1.5px #8F7FFF; background: rgba(143,127,255,.1)"><span class="row2" style="justify-content: space-between; width: 100%"><svg class="i s acc" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M9 3v18M15 3v18M3 9h18M3 15h18"></path></svg><svg class="i xs acc" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"></path></svg></span><span style="font-size: 12px; font-weight: 600">Composition</span></button>
+    <button class="card" style="height: 70px; padding: 10px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: inset 0 0 0 1.5px #8F7FFF; background: rgba(143,127,255,.1)"><span class="row2" style="justify-content: space-between; width: 100%"><svg class="i s acc" viewBox="0 0 24 24"><path d="M3 5l9 7-9 7zM21 5l-9 7 9 7z"></path></svg><svg class="i xs acc" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"></path></svg></span><span style="font-size: 12px; font-weight: 600">Transitions</span></button>
+    <button class="card" style="height: 70px; padding: 10px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: inset 0 0 0 1.5px #8F7FFF; background: rgba(143,127,255,.1)"><span class="row2" style="justify-content: space-between; width: 100%"><svg class="i s acc" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2 2M9 2h6"></path></svg><svg class="i xs acc" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"></path></svg></span><span style="font-size: 12px; font-weight: 600">Pacing</span></button>
+    <button class="card" style="height: 70px; padding: 10px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: inset 0 0 0 1.5px #8F7FFF; background: rgba(143,127,255,.1)"><span class="row2" style="justify-content: space-between; width: 100%"><svg class="i s acc" viewBox="0 0 24 24"><rect x="3" y="6" width="5" height="12" rx="1"></rect><rect x="10" y="6" width="5" height="12" rx="1"></rect><rect x="17" y="6" width="4" height="12" rx="1"></rect></svg><svg class="i xs acc" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"></path></svg></span><span style="font-size: 12px; font-weight: 600">Scene structure</span></button>
+    <button class="card" style="height: 70px; padding: 10px; text-align: left; display: flex; flex-direction: column; justify-content: space-between"><span class="row2" style="justify-content: space-between; width: 100%"><svg class="i s" viewBox="0 0 24 24" style="color: #8B8B96"><path d="M9 18V5l11-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="17" cy="16" r="3"></circle></svg><span style="font-size: 10px; font-weight: 700; color: #8B8B96">OFF</span></span><span style="font-size: 12px; font-weight: 600; color: #A9A9B3">Audio</span></button>
+  </div>
+
+  <div class="pad" style="margin-top: 16px">
+    <div class="cap">Your appearance</div>
+    <div class="seg" style="margin-top: 8px"><span class="on">Keep me as I am</span><span>Restyle me</span></div>
+  </div>
+
+  <div class="pad" style="margin-top: 16px">
+    <div class="cap">Direction notes</div>
+    <label class="field" style="margin-top: 8px; min-height: 92px">
+      <svg class="i s acc" viewBox="0 0 24 24" style="margin-top: 1px"><path d="M12 3l1.8 4.6L18.5 9.5l-4.7 1.9L12 16l-1.8-4.6L5.5 9.5l4.7-1.9z"></path></svg>
+      <span style="flex: 1; font-size: 14px; line-height: 1.45">Use the reference's camera movements, but give it warmer lighting and a more cinematic atmosphere. Keep my outfit.</span>
+    </label>
+    <div style="display: flex; gap: 6px; margin-top: 8px; overflow: hidden">
+      <span class="chip" style="height: 28px; font-size: 12px">+ Luxury commercial</span><span class="chip" style="height: 28px; font-size: 12px">+ Slower</span><span class="chip" style="height: 28px; font-size: 12px">+ Night</span>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 20px; right: 20px; bottom: 34px">
+    <a href="Generate.html" class="btn w">Review &amp; generate</a>
+  </div>
+  <div class="home-ind"></div>
+</div>
+</body>
+</html>
