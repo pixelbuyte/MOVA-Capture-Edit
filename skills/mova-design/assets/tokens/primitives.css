@@ -1,0 +1,80 @@
+/* ─────────────────────────────────────────────────────────────
+   MOVA tokens · layer 1 of 3 · PRIMITIVES
+   Raw values only. Named by what they ARE, never by what they're for.
+   Nothing outside tokens/semantic.css may reference these directly.
+   ───────────────────────────────────────────────────────────── */
+:root {
+  /* Graphite: neutral with a slight blue-violet bias toward the accent */
+  --gray-1000: #000000;
+  --gray-975: #070709;
+  --gray-950: #0E0E11;
+  --gray-925: #16161A;
+  --gray-900: #1E1E23;
+  --gray-875: #28282E;
+  --gray-850: #34343B;
+  --gray-700: #4A4A52;
+  --gray-500: #8E8E99;
+  --gray-400: #A2A2AC;
+  --gray-200: #DEDEE3;
+  --gray-100: #EDEDF0;
+  --gray-50: #F3F3F5;
+  --gray-0: #FFFFFF;
+
+  /* Periwinkle: MOVA's one hue */
+  --peri-100: #ECEBFF;
+  --peri-300: #A9A4FF;
+  --peri-500: #6A62F2;
+  --peri-600: #5047D6;
+  --peri-700: #3B33A8;
+
+  /* Darkroom (direction B only): warm blacks and safelight */
+  --umber-50: #F6EEE8;
+  --umber-975: #0B0807;
+  --umber-950: #14100E;
+  --umber-925: #1C1714;
+  --umber-900: #26201C;
+  --umber-875: #322A25;
+  --umber-400: #B3A79E;
+  --umber-500: #9A8D84;
+  --safelight-300: #FFA07A;
+  --safelight-500: #D9482E;
+
+  /* Paper (direction C only) */
+  --paper-50: #F5F4F0;
+  --paper-100: #ECEAE4;
+  --paper-200: #E2DFD7;
+  --ink-900: #131316;
+  --ink-700: #4B4B53;
+  --ink-500: #6B6B74;
+
+  /* Signals */
+  --red-500: #FF453A;
+  --yellow-400: #FFD60A;
+  --green-400: #3BD671;
+  --green-600: #1E8E4B;
+  --orange-300: #FFB547;
+  --coral-400: #FF6B60;
+  --blue-300: #6BA6FF;
+  --amber-300: #FFB25E;
+
+  /* Type families (mock stand-ins → iOS: SF Pro, New York, SF Mono) */
+  --family-sans: 'Geist', -apple-system, 'SF Pro Text', system-ui, sans-serif;
+  --family-serif: 'Instrument Serif', 'New York', Georgia, serif;
+  --family-mono: 'Geist Mono', 'SF Mono', ui-monospace, monospace;
+
+  /* Type sizes (pt) */
+  --size-11: 11px; --size-12: 12px; --size-13: 13px; --size-15: 15px; --size-16: 16px;
+  --size-21: 21px; --size-28: 28px; --size-40: 40px;
+
+  /* Space: 4pt base */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px;
+  --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px;
+
+  /* Radius */
+  --radius-6: 6px; --radius-10: 10px; --radius-16: 16px; --radius-24: 24px; --radius-full: 999px;
+
+  /* Time and curves */
+  --ms-120: 120ms; --ms-220: 220ms; --ms-380: 380ms; --ms-700: 700ms;
+  --curve-out: cubic-bezier(.2, .8, .2, 1);
+  --curve-spring: cubic-bezier(.3, 1.35, .55, 1);
+}

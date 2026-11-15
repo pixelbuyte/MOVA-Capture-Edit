@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Export</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens/primitives.css">
+<link rel="stylesheet" href="../tokens/semantic.css">
+<link rel="stylesheet" href="../tokens/component.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  /* Layout only. */
+  .behind { position: absolute; inset: 0; }
+  .behind img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; filter: sepia(.3) saturate(1.15) brightness(.6); }
+  .spec { display: flex; align-items: center; justify-content: space-between; min-height: 52px; box-shadow: inset 0 -1px 0 var(--hairline); }
+  .estimate { display: flex; justify-content: space-between; margin-top: var(--sp-3); }
+  .dest { display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--sp-3); margin-top: var(--sp-5); }
+</style>
+</head>
+<body>
+<main class="screen screen--media">
+  <div class="behind" aria-hidden="true"><img src="../img/port_smile.jpg" alt=""></div>
+  <section class="sheet" role="dialog" aria-labelledby="ex-t">
+    <div class="sheet__grabber"></div>
+    <div class="row row--between">
+      <div>
+        <h2 class="title2" id="ex-t">Export</h2>
+        <div class="caption" style="margin-top: var(--sp-1)">Golden hour walk · 0:12 · 3 shots</div>
+      </div>
+      <a class="ibtn ibtn--fill" href="result.html" aria-label="Close export"><svg class="ic ic--sm" aria-hidden="true"><use href="../icons.svg#close"/></svg></a>
+    </div>
+
+    <div style="margin-top: var(--sp-4)">
+      <div class="spec"><span class="callout t-1">Resolution</span>
+        <div class="picker" role="radiogroup" aria-label="Resolution" data-choice><button class="picker__opt" role="radio" data-opt aria-checked="false">720p</button><button class="picker__opt" role="radio" data-opt aria-checked="true">1080p</button><button class="picker__opt" role="radio" data-opt aria-checked="false" aria-disabled="true" aria-label="4K, needs MOVA Pro">4K</button></div></div>
+      <div class="spec"><span class="callout t-1">Format</span>
+        <div class="picker" role="radiogroup" aria-label="Format" data-choice><button class="picker__opt" role="radio" data-opt aria-checked="true">HEVC</button><button class="picker__opt" role="radio" data-opt aria-checked="false">H.264</button></div></div>
+      <div class="spec"><span class="callout t-1">Frame rate</span>
+        <div class="picker" role="radiogroup" aria-label="Frame rate" data-choice><button class="picker__opt" role="radio" data-opt aria-checked="true">24</button><button class="picker__opt" role="radio" data-opt aria-checked="false">30</button></div></div>
+      <div class="spec" style="align-items: flex-start; padding-block: var(--sp-3)">
+        <span class="grow"><span class="callout t-1">Credit the reference</span><span class="caption" style="display: block; margin-top: 2px">Adds “Inspired by @creator” to the last second</span></span>
+        <button class="switch" role="switch" aria-checked="true" aria-label="Credit the reference"></button>
+      </div>
+    </div>
+
+    <div class="estimate"><span class="tc">About 46 MB · 576 frames</span><span class="tc">No credits used</span></div>
+
+    <div class="dest">
+      <button class="btn btn--secondary"><svg class="ic ic--sm" aria-hidden="true"><use href="../icons.svg#share"/></svg>Share</button>
+      <a class="btn btn--primary" href="state-saved.html"><svg class="ic ic--sm" aria-hidden="true"><use href="../icons.svg#save"/></svg>Save to Photos</a>
+    </div>
+  </section>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script src="../motion.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOVA · App Store screenshots</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens/primitives.css">
+<link rel="stylesheet" href="../tokens/semantic.css">
+<style>
+  /* Each slide is 430 × 932 CSS px; exported at 3× = 1290 × 2796, the 6.9" App Store size. */
+  body { margin: 0; background: var(--canvas); font-family: var(--font-ui); color: var(--text-1); }
+  .board { display: flex; flex-wrap: wrap; gap: 32px; padding: 32px; }
+  .slide { position: relative; width: 430px; height: 932px; overflow: hidden; background: var(--surface-1); flex: none; }
+  .slide__glow { position: absolute; inset: 0; background: radial-gradient(70% 45% at 50% 72%, var(--accent-wash), transparent 70%); }
+  .slide__copy { position: absolute; left: 36px; right: 36px; top: 84px; }
+  .slide__copy h2 { margin: 0; font: 400 50px/1 var(--font-display); letter-spacing: -.015em; }
+  .slide__copy p { margin: 16px 0 0; font-size: 19px; line-height: 1.35; color: var(--text-2); max-width: 20em; }
+  .slide__copy .k { font: 600 13px/1 var(--font-ui); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; display: block; }
+  .device { position: absolute; left: 50%; bottom: -120px; width: 316px; margin-left: -158px; padding: 9px; border-radius: 52px; background: var(--gray-1000); box-shadow: 0 0 0 1.5px var(--gray-850), 0 40px 80px -20px rgba(0,0,0,.7); }
+  .device img { display: block; width: 100%; aspect-ratio: 390 / 844; border-radius: 44px; }
+  .device--tilt { transform: rotate(-4deg); }
+  .badge { position: absolute; display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 14px; background: var(--material); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); box-shadow: inset 0 0 0 1px var(--material-border), var(--shadow-float); font-size: 15px; font-weight: 600; }
+  .badge b { font: 500 15px/1 var(--font-mono); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="board">
+  <section class="slide" id="s1" aria-label="Screenshot 1: Any video. Starring you.">
+    <div class="slide__glow"></div>
+    <div class="slide__copy"><h2>Any video.<br>Starring you.</h2><p>Recreate the look and movement of a video you love, with your own photo.</p></div>
+    <div class="device"><img src="../shots/hi/result.jpg" alt=""></div>
+  </section>
+  <section class="slide" id="s2" aria-label="Screenshot 2: It sees how it was made.">
+    <div class="slide__glow"></div>
+    <div class="slide__copy"><h2>It sees how<br>it was made.</h2><p>Every shot, camera move, light and cut, mapped in seconds.</p></div>
+    <div class="device"><img src="../shots/hi/ref-analysis.jpg" alt=""></div>
+  </section>
+  <section class="slide" id="s3" aria-label="Screenshot 3: Direct every shot.">
+    <div class="slide__glow"></div>
+    <div class="slide__copy"><h2>Keep the moves.<br>Change the light.</h2><p>Choose what carries over, shot by shot.</p></div>
+    <div class="device"><img src="../shots/hi/direction.jpg" alt=""></div>
+  </section>
+  <section class="slide" id="s4" aria-label="Screenshot 4: A real camera. Free.">
+    <div class="slide__glow" style="background: radial-gradient(70% 45% at 50% 72%, rgba(255,214,10,.08), transparent 70%)"></div>
+    <div class="slide__copy"><h2>A real camera.<br>Free, always.</h2><p>Manual controls, RAW and Log. Shooting never costs credits.</p></div>
+    <div class="device"><img src="../shots/hi/camera.jpg" alt=""></div>
+  </section>
+  <section class="slide" id="s5" aria-label="Screenshot 5: See the cost first.">
+    <div class="slide__glow"></div>
+    <div class="slide__copy"><h2>See the cost<br>before you tap.</h2><p>Credits shown up front. Failed renders are refunded.</p></div>
+    <div class="device"><img src="../shots/hi/review.jpg" alt=""></div>
+    <div class="badge" style="right: 28px; top: 330px"><b>36</b> credits · 204 left</div>
+  </section>
+</div>
+</body>
+</html>

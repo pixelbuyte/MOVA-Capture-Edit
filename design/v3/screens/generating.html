@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Generating</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens/primitives.css">
+<link rel="stylesheet" href="../tokens/semantic.css">
+<link rel="stylesheet" href="../tokens/component.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .reels { display: grid; grid-template-columns: 3fr 4fr 5fr; gap: var(--sp-2); margin: var(--sp-6) var(--gutter) 0; }
+  .reel { position: relative; height: 250px; border-radius: var(--r-2); overflow: hidden; background: var(--surface-2); }
+  .reel img { width: 100%; height: 100%; object-fit: cover; }
+  .reel--now img { filter: sepia(.5) contrast(.8) brightness(.6) blur(1.5px); }
+  /* film-exposure idea (after Pow's "Film Exposure" transition): image develops from the bottom up */
+  .reel--now .dev { position: absolute; inset: 0; clip-path: inset(var(--undeveloped, 66%) 0 0 0); }
+  .reel--now .dev img { filter: sepia(.3) saturate(1.15) contrast(1.06); }
+  .reel--now .edge { position: absolute; left: 0; right: 0; top: var(--undeveloped, 66%); height: 1px; background: var(--accent); box-shadow: 0 0 14px 2px var(--accent); }
+  .reel--wait { display: grid; place-items: center; background: repeating-linear-gradient(0deg, var(--surface-2) 0 3px, var(--surface-1) 3px 6px); }
+  .reel__n { position: absolute; left: 6px; bottom: 6px; }
+  .grain { position: absolute; inset: 0; opacity: .14; background-image: radial-gradient(var(--text-1) .5px, transparent .6px); background-size: 3px 3px; mix-blend-mode: overlay; }
+  .stages { margin: var(--sp-6) var(--gutter) 0; display: grid; gap: var(--sp-3); }
+  .stage { display: grid; grid-template-columns: 22px 1fr auto; gap: var(--sp-3); align-items: center; font-size: var(--t-callout); }
+  .stage--wait { color: var(--text-3); }
+  .spinner { width: 16px; height: 16px; border-radius: 50%; border: 1.6px solid var(--surface-4); border-top-color: var(--accent); animation: spin 0.9s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .dust { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: var(--accent); opacity: 0; animation: dust 3.6s var(--ease-standard) infinite; }
+  @keyframes dust { 0% { opacity: 0; transform: translateY(0); } 30% { opacity: .8; } 100% { opacity: 0; transform: translateY(-60px); } }
+  @media (prefers-reduced-motion: reduce) { .spinner, .dust { animation: none; } .dust { display: none; } }
+</style>
+</head>
+<body>
+<main class="screen top">
+  <div class="navbar">
+    <a class="ibtn" href="home.html" aria-label="Close. Generation keeps running"><svg class="ic" aria-hidden="true"><use href="../icons.svg#chevdown"/></svg></a>
+    <div class="navbar__title">Golden hour walk</div>
+    <span></span>
+  </div>
+  <div class="pad" style="margin-top: var(--sp-4)">
+    <h1 class="title1">Developing shot 2 of 3</h1>
+    <p class="body" style="margin-top: var(--sp-1)">About 2 minutes left. You can leave this screen, we'll notify you.</p>
+  </div>
+
+  <div class="reels" role="img" aria-label="Shot 1 done, shot 2 one third developed, shot 3 waiting">
+    <div class="reel"><img src="../img/port_smile.jpg" alt="" style="object-position: 50% 25%; filter: sepia(.3) saturate(1.15) contrast(1.08) brightness(.95)"><span class="reel__n tc t-1">1 ✓</span></div>
+    <div class="reel reel--now" style="--undeveloped: 64%" data-develop="64%">
+      <img src="../img/port_smile.jpg" alt="" style="object-position: 30% 60%">
+      <div class="dev"><img src="../img/port_smile.jpg" alt="" style="object-position: 30% 60%"></div>
+      <div class="edge"></div>
+      <div class="grain"></div>
+      <span class="dust" style="left: 30%; top: 66%"></span><span class="dust" style="left: 62%; top: 64%; animation-delay: 1.1s"></span><span class="dust" style="left: 48%; top: 68%; animation-delay: 2.3s"></span>
+      <span class="reel__n tc t-1">2</span>
+    </div>
+    <div class="reel reel--wait"><span class="tc">3 · waiting</span></div>
+  </div>
+  <div class="segprog" style="margin: var(--sp-3) var(--gutter) 0"><i class="done"></i><i class="now" style="--p: 34%"></i><i></i></div>
+
+  <div class="stages" role="list" aria-label="Progress">
+    <div class="stage" role="listitem"><svg class="ic ic--sm" style="color: var(--positive)" aria-hidden="true"><use href="../icons.svg#check"/></svg><span>Mapped 3 camera moves</span><span class="tc">0:14</span></div>
+    <div class="stage" role="listitem"><svg class="ic ic--sm" style="color: var(--positive)" aria-hidden="true"><use href="../icons.svg#check"/></svg><span>Relit you to golden hour</span><span class="tc">0:22</span></div>
+    <div class="stage" role="listitem"><span class="spinner" aria-hidden="true"></span><span>Rendering shot 2</span><span class="tc t-1">41 / 120 frames</span></div>
+    <div class="stage stage--wait" role="listitem"><span class="ic ic--sm" aria-hidden="true"></span><span>Shot 3, then cuts and grade</span><span class="tc">—</span></div>
+  </div>
+
+  <div class="actionbar" style="flex-direction: column; align-items: stretch; gap: var(--sp-1)">
+    <button class="btn btn--secondary"><svg class="ic ic--sm" aria-hidden="true"><use href="../icons.svg#bell"/></svg>Notify me when ready</button>
+    <button class="btn btn--plain" style="width: 100%; color: var(--text-2)">Cancel and return 36 credits</button>
+  </div>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script src="../motion.js"></script>
+</body>
+</html>

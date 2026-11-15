@@ -6,7 +6,9 @@ A professional iPhone camera, a photo and video editor, and an AI studio built a
 
 | Path | Contents |
 |---|---|
-| `design/v2/` | **Current design (v2 "Monitor")**: tokens, components, 27 screens, interactive prototype, before-and-after review. See `design/v2/README.md` |
+| `design/v3/` | **Current design (v3)**: three token layers, motion layer, onboarding, App Store screenshots. See `design/v3/README.md` |
+| `skills/mova-design/` | Agent skill for building on-brand MOVA screens (`skills/dist/mova-design.skill` to install) |
+| `design/v2/` | v2 "Monitor": tokens, components, 27 screens, interactive prototype, before-and-after review. See `design/v2/README.md` |
 | `design/index.html` | v1 design boards (superseded by v2) |
 | `design/screens/` | One static HTML file per screen, 390×844 |
 | `design/SPEC.md` | Brand, tokens, type, screen list, product rules, native framework map |

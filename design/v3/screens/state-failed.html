@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Generation failed</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens/primitives.css">
+<link rel="stylesheet" href="../tokens/semantic.css">
+<link rel="stylesheet" href="../tokens/component.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .reels { display: grid; grid-template-columns: 3fr 4fr 5fr; gap: var(--sp-2); margin: var(--sp-6) var(--gutter) 0; }
+  .reel { position: relative; height: 230px; border-radius: var(--r-2); overflow: hidden; background: var(--surface-2); }
+  .reel img { width: 100%; height: 100%; object-fit: cover; }
+  .reel--bad img { filter: grayscale(1) brightness(.4) blur(2px); }
+  .reel--bad .why { position: absolute; inset: 0; display: grid; place-items: center; color: var(--critical); }
+  .reel--bad .vf::after { opacity: 1; transform: none; --c: var(--critical); inset: 26% 22%; }
+  .reel--skip { display: grid; place-items: center; }
+  .refund { display: flex; align-items: center; gap: var(--sp-3); margin: var(--sp-5) var(--gutter) 0; padding: var(--sp-3) 0; box-shadow: inset 0 1px 0 var(--hairline), inset 0 -1px 0 var(--hairline); font-size: var(--t-callout); }
+</style>
+</head>
+<body>
+<main class="screen top">
+  <div class="navbar">
+    <a class="ibtn" href="home.html" aria-label="Close"><svg class="ic" aria-hidden="true"><use href="../icons.svg#close"/></svg></a>
+    <div class="navbar__title">Golden hour walk</div><span></span>
+  </div>
+  <div class="pad" style="margin-top: var(--sp-4)">
+    <h1 class="title1">Shot 2 didn't render</h1>
+    <p class="body" style="margin-top: var(--sp-2)">Your face is too small in this shot for MOVA to keep it consistent while walking. A closer photo usually fixes it.</p>
+  </div>
+  <div class="reels" role="img" aria-label="Shot 1 rendered, shot 2 failed, shot 3 not started">
+    <div class="reel"><img src="../img/port_smile.jpg" alt="" style="object-position: 50% 25%; filter: sepia(.3) saturate(1.15)"><span class="tc t-1" style="position: absolute; left: 6px; bottom: 6px">1 ✓</span></div>
+    <div class="reel reel--bad"><img src="../img/port_smile.jpg" alt="" style="object-position: 85% 40%"><div class="vf" style="position: absolute; inset: 0"></div><div class="why"><svg class="ic ic--lg" aria-hidden="true"><use href="../icons.svg#alert"/></svg></div><span class="tc" style="position: absolute; left: 6px; bottom: 6px; color: var(--critical)">2</span></div>
+    <div class="reel reel--skip"><span class="tc">3 · not started</span></div>
+  </div>
+  <div class="refund" role="status"><svg class="ic ic--sm" style="color: var(--positive)" aria-hidden="true"><use href="../icons.svg#credit"/></svg><span class="grow">36 credits returned to your balance</span><span class="tc t-1">240</span></div>
+  <div class="actionbar" style="flex-direction: column; gap: var(--sp-2)">
+    <a class="btn btn--primary" href="select-media.html">Choose a closer photo</a>
+    <a class="btn btn--plain" href="generating.html" style="width: 100%">Retry with this photo</a>
+  </div>
+  <div class="home-indicator"></div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script src="../motion.js"></script>
+</body>
+</html>

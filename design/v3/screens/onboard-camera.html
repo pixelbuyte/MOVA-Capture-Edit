@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Camera access</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens/primitives.css">
+<link rel="stylesheet" href="../tokens/semantic.css">
+<link rel="stylesheet" href="../tokens/component.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .vfinder { position: relative; height: 440px; margin: var(--sp-4) var(--gutter) 0; border-radius: var(--r-4); overflow: hidden; }
+  .vfinder img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .lock { position: absolute; left: 34%; top: 18%; width: 32%; height: 36%; }
+  .lock.vf::after { --c: var(--cam); opacity: 1; transform: none; inset: 0; --l: 16px; }
+  .readouts { position: absolute; left: var(--sp-3); right: var(--sp-3); bottom: var(--sp-3); height: 44px; border-radius: 22px; display: grid; grid-template-columns: repeat(4, 1fr); align-items: center; text-align: center; }
+  .readouts b { display: block; font: 600 var(--t-micro)/1 var(--font-ui); letter-spacing: .04em; color: var(--text-2); }
+  .readouts span { font: 500 var(--t-caption)/1.3 var(--font-mono); color: var(--text-1); }
+  .free { display: grid; grid-template-columns: repeat(3, 1fr); margin: var(--sp-5) var(--gutter) 0; }
+  .free div { font-size: var(--t-caption); color: var(--text-2); display: flex; gap: 6px; align-items: center; }
+  .dots { display: flex; gap: 6px; margin-top: var(--sp-5); }
+  .dots i { width: 6px; height: 6px; border-radius: 3px; background: var(--surface-4); }
+  .dots i.on { width: 20px; background: var(--text-1); }
+</style>
+</head>
+<body>
+<main class="screen top">
+  <div class="vfinder">
+    <img src="../img/port_denim.jpg" alt="Camera preview with focus locked on a face">
+    <div class="lock vf" aria-hidden="true"></div>
+    <div class="readouts ibtn--glass" aria-hidden="true"><div><b>ISO</b><span class="iso">125</span></div><div><b>SHUTTER</b><span>1/250</span></div><div><b>WB</b><span>5200K</span></div><div><b>RAW</b><span>48MP</span></div></div>
+  </div>
+  <div class="pad" style="margin-top: var(--sp-5)">
+    <h1 class="title1">A real camera. Free, always.</h1>
+    <p class="body" style="margin-top: var(--sp-2)">Manual focus and exposure, RAW, Log where your iPhone supports it. Shooting and editing never use credits.</p>
+    <div class="dots" aria-label="Page 3 of 3"><i></i><i></i><i class="on"></i></div>
+  </div>
+  <div class="actionbar" style="flex-direction: column; gap: var(--sp-1)">
+    <a class="btn btn--primary" href="camera.html">Allow camera</a>
+    <a class="btn btn--plain" href="home.html" style="width: 100%; color: var(--text-2)">Not now</a>
+  </div>
+  <div class="home-indicator"></div>
+</main>
+<script>
+  (window.movaTimelines = window.movaTimelines || []).push((A) => {
+    const tl = A.timeline({ loop: true });
+    tl.add({ targets: '.lock', scale: [1.5, 1], opacity: [0, 1], duration: 500, easing: 'cubicBezier(.3,1.35,.55,1)' }, 600)
+      .add({ targets: '.vfinder img', scale: [1, 1.04], duration: 1800, easing: 'easeInOutSine' }, 600)
+      .add({ targets: { v: 400 }, v: 125, round: 1, duration: 900, easing: 'easeOutCubic', update: a => document.querySelector('.iso').textContent = a.animations[0].currentValue }, 700)
+      .add({ targets: '.lock', opacity: 0, duration: 400, easing: 'linear' }, '+=2200')
+      .add({ targets: '.vfinder img', scale: 1, duration: 600, easing: 'easeInOutSine' }, '-=400');
+  });
+</script>
+<script src="../proto.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script src="../motion.js"></script>
+</body>
+</html>

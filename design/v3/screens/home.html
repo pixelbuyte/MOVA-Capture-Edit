@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Home</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens/primitives.css">
+<link rel="stylesheet" href="../tokens/semantic.css">
+<link rel="stylesheet" href="../tokens/component.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .hero { position: relative; height: 236px; border-radius: var(--r-4); overflow: hidden; display: block; }
+  .hero .wipe { position: absolute; inset: 0; }
+  .hero__copy { position: absolute; left: var(--sp-4); right: var(--sp-4); bottom: var(--sp-4); display: flex; align-items: flex-end; justify-content: space-between; gap: var(--sp-3); }
+  .hero__tags { position: absolute; left: var(--sp-4); right: var(--sp-4); top: var(--sp-4); display: flex; justify-content: space-between; }
+  .quick { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .quick a { display: flex; flex-direction: column; gap: 10px; padding: var(--sp-4) 0 var(--sp-3); font: 500 var(--t-callout)/1.2 var(--font-ui); color: var(--text-1); }
+  .quick a + a { padding-left: var(--sp-4); box-shadow: inset 1px 0 0 var(--hairline); }
+  .rec-glyph { width: 22px; height: 22px; border-radius: 50%; box-shadow: inset 0 0 0 1.6px var(--text-1); display: grid; place-items: center; }
+  .rec-glyph::after { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--rec); }
+  .proj { width: 132px; flex: none; }
+  .proj .media { height: 176px; border-radius: var(--r-2); }
+  .proj__step { display: flex; gap: 2px; margin-top: var(--sp-2); }
+  .proj__step i { flex: 1; height: 2px; background: var(--surface-4); border-radius: 1px; }
+  .proj__step i.on { background: var(--text-1); }
+  .ready { display: flex; align-items: center; gap: var(--sp-3); padding: var(--sp-3) 0; box-shadow: inset 0 1px 0 var(--hairline), inset 0 -1px 0 var(--hairline); }
+</style>
+</head>
+<body>
+<main class="screen top">
+  <header class="pad row row--between" style="height: 44px">
+    <svg viewBox="0 0 64 64" width="24" height="24" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="MOVA"><path d="M14 46V20l18 18 18-18v26" stroke="var(--accent)" stroke-width="7" opacity=".7" transform="translate(5 5)"/><path d="M14 46V20l18 18 18-18v26" stroke="var(--text-1)" stroke-width="7"/></svg>
+    <div class="row" style="gap: var(--sp-3)">
+      <a class="credits" data-shine href="subscription.html" aria-label="240 credits"><svg class="ic" aria-hidden="true"><use href="../icons.svg#credit"/></svg>240</a>
+      <a href="profile.html" aria-label="Profile and settings" style="width: 34px; height: 34px; border-radius: 50%; overflow: hidden"><img src="../img/port_bun.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover"></a>
+    </div>
+  </header>
+
+  <div class="pad" style="margin-top: var(--sp-4)">
+    <h1 class="display" data-enter>Create something.</h1>
+    <p class="body" data-enter style="margin-top: var(--sp-2)">Capture moments. Reimagine them. Make something entirely yours.</p>
+  </div>
+
+  <a class="hero" data-enter href="ref-import.html" style="margin: var(--sp-5) var(--gutter) 0" aria-label="Recreate a reference: use any video's direction with your own media">
+    <div class="wipe" style="--x: 46%">
+      <img src="../img/port_smile.jpg" alt="" style="object-position: 50% 30%; filter: sepia(.25) saturate(1.15) contrast(1.06)">
+      <div class="wipe__top"><img src="../img/fashion_dress.jpg" alt="" style="object-position: 50% 40%"></div>
+      <div class="wipe__bar"></div>
+    </div>
+    <div class="media__scrim" style="height: 70%"></div>
+    <div class="hero__tags"><span class="src src--ref src--chip">Reference</span><span class="src src--yours src--chip">Your version</span></div>
+    <div class="hero__copy">
+      <div>
+        <div class="title2">Recreate a reference</div>
+        <div class="callout" style="margin-top: 2px; color: var(--text-1); opacity: .75">Its camera, light and pacing. Your media.</div>
+      </div>
+      <span class="ibtn ibtn--glass" aria-hidden="true"><svg class="ic ic--sm"><use href="../icons.svg#chev"/></svg></span>
+    </div>
+  </a>
+
+  <nav class="quick pad" data-enter aria-label="Quick actions">
+    <a href="camera.html"><svg class="ic" aria-hidden="true"><use href="../icons.svg#camera"/></svg>Take photo</a>
+    <a href="camera-record.html"><span class="rec-glyph" aria-hidden="true"></span>Record video</a>
+    <a href="animate.html"><svg class="ic t-accent" aria-hidden="true"><use href="../icons.svg#spark"/></svg>Animate a photo</a>
+  </nav>
+
+  <a class="ready pad" href="result.html" style="margin: 0 var(--gutter); padding-inline: 0">
+    <div class="media" style="width: 40px; height: 40px; border-radius: var(--r-1)"><img src="../img/port_smile.jpg" alt="" style="filter: sepia(.25) saturate(1.15)"></div>
+    <div class="grow">
+      <div class="headline" style="font-size: var(--t-callout)">“Golden hour walk” is ready</div>
+      <div class="caption">Recreation · 3 shots · 2 min ago</div>
+    </div>
+    <span class="tc">0:12</span>
+  </a>
+
+  <div class="pad row row--between" style="margin-top: var(--sp-5)">
+    <h2 class="title2">Continue</h2><a class="callout" href="library.html">All projects</a>
+  </div>
+  <div class="row" style="gap: var(--sp-3); padding-left: var(--gutter); margin-top: var(--sp-3); align-items: flex-start; overflow: hidden">
+    <a class="proj" href="direction.html">
+      <div class="media"><img src="../img/dog.jpg" alt="Biscuit project"></div>
+      <div class="proj__step" aria-label="Step 4 of 6"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+      <div class="headline" style="font-size: var(--t-callout); margin-top: var(--sp-2)">Biscuit, cinematic</div>
+      <div class="caption">Direction · step 4 of 6</div>
+    </a>
+    <a class="proj" href="video-editor.html">
+      <div class="media"><img src="../img/road.jpg" alt="Desert drive project"><span class="media__tc tc">0:24</span></div>
+      <div class="proj__step" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+      <div class="headline" style="font-size: var(--t-callout); margin-top: var(--sp-2)">Desert drive</div>
+      <div class="caption">Editing · 4 clips</div>
+    </a>
+    <a class="proj" href="photo-editor.html">
+      <div class="media"><img src="../img/hiker.jpg" alt="Summit photo"></div>
+      <div class="proj__step" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+      <div class="headline" style="font-size: var(--t-callout); margin-top: var(--sp-2)">Summit</div>
+      <div class="caption">ProRAW · edited</div>
+    </a>
+  </div>
+
+  <nav class="tabbar" aria-label="Main">
+    <div class="tabbar__tabs">
+      <a href="home.html" aria-current="page"><svg class="ic" aria-hidden="true"><use href="../icons.svg#home"/></svg>Home</a>
+      <a href="discover.html"><svg class="ic" aria-hidden="true"><use href="../icons.svg#discover"/></svg>Discover</a>
+      <a href="ref-import.html"><svg class="ic" aria-hidden="true"><use href="../icons.svg#studio"/></svg>Studio</a>
+      <a href="library.html"><svg class="ic" aria-hidden="true"><use href="../icons.svg#library"/></svg>Library</a>
+    </div>
+    <a class="tabbar__shutter" href="camera.html" aria-label="Open camera"><span></span></a>
+  </nav>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script src="../motion.js"></script>
+</body>
+</html>

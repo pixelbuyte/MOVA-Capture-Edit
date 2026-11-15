@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Screen name</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens/primitives.css">
+<link rel="stylesheet" href="../tokens/semantic.css">
+<link rel="stylesheet" href="../tokens/component.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  /* Layout only. Every color, size, radius, space and duration comes from a token. */
+</style>
+</head>
+<body>
+<main class="screen top">
+  <div class="navbar">
+    <a class="ibtn" href="#" aria-label="Back"><svg class="ic" aria-hidden="true"><use href="../icons.svg#back"/></svg></a>
+    <div class="navbar__title">Title</div>
+    <span></span>
+  </div>
+  <div class="pad" style="margin-top: var(--sp-2)" data-enter>
+    <h1 class="title1">The question this screen answers</h1>
+    <p class="body" style="margin-top: var(--sp-1)">One line of context with real numbers.</p>
+  </div>
+
+  <!-- content: components from references/components.md -->
+
+  <div class="actionbar">
+    <a class="btn btn--primary" href="#">Continue</a>
+  </div>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script src="../motion.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · How it was made</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens/primitives.css">
+<link rel="stylesheet" href="../tokens/semantic.css">
+<link rel="stylesheet" href="../tokens/component.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .stage { position: relative; height: 188px; margin: var(--sp-4) var(--gutter) 0; border-radius: var(--r-3); overflow: hidden; }
+  .stage img { width: 100%; height: 100%; object-fit: cover; transition: opacity var(--dur-3); }
+  .stage__grid { position: absolute; inset: 0; background:
+      linear-gradient(90deg, transparent calc(33.33% - .5px), var(--hairline-strong) calc(33.33% - .5px) calc(33.33% + .5px), transparent calc(33.33% + .5px) calc(66.66% - .5px), var(--hairline-strong) calc(66.66% - .5px) calc(66.66% + .5px), transparent calc(66.66% + .5px)),
+      linear-gradient(transparent calc(33.33% - .5px), var(--hairline-strong) calc(33.33% - .5px) calc(33.33% + .5px), transparent calc(33.33% + .5px) calc(66.66% - .5px), var(--hairline-strong) calc(66.66% - .5px) calc(66.66% + .5px), transparent calc(66.66% + .5px)); }
+  .stage__subject { position: absolute; left: 39%; top: 14%; width: 26%; height: 62%; }
+  .stage__subject.vf::after { opacity: 1; transform: none; --l: 10px; inset: 0; }
+  .stage__hud { position: absolute; left: var(--sp-3); right: var(--sp-3); bottom: var(--sp-3); display: flex; justify-content: space-between; align-items: center; }
+  .pill-tc { padding: 4px 7px; border-radius: 6px; background: var(--overlay); color: var(--text-1); }
+  .map { position: relative; margin: var(--sp-5) var(--gutter) 0; }
+  .pace { display: block; width: 100%; height: 26px; margin-top: var(--sp-2); }
+  .detail { display: grid; grid-template-columns: 118px 1fr; gap: var(--sp-4); margin: var(--sp-4) var(--gutter) 0; }
+  .campath { height: 150px; }
+  .detail .readout dt, .detail .readout dd { padding: 9px 0; }
+  .lightglyph { width: 16px; height: 16px; border-radius: 50%; background: conic-gradient(from 140deg, var(--temp-warm) 0 90deg, var(--surface-4) 90deg); flex: none; }
+</style>
+</head>
+<body>
+<main class="screen top">
+  <div class="flowhead">
+    <a class="ibtn" href="ref-import.html" aria-label="Back"><svg class="ic" aria-hidden="true"><use href="../icons.svg#back"/></svg></a>
+    <div class="flowsteps" role="img" aria-label="Step 2 of 6"><i class="done"></i><i class="now"></i><i></i><i></i><i></i><i></i></div>
+    <span></span>
+  </div>
+  <div class="pad" style="margin-top: var(--sp-2)">
+    <h1 class="title1">How it was made</h1>
+    <p class="body" style="margin-top: var(--sp-1)">3 shots · 12 s · warm grade · slowing pace</p>
+  </div>
+
+  <div class="stage">
+    <img data-bind="img" src="../img/fashion_dress.jpg" alt="Selected shot preview" style="object-position: 50% 22%">
+    <div class="stage__grid" aria-hidden="true"></div>
+    <div class="stage__subject vf" aria-hidden="true"></div>
+    <div class="stage__hud">
+      <span class="src src--ref src--chip">Shot <span data-bind="n">1</span></span>
+      <span class="tc pill-tc"><span data-bind="frame">Close-up · centred</span> · <span data-bind="tc">0:00–0:03</span></span>
+    </div>
+  </div>
+
+  <div class="map">
+    <div class="shotmap" role="tablist" aria-label="Shots" data-choice="aria-selected" data-shotmap>
+      <div class="playhead" data-playhead style="left: 0"></div>
+      <button class="shot vf" role="tab" data-opt aria-selected="true" style="flex: 3"
+        data-shot='{"n":"1","tc":"0:00 – 0:03","img":"../img/fashion_dress.jpg","cam":"Push-in · 0.4 m","subj":"Turns to camera","light":"Warm backlight","frame":"Close-up · centred","cut":"Dissolve · 6 fr","tc":"0:00–0:03","path":"M80 128 L80 74"}'>
+        <div class="shot__img"><img src="../img/fashion_dress.jpg" alt="" style="object-position: 50% 22%"></div><span class="shot__n">1</span>
+        <span class="shot__cut" aria-hidden="true"><svg class="ic ic--xs"><use href="../icons.svg#transition"/></svg></span>
+      </button>
+      <button class="shot vf" role="tab" data-opt aria-selected="false" style="flex: 4"
+        data-shot='{"n":"2","tc":"0:03 – 0:07","img":"../img/fashion_dress.jpg","cam":"Track left → right","subj":"Walks the shore","light":"Warm side light","frame":"Medium · thirds","cut":"Cut on the step","tc":"0:03–0:07","path":"M18 108 L142 108"}'>
+        <div class="shot__img"><img src="../img/fashion_dress.jpg" alt="" style="object-position: 50% 78%"></div><span class="shot__n">2</span>
+        <span class="shot__cut" aria-hidden="true"><svg class="ic ic--xs"><use href="../icons.svg#scissors"/></svg></span>
+      </button>
+      <button class="shot vf" role="tab" data-opt aria-selected="false" style="flex: 5"
+        data-shot='{"n":"3","tc":"0:07 – 0:12","img":"../img/beach.jpg","cam":"Crane up, pull back","subj":"Still, small in frame","light":"Golden haze","frame":"Wide · low horizon","cut":"Fade to black","tc":"0:07–0:12","path":"M80 70 L80 132"}'>
+        <div class="shot__img"><img src="../img/beach.jpg" alt=""></div><span class="shot__n">3</span>
+      </button>
+    </div>
+    <svg class="pace" viewBox="0 0 350 26" preserveAspectRatio="none" role="img" aria-label="Pacing slows across the clip: 3, 4, then 5 second shots">
+      <path d="M0 6 C60 6 80 9 87 10 S170 14 204 16 S300 21 350 22" fill="none" stroke="var(--text-3)" stroke-width="1.2"/>
+      <circle cx="87" cy="10" r="2.5" fill="var(--text-1)"/><circle cx="204" cy="16" r="2.5" fill="var(--text-1)"/>
+    </svg>
+    <div class="ruler-tc" style="margin-top: 2px"><span class="tc">0:00</span><span class="caption">Pace slows · 92 BPM ambient</span><span class="tc">0:12</span></div>
+  </div>
+
+  <div class="detail" data-enter>
+    <div class="campath" role="img" aria-label="Top-down camera path for the selected shot">
+      <svg viewBox="0 0 160 150" aria-hidden="true">
+        <circle class="subject" cx="80" cy="40" r="7"/>
+        <text x="80" y="22" text-anchor="middle" fill="var(--text-3)" font-size="11" style="font-family: var(--font-ui)">subject</text>
+        <path id="cp" class="path" data-campath d="M80 128 L80 74"/>
+        <g>
+          <path class="fov" d="M0 0 L-16 -30 L16 -30 Z"/>
+          <rect class="cam" x="-6" y="-3" width="12" height="8" rx="2"/>
+          <animateMotion dur="3s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;.5;1" calcMode="spline" keySplines=".45 0 .25 1;.45 0 .25 1"><mpath href="#cp"/></animateMotion>
+        </g>
+      </svg>
+    </div>
+    <dl class="readout" style="margin: 0; align-content: start; grid-template-columns: 62px 1fr">
+      <dt>Camera</dt><dd><svg class="ic ic--xs t-accent" aria-hidden="true"><use href="../icons.svg#pushin"/></svg><span data-bind="cam">Push-in · 0.4 m</span></dd>
+      <dt>Subject</dt><dd><span data-bind="subj">Turns to camera</span></dd>
+      <dt>Light</dt><dd><span class="lightglyph" aria-hidden="true"></span><span data-bind="light">Warm backlight</span></dd>
+      <dt>Into next</dt><dd><span data-bind="cut">Dissolve · 6 fr</span></dd>
+    </dl>
+  </div>
+
+  <div class="actionbar">
+    <a class="btn btn--plain" href="template.html" style="flex: none">Save as template</a>
+    <a class="btn btn--primary" href="select-media.html">Use this direction</a>
+  </div>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script src="../motion.js"></script>
+</body>
+</html>
