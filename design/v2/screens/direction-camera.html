@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Camera move</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .bigpath { position: absolute; left: var(--gutter); right: var(--gutter); top: 110px; height: 250px; border-radius: var(--r-4); }
+  .moves { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-3) var(--sp-2); margin-top: var(--sp-4); }
+  .move { display: flex; flex-direction: column; gap: var(--sp-2); text-align: left; }
+  .move .campath { height: 78px; width: 100%; }
+  .move .campath .path { stroke-dasharray: none; stroke: var(--text-2); }
+  .move[aria-checked="true"] .campath .path { stroke: var(--accent); }
+  .move__name { font: 500 var(--t-callout)/1.2 var(--font-ui); color: var(--text-2); }
+  .move[aria-checked="true"] .move__name { color: var(--text-1); }
+  .move__ref { font: 600 9.5px/1 var(--font-ui); letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--accent); margin-top: -4px; }
+  .dim { position: absolute; inset: 0; background: var(--overlay); }
+</style>
+</head>
+<body>
+<main class="screen screen--media top">
+  <img src="../img/port_smile.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: sepia(.3) saturate(1.1) blur(1px); opacity: .45">
+  <div class="dim"></div>
+  <div class="campath bigpath" role="img" aria-label="Orbit right around the subject, 90 degrees">
+    <svg viewBox="0 0 350 250" aria-hidden="true">
+      <circle class="subject" cx="175" cy="110" r="10"/>
+      <text x="175" y="88" text-anchor="middle" fill="var(--text-3)" font-size="11" font-family="Geist, sans-serif">you</text>
+      <path id="big" class="path" d="M175 210 A100 100 0 0 0 275 110"/>
+      <g>
+        <animateTransform attributeName="transform" type="rotate" values="0 175 110;-90 175 110;0 175 110" keyTimes="0;.5;1" calcMode="spline" keySplines=".45 0 .25 1;.45 0 .25 1" dur="3.4s" repeatCount="indefinite"/>
+        <g transform="translate(175 210)">
+          <path class="fov" d="M0 0 L-22 -40 L22 -40 Z"/>
+          <rect class="cam" x="-8" y="-4" width="16" height="11" rx="3"/>
+        </g>
+      </g>
+      <text x="16" y="236" fill="var(--text-3)" font-size="11" font-family="Geist Mono, monospace">TOP VIEW · SHOT 1 · 3.0 s</text>
+    </svg>
+  </div>
+
+  <section class="sheet" aria-labelledby="sh-t">
+    <div class="sheet__grabber"></div>
+    <div class="row row--between">
+      <h2 class="title2" id="sh-t">Camera · shot 1</h2>
+      <a class="btn btn--primary btn--sm" href="direction.html">Done</a>
+    </div>
+    <div class="moves" role="radiogroup" aria-label="Camera move" data-choice>
+      <button class="move" role="radio" data-opt aria-checked="false">
+        <div class="campath"><svg viewBox="0 0 100 78"><circle class="subject" cx="50" cy="22" r="4"/><path class="path" d="M50 70 V36"/><path d="M46 40 50 34 54 40" fill="none" stroke="var(--text-2)" stroke-width="1.5"/></svg></div>
+        <span class="move__name">Push-in</span><span class="move__ref">Reference</span>
+      </button>
+      <button class="move" role="radio" data-opt aria-checked="true">
+        <div class="campath"><svg viewBox="0 0 100 78"><circle class="subject" cx="50" cy="34" r="4"/><path class="path" d="M50 68 A34 34 0 0 0 84 34"/></svg></div>
+        <span class="move__name">Orbit</span>
+      </button>
+      <button class="move" role="radio" data-opt aria-checked="false">
+        <div class="campath"><svg viewBox="0 0 100 78"><circle class="subject" cx="50" cy="22" r="4"/><path class="path" d="M14 62 H86"/></svg></div>
+        <span class="move__name">Track</span>
+      </button>
+      <button class="move" role="radio" data-opt aria-checked="false">
+        <div class="campath"><svg viewBox="0 0 100 78"><circle class="subject" cx="50" cy="22" r="4"/><path class="path" d="M50 40 V70"/><circle cx="50" cy="70" r="3" fill="none" stroke="var(--text-2)" stroke-width="1.5"/></svg></div>
+        <span class="move__name">Crane out</span>
+      </button>
+      <button class="move" role="radio" data-opt aria-checked="false">
+        <div class="campath"><svg viewBox="0 0 100 78"><circle class="subject" cx="50" cy="22" r="4"/><path class="path" d="M44 66 l3 -3 l-2 -3 l4 -2 l-1 -3 l4 -1 l2 3 l3 -2"/></svg></div>
+        <span class="move__name">Handheld</span>
+      </button>
+      <button class="move" role="radio" data-opt aria-checked="false">
+        <div class="campath"><svg viewBox="0 0 100 78"><circle class="subject" cx="50" cy="22" r="4"/><rect x="44" y="56" width="12" height="9" rx="2" fill="none" stroke="var(--text-2)" stroke-width="1.5"/></svg></div>
+        <span class="move__name">Locked off</span>
+      </button>
+    </div>
+
+    <div style="margin-top: var(--sp-5)">
+      <div class="row row--between"><span class="callout">Speed</span><output class="tc t-1" id="spd">Slow · 90°</output></div>
+      <div class="ruler ruler--neutral" data-ruler data-values="Very slow · 45°,Slow · 60°,Slow · 75°,Slow · 90°,Medium · 120°,Medium · 150°,Fast · 180°" data-index="3" data-out="spd" role="slider" tabindex="0" aria-label="Orbit speed and distance"><div class="ruler__ticks"></div><div class="ruler__needle"></div></div>
+    </div>
+    <div class="row row--between" style="margin-top: var(--sp-2)">
+      <span class="callout">Ease in and out</span>
+      <button class="switch" role="switch" aria-checked="true" aria-label="Ease in and out"></button>
+    </div>
+  </section>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+</body>
+</html>

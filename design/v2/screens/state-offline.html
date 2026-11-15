@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Offline</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .banner { display: flex; gap: var(--sp-3); align-items: flex-start; margin: var(--sp-3) var(--gutter) 0; padding: var(--sp-3) var(--sp-4); border-radius: var(--r-3); background: var(--surface-2); font-size: var(--t-callout); line-height: var(--lh-callout); }
+  .avail { margin: var(--sp-5) var(--gutter) 0; }
+  .av { display: grid; grid-template-columns: 30px 1fr auto; gap: var(--sp-3); align-items: center; min-height: 52px; box-shadow: inset 0 -1px 0 var(--hairline); font-size: var(--t-body); }
+  .av--off { color: var(--text-3); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--positive); }
+  .av--off .dot { background: var(--surface-4); }
+</style>
+</head>
+<body>
+<main class="screen top">
+  <div class="flowhead">
+    <a class="ibtn" href="home.html" aria-label="Close"><svg class="ic" aria-hidden="true"><use href="../icons.svg#close"/></svg></a>
+    <div class="flowsteps" role="img" aria-label="Step 1 of 6"><i class="now"></i><i></i><i></i><i></i><i></i><i></i></div><span></span>
+  </div>
+  <div class="banner" role="status">
+    <svg class="ic" aria-hidden="true" style="color: var(--caution); margin-top: -1px"><use href="../icons.svg#offline"/></svg>
+    <div><b style="font-weight: 600">You're offline.</b> Analysis and generation need a connection. Your reference is saved, and we'll pick up when you're back.</div>
+  </div>
+  <div class="pad" style="margin-top: var(--sp-6)">
+    <h1 class="title1">Still works offline</h1>
+  </div>
+  <div class="avail" role="list">
+    <a class="av" href="camera.html" role="listitem"><svg class="ic" aria-hidden="true"><use href="../icons.svg#camera"/></svg>Camera and capture<span class="dot" aria-label="available"></span></a>
+    <a class="av" href="photo-editor.html" role="listitem"><svg class="ic" aria-hidden="true"><use href="../icons.svg#sliders"/></svg>Photo and video editing<span class="dot" aria-label="available"></span></a>
+    <a class="av" href="library.html" role="listitem"><svg class="ic" aria-hidden="true"><use href="../icons.svg#library"/></svg>Library<span class="dot" aria-label="available"></span></a>
+    <div class="av av--off" role="listitem"><svg class="ic" aria-hidden="true"><use href="../icons.svg#spark"/></svg>Analysis and generation<span class="dot" aria-label="unavailable until you reconnect"></span></div>
+    <div class="av av--off" role="listitem"><svg class="ic" aria-hidden="true"><use href="../icons.svg#discover"/></svg>Discover<span class="dot" aria-label="unavailable until you reconnect"></span></div>
+  </div>
+  <div class="actionbar"><button class="btn btn--secondary"><svg class="ic ic--sm" aria-hidden="true"><use href="../icons.svg#refresh"/></svg>Try again</button></div>
+  <div class="home-indicator"></div>
+</main>
+</body>
+</html>

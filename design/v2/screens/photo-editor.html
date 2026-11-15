@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Photo editor</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .canvas { position: relative; height: 452px; margin-top: var(--sp-2); background: var(--canvas); }
+  .canvas img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.12) saturate(1.12) brightness(1.02); }
+  .hold { position: absolute; left: 50%; bottom: var(--sp-3); transform: translateX(-50%); }
+  .tools { display: flex; gap: var(--sp-5); padding-left: 140px; margin-top: var(--sp-4); overflow: hidden; }
+  .tool { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 64px; flex: none; color: var(--text-3); }
+  .tool__dial { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; box-shadow: inset 0 0 0 1px var(--hairline-strong); color: var(--text-2); }
+  .tool[aria-checked="true"] { color: var(--text-1); }
+  .tool[aria-checked="true"] .tool__dial { box-shadow: inset 0 0 0 1.5px var(--select); color: var(--text-1); }
+  .tool__name { font: 500 var(--t-caption)/1 var(--font-ui); }
+  .tool__val { font: 500 10px/1 var(--font-mono); color: var(--text-1); min-height: 10px; }
+  .value { text-align: center; margin-top: var(--sp-4); }
+  .value b { display: block; font: 500 26px/1 var(--font-mono); letter-spacing: -.02em; }
+  .bipolar { position: relative; margin: var(--sp-3) var(--gutter) 0; }
+  .bipolar .ruler__needle { background: var(--select); }
+  .zero { position: absolute; left: 50%; top: -6px; width: 4px; height: 4px; margin-left: -2px; border-radius: 50%; background: var(--text-3); }
+  .modes { position: absolute; left: 0; right: 0; bottom: 34px; display: flex; justify-content: center; }
+</style>
+</head>
+<body>
+<main class="screen screen--media top">
+  <div class="navbar" style="grid-template-columns: 90px 1fr 90px">
+    <a class="btn btn--plain" href="library.html" style="padding: 0 var(--sp-2); justify-self: start">Cancel</a>
+    <div class="row" style="justify-content: center; gap: 0">
+      <button class="ibtn" aria-label="Undo"><svg class="ic" aria-hidden="true"><use href="../icons.svg#undo"/></svg></button>
+      <button class="ibtn" aria-label="Redo" aria-disabled="true" style="color: var(--text-disabled)"><svg class="ic" aria-hidden="true"><use href="../icons.svg#redo"/></svg></button>
+    </div>
+    <button class="btn btn--primary btn--sm" style="justify-self: end; padding: 0 var(--sp-3)">Save copy</button>
+  </div>
+
+  <div class="canvas">
+    <img src="../img/hiker.jpg" alt="Photo being edited: a hiker above a sea of clouds">
+    <button class="hold toast" style="height: 36px; background: var(--overlay); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px)" aria-label="Hold to see the original"><svg class="ic ic--sm" aria-hidden="true"><use href="../icons.svg#eye"/></svg>Hold for original</button>
+    <span class="tc" style="position: absolute; right: var(--sp-3); top: var(--sp-3); padding: 4px 7px; border-radius: 6px; background: var(--overlay); color: var(--text-1)">ProRAW · 48 MP</span>
+  </div>
+
+  <div class="value"><span class="label">Highlights</span><b id="hl">−32</b></div>
+  <div class="bipolar">
+    <span class="zero" aria-hidden="true"></span>
+    <div class="ruler" data-ruler data-values="−50,−45,−40,−36,−32,−28,−24,−20,−16,−12,−8,−4,0,+4,+8,+12,+16,+20,+24,+28,+32,+36,+40,+45,+50" data-index="4" data-out="hl" role="slider" tabindex="0" aria-label="Highlights"><div class="ruler__ticks"></div><div class="ruler__needle"></div></div>
+  </div>
+
+  <div class="tools" role="radiogroup" aria-label="Adjustment" data-choice>
+    <button class="tool" role="radio" data-opt aria-checked="false"><span class="tool__dial"><svg class="ic ic--sm" aria-hidden="true"><use href="../icons.svg#sun"/></svg></span><span class="tool__name">Exposure</span><span class="tool__val">+0.2</span></button>
+    <button class="tool" role="radio" data-opt aria-checked="false"><span class="tool__dial"><svg class="ic ic--sm" aria-hidden="true"><use href="../icons.svg#aperture"/></svg></span><span class="tool__name">Contrast</span><span class="tool__val">+12</span></button>
+    <button class="tool" role="radio" data-opt aria-checked="true"><span class="tool__dial"><svg class="ic ic--sm" aria-hidden="true"><use href="../icons.svg#sun"/></svg></span><span class="tool__name">Highlights</span><span class="tool__val">−32</span></button>
+    <button class="tool" role="radio" data-opt aria-checked="false"><span class="tool__dial"><svg class="ic ic--sm" aria-hidden="true"><use href="../icons.svg#drop"/></svg></span><span class="tool__name">Shadows</span><span class="tool__val"></span></button>
+    <button class="tool" role="radio" data-opt aria-checked="false"><span class="tool__dial"><svg class="ic ic--sm" aria-hidden="true"><use href="../icons.svg#drop"/></svg></span><span class="tool__name">Warmth</span><span class="tool__val"></span></button>
+  </div>
+
+  <div class="modes">
+    <div class="rail" role="tablist" aria-label="Editor tools" data-choice="aria-selected">
+      <button role="tab" data-opt aria-selected="true">Adjust</button>
+      <button role="tab" data-opt aria-selected="false">Filters</button>
+      <button role="tab" data-opt aria-selected="false">Crop</button>
+      <button role="tab" data-opt aria-selected="false">Selective</button>
+      <a href="animate.html" role="tab" style="color: var(--accent)">Animate</a>
+    </div>
+  </div>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+</body>
+</html>

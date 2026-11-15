@@ -6,7 +6,8 @@ A professional iPhone camera, a photo and video editor, and an AI studio built a
 
 | Path | Contents |
 |---|---|
-| `design/index.html` | All 26 design boards (open locally; screens are clickable) |
+| `design/v2/` | **Current design (v2 "Monitor")**: tokens, components, 27 screens, interactive prototype, before-and-after review. See `design/v2/README.md` |
+| `design/index.html` | v1 design boards (superseded by v2) |
 | `design/screens/` | One static HTML file per screen, 390×844 |
 | `design/SPEC.md` | Brand, tokens, type, screen list, product rules, native framework map |
 | `design/video/` | Demo video: 1080p and 720p (49 s), portrait screen-only clip, posters |

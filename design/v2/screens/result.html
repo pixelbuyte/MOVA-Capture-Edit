@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Your version</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .player { position: absolute; inset: 0 0 268px 0; }
+  .player .wipe { position: absolute; inset: 0; }
+  .player__top { position: absolute; top: var(--safe-top); left: var(--sp-3); right: var(--sp-3); display: flex; justify-content: space-between; align-items: center; z-index: 5; }
+  .player__tags { position: absolute; left: var(--sp-4); right: var(--sp-4); bottom: var(--sp-4); display: flex; justify-content: space-between; z-index: 4; pointer-events: none; }
+  .panel { position: absolute; left: 0; right: 0; bottom: 0; height: 280px; background: var(--surface-1); border-radius: var(--r-4) var(--r-4) 0 0; padding: var(--sp-5) var(--gutter) 0; }
+  .scrub { display: flex; gap: 3px; height: 40px; margin-top: var(--sp-4); position: relative; }
+  .scrub > div { border-radius: 4px; background-size: cover; background-position: center; }
+  .actions { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: var(--sp-4); }
+  .actions a, .actions button { display: flex; flex-direction: column; align-items: center; gap: 4px; min-height: 56px; font: 500 var(--t-caption)/1.2 var(--font-ui); color: var(--text-1); }
+  .actions .tc { font-size: 10px; }
+</style>
+</head>
+<body>
+<main class="screen screen--media">
+  <div class="player">
+    <div class="wipe" data-wipe role="slider" tabindex="0" aria-label="Compare reference with your version" aria-valuemin="0" aria-valuemax="100" aria-valuenow="32">
+      <img src="../img/port_smile.jpg" alt="Your version, shot 2" style="object-position: 50% 25%; filter: sepia(.3) saturate(1.18) contrast(1.08) brightness(.95)">
+      <div class="wipe__top"><img src="../img/fashion_dress.jpg" alt="Reference, shot 2" style="object-position: 50% 30%"></div>
+      <div class="wipe__bar"></div>
+      <div class="wipe__knob" aria-hidden="true"><svg class="ic ic--sm"><use href="../icons.svg#compare"/></svg></div>
+    </div>
+    <div class="player__top">
+      <a class="ibtn ibtn--glass" href="home.html" aria-label="Close"><svg class="ic" aria-hidden="true"><use href="../icons.svg#close"/></svg></a>
+      <div class="rail" role="tablist" aria-label="Take" data-choice="aria-selected" style="background: var(--overlay); border-radius: 22px; padding: 0 var(--sp-4); gap: var(--sp-4); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px)">
+        <button role="tab" data-opt aria-selected="true">Take 2</button><button role="tab" data-opt aria-selected="false">Take 1</button>
+      </div>
+      <button class="ibtn ibtn--glass" aria-label="Share"><svg class="ic" aria-hidden="true"><use href="../icons.svg#share"/></svg></button>
+    </div>
+    <div class="player__tags"><span class="src src--ref src--chip">Reference</span><span class="src src--yours src--chip">Your version</span></div>
+  </div>
+
+  <section class="panel">
+    <div class="row row--between" style="align-items: flex-end">
+      <div>
+        <div class="label t-accent" style="display: flex; gap: 6px; align-items: center"><svg class="ic ic--xs" aria-hidden="true"><use href="../icons.svg#spark"/></svg>New video from your photo</div>
+        <h1 class="display" style="font-size: 34px; line-height: 38px; margin-top: var(--sp-2)">Golden hour walk</h1>
+      </div>
+      <button class="ibtn ibtn--fill" data-playtoggle aria-pressed="false" aria-label="Play" style="width: 52px; height: 52px"><svg class="ic" aria-hidden="true"><use href="../icons.svg#play"/></svg></button>
+    </div>
+    <div class="scrub" aria-label="Shots">
+      <div style="flex: 3; background-image: url(../img/port_smile.jpg); background-position: 50% 25%; filter: sepia(.3)"></div>
+      <div style="flex: 4; background-image: url(../img/port_smile.jpg); background-position: 30% 60%; filter: sepia(.3); outline: 1.5px solid var(--select); outline-offset: 1px"></div>
+      <div style="flex: 5; background-image: url(../img/beach.jpg); filter: sepia(.25)"></div>
+      <div class="playhead" style="left: 34%"></div>
+    </div>
+    <div class="ruler-tc"><span class="tc">0:04</span><span class="tc">Shot 2 of 3</span><span class="tc">0:12</span></div>
+    <div class="actions">
+      <a href="review.html"><svg class="ic" aria-hidden="true"><use href="../icons.svg#refresh"/></svg>New take<span class="tc">36 cr</span></a>
+      <a href="direction.html"><svg class="ic" aria-hidden="true"><use href="../icons.svg#sliders"/></svg>Change direction</a>
+      <a href="video-editor.html"><svg class="ic" aria-hidden="true"><use href="../icons.svg#scissors"/></svg>Edit</a>
+    </div>
+  </section>
+  <div class="actionbar" style="background: var(--surface-1)">
+    <button class="btn btn--secondary" style="width: 120px; flex: none"><svg class="ic ic--sm" aria-hidden="true"><use href="../icons.svg#share"/></svg>Export</button>
+    <button class="btn btn--primary">Save to Library</button>
+  </div>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+</body>
+</html>

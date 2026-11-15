@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Plans and credits</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .compare { margin: var(--sp-5) var(--gutter) 0; display: grid; grid-template-columns: 1fr 64px 64px; }
+  .compare > * { padding: 9px 0; box-shadow: inset 0 -1px 0 var(--hairline); font-size: var(--t-callout); }
+  .compare .h { font: 600 var(--t-micro)/1 var(--font-ui); letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--text-3); padding-bottom: var(--sp-2); text-align: center; }
+  .compare .c { text-align: center; color: var(--text-2); }
+  .compare .pro { color: var(--text-1); }
+  .compare .col-pro { background: var(--surface-2); }
+  .packs { margin: var(--sp-5) var(--gutter) 0; display: grid; gap: 0; }
+  .pack { display: grid; grid-template-columns: 1fr auto; align-items: center; min-height: 52px; padding: 0 var(--sp-1); box-shadow: inset 0 -1px 0 var(--hairline); text-align: left; position: relative; }
+  .pack .vf::after { inset: 0; }
+  .pack b { font: 500 var(--t-headline)/1 var(--font-mono); }
+</style>
+</head>
+<body>
+<main class="screen top">
+  <div class="navbar">
+    <a class="ibtn" href="profile.html" aria-label="Close"><svg class="ic" aria-hidden="true"><use href="../icons.svg#close"/></svg></a>
+    <span></span>
+    <button class="btn btn--plain" style="justify-self: end; padding: 0 var(--sp-2); font-size: var(--t-callout)">Restore</button>
+  </div>
+  <div class="pad">
+    <h1 class="display" style="font-size: 36px; line-height: 40px">More room to create.</h1>
+    <p class="body" style="margin-top: var(--sp-2)">Capture and editing are free, always. Credits pay only for AI generation.</p>
+  </div>
+
+  <div class="pad" style="margin-top: var(--sp-4)">
+    <div class="rail" role="tablist" aria-label="Billing" data-choice="aria-selected"><button role="tab" data-opt aria-selected="false">Monthly</button><button role="tab" data-opt aria-selected="true">Yearly</button></div>
+  </div>
+
+  <div class="compare" role="table" aria-label="Free and Pro compared">
+    <span class="h" style="text-align: left">&nbsp;</span><span class="h">Free</span><span class="h col-pro" style="color: var(--accent); border-radius: 8px 8px 0 0">Pro</span>
+    <span>Pro camera &amp; editor</span><span class="c">✓</span><span class="c pro col-pro">✓</span>
+    <span>Credits each month</span><span class="c">20</span><span class="c pro col-pro">500</span>
+    <span>AI output</span><span class="c">1080p</span><span class="c pro col-pro">4K</span>
+    <span>Premium recipes</span><span class="c">—</span><span class="c pro col-pro">✓</span>
+    <span>Price</span><span class="c">$0</span><span class="c pro col-pro tc t-1" style="border-radius: 0 0 8px 8px">[PRICE]</span>
+  </div>
+
+  <div class="packs" role="radiogroup" aria-label="Credit packs, never expire" data-choice>
+    <div class="label" style="padding-bottom: var(--sp-2)">Or top up · packs never expire</div>
+    <button class="pack" role="radio" data-opt aria-checked="false"><b>100</b><span class="tc">[PRICE]</span></button>
+    <button class="pack vf" role="radio" data-opt aria-checked="true"><b>300</b><span class="tc t-1">[PRICE]</span></button>
+    <button class="pack" role="radio" data-opt aria-checked="false"><b>1,000</b><span class="tc">[PRICE]</span></button>
+  </div>
+  <p class="caption pad" style="margin-top: var(--sp-3)">A 12 s recreation is 36 credits. A 5 s photo animation is 18. Failed generations are refunded.</p>
+
+  <div class="actionbar" style="flex-direction: column; gap: var(--sp-2)">
+    <button class="btn btn--primary">Start Pro</button>
+    <span class="caption">Cancel anytime in Settings · Terms · Privacy</span>
+  </div>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+</body>
+</html>

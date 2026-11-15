@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Saved</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .full { position: absolute; inset: 0; }
+  .full img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; filter: sepia(.3) saturate(1.18) contrast(1.08) brightness(.95); }
+  .burst { position: absolute; left: 50%; top: 118px; width: 0; height: 0; }
+  /* restrained spark burst (idea from Vortex's "spark" preset): 10 particles, once, 700 ms */
+  .burst i { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); opacity: 0; animation: burst 900ms var(--ease-standard) 200ms both; }
+  @keyframes burst { 0% { opacity: 1; transform: translate(0, 0) scale(1); } 100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(.4); } }
+  @media (prefers-reduced-motion: reduce) { .burst { display: none; } }
+  .toastwrap { position: absolute; left: 0; right: 0; top: 96px; display: flex; justify-content: center; }
+  .exp { position: absolute; left: var(--gutter); right: var(--gutter); bottom: 120px; padding: var(--sp-4); border-radius: var(--r-3); }
+</style>
+</head>
+<body>
+<main class="screen screen--media">
+  <div class="full"><img src="../img/port_smile.jpg" alt="Your finished video"></div>
+  <div style="position: absolute; inset: 0; background: linear-gradient(var(--overlay), transparent 30%, transparent 55%, var(--canvas))"></div>
+  <div class="toastwrap"><div class="toast rise" role="status"><svg class="ic ic--sm" style="color: var(--positive)" aria-hidden="true"><use href="../icons.svg#check"/></svg>Saved to Library</div></div>
+  <div class="burst" aria-hidden="true">
+    <i style="--x: -70px; --y: -30px"></i><i style="--x: -50px; --y: 26px"></i><i style="--x: 60px; --y: -36px"></i><i style="--x: 76px; --y: 14px"></i><i style="--x: 20px; --y: -50px"></i>
+    <i style="--x: -24px; --y: -48px"></i><i style="--x: 40px; --y: 40px"></i><i style="--x: -80px; --y: 4px"></i><i style="--x: 92px; --y: -10px"></i><i style="--x: -8px; --y: 46px"></i>
+  </div>
+  <section class="exp ibtn--glass" aria-label="Export">
+    <div class="row row--between"><span class="headline">Exporting · 4K HEVC</span><span class="tc t-1">368 / 576 frames</span></div>
+    <div class="segprog" style="margin-top: var(--sp-3)"><i class="now" style="--p: 64%"></i></div>
+    <div class="caption" style="margin-top: var(--sp-2)">About 20 seconds. Saves to Photos when done.</div>
+  </section>
+  <div class="actionbar" style="background: none">
+    <a class="btn btn--secondary" href="library.html">Open Library</a>
+    <a class="btn btn--primary" href="home.html">Done</a>
+  </div>
+  <div class="home-indicator"></div>
+</main>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Add your media</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .pair { display: grid; grid-template-columns: 104px 1fr; gap: var(--sp-4); margin: var(--sp-4) var(--gutter) 0; align-items: end; }
+  .pair .media { border-radius: var(--r-2); }
+  .fit { margin: var(--sp-3) var(--gutter) 0; display: grid; gap: 6px; }
+  .fit li { display: flex; gap: var(--sp-2); align-items: flex-start; font-size: var(--t-callout); line-height: var(--lh-callout); color: var(--text-2); list-style: none; }
+  .fit ul { margin: 0; padding: 0; display: grid; gap: 6px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: var(--sp-3); }
+  .grid button { position: relative; height: 92px; overflow: visible; }
+  .grid img { width: 100%; height: 100%; object-fit: cover; }
+  .grid .vf::after { inset: 3px; --l: 10px; }
+  .grid .media__tc { right: 4px; bottom: 4px; }
+  .pick-n { position: absolute; right: 6px; top: 6px; width: 20px; height: 20px; border-radius: 50%; background: var(--select); color: var(--on-select); font: 700 11px/20px var(--font-ui); text-align: center; }
+</style>
+</head>
+<body>
+<main class="screen top">
+  <div class="flowhead">
+    <a class="ibtn" href="ref-analysis.html" aria-label="Back"><svg class="ic" aria-hidden="true"><use href="../icons.svg#back"/></svg></a>
+    <div class="flowsteps" role="img" aria-label="Step 3 of 6"><i class="done"></i><i class="done"></i><i class="now"></i><i></i><i></i><i></i></div>
+    <span></span>
+  </div>
+  <div class="pad" style="margin-top: var(--sp-2)">
+    <h1 class="title1">Add your media</h1>
+    <p class="body" style="margin-top: var(--sp-1)">A photo or video of who, or what, should star.</p>
+  </div>
+
+  <div class="pair">
+    <figure style="margin: 0">
+      <div class="media" style="height: 150px"><img src="../img/fashion_dress.jpg" alt="Reference video" style="object-position: 50% 25%"><span class="media__tc tc">0:12</span></div>
+      <figcaption class="src src--ref" style="margin-top: var(--sp-2)">Reference</figcaption>
+    </figure>
+    <figure style="margin: 0">
+      <div class="media" style="height: 212px"><img src="../img/port_smile.jpg" alt="Your selected portrait" style="object-position: 50% 30%">
+        <button class="ibtn ibtn--glass" aria-label="Remove photo" style="position: absolute; right: 8px; top: 8px; width: 34px; height: 34px"><svg class="ic ic--sm" aria-hidden="true"><use href="../icons.svg#close"/></svg></button>
+      </div>
+      <figcaption class="src src--yours" style="margin-top: var(--sp-2)">Your photo</figcaption>
+    </figure>
+  </div>
+
+  <section class="fit" aria-label="Fit check">
+    <ul>
+      <li><svg class="ic ic--sm" style="color: var(--positive)" aria-hidden="true"><use href="../icons.svg#check"/></svg>One person, face clearly visible</li>
+      <li><svg class="ic ic--sm" style="color: var(--positive)" aria-hidden="true"><use href="../icons.svg#check"/></svg>Framing close enough for all 3 shots</li>
+      <li><svg class="ic ic--sm" style="color: var(--caution)" aria-hidden="true"><use href="../icons.svg#sun"/></svg>Your light is from the front, the reference is backlit. MOVA will relight you to match.</li>
+    </ul>
+  </section>
+
+  <div class="pad" style="margin-top: var(--sp-4)">
+    <div class="rail" role="tablist" aria-label="Filter" data-choice="aria-selected">
+      <button role="tab" data-opt aria-selected="true">Recent</button>
+      <button role="tab" data-opt aria-selected="false">Portraits</button>
+      <button role="tab" data-opt aria-selected="false">Pets</button>
+      <button role="tab" data-opt aria-selected="false">Products</button>
+      <button role="tab" data-opt aria-selected="false">Videos</button>
+    </div>
+  </div>
+  <div class="grid" role="listbox" aria-label="Your photos and videos" data-choice="aria-selected">
+    <button class="vf" role="option" data-opt aria-selected="true" aria-label="Portrait, selected"><img src="../img/port_smile.jpg" alt=""><span class="pick-n" aria-hidden="true">1</span></button>
+    <button class="vf" role="option" data-opt aria-selected="false" aria-label="Dog photo"><img src="../img/dog.jpg" alt=""></button>
+    <button class="vf" role="option" data-opt aria-selected="false" aria-label="Watch product photo"><img src="../img/watch.jpg" alt=""></button>
+    <button class="vf" role="option" data-opt aria-selected="false" aria-label="Desert road video, 24 seconds"><img src="../img/road.jpg" alt=""><span class="media__tc tc">0:24</span></button>
+    <button class="vf" role="option" data-opt aria-selected="false" aria-label="Portrait in red"><img src="../img/port_red.jpg" alt=""></button>
+    <button class="vf" role="option" data-opt aria-selected="false" aria-label="Cat photo"><img src="../img/cat.jpg" alt=""></button>
+    <button class="vf" role="option" data-opt aria-selected="false" aria-label="Headphones product photo"><img src="../img/headphones.jpg" alt=""></button>
+    <button class="vf" role="option" data-opt aria-selected="false" aria-label="Valley landscape"><img src="../img/valley.jpg" alt=""></button>
+  </div>
+
+  <div class="actionbar">
+    <a class="ibtn ibtn--fill" href="camera.html" aria-label="Take a new photo" style="width: 52px; height: 52px; border-radius: var(--r-3)"><svg class="ic" aria-hidden="true"><use href="../icons.svg#camera"/></svg></a>
+    <a class="btn btn--primary" href="direction.html">Continue</a>
+  </div>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+</body>
+</html>
