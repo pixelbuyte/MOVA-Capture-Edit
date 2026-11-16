@@ -1,0 +1,7 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Pow for the web · demo</title>
+<style>body{margin:0;background:#0B0B0B;color:#EDEAE3;font:14px/1.4 system-ui;padding:24px}.g{display:grid;grid-template-columns:repeat(4,180px);gap:20px}figure{margin:0}.f{width:180px;height:240px;border-radius:16px;overflow:hidden;background:#3a3a3a}.f img{width:100%;height:100%;object-fit:cover}button{margin-top:8px;font:inherit;color:#EDEAE3;background:#222;border:0;border-radius:8px;padding:8px 10px}.v{display:inline-block;padding:10px 14px;border-radius:10px;background:#1a1a1a;font:600 20px ui-monospace}</style></head><body>
+<div class="g" id="g"></div><p><span class="v" id="v">240</span> <button id="sh">shine</button></p>
+<script src="pow.js"></script><script>
+['filmExposure','snapshot','iris','wipe','glare','blur','pop'].forEach(n=>{const f=document.createElement('figure');f.innerHTML=`<div class="f"><img src="photo.jpg" alt=""></div><button>${n}</button>`;document.getElementById('g').appendChild(f);const el=f.querySelector('.f');f.querySelector('button').onclick=()=>Pow.transition(el,n,{duration:1400,origin:[.3,.7],blur:10,ease:n==='pop'?Pow.spring({damping:.55}):undefined});});
+document.getElementById('sh').onclick=()=>Pow.change(document.getElementById('v'),'shine');
+</script></body></html>

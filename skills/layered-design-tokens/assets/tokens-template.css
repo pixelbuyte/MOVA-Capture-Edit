@@ -1,0 +1,23 @@
+/* Layer 1 · primitives (raw values; only layer 2 reads these) */
+:root {
+  --neutral-0: #FFFFFF; --neutral-50: #F2F2F2; --neutral-500: #8A8A8A; --neutral-900: #141414; --neutral-950: #0B0B0B;
+  --brand-500: #REPLACE;
+  --size-11: 11px; --size-13: 13px; --size-15: 15px; --size-17: 17px; --size-28: 28px; --size-44: 44px;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px;
+  --radius-8: 8px; --radius-16: 16px; --radius-28: 28px; --radius-full: 999px;
+  --ms-120: 120ms; --ms-200: 200ms; --ms-420: 420ms; --ms-520: 520ms;
+  --curve-out: cubic-bezier(.2, .8, .2, 1); --curve-emph: cubic-bezier(.32, .72, 0, 1);
+}
+/* Layer 2 · semantic roles (components and screens read these) */
+:root {
+  --surface: var(--neutral-950); --surface-raised: var(--neutral-900);
+  --text-1: var(--neutral-50); /* measure contrast here */ --text-2: var(--neutral-500);
+  --t-body: var(--size-15); --t-title: var(--size-28);
+  --motion-micro-press: var(--ms-120) var(--curve-out);
+  --motion-component-in: var(--ms-420) var(--curve-emph);
+  --motion-page-push: var(--ms-520) var(--curve-emph);
+}
+[data-theme="light"] { --surface: var(--neutral-50); --surface-raised: var(--neutral-0); --text-1: var(--neutral-950); }
+@media (prefers-reduced-motion: reduce) { :root { --ms-120: 0ms; --ms-200: 0ms; --ms-420: 0ms; --ms-520: 0ms; } }
+/* Layer 3 · component decisions */
+:root { --button-height: 52px; --button-radius: var(--radius-full); --tap-min: 44px; }
