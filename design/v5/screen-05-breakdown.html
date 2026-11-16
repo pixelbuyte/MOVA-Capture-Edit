@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MOVA · Shot breakdown</title>
+<meta name="viewport" content="width=1200">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1116; --ink-2:#1B2028; --paper:#F4EEE3;
+    --coral:#FF5A36; --coral-deep:#E2401D; --mint:#3DF0A8; --sun:#FFC53D; --lagoon:#1F8A9E;
+    --white:#FFFFFF; --w70:rgba(255,255,255,.72); --w50:rgba(255,255,255,.52); --hair:rgba(255,255,255,.14);
+    --display:"Bricolage Grotesque",system-ui,sans-serif; --mono:"DM Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1200px;height:1000px}
+  body{background:var(--paper);font-family:var(--display);color:var(--ink);position:relative;overflow:hidden;-webkit-font-smoothing:antialiased}
+
+  /* ───────── Board (same as screen 01) ───────── */
+  .disc{position:absolute;left:320px;top:220px;width:560px;height:560px;border-radius:50%;background:var(--coral)}
+  .col{position:absolute;top:66px;bottom:66px;width:236px;display:flex;flex-direction:column}
+  .col.l{left:64px}
+  .col.r{left:900px;justify-content:center;gap:28px}
+  .brand{font-weight:800;font-size:28px;letter-spacing:-.02em;font-variation-settings:"opsz" 96;display:flex;align-items:center;gap:10px}
+  .brand i{width:14px;height:14px;border-radius:50%;background:var(--coral);display:block}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(14,17,22,.56)}
+  .l .eyebrow{margin-top:auto}
+  h1{font-weight:700;font-size:44px;line-height:1;letter-spacing:-.03em;font-variation-settings:"opsz" 96;margin-top:12px}
+  .lede{font-size:16px;line-height:1.45;color:rgba(14,17,22,.72);margin-top:16px;font-weight:400}
+  .swatches{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+  .sw{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:rgba(14,17,22,.72)}
+  .sw b{width:20px;height:20px;border-radius:6px;display:block;flex:none;box-shadow:inset 0 0 0 1px rgba(14,17,22,.08)}
+  .note{padding-left:16px;border-left:2px solid rgba(14,17,22,.14)}
+  .note.c{border-color:var(--coral)} .note.m{border-color:#17B67B} .note.s{border-color:var(--sun)} .note.g{border-color:var(--lagoon)}
+  .note h3{font-size:16px;font-weight:700;letter-spacing:-.01em}
+  .note p{font-size:14px;line-height:1.4;color:rgba(14,17,22,.68);margin-top:4px}
+
+  /* ───────── Phone (same as screen 01) ───────── */
+  .phone{position:absolute;left:393px;top:66px;width:414px;height:868px;border-radius:66px;background:#0A0B0D;padding:12px;
+    box-shadow:0 0 0 1.5px #2E3138, inset 0 0 0 1.5px #3B3F47, 0 50px 90px -30px rgba(60,20,8,.55), 0 18px 36px -12px rgba(14,17,22,.35)}
+  .screen{position:relative;width:390px;height:844px;border-radius:54px;overflow:hidden;background:var(--ink);color:var(--white)}
+  .island{position:absolute;left:133px;top:12px;width:124px;height:36px;border-radius:20px;background:#000;z-index:9}
+  .home{position:absolute;left:128px;top:827px;width:134px;height:5px;border-radius:3px;background:rgba(255,255,255,.9)}
+
+  /* shared app parts */
+  .bar{position:absolute;left:16px;right:16px;top:72px;height:44px;display:flex;align-items:center;justify-content:space-between;z-index:5}
+  .rbtn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;flex:none;
+    background:rgba(14,17,22,.46);border:1px solid var(--hair);
+    -webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4)}
+  .rbtn.solid{background:var(--ink-2)}
+  .rbtn svg{width:22px;height:22px;fill:#fff;display:block}
+  .title{text-align:center}
+  .title small{display:block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--w70);line-height:14px}
+  .title small b{color:var(--coral);font-weight:500}
+  .title strong{display:block;font-size:21px;font-weight:700;letter-spacing:-.02em;line-height:26px;margin-top:2px;font-variation-settings:"opsz" 40}
+  .segs{position:absolute;left:16px;right:16px;top:58px;display:flex;gap:4px;z-index:5}
+  .segs i{height:4px;border-radius:2px;background:rgba(255,255,255,.38);display:block}
+  .segs i.on{background:var(--coral);box-shadow:0 0 12px rgba(255,90,54,.7)}
+  .media{position:absolute;left:0;top:0;width:390px;height:400px;overflow:hidden}
+  .media .sky{position:absolute;left:0;top:0;width:390px;height:97px;overflow:hidden}
+  .media .sky img{position:absolute;left:0;top:0;width:390px;height:4480px}   /* top rows of sky, stretched behind the island */
+  .media .main{position:absolute;left:0;top:96px;width:390px;height:540.3px;display:block}
+  .scrim-t{position:absolute;left:0;top:0;width:100%;height:170px;
+    background:linear-gradient(180deg,rgba(14,17,22,.78) 0%,rgba(14,17,22,.5) 50%,rgba(14,17,22,0) 100%)}
+  .scrim-b{position:absolute;left:0;top:250px;width:100%;height:150px;
+    background:linear-gradient(180deg,rgba(14,17,22,0) 0%,rgba(14,17,22,.55) 45%,rgba(14,17,22,.92) 82%,var(--ink) 100%)}
+  .pill{height:24px;padding:0 9px;border-radius:12px;font-size:12px;font-weight:700;line-height:24px;letter-spacing:.01em;white-space:nowrap}
+  .pill.c{background:var(--coral);color:#1C0B05}
+  .pill.g{background:rgba(14,17,22,.6);color:#fff;border:1px solid var(--hair);line-height:22px;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+  .cta{position:absolute;left:16px;right:16px;top:744px;height:56px;border-radius:28px;background:var(--coral);color:#1C0B05;
+    font-size:17px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;justify-content:center;gap:10px;
+    box-shadow:0 10px 28px -8px rgba(255,90,54,.55), inset 0 1px 0 rgba(255,255,255,.25)}
+  .cta svg{width:22px;height:22px;fill:#1C0B05;display:block}
+
+  /* ───────── This screen ───────── */
+  .list{position:absolute;left:16px;right:16px;top:128px;display:flex;flex-direction:column;gap:8px}
+  .shot{height:96px;border-radius:22px;background:var(--ink-2);border:1px solid var(--hair);padding:7px 14px 7px 7px;display:flex;align-items:center;gap:14px}
+  .shot.on{background:#2A1D1B;border-color:rgba(255,90,54,.6)}
+  .th{width:58px;height:80px;border-radius:15px;flex:none;background-image:url(../v3/img/fashion_yellow.jpg);background-repeat:no-repeat;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16)}
+  .inf{flex:1;min-width:0}
+  .inf small{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.06em;color:var(--w50);line-height:16px}
+  .on .inf small{color:var(--coral)}
+  .inf small b{font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.01em;height:18px;line-height:18px;padding:0 7px;border-radius:9px;background:var(--coral);color:#1C0B05}
+  .inf strong{display:block;font-size:18px;font-weight:700;letter-spacing:-.02em;line-height:22px;margin-top:3px;white-space:nowrap}
+  .meta{display:flex;align-items:center;gap:6px;margin-top:5px;font-size:13px;font-weight:500;line-height:18px;color:var(--w70);white-space:nowrap}
+  .meta svg{width:16px;height:16px;fill:#fff;flex:none}
+  .meta u{text-decoration:none;width:3px;height:3px;border-radius:50%;background:var(--w50);margin:0 2px}
+  .meta span{color:#fff}
+  .dur{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:14px;font-weight:500;color:#fff;flex:none}
+  .dur svg{width:14px;height:14px;fill:var(--w50)}
+  .beat{position:absolute;left:16px;right:16px;top:552px;height:132px;border-radius:22px;background:var(--ink-2);border:1px solid var(--hair);padding:12px 15px 0}
+  .beat header{display:flex;align-items:center;justify-content:space-between;height:18px;margin-bottom:12px}
+  .beat h2{font-size:15px;font-weight:700;letter-spacing:-.01em}
+  .beat header span{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--w70)}
+  .beat header i{width:6px;height:6px;border-radius:50%;background:var(--sun);display:block}
+  .beat svg{display:block}
+  .auto{position:absolute;left:16px;right:16px;top:700px;height:20px;display:flex;align-items:center;justify-content:center;gap:7px;font-size:13px;line-height:20px;color:var(--w70)}
+  .auto svg{width:15px;height:15px;fill:var(--w70);flex:none}
+  .auto b{color:#fff;font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="disc"></div>
+
+<div class="col l">
+  <div class="brand"><i></i>MOVA</div>
+  <div class="eyebrow">Screen 05</div>
+  <h1>Shot breakdown</h1>
+  <p class="lede">The clip, taken apart. Four shots, what each one frames, how the camera moves and how long it lasts.</p>
+  <div class="swatches">
+    <div class="sw"><b style="background:#FF5A36"></b>#FF5A36</div>
+    <div class="sw"><b style="background:#3DF0A8"></b>#3DF0A8</div>
+    <div class="sw"><b style="background:#FFC53D"></b>#FFC53D</div>
+    <div class="sw"><b style="background:#1F8A9E"></b>#1F8A9E</div>
+    <div class="sw"><b style="background:#0E1116"></b>#0E1116</div>
+    <div class="sw"><b style="background:#F4EEE3"></b>#F4EEE3</div>
+  </div>
+</div>
+
+<div class="col r">
+  <div class="note c"><h3>A card per shot</h3><p>Thumbnail, name, framing, move, length. The coral card is the one you shoot next.</p></div>
+  <div class="note s"><h3>Cuts on the beat</h3><p>Yellow dots are beats. Coral lines are cuts, and each one sits on a beat.</p></div>
+  <div class="note g"><h3>A draft, not a verdict</h3><p>MOVA detects all of this, so it says so. Tap a shot to rename, retime or merge it.</p></div>
+  <div class="note m"><h3>Straight to the camera</h3><p>The button names the shot. One tap and screen 01 opens on Wide approach.</p></div>
+</div>
+
+<div class="phone">
+  <div class="screen">
+    <div class="island"></div>
+    <div class="bar" style="top:68px">
+      <div class="rbtn solid" aria-label="Back"><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"/></svg></div>
+      <div class="title"><small><b>Reference</b> · 9.0s</small><strong>4 shots</strong></div>
+      <div class="rbtn solid" aria-label="Adjust cuts"><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M40,88H73a32,32,0,0,0,62,0h81a8,8,0,0,0,0-16H135a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16Zm64-24A16,16,0,1,1,88,80,16,16,0,0,1,104,64ZM216,168H199a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16h97a32,32,0,0,0,62,0h17a8,8,0,0,0,0-16Zm-48,24a16,16,0,1,1,16-16A16,16,0,0,1,168,192Z"/></svg></div>
+    </div>
+
+    <!-- shot list: thumbnails are crops of the reference frame (real photograph, Unsplash) -->
+    <div class="list">
+      <div class="shot on">
+        <div class="th" style="background-size:60px auto;background-position:0 0"></div>
+        <div class="inf">
+          <small>01<b>Up next</b></small>
+          <strong>Wide approach</strong>
+          <div class="meta">Wide<u></u><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M144,104V64a8,8,0,0,1,16,0V84.69l42.34-42.35a8,8,0,0,1,11.32,11.32L171.31,96H192a8,8,0,0,1,0,16H152A8,8,0,0,1,144,104Zm-40,40H64a8,8,0,0,0,0,16H84.69L42.34,202.34a8,8,0,0,0,11.32,11.32L96,171.31V192a8,8,0,0,0,16,0V152A8,8,0,0,0,104,144Zm67.31,16H192a8,8,0,0,0,0-16H152a8,8,0,0,0-8,8v40a8,8,0,0,0,16,0V171.31l42.34,42.35a8,8,0,0,0,11.32-11.32ZM104,56a8,8,0,0,0-8,8V84.69L53.66,42.34A8,8,0,0,0,42.34,53.66L84.69,96H64a8,8,0,0,0,0,16h40a8,8,0,0,0,8-8V64A8,8,0,0,0,104,56Z"/></svg><span>Dolly in</span></div>
+        </div>
+        <div class="dur">3.2s<svg viewBox="0 0 256 256" aria-hidden="true"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></div>
+      </div>
+      <div class="shot">
+        <div class="th" style="background-size:173px auto;background-position:-56px -11px"></div>
+        <div class="inf">
+          <small>02</small>
+          <strong>Hoodie close-up</strong>
+          <div class="meta">Close-up<u></u><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM208,208H48V96H208V208Zm-68-56a12,12,0,1,1-12-12A12,12,0,0,1,140,152Z"/></svg><span>Locked off</span></div>
+        </div>
+        <div class="dur">1.8s<svg viewBox="0 0 256 256" aria-hidden="true"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></div>
+      </div>
+      <div class="shot">
+        <div class="th" style="background-size:116px auto;background-position:-33px -76px"></div>
+        <div class="inf">
+          <small>03</small>
+          <strong>Boots to face</strong>
+          <div class="meta">Low angle<u></u><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M205.66,117.66a8,8,0,0,1-11.32,0L136,59.31V216a8,8,0,0,1-16,0V59.31L61.66,117.66a8,8,0,0,1-11.32-11.32l72-72a8,8,0,0,1,11.32,0l72,72A8,8,0,0,1,205.66,117.66Z"/></svg><span>Tilt up</span></div>
+        </div>
+        <div class="dur">2.4s<svg viewBox="0 0 256 256" aria-hidden="true"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></div>
+      </div>
+      <div class="shot">
+        <div class="th" style="background-size:116px auto;background-position:-3px -38px"></div>
+        <div class="inf">
+          <small>04</small>
+          <strong>Hoop reveal</strong>
+          <div class="meta">Medium<u></u><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"/></svg><span>Pan left</span></div>
+        </div>
+        <div class="dur">1.6s<svg viewBox="0 0 256 256" aria-hidden="true"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></div>
+      </div>
+    </div>
+
+    <!-- beat map: 100 BPM, first beat at 0.2s; cuts at 3.2 / 5.0 / 7.4s fall on beats 6, 9, 13 -->
+    <div class="beat">
+      <header><h2>Beat map</h2><span><i></i>100 BPM · cuts on the beat</span></header>
+      <svg viewBox="0 0 326 76" width="326" height="76" role="img" aria-label="Waveform with 15 beats; the three cuts land on beats 6, 9 and 13"><rect x="1.5" y="15.5" width="3" height="13" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="6.5" y="3.5" width="3" height="37" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="11.5" y="15.5" width="3" height="13" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="16.5" y="17.0" width="3" height="10" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="21.5" y="13.5" width="3" height="17" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="26.5" y="5.5" width="3" height="33" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="31.5" y="13.0" width="3" height="18" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="36.5" y="14.0" width="3" height="16" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="41.5" y="13.5" width="3" height="17" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="46.5" y="9.0" width="3" height="26" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="51.5" y="7.5" width="3" height="29" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="56.5" y="14.5" width="3" height="15" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="61.5" y="13.5" width="3" height="17" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="66.5" y="14.5" width="3" height="15" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="71.5" y="6.0" width="3" height="32" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="76.5" y="13.0" width="3" height="18" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="81.5" y="14.0" width="3" height="16" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="86.5" y="17.0" width="3" height="10" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="91.5" y="5.0" width="3" height="34" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="96.5" y="12.0" width="3" height="20" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="101.5" y="13.0" width="3" height="18" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="106.5" y="13.5" width="3" height="17" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="111.5" y="12.0" width="3" height="20" rx="1.5" fill="rgba(255,255,255,.62)"/><rect x="116.5" y="8.0" width="3" height="28" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="121.5" y="12.5" width="3" height="19" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="126.5" y="14.0" width="3" height="16" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="131.5" y="12.5" width="3" height="19" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="136.5" y="5.0" width="3" height="34" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="141.5" y="12.0" width="3" height="20" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="146.5" y="13.0" width="3" height="18" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="151.5" y="15.5" width="3" height="13" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="156.5" y="7.5" width="3" height="29" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="161.5" y="9.5" width="3" height="25" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="166.5" y="16.0" width="3" height="12" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="171.5" y="17.0" width="3" height="10" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="176.5" y="11.5" width="3" height="21" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="181.5" y="8.0" width="3" height="28" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="186.5" y="16.0" width="3" height="12" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="191.5" y="12.5" width="3" height="19" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="196.5" y="13.0" width="3" height="18" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="201.5" y="4.0" width="3" height="36" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="206.5" y="12.0" width="3" height="20" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="211.5" y="17.5" width="3" height="9" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="216.5" y="16.0" width="3" height="12" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="221.5" y="6.5" width="3" height="31" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="226.5" y="11.0" width="3" height="22" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="231.5" y="15.5" width="3" height="13" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="236.5" y="17.0" width="3" height="10" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="241.5" y="8.5" width="3" height="27" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="246.5" y="9.5" width="3" height="25" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="251.5" y="15.5" width="3" height="13" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="256.5" y="16.0" width="3" height="12" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="261.5" y="13.0" width="3" height="18" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="266.5" y="3.0" width="3" height="38" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="271.5" y="13.5" width="3" height="17" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="276.5" y="17.0" width="3" height="10" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="281.5" y="15.5" width="3" height="13" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="286.5" y="8.5" width="3" height="27" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="291.5" y="11.5" width="3" height="21" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="296.5" y="15.5" width="3" height="13" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="301.5" y="16.0" width="3" height="12" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="306.5" y="11.0" width="3" height="22" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="311.5" y="6.0" width="3" height="32" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="316.5" y="16.5" width="3" height="11" rx="1.5" fill="rgba(255,255,255,.3)"/><rect x="321.5" y="13.0" width="3" height="18" rx="1.5" fill="rgba(255,255,255,.3)"/><circle cx="7.2" cy="51" r="1.75" fill="#FFC53D" opacity=".85"/><circle cx="29.0" cy="51" r="1.75" fill="#FFC53D" opacity=".85"/><circle cx="50.7" cy="51" r="1.75" fill="#FFC53D" opacity=".85"/><circle cx="72.4" cy="51" r="1.75" fill="#FFC53D" opacity=".85"/><circle cx="94.2" cy="51" r="1.75" fill="#FFC53D" opacity=".85"/><circle cx="137.6" cy="51" r="1.75" fill="#FFC53D" opacity=".85"/><circle cx="159.4" cy="51" r="1.75" fill="#FFC53D" opacity=".85"/><circle cx="202.8" cy="51" r="1.75" fill="#FFC53D" opacity=".85"/><circle cx="224.6" cy="51" r="1.75" fill="#FFC53D" opacity=".85"/><circle cx="246.3" cy="51" r="1.75" fill="#FFC53D" opacity=".85"/><circle cx="289.8" cy="51" r="1.75" fill="#FFC53D" opacity=".85"/><circle cx="311.5" cy="51" r="1.75" fill="#FFC53D" opacity=".85"/><path d="M115.9 0V51" stroke="#FF5A36" stroke-width="2" stroke-linecap="round"/><circle cx="115.9" cy="51" r="4" fill="#FF5A36" stroke="#1B2028" stroke-width="1.5"/><path d="M181.1 0V51" stroke="#FF5A36" stroke-width="2" stroke-linecap="round"/><circle cx="181.1" cy="51" r="4" fill="#FF5A36" stroke="#1B2028" stroke-width="1.5"/><path d="M268.0 0V51" stroke="#FF5A36" stroke-width="2" stroke-linecap="round"/><circle cx="268.0" cy="51" r="4" fill="#FF5A36" stroke="#1B2028" stroke-width="1.5"/><text x="58.0" y="72" text-anchor="middle" font-family="DM Mono,monospace" font-size="11" fill="#FF5A36">1 · 3.2s</text><text x="148.5" y="72" text-anchor="middle" font-family="DM Mono,monospace" font-size="11" fill="rgba(255,255,255,.72)">2 · 1.8s</text><text x="224.6" y="72" text-anchor="middle" font-family="DM Mono,monospace" font-size="11" fill="rgba(255,255,255,.72)">3 · 2.4s</text><text x="297.0" y="72" text-anchor="middle" font-family="DM Mono,monospace" font-size="11" fill="rgba(255,255,255,.72)">4 · 1.6s</text></svg>
+    </div>
+
+    <div class="auto"><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M197.58,129.06,146,110l-19-51.62a15.92,15.92,0,0,0-29.88,0L78,110l-51.62,19a15.92,15.92,0,0,0,0,29.88L78,178l19,51.62a15.92,15.92,0,0,0,29.88,0L146,178l51.62-19a15.92,15.92,0,0,0,0-29.88ZM137,164.22a8,8,0,0,0-4.74,4.74L112,223.85,91.78,169A8,8,0,0,0,87,164.22L32.15,144,87,123.78A8,8,0,0,0,91.78,119L112,64.15,132.22,119a8,8,0,0,0,4.74,4.74L191.85,144ZM144,40a8,8,0,0,1,8-8h16V16a8,8,0,0,1,16,0V32h16a8,8,0,0,1,0,16H184V64a8,8,0,0,1-16,0V48H152A8,8,0,0,1,144,40ZM248,88a8,8,0,0,1-8,8h-8v8a8,8,0,0,1-16,0V96h-8a8,8,0,0,1,0-16h8V72a8,8,0,0,1,16,0v8h8A8,8,0,0,1,248,88Z"/></svg><span>Detected automatically. <b>Tap any shot to adjust.</b></span></div>
+
+    <div class="cta"><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M251.77,73a8,8,0,0,0-8.21.39L208,97.05V72a16,16,0,0,0-16-16H32A16,16,0,0,0,16,72V184a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V159l35.56,23.71A8,8,0,0,0,248,184a8,8,0,0,0,8-8V80A8,8,0,0,0,251.77,73ZM192,184H32V72H192V184Zm48-22.95-32-21.33V116.28L240,95Z"/></svg>Shoot shot 1</div>
+
+    <div class="home"></div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MOVA · Reference</title>
+<meta name="viewport" content="width=1200">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1116; --ink-2:#1B2028; --paper:#F4EEE3;
+    --coral:#FF5A36; --coral-deep:#E2401D; --mint:#3DF0A8; --sun:#FFC53D; --lagoon:#1F8A9E;
+    --white:#FFFFFF; --w70:rgba(255,255,255,.72); --w50:rgba(255,255,255,.52); --hair:rgba(255,255,255,.14);
+    --display:"Bricolage Grotesque",system-ui,sans-serif; --mono:"DM Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1200px;height:1000px}
+  body{background:var(--paper);font-family:var(--display);color:var(--ink);position:relative;overflow:hidden;-webkit-font-smoothing:antialiased}
+
+  /* ───────── Board (same as screen 01) ───────── */
+  .disc{position:absolute;left:320px;top:220px;width:560px;height:560px;border-radius:50%;background:var(--coral)}
+  .col{position:absolute;top:66px;bottom:66px;width:236px;display:flex;flex-direction:column}
+  .col.l{left:64px}
+  .col.r{left:900px;justify-content:center;gap:28px}
+  .brand{font-weight:800;font-size:28px;letter-spacing:-.02em;font-variation-settings:"opsz" 96;display:flex;align-items:center;gap:10px}
+  .brand i{width:14px;height:14px;border-radius:50%;background:var(--coral);display:block}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(14,17,22,.56)}
+  .l .eyebrow{margin-top:auto}
+  h1{font-weight:700;font-size:44px;line-height:1;letter-spacing:-.03em;font-variation-settings:"opsz" 96;margin-top:12px}
+  .lede{font-size:16px;line-height:1.45;color:rgba(14,17,22,.72);margin-top:16px;font-weight:400}
+  .swatches{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+  .sw{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:rgba(14,17,22,.72)}
+  .sw b{width:20px;height:20px;border-radius:6px;display:block;flex:none;box-shadow:inset 0 0 0 1px rgba(14,17,22,.08)}
+  .note{padding-left:16px;border-left:2px solid rgba(14,17,22,.14)}
+  .note.c{border-color:var(--coral)} .note.m{border-color:#17B67B} .note.s{border-color:var(--sun)} .note.g{border-color:var(--lagoon)}
+  .note h3{font-size:16px;font-weight:700;letter-spacing:-.01em}
+  .note p{font-size:14px;line-height:1.4;color:rgba(14,17,22,.68);margin-top:4px}
+
+  /* ───────── Phone (same as screen 01) ───────── */
+  .phone{position:absolute;left:393px;top:66px;width:414px;height:868px;border-radius:66px;background:#0A0B0D;padding:12px;
+    box-shadow:0 0 0 1.5px #2E3138, inset 0 0 0 1.5px #3B3F47, 0 50px 90px -30px rgba(60,20,8,.55), 0 18px 36px -12px rgba(14,17,22,.35)}
+  .screen{position:relative;width:390px;height:844px;border-radius:54px;overflow:hidden;background:var(--ink);color:var(--white)}
+  .island{position:absolute;left:133px;top:12px;width:124px;height:36px;border-radius:20px;background:#000;z-index:9}
+  .home{position:absolute;left:128px;top:827px;width:134px;height:5px;border-radius:3px;background:rgba(255,255,255,.9)}
+
+  /* shared app parts */
+  .bar{position:absolute;left:16px;right:16px;top:72px;height:44px;display:flex;align-items:center;justify-content:space-between;z-index:5}
+  .rbtn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;flex:none;
+    background:rgba(14,17,22,.46);border:1px solid var(--hair);
+    -webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4)}
+  .rbtn.solid{background:var(--ink-2)}
+  .rbtn svg{width:22px;height:22px;fill:#fff;display:block}
+  .title{text-align:center}
+  .title small{display:block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--w70);line-height:14px}
+  .title small b{color:var(--coral);font-weight:500}
+  .title strong{display:block;font-size:21px;font-weight:700;letter-spacing:-.02em;line-height:26px;margin-top:2px;font-variation-settings:"opsz" 40}
+  .segs{position:absolute;left:16px;right:16px;top:58px;display:flex;gap:4px;z-index:5}
+  .segs i{height:4px;border-radius:2px;background:rgba(255,255,255,.38);display:block}
+  .segs i.on{background:var(--coral);box-shadow:0 0 12px rgba(255,90,54,.7)}
+  .media{position:absolute;left:0;top:0;width:390px;height:400px;overflow:hidden}
+  .media .sky{position:absolute;left:0;top:0;width:390px;height:97px;overflow:hidden}
+  .media .sky img{position:absolute;left:0;top:0;width:390px;height:4480px}   /* top rows of sky, stretched behind the island */
+  .media .main{position:absolute;left:0;top:96px;width:390px;height:540.3px;display:block}
+  .scrim-t{position:absolute;left:0;top:0;width:100%;height:170px;
+    background:linear-gradient(180deg,rgba(14,17,22,.78) 0%,rgba(14,17,22,.5) 50%,rgba(14,17,22,0) 100%)}
+  .scrim-b{position:absolute;left:0;top:250px;width:100%;height:150px;
+    background:linear-gradient(180deg,rgba(14,17,22,0) 0%,rgba(14,17,22,.55) 45%,rgba(14,17,22,.92) 82%,var(--ink) 100%)}
+  .pill{height:24px;padding:0 9px;border-radius:12px;font-size:12px;font-weight:700;line-height:24px;letter-spacing:.01em;white-space:nowrap}
+  .pill.c{background:var(--coral);color:#1C0B05}
+  .pill.g{background:rgba(14,17,22,.6);color:#fff;border:1px solid var(--hair);line-height:22px;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+  .cta{position:absolute;left:16px;right:16px;top:744px;height:56px;border-radius:28px;background:var(--coral);color:#1C0B05;
+    font-size:17px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;justify-content:center;gap:10px;
+    box-shadow:0 10px 28px -8px rgba(255,90,54,.55), inset 0 1px 0 rgba(255,255,255,.25)}
+  .cta svg{width:22px;height:22px;fill:#1C0B05;display:block}
+
+  /* ───────── This screen ───────── */
+  .play{position:absolute;left:16px;right:16px;top:340px;height:44px;display:flex;align-items:center;gap:12px;z-index:5}
+  .pbtn{width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+  .pbtn svg{width:20px;height:20px;fill:var(--ink);display:block;margin-left:2px}
+  .tc{font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.02em;color:#fff}
+  .tc span{color:var(--w70)}
+  .play .pill{margin-left:auto}
+  .head{position:absolute;left:16px;right:16px;top:412px}
+  .head small{display:block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--w70);line-height:14px}
+  .head small b{color:var(--coral);font-weight:500}
+  .head strong{display:block;font-size:26px;font-weight:700;letter-spacing:-.025em;line-height:30px;margin-top:4px;font-variation-settings:"opsz" 48}
+  .cuts{position:absolute;left:16px;right:16px;top:476px;display:flex;gap:4px}
+  .cuts div{min-width:0}
+  .cuts i{display:block;height:6px;border-radius:3px;background:rgba(255,255,255,.38)}
+  .cuts .on i{background:linear-gradient(90deg,var(--coral) 0 28%,rgba(255,255,255,.38) 28%)}
+  .cuts span{display:block;margin-top:7px;font-family:var(--mono);font-size:11px;line-height:14px;color:var(--w70);white-space:nowrap}
+  .cuts span b{color:#fff;font-weight:500;margin-right:6px}
+  .cuts .on span b{color:var(--coral)}
+  .sec{position:absolute;left:16px;right:16px;top:522px;height:20px;display:flex;align-items:center;justify-content:space-between}
+  .sec h2{font-size:17px;font-weight:700;letter-spacing:-.015em;line-height:20px}
+  .sec span{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--w70)}
+  .sec svg{width:14px;height:14px;fill:var(--w70)}
+  .facts{position:absolute;left:16px;right:16px;top:552px;border-radius:20px;background:var(--ink-2);border:1px solid var(--hair);padding:0 14px}
+  .row{height:35px;display:flex;align-items:center;gap:10px;border-top:1px solid rgba(255,255,255,.08)}
+  .row:first-child{border-top:0}
+  .row svg{width:18px;height:18px;fill:var(--w70);flex:none}
+  .row.beat svg{fill:var(--sun)}
+  .row em{font-style:normal;font-size:14px;color:var(--w70);line-height:18px}
+  .row strong{margin-left:auto;font-size:14px;font-weight:600;letter-spacing:-.005em;line-height:18px;white-space:nowrap}
+  .pal{margin-left:auto;display:flex;gap:4px}
+  .pal b{width:26px;height:18px;border-radius:6px;display:block;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+</style>
+</head>
+<body>
+
+<div class="disc"></div>
+
+<div class="col l">
+  <div class="brand"><i></i>MOVA</div>
+  <div class="eyebrow">Screen 04</div>
+  <h1>Reference</h1>
+  <p class="lede">Open the clip you saved. MOVA reads it once and tells you, in plain words, what it is made of.</p>
+  <div class="swatches">
+    <div class="sw"><b style="background:#FF5A36"></b>#FF5A36</div>
+    <div class="sw"><b style="background:#3DF0A8"></b>#3DF0A8</div>
+    <div class="sw"><b style="background:#FFC53D"></b>#FFC53D</div>
+    <div class="sw"><b style="background:#1F8A9E"></b>#1F8A9E</div>
+    <div class="sw"><b style="background:#0E1116"></b>#0E1116</div>
+    <div class="sw"><b style="background:#F4EEE3"></b>#F4EEE3</div>
+  </div>
+</div>
+
+<div class="col r">
+  <div class="note c"><h3>The clip comes first</h3><p>Half the screen is the reference itself. Play it before you plan anything.</p></div>
+  <div class="note s"><h3>Cuts you can see</h3><p>The scrubber is already split into the four shots, each as long as it runs.</p></div>
+  <div class="note g"><h3>Found, not decided</h3><p>Every fact is marked as detected. Tap a row to correct what MOVA got wrong.</p></div>
+  <div class="note m"><h3>One way forward</h3><p>A single coral button. Everything else on the screen is for reading.</p></div>
+</div>
+
+<div class="phone">
+  <div class="screen">
+    <!-- reference clip: real photograph (Unsplash) standing in for the video frame -->
+    <div class="media">
+      <div class="sky"><img src="../v3/img/fashion_yellow.jpg" alt=""></div>
+      <img class="main" src="../v3/img/fashion_yellow.jpg" alt="Reference clip: a dancer in a yellow tracksuit on a seaside court">
+      <div class="scrim-t"></div>
+      <div class="scrim-b"></div>
+    </div>
+    <div class="island"></div>
+
+    <div class="bar">
+      <div class="rbtn" aria-label="Back"><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"/></svg></div>
+      <div class="rbtn" aria-label="More"><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M140,128a12,12,0,1,1-12-12A12,12,0,0,1,140,128Zm56-12a12,12,0,1,0,12,12A12,12,0,0,0,196,116ZM60,116a12,12,0,1,0,12,12A12,12,0,0,0,60,116Z"/></svg></div>
+    </div>
+
+    <div class="play">
+      <div class="pbtn" aria-label="Play reference"><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"/></svg></div>
+      <div class="tc">0:00.9 <span>/ 0:09.0</span></div>
+      <div class="pill g">9:16 · 30 fps</div>
+    </div>
+
+    <div class="head">
+      <small><b>Reference</b> · imported clip</small>
+      <strong>Yellow on the court</strong>
+    </div>
+
+    <!-- four shots, each as long as it runs; label = shot number + start time -->
+    <div class="cuts" aria-label="4 shots">
+      <div class="on" style="flex:3.2"><i></i><span><b>1</b>0:00.0</span></div>
+      <div style="flex:1.8"><i></i><span><b>2</b>0:03.2</span></div>
+      <div style="flex:2.4"><i></i><span><b>3</b>0:05.0</span></div>
+      <div style="flex:1.6"><i></i><span><b>4</b>0:07.4</span></div>
+    </div>
+
+    <div class="sec"><h2>What MOVA found</h2><span><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M197.58,129.06,146,110l-19-51.62a15.92,15.92,0,0,0-29.88,0L78,110l-51.62,19a15.92,15.92,0,0,0,0,29.88L78,178l19,51.62a15.92,15.92,0,0,0,29.88,0L146,178l51.62-19a15.92,15.92,0,0,0,0-29.88ZM137,164.22a8,8,0,0,0-4.74,4.74L112,223.85,91.78,169A8,8,0,0,0,87,164.22L32.15,144,87,123.78A8,8,0,0,0,91.78,119L112,64.15,132.22,119a8,8,0,0,0,4.74,4.74L191.85,144ZM144,40a8,8,0,0,1,8-8h16V16a8,8,0,0,1,16,0V32h16a8,8,0,0,1,0,16H184V64a8,8,0,0,1-16,0V48H152A8,8,0,0,1,144,40ZM248,88a8,8,0,0,1-8,8h-8v8a8,8,0,0,1-16,0V96h-8a8,8,0,0,1,0-16h8V72a8,8,0,0,1,16,0v8h8A8,8,0,0,1,248,88Z"/></svg>Detected · editable</span></div>
+    <div class="facts">
+      <div class="row"><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M216,104H102.09L210,75.51a8,8,0,0,0,5.68-9.84l-8.16-30a15.93,15.93,0,0,0-19.42-11.13L35.81,64.74a15.75,15.75,0,0,0-9.7,7.4,15.51,15.51,0,0,0-1.55,12L32,111.56c0,.14,0,.29,0,.44v88a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V112A8,8,0,0,0,216,104ZM192.16,40l6,22.07-22.62,6L147.42,51.83Zm-66.69,17.6,28.12,16.24-36.94,9.75L88.53,67.37Zm-79.4,44.62-6-22.08,26.5-7L94.69,89.4ZM208,200H48V120H208v80Z"/></svg><em>Shots</em><strong>4 in 9.0s</strong></div>
+      <div class="row"><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M251.77,73a8,8,0,0,0-8.21.39L208,97.05V72a16,16,0,0,0-16-16H32A16,16,0,0,0,16,72V184a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V159l35.56,23.71A8,8,0,0,0,248,184a8,8,0,0,0,8-8V80A8,8,0,0,0,251.77,73ZM192,184H32V72H192V184Zm48-22.95-32-21.33V116.28L240,95Z"/></svg><em>Camera moves</em><strong>Dolly in, tilt up, pan left</strong></div>
+      <div class="row beat"><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M187.14,114.84l26.78-29.46a8,8,0,0,0-11.84-10.76l-20.55,22.6-17.2-54.07A15.94,15.94,0,0,0,149.08,32H106.91A15.94,15.94,0,0,0,91.66,43.15l-50.91,160A16,16,0,0,0,56,224H200a16,16,0,0,0,15.25-20.85ZM184.72,160H146.08l28.62-31.48ZM106.91,48h42.17l20,62.9L124.46,160H71.27ZM56,208l10.18-32H189.81L200,208Z"/></svg><em>Beat</em><strong>100 BPM · cuts on the beat</strong></div>
+      <div class="row"><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"/></svg><em>Light and grade</em><strong>Hard sun, warm</strong></div>
+      <div class="row"><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M200.77,53.89A103.27,103.27,0,0,0,128,24h-1.07A104,104,0,0,0,24,128c0,43,26.58,79.06,69.36,94.17A32,32,0,0,0,136,192a16,16,0,0,1,16-16h46.21a31.81,31.81,0,0,0,31.2-24.88,104.43,104.43,0,0,0,2.59-24A103.28,103.28,0,0,0,200.77,53.89Zm13,93.71A15.89,15.89,0,0,1,198.21,160H152a32,32,0,0,0-32,32,16,16,0,0,1-21.31,15.07C62.49,194.3,40,164,40,128a88,88,0,0,1,87.09-88h.9a88.35,88.35,0,0,1,88,87.25A88.86,88.86,0,0,1,213.81,147.6ZM140,76a12,12,0,1,1-12-12A12,12,0,0,1,140,76ZM96,100A12,12,0,1,1,84,88,12,12,0,0,1,96,100Zm0,56a12,12,0,1,1-12-12A12,12,0,0,1,96,156Zm88-56a12,12,0,1,1-12-12A12,12,0,0,1,184,100Z"/></svg><em>Palette</em><div class="pal" aria-label="Colors sampled from the clip"><b style="background:#88CDDD"></b><b style="background:#E0B73C"></b><b style="background:#C78934"></b><b style="background:#C5C295"></b><b style="background:#576352"></b></div></div>
+    </div>
+
+    <div class="cta"><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M157.73,113.13A8,8,0,0,1,159.82,102L227.48,55.7a8,8,0,0,1,9,13.21l-67.67,46.3a7.92,7.92,0,0,1-4.51,1.4A8,8,0,0,1,157.73,113.13Zm80.87,85.09a8,8,0,0,1-11.12,2.08L136,137.7,93.49,166.78a36,36,0,1,1-9-13.19L121.83,128,84.44,102.41a35.86,35.86,0,1,1,9-13.19l143,97.87A8,8,0,0,1,238.6,198.22ZM80,180a20,20,0,1,0-5.86,14.14A19.85,19.85,0,0,0,80,180ZM74.14,90.13a20,20,0,1,0-28.28,0A19.85,19.85,0,0,0,74.14,90.13Z"/></svg>Break it into shots</div>
+
+    <div class="home"></div>
+  </div>
+</div>
+
+</body>
+</html>
