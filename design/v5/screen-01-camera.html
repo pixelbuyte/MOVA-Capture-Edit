@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MOVA · Recreate camera</title>
+<meta name="viewport" content="width=1200">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1116;          /* glass + tray */
+    --ink-2:#1B2028;
+    --paper:#F4EEE3;        /* board */
+    --coral:#FF5A36;        /* brand, reference, record */
+    --coral-deep:#E2401D;
+    --mint:#3DF0A8;         /* match */
+    --sun:#FFC53D;          /* sampled from the scene, board accent */
+    --lagoon:#1F8A9E;       /* sampled from the sky, board accent */
+    --white:#FFFFFF;
+    --w70:rgba(255,255,255,.72);
+    --w50:rgba(255,255,255,.52);
+    --hair:rgba(255,255,255,.14);
+    --display:"Bricolage Grotesque",system-ui,sans-serif;
+    --mono:"DM Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1200px;height:1000px}
+  body{
+    background:var(--paper);
+    font-family:var(--display);
+    color:var(--ink);
+    position:relative;overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ───────── Board ───────── */
+  .disc{position:absolute;left:320px;top:220px;width:560px;height:560px;border-radius:50%;background:var(--coral)}
+  .col{position:absolute;top:66px;bottom:66px;width:236px;display:flex;flex-direction:column}
+  .col.l{left:64px}
+  .col.r{left:900px;justify-content:center;gap:28px}
+  .brand{font-weight:800;font-size:28px;letter-spacing:-.02em;font-variation-settings:"opsz" 96;display:flex;align-items:center;gap:10px}
+  .brand i{width:14px;height:14px;border-radius:50%;background:var(--coral);display:block}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(14,17,22,.56)}
+  .l .eyebrow{margin-top:auto}
+  h1{font-weight:700;font-size:44px;line-height:1;letter-spacing:-.03em;font-variation-settings:"opsz" 96;margin-top:12px}
+  .lede{font-size:16px;line-height:1.45;color:rgba(14,17,22,.72);margin-top:16px;font-weight:400}
+  .swatches{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+  .sw{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:rgba(14,17,22,.72)}
+  .sw b{width:20px;height:20px;border-radius:6px;display:block;flex:none;box-shadow:inset 0 0 0 1px rgba(14,17,22,.08)}
+  .note{padding-left:16px;border-left:2px solid rgba(14,17,22,.14)}
+  .note.c{border-color:var(--coral)} .note.m{border-color:#17B67B} .note.s{border-color:var(--sun)} .note.g{border-color:var(--lagoon)}
+  .note h3{font-size:16px;font-weight:700;letter-spacing:-.01em}
+  .note p{font-size:14px;line-height:1.4;color:rgba(14,17,22,.68);margin-top:4px}
+
+  /* ───────── Phone ───────── */
+  .phone{
+    position:absolute;left:393px;top:66px;width:414px;height:868px;border-radius:66px;
+    background:#0A0B0D;padding:12px;
+    box-shadow:0 0 0 1.5px #2E3138, inset 0 0 0 1.5px #3B3F47,
+               0 50px 90px -30px rgba(60,20,8,.55), 0 18px 36px -12px rgba(14,17,22,.35);
+  }
+  .screen{position:relative;width:390px;height:844px;border-radius:54px;overflow:hidden;background:var(--ink);color:var(--white)}
+  .island{position:absolute;left:133px;top:12px;width:124px;height:36px;border-radius:20px;background:#000;z-index:9}
+
+  /* feed */
+  .feed{position:absolute;inset:0}
+  .feed .sky{position:absolute;left:0;top:0;width:390px;height:177px;overflow:hidden}
+  .feed .sky img{position:absolute;left:0;top:0;width:390px;height:4775px}   /* top 20 rows of sky, stretched */
+  .feed .main{position:absolute;left:0;top:176px;width:390px;height:540.3px;display:block}
+  .scrim-t{position:absolute;left:0;top:0;width:100%;height:250px;
+    background:linear-gradient(180deg,rgba(14,17,22,.78) 0%,rgba(14,17,22,.6) 45%,rgba(14,17,22,.28) 76%,rgba(14,17,22,0) 100%)}
+  .scrim-b{position:absolute;left:0;top:596px;width:100%;height:248px;
+    background:linear-gradient(180deg,rgba(14,17,22,0) 0%,rgba(14,17,22,.5) 30%,rgba(14,17,22,.94) 47%,var(--ink) 52%)}
+  .grid{position:absolute;inset:0;opacity:.16;
+    background:
+      linear-gradient(90deg,transparent 129.5px,#fff 129.5px,#fff 130.5px,transparent 130.5px,transparent 259.5px,#fff 259.5px,#fff 260.5px,transparent 260.5px),
+      linear-gradient(180deg,transparent 349.5px,#fff 349.5px,#fff 350.5px,transparent 350.5px,transparent 513.5px,#fff 513.5px,#fff 514.5px,transparent 514.5px);
+    -webkit-mask-image:linear-gradient(180deg,transparent 190px,#000 240px,#000 620px,transparent 680px)}
+  svg.ghost{position:absolute;left:0;top:0;width:390px;height:844px;overflow:visible}
+  .tag{position:absolute;left:20px;top:292px;height:24px;padding:0 9px;border-radius:12px;background:var(--coral);color:#1C0B05;
+    font-size:12px;font-weight:700;line-height:24px;letter-spacing:.01em}
+
+  /* top */
+  .segs{position:absolute;left:16px;right:16px;top:58px;display:flex;gap:4px}
+  .segs i{height:4px;border-radius:2px;background:rgba(255,255,255,.38);display:block}
+  .segs i.on{background:var(--coral);box-shadow:0 0 12px rgba(255,90,54,.7)}
+  .bar{position:absolute;left:16px;right:16px;top:72px;height:44px;display:flex;align-items:center;justify-content:space-between}
+  .rbtn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;flex:none;
+    background:rgba(14,17,22,.46);border:1px solid var(--hair);
+    -webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4)}
+  .rbtn svg,.cbtn svg{width:22px;height:22px;fill:#fff;display:block}
+  .title{text-align:center}
+  .title small{display:block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--w70);line-height:14px}
+  .title small b{color:var(--coral);font-weight:500}
+  .title strong{display:block;font-size:21px;font-weight:700;letter-spacing:-.02em;line-height:26px;margin-top:2px;font-variation-settings:"opsz" 40}
+
+  .coach{position:absolute;left:16px;right:16px;top:126px;height:60px;display:flex;gap:8px}
+  .card{height:60px;border-radius:20px;display:flex;align-items:center;gap:12px;padding:0 14px 0 8px;
+    background:rgba(14,17,22,.58);border:1px solid var(--hair);
+    -webkit-backdrop-filter:blur(22px) saturate(1.5);backdrop-filter:blur(22px) saturate(1.5)}
+  .card.match{flex:1}
+  .card.move{width:130px}
+  .ring{position:relative;width:44px;height:44px;flex:none}
+  .ring svg{width:44px;height:44px;display:block;transform:rotate(-90deg)}
+  .ring span{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--mono);font-weight:500;font-size:14px;letter-spacing:-.02em}
+  .tile{width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.12);display:grid;place-items:center;flex:none}
+  .tile svg{width:22px;height:22px;fill:#fff}
+  .kv small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--w70);line-height:14px;white-space:nowrap}
+  .kv small b{color:var(--mint);font-weight:500}
+  .kv strong{display:block;font-size:17px;font-weight:600;letter-spacing:-.015em;line-height:22px;margin-top:2px;white-space:nowrap}
+
+  /* bottom */
+  .modes{position:absolute;left:0;right:0;top:684px;height:32px;display:flex;justify-content:center;align-items:center;gap:4px}
+  .modes span{height:32px;padding:0 14px;border-radius:16px;font-size:15px;font-weight:600;line-height:32px;color:var(--w70);letter-spacing:-.005em}
+  .modes span.on{background:var(--coral);color:#1C0B05;font-weight:700}
+  .ctrl{position:absolute;left:20px;right:20px;top:728px;height:82px;display:flex;justify-content:space-between;align-items:flex-start}
+  .it{width:52px;margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:6px}
+  .it small{font-size:11px;font-weight:500;line-height:13px;color:var(--w70);white-space:nowrap}
+  .cbtn{width:44px;height:44px;border-radius:50%;background:var(--ink-2);border:1px solid var(--hair);display:grid;place-items:center}
+  .cbtn.on{background:rgba(255,90,54,.18);border-color:rgba(255,90,54,.55)}
+  .cbtn.on svg{fill:#FF8466}
+  .it.on small{color:#FF9A80}
+  .thumb{width:44px;height:44px;border-radius:13px;border:1.5px solid rgba(255,255,255,.9);
+    background:url(../v3/img/fashion_yellow.jpg) -76px -4px/190px auto no-repeat}
+  .look{position:relative}
+  .look::after{content:"";position:absolute;right:-1px;top:-1px;width:12px;height:12px;border-radius:50%;background:var(--sun);border:2px solid var(--ink)}
+  .shutter{width:80px;height:80px;position:relative;flex:none}
+  .shutter svg{position:absolute;inset:0;width:80px;height:80px}
+  .shutter i{position:absolute;left:10px;top:10px;width:60px;height:60px;border-radius:50%;
+    background:radial-gradient(circle at 36% 30%,#FF7C5C 0%,var(--coral) 46%,var(--coral-deep) 100%);
+    box-shadow:inset 0 -3px 8px rgba(120,20,0,.35), 0 0 22px rgba(255,90,54,.35)}
+  .home{position:absolute;left:128px;top:827px;width:134px;height:5px;border-radius:3px;background:rgba(255,255,255,.9)}
+</style>
+</head>
+<body>
+
+<div class="disc"></div>
+
+<div class="col l">
+  <div class="brand"><i></i>MOVA</div>
+  <div class="eyebrow">Screen 01</div>
+  <h1>Recreate camera</h1>
+  <p class="lede">Drop in a clip you love. MOVA walks you through it shot by shot, and shows you where to stand.</p>
+  <div class="swatches">
+    <div class="sw"><b style="background:#FF5A36"></b>#FF5A36</div>
+    <div class="sw"><b style="background:#3DF0A8"></b>#3DF0A8</div>
+    <div class="sw"><b style="background:#FFC53D"></b>#FFC53D</div>
+    <div class="sw"><b style="background:#1F8A9E"></b>#1F8A9E</div>
+    <div class="sw"><b style="background:#0E1116"></b>#0E1116</div>
+    <div class="sw"><b style="background:#F4EEE3"></b>#F4EEE3</div>
+  </div>
+</div>
+
+<div class="col r">
+  <div class="note c"><h3>Four shots, one bar</h3><p>Each segment is as long as its shot. The coral one is where you are.</p></div>
+  <div class="note m"><h3>One number, one tip</h3><p>Match is a single score. The coach only ever says one thing at a time.</p></div>
+  <div class="note s"><h3>The reference ghost</h3><p>A dashed outline shows where the subject stood in the original clip.</p></div>
+  <div class="note g"><h3>A shutter that counts</h3><p>The ring repeats the four shots, so progress stays under your thumb.</p></div>
+</div>
+
+<div class="phone">
+  <div class="screen">
+    <!-- live viewfinder: real photograph (Unsplash), sky strip stretched above it -->
+    <div class="feed">
+      <div class="sky"><img src="../v3/img/fashion_yellow.jpg" alt=""></div>
+      <img class="main" src="../v3/img/fashion_yellow.jpg" alt="Live camera view of a dancer in a yellow tracksuit on a seaside court">
+    </div>
+    <div class="grid"></div>
+    <div class="scrim-t"></div>
+    <div class="scrim-b"></div>
+
+    <!-- reference ghost -->
+    <svg class="ghost" viewBox="0 0 390 844" aria-hidden="true">
+      <path id="g-fill" fill="rgba(255,90,54,.10)"/>
+      <path id="g-under" fill="none" stroke="rgba(14,17,22,.2)" stroke-width="4" stroke-linejoin="round"/>
+      <path id="g-line" fill="none" stroke="#FF5A36" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="9 7"/>
+      <path d="M100 304 H121" stroke="#FF5A36" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="124" cy="304" r="4" fill="#FF5A36" stroke="#fff" stroke-width="1.5"/>
+    </svg>
+    <div class="tag">Reference</div>
+
+    <div class="island"></div>
+
+    <!-- shot progress -->
+    <div class="segs" aria-label="Shot 1 of 4">
+      <i class="on" style="flex:3.2"></i><i style="flex:1.8"></i><i style="flex:2.4"></i><i style="flex:1.6"></i>
+    </div>
+    <div class="bar">
+      <div class="rbtn" aria-label="Close"><svg viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></svg></div>
+      <div class="title"><small><b>Shot 1 of 4</b> · 3.2s</small><strong>Wide approach</strong></div>
+      <div class="rbtn" aria-label="Flash"><svg viewBox="0 0 256 256"><path d="M215.79,118.17a8,8,0,0,0-5-5.66L153.18,90.9l14.66-73.33a8,8,0,0,0-13.69-7l-112,120a8,8,0,0,0,3,13l57.63,21.61L88.16,238.43a8,8,0,0,0,13.69,7l112-120A8,8,0,0,0,215.79,118.17ZM109.37,214l10.47-52.38a8,8,0,0,0-5-9.06L62,132.71l84.62-90.66L136.16,94.43a8,8,0,0,0,5,9.06l52.8,19.8Z"/></svg></div>
+    </div>
+
+    <!-- coach -->
+    <div class="coach">
+      <div class="card match">
+        <div class="ring">
+          <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="4"/><circle cx="22" cy="22" r="19" fill="none" stroke="#3DF0A8" stroke-width="4" stroke-linecap="round" stroke-dasharray="102.67 119.38"/></svg>
+          <span>86%</span>
+        </div>
+        <div class="kv"><small><b>Match</b> · nearly</small><strong>One step closer</strong></div>
+      </div>
+      <div class="card move">
+        <div class="tile"><svg viewBox="0 0 256 256"><path d="M144,104V64a8,8,0,0,1,16,0V84.69l42.34-42.35a8,8,0,0,1,11.32,11.32L171.31,96H192a8,8,0,0,1,0,16H152A8,8,0,0,1,144,104Zm-40,40H64a8,8,0,0,0,0,16H84.69L42.34,202.34a8,8,0,0,0,11.32,11.32L96,171.31V192a8,8,0,0,0,16,0V152A8,8,0,0,0,104,144Zm67.31,16H192a8,8,0,0,0,0-16H152a8,8,0,0,0-8,8v40a8,8,0,0,0,16,0V171.31l42.34,42.35a8,8,0,0,0,11.32-11.32ZM104,56a8,8,0,0,0-8,8V84.69L53.66,42.34A8,8,0,0,0,42.34,53.66L84.69,96H64a8,8,0,0,0,0,16h40a8,8,0,0,0,8-8V64A8,8,0,0,0,104,56Z"/></svg></div>
+        <div class="kv"><small>Move</small><strong>Dolly in</strong></div>
+      </div>
+    </div>
+
+    <!-- modes -->
+    <div class="modes"><span class="on">Recreate</span><span>Video</span><span>Photo</span><span>Slo-mo</span></div>
+
+    <!-- controls -->
+    <div class="ctrl">
+      <div class="it"><div class="thumb"></div><small>Last take</small></div>
+      <div class="it"><div class="cbtn look"><svg viewBox="0 0 256 256"><path d="M88,180a12,12,0,1,1-12-12A12,12,0,0,1,88,180Zm152-23.81V208a16,16,0,0,1-16,16H76a46.36,46.36,0,0,1-7.94-.68,44,44,0,0,1-35.43-50.95l25-143.13a15.94,15.94,0,0,1,18.47-13L130.84,26a16,16,0,0,1,12.92,18.52l-12.08,69L199.49,89a16,16,0,0,1,20.45,9.52L239,150.69A18.35,18.35,0,0,1,240,156.19ZM103,184.87,128,41.74,73.46,32l-25,143.1A28,28,0,0,0,70.9,207.57,27.29,27.29,0,0,0,91.46,203,27.84,27.84,0,0,0,103,184.87ZM116.78,195,224,156.11,204.92,104,128.5,131.7l-9.78,55.92A44.63,44.63,0,0,1,116.78,195ZM224,173.12,127.74,208H224Z"/></svg></div><small>Look</small></div>
+      <div class="shutter" aria-label="Record shot 1">
+        <svg viewBox="0 0 80 80" id="shutter-ring"></svg>
+        <i></i>
+      </div>
+      <div class="it on"><div class="cbtn on"><svg viewBox="0 0 256 256"><path d="M224,40V76a8,8,0,0,1-16,0V48H180a8,8,0,0,1,0-16h36A8,8,0,0,1,224,40Zm-8,132a8,8,0,0,0-8,8v28H180a8,8,0,0,0,0,16h36a8,8,0,0,0,8-8V180A8,8,0,0,0,216,172ZM76,208H48V180a8,8,0,0,0-16,0v36a8,8,0,0,0,8,8H76a8,8,0,0,0,0-16ZM40,84a8,8,0,0,0,8-8V48H76a8,8,0,0,0,0-16H40a8,8,0,0,0-8,8V76A8,8,0,0,0,40,84Zm136,92a8,8,0,0,1-6.41-3.19,52,52,0,0,0-83.2,0,8,8,0,1,1-12.8-9.62A67.94,67.94,0,0,1,101,141.51a40,40,0,1,1,53.94,0,67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,176,176Zm-48-40a24,24,0,1,0-24-24A24,24,0,0,0,128,136Z"/></svg></div><small>Guide</small></div>
+      <div class="it"><div class="cbtn"><svg viewBox="0 0 256 256"><path d="M208,56H180.28L166.65,35.56A8,8,0,0,0,160,32H96a8,8,0,0,0-6.65,3.56L75.71,56H48A24,24,0,0,0,24,80V192a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V80A24,24,0,0,0,208,56Zm8,136a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V80a8,8,0,0,1,8-8H80a8,8,0,0,0,6.66-3.56L100.28,48h55.43l13.63,20.44A8,8,0,0,0,176,72h32a8,8,0,0,1,8,8ZM176,96v24a8,8,0,0,1-8,8H144a8,8,0,0,1,0-16h5.15a32.12,32.12,0,0,0-40.34-1.61A8,8,0,0,1,99.19,97.6,48.21,48.21,0,0,1,160,100.23V96a8,8,0,0,1,16,0Zm-17.61,59.2a8,8,0,0,1-1.58,11.2A48.21,48.21,0,0,1,96,163.77V168a8,8,0,0,1-16,0V144a8,8,0,0,1,8-8h24a8,8,0,0,1,0,16h-5.15a32.12,32.12,0,0,0,40.34,1.61A8,8,0,0,1,158.39,155.2Z"/></svg></div><small>Flip</small></div>
+    </div>
+
+    <div class="home"></div>
+  </div>
+</div>
+
+<script>
+/* Reference ghost: outline traced by hand over the photo (source px, 462×640),
+   then enlarged 5% — the reference subject stood a step closer to camera. */
+(function(){
+  var P=[[235,34],[255,47],[259,68],[256,84],[270,81],[282,85],[292,106],[302,140],[309,176],[304,202],[288,210],[276,206],[273,222],[291,236],[306,262],[318,300],[328,380],[335,450],[338,492],[331,513],[323,522],[330,558],[329,588],[313,591],[304,560],[302,520],[296,470],[280,400],[263,332],[254,316],[240,360],[222,430],[205,500],[200,520],[195,532],[192,560],[166,592],[158,586],[172,556],[170,522],[163,505],[170,440],[180,370],[186,310],[183,288],[195,246],[200,226],[181,222],[165,200],[155,170],[158,136],[170,114],[186,86],[198,81],[213,84],[209,68],[214,47]];
+  var k=390/462, T=176, S=1.05, cx=235, cy=420, dx=5, dy=-2;
+  var Q=P.map(function(p){return [((p[0]-cx)*S+cx+dx)*k, ((p[1]-cy)*S+cy+dy)*k+T];});
+  var n=Q.length, d='M'+Q[0][0].toFixed(1)+' '+Q[0][1].toFixed(1);
+  for(var i=0;i<n;i++){
+    var p0=Q[(i-1+n)%n],p1=Q[i],p2=Q[(i+1)%n],p3=Q[(i+2)%n],t=.5/3*2; // Catmull-Rom → Bézier
+    d+=' C'+(p1[0]+(p2[0]-p0[0])*t/2).toFixed(1)+' '+(p1[1]+(p2[1]-p0[1])*t/2).toFixed(1)+' '+
+            (p2[0]-(p3[0]-p1[0])*t/2).toFixed(1)+' '+(p2[1]-(p3[1]-p1[1])*t/2).toFixed(1)+' '+
+            p2[0].toFixed(1)+' '+p2[1].toFixed(1);
+  }
+  d+='Z';
+  ['g-fill','g-under','g-line'].forEach(function(id){document.getElementById(id).setAttribute('d',d);});
+
+  /* Shutter ring: four arcs sized by shot length, first one live */
+  var dur=[3.2,1.8,2.4,1.6], tot=9, r=37, C=2*Math.PI*r, gap=7, avail=C-gap*4, off=gap/2, h='';
+  dur.forEach(function(s,i){
+    var len=s/tot*avail;
+    h+='<circle cx="40" cy="40" r="'+r+'" fill="none" stroke="'+(i===0?'#FF5A36':'rgba(255,255,255,.42)')+'" stroke-width="4" stroke-linecap="round" '+
+       'stroke-dasharray="'+len.toFixed(2)+' '+(C-len).toFixed(2)+'" stroke-dashoffset="'+(-off).toFixed(2)+'" transform="rotate(-90 40 40)"/>';
+    off+=len+gap;
+  });
+  document.getElementById('shutter-ring').innerHTML=h;
+})();
+</script>
+</body>
+</html>
