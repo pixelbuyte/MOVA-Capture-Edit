@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MOVA · Library</title>
+<meta name="viewport" content="width=1200">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1116;--ink-2:#1B2028;--paper:#F4EEE3;--coral:#FF5A36;--coral-deep:#E2401D;--mint:#3DF0A8;--sun:#FFC53D;--lagoon:#1F8A9E;
+    --white:#FFFFFF;--w70:rgba(255,255,255,.72);--w50:rgba(255,255,255,.52);--hair:rgba(255,255,255,.14);
+    --display:"Bricolage Grotesque",system-ui,sans-serif;--mono:"DM Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1200px;height:1000px}
+  body{background:var(--paper);font-family:var(--display);color:var(--ink);position:relative;overflow:hidden;-webkit-font-smoothing:antialiased}
+
+  /* ───────── Board ───────── */
+  .disc{position:absolute;left:320px;top:220px;width:560px;height:560px;border-radius:50%;background:var(--coral)}
+  .col{position:absolute;top:66px;bottom:66px;width:236px;display:flex;flex-direction:column}
+  .col.l{left:64px}
+  .col.r{left:900px;justify-content:center;gap:28px}
+  .brand{font-weight:800;font-size:28px;letter-spacing:-.02em;font-variation-settings:"opsz" 96;display:flex;align-items:center;gap:10px}
+  .brand i{width:14px;height:14px;border-radius:50%;background:var(--coral);display:block}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(14,17,22,.56)}
+  .l .eyebrow{margin-top:auto}
+  h1{font-weight:700;font-size:44px;line-height:1;letter-spacing:-.03em;font-variation-settings:"opsz" 96;margin-top:12px}
+  .lede{font-size:16px;line-height:1.45;color:rgba(14,17,22,.72);margin-top:16px;font-weight:400}
+  .swatches{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+  .sw{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:rgba(14,17,22,.72)}
+  .sw b{width:20px;height:20px;border-radius:6px;display:block;flex:none;box-shadow:inset 0 0 0 1px rgba(14,17,22,.08)}
+  .note{padding-left:16px;border-left:2px solid rgba(14,17,22,.14)}
+  .note.c{border-color:var(--coral)} .note.m{border-color:#17B67B} .note.s{border-color:var(--sun)} .note.g{border-color:var(--lagoon)}
+  .note h3{font-size:16px;font-weight:700;letter-spacing:-.01em}
+  .note p{font-size:14px;line-height:1.4;color:rgba(14,17,22,.68);margin-top:4px}
+
+  /* ───────── Phone ───────── */
+  .phone{position:absolute;left:393px;top:66px;width:414px;height:868px;border-radius:66px;background:#0A0B0D;padding:12px;
+    box-shadow:0 0 0 1.5px #2E3138, inset 0 0 0 1.5px #3B3F47,0 50px 90px -30px rgba(60,20,8,.55), 0 18px 36px -12px rgba(14,17,22,.35)}
+  .screen{position:relative;width:390px;height:844px;border-radius:54px;overflow:hidden;background:var(--ink);color:var(--white)}
+  .island{position:absolute;left:133px;top:12px;width:124px;height:36px;border-radius:20px;background:#000;z-index:9}
+  .home{position:absolute;left:128px;top:827px;width:134px;height:5px;border-radius:3px;background:rgba(255,255,255,.9);z-index:9}
+  svg{display:block}
+  .bar{position:absolute;left:16px;right:16px;top:58px;height:44px;display:flex;align-items:center;justify-content:space-between}
+  .rbtn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--ink-2);border:1px solid var(--hair)}
+  .rbtn svg{width:22px;height:22px;fill:#fff}
+  .title{position:absolute;left:60px;right:60px;top:0;height:44px;text-align:center;display:flex;flex-direction:column;justify-content:center}
+  .title strong{display:block;font-size:17px;font-weight:700;letter-spacing:-.015em;line-height:22px;font-variation-settings:"opsz" 40}
+  .title small{display:block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--w70);line-height:14px;margin-top:1px}
+  .mono{font-family:var(--mono)}
+
+  /* ───────── Library ───────── */
+  .head{position:absolute;left:20px;right:16px;top:60px;height:44px;display:flex;align-items:center;justify-content:space-between}
+  .head h2{font-size:32px;font-weight:700;letter-spacing:-.03em;line-height:44px;font-variation-settings:"opsz" 96}
+  .head h2 small{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--w50);margin-left:8px;vertical-align:3px}
+  .seg{position:absolute;left:16px;right:16px;top:114px;height:40px;padding:4px;border-radius:20px;background:var(--ink-2);border:1px solid var(--hair);display:flex}
+  .seg b{flex:1;height:30px;border-radius:15px;text-align:center;font-size:14px;font-weight:600;line-height:30px;color:var(--w70);letter-spacing:-.005em}
+  .seg b.on{background:#fff;color:var(--ink);font-weight:700}
+  .grid{position:absolute;left:16px;top:168px;width:358px;display:flex;gap:10px;align-items:flex-start}
+  .gc{width:174px;display:flex;flex-direction:column;gap:14px}
+  .ph{position:relative;width:174px;border-radius:16px;background-size:cover;background-color:var(--ink-2);overflow:hidden}
+  .ph::after{content:"";position:absolute;left:0;right:0;bottom:0;height:56px;background:linear-gradient(180deg,rgba(14,17,22,0),rgba(14,17,22,.5))}
+  .b{position:absolute;z-index:2;height:24px;padding:0 8px 0 6px;border-radius:12px;background:rgba(14,17,22,.68);border:1px solid var(--hair);
+    display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:12px;font-weight:500;line-height:22px;color:#fff}
+  .b svg{width:12px;height:12px;fill:currentColor}
+  .b.bl{left:8px;bottom:8px}
+  .b.sq{width:24px;padding:0;justify-content:center}.b.sq svg{width:14px;height:14px}
+  .b.match{right:8px;top:8px;color:var(--mint)}
+  .it strong{display:block;font-size:14px;font-weight:600;letter-spacing:-.01em;line-height:18px;margin-top:8px}
+  .it small{display:block;font-size:12px;line-height:15px;color:var(--w50);margin-top:1px;white-space:nowrap}
+  .it small em{font-style:normal;color:var(--w70)}
+  .tabfade{position:absolute;left:0;right:0;top:690px;height:70px;background:linear-gradient(180deg,rgba(14,17,22,0),var(--ink));z-index:3}
+  .tabbar{position:absolute;left:0;right:0;top:752px;height:92px;background:var(--ink);border-top:1px solid var(--hair);z-index:4;display:flex;justify-content:space-between;padding:10px 18px 0}
+  .tab{width:60px;display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:2px}
+  .tab svg{width:26px;height:26px;fill:var(--w50)}
+  .tab small{font-size:11px;font-weight:500;line-height:13px;color:var(--w50)}
+  .tab.on svg{fill:#fff}.tab.on small{color:#fff;font-weight:700}
+  .cam{width:60px;height:60px;margin-top:-22px;border-radius:50%;display:grid;place-items:center;flex:none;
+    background:radial-gradient(circle at 36% 30%,#FF7C5C 0%,var(--coral) 46%,var(--coral-deep) 100%);
+    box-shadow:0 0 0 5px var(--ink),0 10px 24px -6px rgba(255,90,54,.55),inset 0 -3px 8px rgba(120,20,0,.3)}
+  .cam svg{width:28px;height:28px;fill:#1C0B05}
+</style>
+</head>
+<body>
+
+<div class="disc"></div>
+
+<div class="col l">
+  <div class="brand"><i></i>MOVA</div>
+  <div class="eyebrow">Screen 09</div>
+  <h1>Library</h1>
+  <p class="lede">Everything you have shot with MOVA. Recreations keep their score, so you can see how close you got.</p>
+  <div class="swatches">
+    <div class="sw"><b style="background:#FF5A36"></b>#FF5A36</div>
+    <div class="sw"><b style="background:#3DF0A8"></b>#3DF0A8</div>
+    <div class="sw"><b style="background:#FFC53D"></b>#FFC53D</div>
+    <div class="sw"><b style="background:#1F8A9E"></b>#1F8A9E</div>
+    <div class="sw"><b style="background:#0E1116"></b>#0E1116</div>
+    <div class="sw"><b style="background:#F4EEE3"></b>#F4EEE3</div>
+  </div>
+</div>
+
+<div class="col r">
+  <div class="note "><h3>Photos do the talking</h3><p>The grid is the colour. Chrome stays ink and white so nothing fights the work.</p></div>
+  <div class="note m"><h3>Mint means match</h3><p>Only recreations carry a mint score. Plain videos and photos stay quiet.</p></div>
+  <div class="note g"><h3>One filter, three views</h3><p>All, Recreations and Photos. No folders to manage.</p></div>
+  <div class="note c"><h3>Camera in the middle</h3><p>The coral button is always one tap away, on every tab.</p></div>
+</div>
+
+<div class="phone">
+  <div class="screen">
+    <div class="head">
+      <h2>Library<small>24</small></h2>
+      <div class="rbtn" aria-label="Search"><svg viewBox="0 0 256 256" ><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg></div>
+    </div>
+    <div class="seg"><b class="on">All</b><b>Recreations</b><b>Photos</b></div>
+
+    <!-- masonry: real photographs (Unsplash) -->
+    <div class="grid">
+      <div class="gc">
+        <div class="it">
+          <div class="ph" style="height:240px;background-image:url(../v3/img/fashion_yellow.jpg);background-position:50% 20%">
+            <span class="b match"><svg viewBox="0 0 256 256" ><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg>91%</span>
+            <span class="b bl"><svg viewBox="0 0 256 256" ><path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"/></svg>0:09</span>
+          </div>
+          <strong>Seaside recreate</strong><small><em>Recreation</em> · Today · 4 shots</small>
+        </div>
+        <div class="it">
+          <div class="ph" style="height:118px;background-image:url(../v3/img/beach.jpg);background-position:50% 60%">
+            
+            <span class="b bl sq" aria-label="Photo"><svg viewBox="0 0 256 256" ><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V158.75l-26.07-26.06a16,16,0,0,0-22.63,0l-20,20-44-44a16,16,0,0,0-22.62,0L40,149.37V56ZM40,172l52-52,80,80H40Zm176,28H194.63l-36-36,20-20L216,181.38V200ZM144,100a12,12,0,1,1,12,12A12,12,0,0,1,144,100Z"/></svg></span>
+          </div>
+          <strong>Low tide</strong><small>Yesterday</small>
+        </div>
+        <div class="it">
+          <div class="ph" style="height:230px;background-image:url(../v3/img/port_red2.jpg);background-position:0 -52px;background-size:174px auto;background-repeat:no-repeat">
+            <span class="b match"><svg viewBox="0 0 256 256" ><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg>84%</span>
+            <span class="b bl"><svg viewBox="0 0 256 256" ><path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"/></svg>0:06</span>
+          </div>
+          <strong>Window light</strong><small><em>Recreation</em> · Sat · 3 shots</small>
+        </div>
+      </div>
+      <div class="gc">
+        <div class="it">
+          <div class="ph" style="height:196px;background-image:url(../v3/img/road.jpg);background-position:50% 70%">
+            
+            <span class="b bl"><svg viewBox="0 0 256 256" ><path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"/></svg>0:14</span>
+          </div>
+          <strong>Canyon road</strong><small>Yesterday</small>
+        </div>
+        <div class="it">
+          <div class="ph" style="height:140px;background-image:url(../v3/img/cinema.jpg);background-position:50% 40%">
+            
+            <span class="b bl sq" aria-label="Photo"><svg viewBox="0 0 256 256" ><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V158.75l-26.07-26.06a16,16,0,0,0-22.63,0l-20,20-44-44a16,16,0,0,0-22.62,0L40,149.37V56ZM40,172l52-52,80,80H40Zm176,28H194.63l-36-36,20-20L216,181.38V200ZM144,100a12,12,0,1,1,12,12A12,12,0,0,1,144,100Z"/></svg></span>
+          </div>
+          <strong>Central Cinema</strong><small>Sun</small>
+        </div>
+        <div class="it">
+          <div class="ph" style="height:250px;background-image:url(../v3/img/hoodie.jpg);background-position:50% 25%">
+            <span class="b match"><svg viewBox="0 0 256 256" ><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg>78%</span>
+            <span class="b bl"><svg viewBox="0 0 256 256" ><path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"/></svg>0:11</span>
+          </div>
+          <strong>Blue wall walk</strong><small><em>Recreation</em> · 12 Nov · 5 shots</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabfade"></div>
+    <div class="tabbar">
+      <div class="tab"><svg viewBox="0 0 256 256" ><path d="M219.31,108.68l-80-80a16,16,0,0,0-22.62,0l-80,80A15.87,15.87,0,0,0,32,120v96a8,8,0,0,0,8,8h64a8,8,0,0,0,8-8V160h32v56a8,8,0,0,0,8,8h64a8,8,0,0,0,8-8V120A15.87,15.87,0,0,0,219.31,108.68ZM208,208H160V152a8,8,0,0,0-8-8H104a8,8,0,0,0-8,8v56H48V120l80-80,80,80Z"/></svg><small>Studio</small></div>
+      <div class="tab on"><svg viewBox="0 0 256 256" ><path d="M120,56v48a16,16,0,0,1-16,16H56a16,16,0,0,1-16-16V56A16,16,0,0,1,56,40h48A16,16,0,0,1,120,56Zm80-16H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,200,40Zm-96,96H56a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,104,136Zm96,0H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,200,136Z"/></svg><small>Library</small></div>
+      <div class="cam" aria-label="Open camera"><svg viewBox="0 0 256 256" ><path d="M208,56H180.28L166.65,35.56A8,8,0,0,0,160,32H96a8,8,0,0,0-6.65,3.56L75.71,56H48A24,24,0,0,0,24,80V192a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V80A24,24,0,0,0,208,56Zm-44,76a36,36,0,1,1-36-36A36,36,0,0,1,164,132Z"/></svg></div>
+      <div class="tab"><svg viewBox="0 0 256 256" ><path d="M157.73,113.13A8,8,0,0,1,159.82,102L227.48,55.7a8,8,0,0,1,9,13.21l-67.67,46.3a7.92,7.92,0,0,1-4.51,1.4A8,8,0,0,1,157.73,113.13Zm80.87,85.09a8,8,0,0,1-11.12,2.08L136,137.7,93.49,166.78a36,36,0,1,1-9-13.19L121.83,128,84.44,102.41a35.86,35.86,0,1,1,9-13.19l143,97.87A8,8,0,0,1,238.6,198.22ZM80,180a20,20,0,1,0-5.86,14.14A19.85,19.85,0,0,0,80,180ZM74.14,90.13a20,20,0,1,0-28.28,0A19.85,19.85,0,0,0,74.14,90.13Z"/></svg><small>Edit</small></div>
+      <div class="tab"><svg viewBox="0 0 256 256" ><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"/></svg><small>You</small></div>
+    </div>
+    <div class="island"></div>
+    <div class="home"></div>
+  </div>
+</div>
+</body>
+</html>
