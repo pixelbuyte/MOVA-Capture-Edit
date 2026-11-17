@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MOVA · Exporting</title>
+<meta name="viewport" content="width=1200">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1116;--ink-2:#1B2028;--paper:#F4EEE3;--coral:#FF5A36;--coral-deep:#E2401D;--mint:#3DF0A8;--sun:#FFC53D;--lagoon:#1F8A9E;--white:#FFFFFF;
+    --w70:rgba(255,255,255,.72);--w50:rgba(255,255,255,.52);--hair:rgba(255,255,255,.14);
+    --display:"Bricolage Grotesque",system-ui,sans-serif;--mono:"DM Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1200px;height:1000px}
+  body{background:var(--paper);font-family:var(--display);color:var(--ink);position:relative;overflow:hidden;-webkit-font-smoothing:antialiased}
+
+  /* ───────── Board ───────── */
+  .disc{position:absolute;left:320px;top:220px;width:560px;height:560px;border-radius:50%;background:var(--coral)}
+  .col{position:absolute;top:66px;bottom:66px;width:236px;display:flex;flex-direction:column}
+  .col.l{left:64px}
+  .col.r{left:900px;justify-content:center;gap:28px}
+  .brand{font-weight:800;font-size:28px;letter-spacing:-.02em;font-variation-settings:"opsz" 96;display:flex;align-items:center;gap:10px}
+  .brand i{width:14px;height:14px;border-radius:50%;background:var(--coral);display:block}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(14,17,22,.56)}
+  .l .eyebrow{margin-top:auto}
+  h1{font-weight:700;font-size:44px;line-height:1;letter-spacing:-.03em;font-variation-settings:"opsz" 96;margin-top:12px}
+  .lede{font-size:16px;line-height:1.45;color:rgba(14,17,22,.72);margin-top:16px;font-weight:400}
+  .swatches{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+  .sw{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:rgba(14,17,22,.72)}
+  .sw b{width:20px;height:20px;border-radius:6px;display:block;flex:none;box-shadow:inset 0 0 0 1px rgba(14,17,22,.08)}
+  .note{padding-left:16px;border-left:2px solid rgba(14,17,22,.14)}
+  .note.c{border-color:var(--coral)} .note.m{border-color:#17B67B} .note.s{border-color:var(--sun)} .note.g{border-color:var(--lagoon)}
+  .note h3{font-size:16px;font-weight:700;letter-spacing:-.01em}
+  .note p{font-size:14px;line-height:1.4;color:rgba(14,17,22,.68);margin-top:4px}
+
+  /* ───────── Phone ───────── */
+  .phone{position:absolute;left:393px;top:66px;width:414px;height:868px;border-radius:66px;background:#0A0B0D;padding:12px;
+    box-shadow:0 0 0 1.5px #2E3138, inset 0 0 0 1.5px #3B3F47,0 50px 90px -30px rgba(60,20,8,.55), 0 18px 36px -12px rgba(14,17,22,.35)}
+  .screen{position:relative;width:390px;height:844px;border-radius:54px;overflow:hidden;background:var(--ink);color:var(--white)}
+  .island{position:absolute;left:133px;top:12px;width:124px;height:36px;border-radius:20px;background:#000;z-index:9}
+  .home{position:absolute;left:128px;top:827px;width:134px;height:5px;border-radius:3px;background:rgba(255,255,255,.9);z-index:9}
+  svg{display:block}
+  .mono{font-family:var(--mono)}
+  .rbtn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--ink-2);border:1px solid var(--hair)}
+  .rbtn svg{width:22px;height:22px;fill:#fff}
+
+  /* ───────── Exporting ───────── */
+  .glow{position:absolute;left:-60px;top:-40px;width:510px;height:640px;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,#000 30%,transparent 92%);mask-image:linear-gradient(180deg,#000 30%,transparent 92%)}
+  .glow img{width:510px;height:707px;display:block;filter:blur(44px) saturate(1.25) brightness(.5);transform:scale(1.15)}
+  .bar{position:absolute;left:16px;right:16px;top:58px;height:44px}
+  .title{position:absolute;left:60px;right:60px;top:0;height:44px;text-align:center;display:flex;flex-direction:column;justify-content:center}
+  .title strong{display:block;font-size:17px;font-weight:700;letter-spacing:-.015em;line-height:22px;font-variation-settings:"opsz" 40}
+  .title small{display:block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--w70);line-height:14px;margin-top:1px}
+  .frame{position:absolute;left:81px;top:118px;width:228px;height:316px;border-radius:22px;overflow:hidden;background:#000;box-shadow:0 24px 48px -18px rgba(0,0,0,.7)}
+  .frame img{width:228px;height:316px;display:block;filter:saturate(1.18) sepia(.28) contrast(1.06) brightness(1.03)}
+  .frame::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(14,17,22,.72) 0%,rgba(14,17,22,.5) 60%,rgba(14,17,22,.55) 100%)}
+  svg.prog{position:absolute;left:73px;top:110px;width:244px;height:332px;overflow:visible}
+  .pct{position:absolute;left:81px;top:118px;width:228px;height:316px;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2}
+  .pct strong{font-family:var(--mono);font-weight:500;font-size:64px;line-height:64px;letter-spacing:-.06em}
+  .pct strong sup{font-size:26px;line-height:26px;letter-spacing:0;vertical-align:top;position:relative;top:8px;margin-left:3px;color:var(--w70)}
+  .pct small{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--w70);line-height:14px;margin-top:6px}
+  .now{position:absolute;left:20px;right:20px;top:462px;text-align:center}
+  .now strong{display:block;font-size:24px;font-weight:700;letter-spacing:-.025em;line-height:28px;font-variation-settings:"opsz" 96}
+  .now small{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--w70);line-height:16px;margin-top:5px}
+  .steps{position:absolute;left:20px;right:20px;top:528px;border-radius:20px;background:var(--ink-2);border:1px solid var(--hair);padding:4px 0}
+  .step{position:relative;height:40px;display:flex;align-items:center;padding:0 16px 0 14px}
+  .step+.step::before{content:"";position:absolute;left:46px;right:0;top:0;height:1px;background:var(--hair)}
+  .st{width:22px;height:22px;display:grid;place-items:center;flex:none}
+  .st svg{width:22px;height:22px;fill:var(--w70)}
+  .step .sl{flex:1;margin-left:10px;font-size:15px;font-weight:500;letter-spacing:-.01em;color:var(--w70)}
+  .step .sv{font-family:var(--mono);font-size:12px;color:var(--w50);letter-spacing:-.01em}
+  .step.cur .sl{color:#fff;font-weight:700}
+  .step.cur .sv{color:#FF9A80}
+  .step.cur .st svg{fill:none}
+  .step.todo .sl,.step.todo .sv{color:var(--w50)}
+  .step.todo .st svg{fill:rgba(255,255,255,.3)}
+  .keep{position:absolute;left:20px;right:20px;top:708px;height:20px;display:flex;align-items:center;justify-content:center;gap:7px;font-size:13px;line-height:18px;color:var(--w70);white-space:nowrap}
+  .keep svg{width:16px;height:16px;fill:var(--w70);flex:none}
+  .keep b{color:#fff;font-weight:600}
+  .cancel{position:absolute;left:20px;right:20px;top:748px;height:52px;border-radius:26px;background:var(--ink-2);border:1px solid var(--hair);display:grid;place-items:center;font-size:17px;font-weight:600;letter-spacing:-.01em}
+</style>
+</head>
+<body>
+
+<div class="disc"></div>
+
+<div class="col l">
+  <div class="brand"><i></i>MOVA</div>
+  <div class="eyebrow">Screen 12</div>
+  <h1>Exporting</h1>
+  <p class="lede">The few seconds after Save. One number, the step it is on, and an honest way to stop.</p>
+  <div class="swatches">
+    <div class="sw"><b style="background:#FF5A36"></b>#FF5A36</div>
+    <div class="sw"><b style="background:#3DF0A8"></b>#3DF0A8</div>
+    <div class="sw"><b style="background:#FFC53D"></b>#FFC53D</div>
+    <div class="sw"><b style="background:#1F8A9E"></b>#1F8A9E</div>
+    <div class="sw"><b style="background:#0E1116"></b>#0E1116</div>
+    <div class="sw"><b style="background:#F4EEE3"></b>#F4EEE3</div>
+  </div>
+</div>
+
+<div class="col r">
+  <div class="note c"><h3>Progress on the frame</h3><p>The coral line runs around your final frame. 64% is read off the render, not a loop.</p></div>
+  <div class="note g"><h3>Four named steps</h3><p>Clips, look, audio, save. You can see which one is running and what is left.</p></div>
+  <div class="note s"><h3>Why to stay</h3><p>Rendering is local, so MOVA says plainly that it needs to stay open.</p></div>
+  <div class="note m"><h3>Cancel is always there</h3><p>Stopping keeps the project and its match score. Nothing is lost but the file.</p></div>
+</div>
+
+<div class="phone">
+  <div class="screen">
+    <div class="glow"><img src="../v3/img/fashion_yellow.jpg" alt=""></div>
+    <div class="bar"><div class="title"><strong>Exporting</strong><small>Seaside recreate · 4K · 30 fps</small></div></div>
+
+    <!-- final frame: real photograph (Unsplash) with the Golden look, dimmed while it renders -->
+    <div class="frame"><img src="../v3/img/fashion_yellow.jpg" alt="Final frame: dancer in a yellow tracksuit on a seaside court"></div>
+    <svg class="prog" viewBox="0 0 244 332" role="progressbar" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100">
+      <rect x="3" y="3" width="238" height="326" rx="27" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="4"/>
+      <path id="pg" fill="none" stroke="#FF5A36" stroke-width="4" stroke-linecap="round" pathLength="100" stroke-dasharray="64 100" style="filter:drop-shadow(0 0 8px rgba(255,90,54,.7))"
+        d="M122 3 H214 a27 27 0 0 1 27 27 V302 a27 27 0 0 1 -27 27 H30 a27 27 0 0 1 -27 -27 V30 a27 27 0 0 1 27 -27 Z"/>
+    </svg>
+    <div class="pct"><strong>64<sup>%</sup></strong><small>0:05.8 of 0:09.0</small></div>
+
+    <div class="now"><strong>Mixing audio</strong><small>About 3 seconds left</small></div>
+
+    <div class="steps">
+      <div class="step done"><span class="st"><svg viewBox="0 0 256 256" ><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg></span><span class="sl">Rendering clips</span><span class="sv">4 of 4</span></div>
+      <div class="step done"><span class="st"><svg viewBox="0 0 256 256" ><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg></span><span class="sl">Applying look</span><span class="sv">Golden</span></div>
+      <div class="step cur"><span class="st"><svg viewBox="0 0 22 22"><circle cx="11" cy="11" r="8.5" stroke="rgba(255,255,255,.18)" stroke-width="2.5"/><path d="M11 2.5a8.5 8.5 0 0 1 8.5 8.5" stroke="#FF5A36" stroke-width="2.5" stroke-linecap="round"/></svg></span><span class="sl">Mixing audio</span><span class="sv">Low tide</span></div>
+      <div class="step todo"><span class="st"><svg viewBox="0 0 256 256" ><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Z"/></svg></span><span class="sl">Saving</span><span class="sv">To Photos</span></div>
+    </div>
+
+    <div class="keep"><svg viewBox="0 0 256 256" ><path d="M176,16H80A24,24,0,0,0,56,40V216a24,24,0,0,0,24,24h96a24,24,0,0,0,24-24V40A24,24,0,0,0,176,16ZM72,64H184V192H72Zm8-32h96a8,8,0,0,1,8,8v8H72V40A8,8,0,0,1,80,32Zm96,192H80a8,8,0,0,1-8-8v-8H184v8A8,8,0,0,1,176,224Z"/></svg><span><b>Keep MOVA open</b> — rendering on this iPhone</span></div>
+    <div class="cancel">Cancel export</div>
+    <div class="island"></div>
+    <div class="home"></div>
+  </div>
+</div>
+</body>
+</html>

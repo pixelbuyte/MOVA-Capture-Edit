@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MOVA · MOVA Pro</title>
+<meta name="viewport" content="width=1200">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1116;--ink-2:#1B2028;--paper:#F4EEE3;--coral:#FF5A36;--coral-deep:#E2401D;--mint:#3DF0A8;--sun:#FFC53D;--lagoon:#1F8A9E;--white:#FFFFFF;
+    --w70:rgba(255,255,255,.72);--w50:rgba(255,255,255,.52);--hair:rgba(255,255,255,.14);
+    --display:"Bricolage Grotesque",system-ui,sans-serif;--mono:"DM Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1200px;height:1000px}
+  body{background:var(--paper);font-family:var(--display);color:var(--ink);position:relative;overflow:hidden;-webkit-font-smoothing:antialiased}
+
+  /* ───────── Board ───────── */
+  .disc{position:absolute;left:320px;top:220px;width:560px;height:560px;border-radius:50%;background:var(--coral)}
+  .col{position:absolute;top:66px;bottom:66px;width:236px;display:flex;flex-direction:column}
+  .col.l{left:64px}
+  .col.r{left:900px;justify-content:center;gap:28px}
+  .brand{font-weight:800;font-size:28px;letter-spacing:-.02em;font-variation-settings:"opsz" 96;display:flex;align-items:center;gap:10px}
+  .brand i{width:14px;height:14px;border-radius:50%;background:var(--coral);display:block}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(14,17,22,.56)}
+  .l .eyebrow{margin-top:auto}
+  h1{font-weight:700;font-size:44px;line-height:1;letter-spacing:-.03em;font-variation-settings:"opsz" 96;margin-top:12px}
+  .lede{font-size:16px;line-height:1.45;color:rgba(14,17,22,.72);margin-top:16px;font-weight:400}
+  .swatches{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+  .sw{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:rgba(14,17,22,.72)}
+  .sw b{width:20px;height:20px;border-radius:6px;display:block;flex:none;box-shadow:inset 0 0 0 1px rgba(14,17,22,.08)}
+  .note{padding-left:16px;border-left:2px solid rgba(14,17,22,.14)}
+  .note.c{border-color:var(--coral)} .note.m{border-color:#17B67B} .note.s{border-color:var(--sun)} .note.g{border-color:var(--lagoon)}
+  .note h3{font-size:16px;font-weight:700;letter-spacing:-.01em}
+  .note p{font-size:14px;line-height:1.4;color:rgba(14,17,22,.68);margin-top:4px}
+
+  /* ───────── Phone ───────── */
+  .phone{position:absolute;left:393px;top:66px;width:414px;height:868px;border-radius:66px;background:#0A0B0D;padding:12px;
+    box-shadow:0 0 0 1.5px #2E3138, inset 0 0 0 1.5px #3B3F47,0 50px 90px -30px rgba(60,20,8,.55), 0 18px 36px -12px rgba(14,17,22,.35)}
+  .screen{position:relative;width:390px;height:844px;border-radius:54px;overflow:hidden;background:var(--ink);color:var(--white)}
+  .island{position:absolute;left:133px;top:12px;width:124px;height:36px;border-radius:20px;background:#000;z-index:9}
+  .home{position:absolute;left:128px;top:827px;width:134px;height:5px;border-radius:3px;background:rgba(255,255,255,.9);z-index:9}
+  svg{display:block}
+  .mono{font-family:var(--mono)}
+  .rbtn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--ink-2);border:1px solid var(--hair)}
+  .rbtn svg{width:22px;height:22px;fill:#fff}
+
+  /* ───────── MOVA Pro ───────── */
+  .hero{position:absolute;left:0;top:0;width:390px;height:330px;overflow:hidden}
+  .hero img{position:absolute;left:-26px;top:-22px;width:528px;height:352px;display:block}
+  .scrim-t{position:absolute;left:0;top:0;width:100%;height:140px;background:linear-gradient(180deg,rgba(14,17,22,.6) 0%,rgba(14,17,22,.28) 55%,rgba(14,17,22,0) 100%)}
+  .scrim-b{position:absolute;left:0;top:120px;width:100%;height:212px;background:linear-gradient(180deg,rgba(14,17,22,0) 0%,rgba(14,17,22,.55) 42%,rgba(14,17,22,.94) 78%,var(--ink) 100%)}
+  .mark{position:absolute;left:24px;top:66px;display:flex;align-items:center;gap:8px;font-weight:800;font-size:22px;line-height:28px;letter-spacing:-.02em;font-variation-settings:"opsz" 96}
+  .mark i{width:11px;height:11px;border-radius:50%;background:var(--coral);display:block}
+  .mark b{height:22px;padding:0 8px;border-radius:11px;background:var(--coral);color:#1C0B05;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;line-height:22px;margin-left:2px}
+  .close{position:absolute;right:16px;top:58px;background:rgba(14,17,22,.46);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4)}
+  .copy{position:absolute;left:24px;right:24px;top:222px}
+  .copy h2{font-weight:700;font-size:38px;line-height:1;letter-spacing:-.03em;font-variation-settings:"opsz" 96}
+  .bens{position:absolute;left:24px;right:24px;top:318px}
+  .ben{display:flex;align-items:center;gap:12px;height:31px}
+  .bi{width:22px;height:22px;display:grid;place-items:center;flex:none}
+  .bi svg{width:22px;height:22px;fill:#fff}
+  .ben div{flex:1;display:flex;align-items:baseline;justify-content:space-between}
+  .ben strong{font-size:16px;font-weight:600;letter-spacing:-.01em;line-height:20px;white-space:nowrap}
+  .ben small{font-size:13px;line-height:18px;color:var(--w70);white-space:nowrap}
+  .plan{position:absolute;left:20px;right:20px;height:68px;border-radius:20px;background:var(--ink-2);border:1px solid var(--hair);display:flex;align-items:center;gap:12px;padding:0 16px 0 14px}
+  .plan.on{background:rgba(255,90,54,.12);border:1.5px solid var(--coral)}
+  .radio{width:24px;height:24px;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);flex:none;display:grid;place-items:center}
+  .plan.on .radio{background:var(--coral);border-color:var(--coral)}
+  .radio svg{width:14px;height:14px;fill:#1C0B05}
+  .plan .nm{flex:1;min-width:0}
+  .plan strong{display:block;font-size:17px;font-weight:600;letter-spacing:-.015em;line-height:22px}
+  .plan .nm strong{display:flex;align-items:center;gap:8px}
+  .plan small{display:block;font-size:13px;line-height:17px;color:var(--w70);margin-top:1px;white-space:nowrap}
+  .save{height:20px;padding:0 7px;border-radius:10px;background:var(--coral);color:#1C0B05;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;line-height:20px}
+  .plan .pr{text-align:right}
+  .plan .pr strong{font-family:var(--mono);font-weight:500;font-size:17px;letter-spacing:-.02em}
+  .plan .pr small{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;line-height:14px;margin-top:2px}
+  .cta{position:absolute;left:20px;right:20px;top:624px;height:56px;border-radius:28px;background:var(--coral);color:#1C0B05;display:flex;align-items:center;justify-content:center;gap:8px;
+    font-size:18px;font-weight:700;letter-spacing:-.015em;box-shadow:inset 0 -3px 8px rgba(120,20,0,.22), 0 12px 28px -10px rgba(255,90,54,.6)}
+  .fine{position:absolute;left:32px;right:32px;top:694px;text-align:center;font-size:13px;line-height:18px;color:var(--w70)}
+  .links{position:absolute;left:0;right:0;top:758px;height:44px;display:flex;justify-content:center;align-items:center;gap:22px;font-size:13px;font-weight:600;color:var(--w70);letter-spacing:-.005em}
+  .links b{font-weight:600;color:#fff}
+</style>
+</head>
+<body>
+
+<div class="disc"></div>
+
+<div class="col l">
+  <div class="brand"><i></i>MOVA</div>
+  <div class="eyebrow">Screen 11</div>
+  <h1>MOVA Pro</h1>
+  <p class="lede">What Pro adds, what it costs, and when you are charged. All on one screen, with a way out.</p>
+  <div class="swatches">
+    <div class="sw"><b style="background:#FF5A36"></b>#FF5A36</div>
+    <div class="sw"><b style="background:#3DF0A8"></b>#3DF0A8</div>
+    <div class="sw"><b style="background:#FFC53D"></b>#FFC53D</div>
+    <div class="sw"><b style="background:#1F8A9E"></b>#1F8A9E</div>
+    <div class="sw"><b style="background:#0E1116"></b>#0E1116</div>
+    <div class="sw"><b style="background:#F4EEE3"></b>#F4EEE3</div>
+  </div>
+</div>
+
+<div class="col r">
+  <div class="note c"><h3>One coral button</h3><p>The trial is the only filled control. Close and Restore stay quiet.</p></div>
+  <div class="note g"><h3>Four things, named</h3><p>Each benefit is a feature that exists elsewhere in the app. No ratings, no counts.</p></div>
+  <div class="note s"><h3>Example pricing</h3><p>$39.99 and $5.99 are placeholders for layout. Final prices come from the App Store.</p></div>
+  <div class="note m"><h3>The charge is spelled out</h3><p>Trial length, renewal price and how to cancel sit right under the button.</p></div>
+</div>
+
+<div class="phone">
+  <div class="screen">
+    <!-- real photograph (Unsplash) -->
+    <div class="hero"><img src="../v3/img/hiker.jpg" alt="A photographer shooting from a rocky peak above the clouds"></div>
+    <div class="scrim-t"></div>
+    <div class="scrim-b"></div>
+    <div class="mark"><i></i>MOVA<b>PRO</b></div>
+    <div class="rbtn close" aria-label="Close"><svg viewBox="0 0 256 256" ><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></svg></div>
+
+    <div class="copy"><h2>Recreate anything.<br>Export it in 4K.</h2></div>
+
+    <div class="bens">
+      <div class="ben"><span class="bi"><svg viewBox="0 0 256 256" ><path d="M248,128a56,56,0,0,1-95.6,39.6l-.33-.35L92.12,99.55a40,40,0,1,0,0,56.9l8.52-9.62a8,8,0,1,1,12,10.61l-8.69,9.81-.33.35a56,56,0,1,1,0-79.2l.33.35,59.95,67.7a40,40,0,1,0,0-56.9l-8.52,9.62a8,8,0,1,1-12-10.61l8.69-9.81.33-.35A56,56,0,0,1,248,128Z"/></svg></span><div><strong>Unlimited recreations</strong><small>No monthly cap</small></div></div>
+      <div class="ben"><span class="bi"><svg viewBox="0 0 256 256" ><path d="M216,112v96a16,16,0,0,1-16,16H56a16,16,0,0,1-16-16V112A16,16,0,0,1,56,96H80a8,8,0,0,1,0,16H56v96H200V112H176a8,8,0,0,1,0-16h24A16,16,0,0,1,216,112ZM93.66,69.66,120,43.31V136a8,8,0,0,0,16,0V43.31l26.34,26.35a8,8,0,0,0,11.32-11.32l-40-40a8,8,0,0,0-11.32,0l-40,40A8,8,0,0,0,93.66,69.66Z"/></svg></span><div><strong>4K export</strong><small>Up to 60 fps</small></div></div>
+      <div class="ben"><span class="bi"><svg viewBox="0 0 256 256" ><path d="M88,180a12,12,0,1,1-12-12A12,12,0,0,1,88,180Zm152-23.81V208a16,16,0,0,1-16,16H76a46.36,46.36,0,0,1-7.94-.68,44,44,0,0,1-35.43-50.95l25-143.13a15.94,15.94,0,0,1,18.47-13L130.84,26a16,16,0,0,1,12.92,18.52l-12.08,69L199.49,89a16,16,0,0,1,20.45,9.52L239,150.69A18.35,18.35,0,0,1,240,156.19ZM103,184.87,128,41.74,73.46,32l-25,143.1A28,28,0,0,0,70.9,207.57,27.29,27.29,0,0,0,91.46,203,27.84,27.84,0,0,0,103,184.87ZM116.78,195,224,156.11,204.92,104,128.5,131.7l-9.78,55.92A44.63,44.63,0,0,1,116.78,195ZM224,173.12,127.74,208H224Z"/></svg></span><div><strong>All looks</strong><small>On your own footage</small></div></div>
+      <div class="ben"><span class="bi"><svg viewBox="0 0 256 256" ><path d="M187.14,114.84l26.78-29.46a8,8,0,0,0-11.84-10.76l-20.55,22.6-17.2-54.07A15.94,15.94,0,0,0,149.08,32H106.91A15.94,15.94,0,0,0,91.66,43.15l-50.91,160A16,16,0,0,0,56,224H200a16,16,0,0,0,15.25-20.85ZM184.72,160H146.08l28.62-31.48ZM106.91,48h42.17l20,62.9L124.46,160H71.27ZM56,208l10.18-32H189.81L200,208Z"/></svg></span><div><strong>Beat sync</strong><small>Cuts land on the beat</small></div></div>
+    </div>
+
+    <div class="plan on" style="top:458px" role="radio" aria-checked="true">
+      <span class="radio"><svg viewBox="0 0 256 256" ><path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"/></svg></span>
+      <div class="nm"><strong>Yearly<span class="save">Save 44%</span></strong><small>$3.33 a month, billed yearly</small></div>
+      <div class="pr"><strong>$39.99</strong><small>per year</small></div>
+    </div>
+    <div class="plan" style="top:536px" role="radio" aria-checked="false">
+      <span class="radio"></span>
+      <div class="nm"><strong>Monthly</strong><small>Billed every month</small></div>
+      <div class="pr"><strong>$5.99</strong><small>per month</small></div>
+    </div>
+
+    <div class="cta">Start 7-day free trial</div>
+    <p class="fine">Free for 7 days, then $39.99 a year. Renews yearly until you cancel. Cancel anytime in Settings.</p>
+    <div class="links"><b>Restore purchases</b><span>Terms</span><span>Privacy</span></div>
+    <div class="island"></div>
+    <div class="home"></div>
+  </div>
+</div>
+</body>
+</html>
