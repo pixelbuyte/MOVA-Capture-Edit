@@ -3,63 +3,158 @@
     "Screen registry for the MOVA v5 clickable prototype. Edit this file, then run: python3 build-single.py",
     "Each screen: id = file name without 'screen-' and '.html' (design/v5/screen-<id>.html). name is optional (defaults to the page <title>).",
     "Hotspot: sel = CSS selector inside that screen's 390x844 markup; to = target screen id, or '@back' (history back, with 'fallback' id).",
-    "  fx = push | pop | fade (default push). action = record | look | save (custom behaviours in shell.html ACTIONS).",
+    "  fx = push | pop | fade (default push). action = record | look | save | toggle | select (custom behaviours in shell.html ACTIONS).",
     "A hotspot whose target screen does not exist yet is skipped silently, so future screens can be pre-wired.",
     "Any design/v5/screen-NN-*.html not listed here is appended automatically with Back/Close -> '@back'."
   ],
   "start": "02-welcome",
-  "order": ["02-welcome", "03-studio", "04-reference", "05-breakdown", "01-camera", "06-result", "07-editor", "08-export", "09-library"],
+  "order": [
+    "02-welcome",
+    "03-studio",
+    "04-reference",
+    "05-breakdown",
+    "01-camera",
+    "06-result",
+    "07-editor",
+    "08-export",
+    "09-library",
+    "10-settings",
+    "11-paywall",
+    "12-exporting",
+    "13-camera-permission",
+    "14-analysis-failed",
+    "15-library-empty"
+  ],
   "screens": [
-    { "id": "02-welcome", "hotspots": [
-      { "sel": ".cta", "to": "03-studio" },
-      { "sel": ".alt", "to": "03-studio" }
-    ]},
-    { "id": "03-studio", "hotspots": [
-      { "sel": ".hero", "to": "04-reference" },
-      { "sel": ".paste", "to": "04-reference" },
-      { "sel": ".tpl", "to": "04-reference" },
-      { "sel": ".proj", "to": "07-editor" },
-      { "sel": ".tabs > :nth-child(2)", "to": "09-library", "fx": "fade" },
-      { "sel": ".tabs .rec", "to": "01-camera" },
-      { "sel": ".tabs > :nth-child(4)", "to": "07-editor", "fx": "fade" },
-      { "sel": ".tabs > :nth-child(5), .ava", "to": "10-settings", "fx": "fade" }
-    ]},
-    { "id": "04-reference", "hotspots": [
-      { "sel": ".cta", "to": "05-breakdown" },
-      { "sel": ".bar [aria-label='Back']", "to": "03-studio", "fx": "pop" }
-    ]},
-    { "id": "05-breakdown", "hotspots": [
-      { "sel": ".cta", "to": "01-camera" },
-      { "sel": ".shot.on", "to": "01-camera" },
-      { "sel": ".bar [aria-label='Back']", "to": "04-reference", "fx": "pop" }
-    ]},
-    { "id": "01-camera", "hotspots": [
-      { "sel": ".shutter", "action": "record", "to": "06-result" },
-      { "sel": ".bar [aria-label='Close']", "to": "03-studio", "fx": "pop" },
-      { "sel": ".ctrl > .it:first-child", "to": "09-library" }
-    ]},
-    { "id": "06-result", "hotspots": [
-      { "sel": ".btn.pri", "to": "07-editor" },
-      { "sel": ".btn.sec", "to": "01-camera", "fx": "pop" },
-      { "sel": ".bar [aria-label='Close']", "to": "05-breakdown", "fx": "pop" },
-      { "sel": ".bar [aria-label='Export']", "to": "08-export" }
-    ]},
-    { "id": "07-editor", "hotspots": [
-      { "sel": ".export", "to": "08-export" },
-      { "sel": ".bar [aria-label='Back']", "to": "03-studio", "fx": "pop" },
-      { "sel": ".rail .lk", "action": "look" }
-    ]},
-    { "id": "08-export", "hotspots": [
-      { "sel": ".save", "action": "save", "to": "03-studio" },
-      { "sel": ".bar .rbtn", "to": "07-editor", "fx": "pop" }
-    ]},
-    { "id": "09-library", "hotspots": [
-      { "sel": ".tabbar > :nth-child(1)", "to": "03-studio", "fx": "fade" },
-      { "sel": ".tabbar .cam", "to": "01-camera" },
-      { "sel": ".tabbar > :nth-child(4)", "to": "07-editor", "fx": "fade" },
-      { "sel": ".tabbar > :nth-child(5)", "to": "10-settings", "fx": "fade" },
-      { "sel": ".grid .it:has(.b.match)", "to": "06-result" },
-      { "sel": ".grid .it:not(:has(.b.match))", "to": "07-editor" }
-    ]}
+    {
+      "id": "02-welcome",
+      "hotspots": [
+        { "sel": ".cta", "to": "03-studio" },
+        { "sel": ".alt", "to": "03-studio" }
+      ]
+    },
+    {
+      "id": "03-studio",
+      "hotspots": [
+        { "sel": ".hero", "to": "04-reference" },
+        { "sel": ".paste", "to": "04-reference" },
+        { "sel": ".tpl", "to": "04-reference" },
+        { "sel": ".proj", "to": "07-editor" },
+        { "sel": ".tabs > :nth-child(2)", "to": "09-library", "fx": "fade" },
+        { "sel": ".tabs .rec", "to": "01-camera" },
+        { "sel": ".tabs > :nth-child(4)", "to": "07-editor", "fx": "fade" },
+        { "sel": ".tabs > :nth-child(5), .ava", "to": "10-settings", "fx": "fade" }
+      ]
+    },
+    {
+      "id": "04-reference",
+      "hotspots": [
+        { "sel": ".cta", "to": "05-breakdown" },
+        { "sel": ".bar [aria-label='Back']", "to": "03-studio", "fx": "pop" }
+      ]
+    },
+    {
+      "id": "05-breakdown",
+      "hotspots": [
+        { "sel": ".cta", "to": "01-camera" },
+        { "sel": ".shot.on", "to": "01-camera" },
+        { "sel": ".bar [aria-label='Back']", "to": "04-reference", "fx": "pop" }
+      ]
+    },
+    {
+      "id": "01-camera",
+      "hotspots": [
+        { "sel": ".shutter", "action": "record", "to": "06-result" },
+        { "sel": ".bar [aria-label='Close']", "to": "03-studio", "fx": "pop" },
+        { "sel": ".ctrl > .it:first-child", "to": "09-library" }
+      ]
+    },
+    {
+      "id": "06-result",
+      "hotspots": [
+        { "sel": ".btn.pri", "to": "07-editor" },
+        { "sel": ".btn.sec", "to": "01-camera", "fx": "pop" },
+        { "sel": ".bar [aria-label='Close']", "to": "05-breakdown", "fx": "pop" },
+        { "sel": ".bar [aria-label='Export']", "to": "08-export" }
+      ]
+    },
+    {
+      "id": "07-editor",
+      "hotspots": [
+        { "sel": ".export", "to": "08-export" },
+        { "sel": ".bar [aria-label='Back']", "to": "03-studio", "fx": "pop" },
+        { "sel": ".rail .lk", "action": "look" }
+      ]
+    },
+    {
+      "id": "08-export",
+      "hotspots": [
+        { "sel": ".save", "action": "save", "via": "12-exporting", "to": "03-studio" },
+        { "sel": ".bar .rbtn", "to": "07-editor", "fx": "pop" }
+      ]
+    },
+    {
+      "id": "09-library",
+      "hotspots": [
+        { "sel": ".tabbar > :nth-child(1)", "to": "03-studio", "fx": "fade" },
+        { "sel": ".tabbar .cam", "to": "01-camera" },
+        { "sel": ".tabbar > :nth-child(4)", "to": "07-editor", "fx": "fade" },
+        { "sel": ".tabbar > :nth-child(5)", "to": "10-settings", "fx": "fade" },
+        { "sel": ".grid .it:has(.b.match)", "to": "06-result" },
+        { "sel": ".grid .it:not(:has(.b.match))", "to": "07-editor" }
+      ]
+    },
+    {
+      "id": "10-settings",
+      "hotspots": [
+        { "sel": ".tabbar > :nth-child(1)", "to": "03-studio", "fx": "fade" },
+        { "sel": ".tabbar > :nth-child(2)", "to": "09-library", "fx": "fade" },
+        { "sel": ".tabbar .cam", "to": "01-camera" },
+        { "sel": ".tabbar > :nth-child(4)", "to": "07-editor", "fx": "fade" },
+        { "sel": ".pro", "to": "11-paywall" },
+        { "sel": ".tog", "action": "toggle" }
+      ]
+    },
+    {
+      "id": "11-paywall",
+      "hotspots": [
+        { "sel": "[aria-label='Close']", "to": "@back", "fallback": "10-settings", "fx": "pop" },
+        { "sel": ".cta", "to": "@back", "fallback": "10-settings", "fx": "pop" },
+        { "sel": ".plan", "action": "select" }
+      ]
+    },
+    {
+      "id": "12-exporting",
+      "hotspots": [
+        { "sel": ".cancel", "to": "08-export", "fx": "fade" }
+      ]
+    },
+    {
+      "id": "13-camera-permission",
+      "hotspots": [
+        { "sel": ".cta", "to": "01-camera", "fx": "fade" },
+        { "sel": ".alt", "to": "03-studio", "fx": "pop" },
+        { "sel": ".bar [aria-label='Close']", "to": "03-studio", "fx": "pop" }
+      ]
+    },
+    {
+      "id": "14-analysis-failed",
+      "hotspots": [
+        { "sel": ".cta", "to": "03-studio", "fx": "pop" },
+        { "sel": ".bar .rbtn", "to": "03-studio", "fx": "pop" },
+        { "sel": ".opt[style*='594']", "to": "05-breakdown" },
+        { "sel": ".opt[style*='664']", "to": "04-reference" }
+      ]
+    },
+    {
+      "id": "15-library-empty",
+      "hotspots": [
+        { "sel": ".tabbar > :nth-child(1)", "to": "03-studio", "fx": "fade" },
+        { "sel": ".tabbar .cam", "to": "01-camera" },
+        { "sel": ".tabbar > :nth-child(4)", "to": "07-editor", "fx": "fade" },
+        { "sel": ".tabbar > :nth-child(5)", "to": "10-settings", "fx": "fade" },
+        { "sel": ".cta", "to": "04-reference" }
+      ]
+    }
   ]
 }

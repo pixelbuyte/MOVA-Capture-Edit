@@ -20,12 +20,13 @@
   .mv-brand i{width:14px;height:14px;border-radius:50%;background:var(--coral);display:block}
   .mv-eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(14,17,22,.56)}
   .mv-now{margin-top:28px}
-  .mv-now h1{margin:10px 0 0;font-weight:700;font-size:40px;line-height:1;letter-spacing:-.03em;font-variation-settings:"opsz" 96}
+  .mv-now h1{margin:10px 0 0;font-weight:700;font-size:36px;text-wrap:balance;line-height:1;letter-spacing:-.03em;font-variation-settings:"opsz" 96}
   .mv-list{list-style:none;margin:24px 0 0;padding:0;display:flex;flex-direction:column;gap:2px;overflow:auto;min-height:0}
   .mv-list button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;width:100%;height:32px;padding:0 10px;border-radius:10px;
-    font-family:var(--display);font-size:15px;font-weight:500;color:rgba(14,17,22,.68);transition:background .15s,color .15s}
-  .mv-list button span{font-family:var(--mono);font-size:12px;color:rgba(14,17,22,.44);width:18px}
-  .mv-list button::after{content:"";margin-left:auto;width:8px;height:8px;border-radius:50%;background:var(--coral);opacity:0;transition:opacity .15s}
+    font-family:var(--display);font-size:15px;font-weight:500;color:rgba(14,17,22,.68);transition:background .15s,color .15s;white-space:nowrap;overflow:hidden}
+  .mv-list button b{font-weight:inherit;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .mv-list button span{font-family:var(--mono);font-size:12px;color:rgba(14,17,22,.44);width:18px;flex:none}
+  .mv-list button::after{content:"";flex:none;margin-left:auto;width:8px;height:8px;border-radius:50%;background:var(--coral);opacity:0;transition:opacity .15s}
   .mv-list button:hover{background:rgba(14,17,22,.06);color:var(--ink)}
   .mv-list button:focus-visible,.mv-btn:focus-visible,.mv-toggle:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
   .mv-list button[aria-current="true"]{background:var(--ink);color:#fff;font-weight:600}
@@ -176,13 +177,32 @@
       s.shadow.querySelectorAll('.rail .lk').forEach(function(n){ n.classList.toggle('on', n === el); });
       var pill = s.shadow.querySelector('.lookpill'); if (pill) pill.textContent = el.querySelector('small').textContent;
     },
-    save: function(s, el, h){
+    toggle: function(s, el){                       // settings switches
+      var on = el.classList.toggle('on'); el.setAttribute('aria-checked', on);
+    },
+    select: function(s, el, h){                    // radio-style rows
+      s.shadow.querySelectorAll(h.sel).forEach(function(n){
+        n.classList.toggle('on', n === el); n.setAttribute('aria-checked', n === el);
+      });
+    },
+    save: function(s, el, h, rendered){
       if (el.classList.contains('saved')) { go(h.to, 'pop'); return; }
+      var via = byId[h.via];
+      if (via && !rendered) {                      // pass through the Exporting screen, then come back saved
+        go(via.id, 'fade');
+        var t = setTimeout(function(){
+          via.reset = null; busy = false; go(s.id, 'fade');
+          ACTIONS.save(s, el, h, true);
+        }, 1900);
+        via.reset = function(){ clearTimeout(t); via.reset = null; };
+        return;
+      }
       var label = el.lastChild, keep = label.textContent;
       el.classList.add('saved'); label.textContent = 'Saved to Photos';
       toast.classList.add('is-on');
+      var hide = setTimeout(function(){ toast.classList.remove('is-on'); }, 4000);
       document.getElementById('mv-toast-btn').onclick = function(){ go(h.to, 'pop'); };
-      s.reset = function(){ el.classList.remove('saved'); label.textContent = keep; toast.classList.remove('is-on'); s.reset = null; };
+      s.reset = function(){ clearTimeout(hide); el.classList.remove('saved'); label.textContent = keep; toast.classList.remove('is-on'); s.reset = null; };
     }
   };
 
@@ -269,7 +289,7 @@
   var list = document.getElementById('mv-list'), btns = {};
   ORDER.forEach(function(id){
     var s = byId[id], li = document.createElement('li'), b = document.createElement('button');
-    b.type = 'button'; b.innerHTML = '<span>' + s.num + '</span>'; b.appendChild(document.createTextNode(s.name));
+    b.type = 'button'; b.innerHTML = '<span>' + s.num + '</span>'; var nm = document.createElement('b'); nm.textContent = s.name; b.appendChild(nm); b.title = s.name;
     b.addEventListener('click', function(){ go(id, ORDER.indexOf(id) < ORDER.indexOf(current.id) ? 'pop' : 'push'); });
     li.appendChild(b); list.appendChild(li); btns[id] = b;
   });

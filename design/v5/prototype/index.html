@@ -24,12 +24,13 @@
   .mv-brand i{width:14px;height:14px;border-radius:50%;background:var(--coral);display:block}
   .mv-eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(14,17,22,.56)}
   .mv-now{margin-top:28px}
-  .mv-now h1{margin:10px 0 0;font-weight:700;font-size:40px;line-height:1;letter-spacing:-.03em;font-variation-settings:"opsz" 96}
+  .mv-now h1{margin:10px 0 0;font-weight:700;font-size:36px;text-wrap:balance;line-height:1;letter-spacing:-.03em;font-variation-settings:"opsz" 96}
   .mv-list{list-style:none;margin:24px 0 0;padding:0;display:flex;flex-direction:column;gap:2px;overflow:auto;min-height:0}
   .mv-list button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;width:100%;height:32px;padding:0 10px;border-radius:10px;
-    font-family:var(--display);font-size:15px;font-weight:500;color:rgba(14,17,22,.68);transition:background .15s,color .15s}
-  .mv-list button span{font-family:var(--mono);font-size:12px;color:rgba(14,17,22,.44);width:18px}
-  .mv-list button::after{content:"";margin-left:auto;width:8px;height:8px;border-radius:50%;background:var(--coral);opacity:0;transition:opacity .15s}
+    font-family:var(--display);font-size:15px;font-weight:500;color:rgba(14,17,22,.68);transition:background .15s,color .15s;white-space:nowrap;overflow:hidden}
+  .mv-list button b{font-weight:inherit;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .mv-list button span{font-family:var(--mono);font-size:12px;color:rgba(14,17,22,.44);width:18px;flex:none}
+  .mv-list button::after{content:"";flex:none;margin-left:auto;width:8px;height:8px;border-radius:50%;background:var(--coral);opacity:0;transition:opacity .15s}
   .mv-list button:hover{background:rgba(14,17,22,.06);color:var(--ink)}
   .mv-list button:focus-visible,.mv-btn:focus-visible,.mv-toggle:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
   .mv-list button[aria-current="true"]{background:var(--ink);color:#fff;font-weight:600}
@@ -2276,7 +2277,7 @@
     <div class="home"></div>
   </div>
 </template>
-<script type="application/json" id="mova-registry">{"start": "02-welcome", "order": ["02-welcome", "03-studio", "04-reference", "05-breakdown", "01-camera", "06-result", "07-editor", "08-export", "09-library", "10-settings", "11-paywall", "12-exporting", "13-camera-permission", "14-analysis-failed", "15-library-empty"], "screens": [{"id": "02-welcome", "hotspots": [{"sel": ".cta", "to": "03-studio"}, {"sel": ".alt", "to": "03-studio"}], "name": "Welcome", "num": "02"}, {"id": "03-studio", "hotspots": [{"sel": ".hero", "to": "04-reference"}, {"sel": ".paste", "to": "04-reference"}, {"sel": ".tpl", "to": "04-reference"}, {"sel": ".proj", "to": "07-editor"}, {"sel": ".tabs > :nth-child(2)", "to": "09-library", "fx": "fade"}, {"sel": ".tabs .rec", "to": "01-camera"}, {"sel": ".tabs > :nth-child(4)", "to": "07-editor", "fx": "fade"}, {"sel": ".tabs > :nth-child(5), .ava", "to": "10-settings", "fx": "fade"}], "name": "Studio", "num": "03"}, {"id": "04-reference", "hotspots": [{"sel": ".cta", "to": "05-breakdown"}, {"sel": ".bar [aria-label='Back']", "to": "03-studio", "fx": "pop"}], "name": "Reference", "num": "04"}, {"id": "05-breakdown", "hotspots": [{"sel": ".cta", "to": "01-camera"}, {"sel": ".shot.on", "to": "01-camera"}, {"sel": ".bar [aria-label='Back']", "to": "04-reference", "fx": "pop"}], "name": "Shot breakdown", "num": "05"}, {"id": "01-camera", "hotspots": [{"sel": ".shutter", "action": "record", "to": "06-result"}, {"sel": ".bar [aria-label='Close']", "to": "03-studio", "fx": "pop"}, {"sel": ".ctrl > .it:first-child", "to": "09-library"}], "name": "Recreate camera", "num": "01"}, {"id": "06-result", "hotspots": [{"sel": ".btn.pri", "to": "07-editor"}, {"sel": ".btn.sec", "to": "01-camera", "fx": "pop"}, {"sel": ".bar [aria-label='Close']", "to": "05-breakdown", "fx": "pop"}, {"sel": ".bar [aria-label='Export']", "to": "08-export"}], "name": "Result", "num": "06"}, {"id": "07-editor", "hotspots": [{"sel": ".export", "to": "08-export"}, {"sel": ".bar [aria-label='Back']", "to": "03-studio", "fx": "pop"}, {"sel": ".rail .lk", "action": "look"}], "name": "Editor", "num": "07"}, {"id": "08-export", "hotspots": [{"sel": ".save", "action": "save", "to": "03-studio"}, {"sel": ".bar .rbtn", "to": "07-editor", "fx": "pop"}], "name": "Export", "num": "08"}, {"id": "09-library", "hotspots": [{"sel": ".tabbar > :nth-child(1)", "to": "03-studio", "fx": "fade"}, {"sel": ".tabbar .cam", "to": "01-camera"}, {"sel": ".tabbar > :nth-child(4)", "to": "07-editor", "fx": "fade"}, {"sel": ".tabbar > :nth-child(5)", "to": "10-settings", "fx": "fade"}, {"sel": ".grid .it:has(.b.match)", "to": "06-result"}, {"sel": ".grid .it:not(:has(.b.match))", "to": "07-editor"}], "name": "Library", "num": "09"}, {"id": "10-settings", "hotspots": [{"sel": "[aria-label^='Back'], [aria-label='Close']", "to": "@back", "fallback": "03-studio", "fx": "pop"}], "name": "You", "num": "10"}, {"id": "11-paywall", "hotspots": [{"sel": "[aria-label^='Back'], [aria-label='Close']", "to": "@back", "fallback": "03-studio", "fx": "pop"}], "name": "MOVA Pro", "num": "11"}, {"id": "12-exporting", "hotspots": [{"sel": "[aria-label^='Back'], [aria-label='Close']", "to": "@back", "fallback": "03-studio", "fx": "pop"}], "name": "Exporting", "num": "12"}, {"id": "13-camera-permission", "hotspots": [{"sel": "[aria-label^='Back'], [aria-label='Close']", "to": "@back", "fallback": "03-studio", "fx": "pop"}], "name": "Camera access needed", "num": "13"}, {"id": "14-analysis-failed", "hotspots": [{"sel": "[aria-label^='Back'], [aria-label='Close']", "to": "@back", "fallback": "03-studio", "fx": "pop"}], "name": "Couldn't break down this clip", "num": "14"}, {"id": "15-library-empty", "hotspots": [{"sel": "[aria-label^='Back'], [aria-label='Close']", "to": "@back", "fallback": "03-studio", "fx": "pop"}], "name": "Library, empty", "num": "15"}]}</script>
+<script type="application/json" id="mova-registry">{"start": "02-welcome", "order": ["02-welcome", "03-studio", "04-reference", "05-breakdown", "01-camera", "06-result", "07-editor", "08-export", "09-library", "10-settings", "11-paywall", "12-exporting", "13-camera-permission", "14-analysis-failed", "15-library-empty"], "screens": [{"id": "02-welcome", "hotspots": [{"sel": ".cta", "to": "03-studio"}, {"sel": ".alt", "to": "03-studio"}], "name": "Welcome", "num": "02"}, {"id": "03-studio", "hotspots": [{"sel": ".hero", "to": "04-reference"}, {"sel": ".paste", "to": "04-reference"}, {"sel": ".tpl", "to": "04-reference"}, {"sel": ".proj", "to": "07-editor"}, {"sel": ".tabs > :nth-child(2)", "to": "09-library", "fx": "fade"}, {"sel": ".tabs .rec", "to": "01-camera"}, {"sel": ".tabs > :nth-child(4)", "to": "07-editor", "fx": "fade"}, {"sel": ".tabs > :nth-child(5), .ava", "to": "10-settings", "fx": "fade"}], "name": "Studio", "num": "03"}, {"id": "04-reference", "hotspots": [{"sel": ".cta", "to": "05-breakdown"}, {"sel": ".bar [aria-label='Back']", "to": "03-studio", "fx": "pop"}], "name": "Reference", "num": "04"}, {"id": "05-breakdown", "hotspots": [{"sel": ".cta", "to": "01-camera"}, {"sel": ".shot.on", "to": "01-camera"}, {"sel": ".bar [aria-label='Back']", "to": "04-reference", "fx": "pop"}], "name": "Shot breakdown", "num": "05"}, {"id": "01-camera", "hotspots": [{"sel": ".shutter", "action": "record", "to": "06-result"}, {"sel": ".bar [aria-label='Close']", "to": "03-studio", "fx": "pop"}, {"sel": ".ctrl > .it:first-child", "to": "09-library"}], "name": "Recreate camera", "num": "01"}, {"id": "06-result", "hotspots": [{"sel": ".btn.pri", "to": "07-editor"}, {"sel": ".btn.sec", "to": "01-camera", "fx": "pop"}, {"sel": ".bar [aria-label='Close']", "to": "05-breakdown", "fx": "pop"}, {"sel": ".bar [aria-label='Export']", "to": "08-export"}], "name": "Result", "num": "06"}, {"id": "07-editor", "hotspots": [{"sel": ".export", "to": "08-export"}, {"sel": ".bar [aria-label='Back']", "to": "03-studio", "fx": "pop"}, {"sel": ".rail .lk", "action": "look"}], "name": "Editor", "num": "07"}, {"id": "08-export", "hotspots": [{"sel": ".save", "action": "save", "via": "12-exporting", "to": "03-studio"}, {"sel": ".bar .rbtn", "to": "07-editor", "fx": "pop"}], "name": "Export", "num": "08"}, {"id": "09-library", "hotspots": [{"sel": ".tabbar > :nth-child(1)", "to": "03-studio", "fx": "fade"}, {"sel": ".tabbar .cam", "to": "01-camera"}, {"sel": ".tabbar > :nth-child(4)", "to": "07-editor", "fx": "fade"}, {"sel": ".tabbar > :nth-child(5)", "to": "10-settings", "fx": "fade"}, {"sel": ".grid .it:has(.b.match)", "to": "06-result"}, {"sel": ".grid .it:not(:has(.b.match))", "to": "07-editor"}], "name": "Library", "num": "09"}, {"id": "10-settings", "hotspots": [{"sel": ".tabbar > :nth-child(1)", "to": "03-studio", "fx": "fade"}, {"sel": ".tabbar > :nth-child(2)", "to": "09-library", "fx": "fade"}, {"sel": ".tabbar .cam", "to": "01-camera"}, {"sel": ".tabbar > :nth-child(4)", "to": "07-editor", "fx": "fade"}, {"sel": ".pro", "to": "11-paywall"}, {"sel": ".tog", "action": "toggle"}], "name": "You", "num": "10"}, {"id": "11-paywall", "hotspots": [{"sel": "[aria-label='Close']", "to": "@back", "fallback": "10-settings", "fx": "pop"}, {"sel": ".cta", "to": "@back", "fallback": "10-settings", "fx": "pop"}, {"sel": ".plan", "action": "select"}], "name": "MOVA Pro", "num": "11"}, {"id": "12-exporting", "hotspots": [{"sel": ".cancel", "to": "08-export", "fx": "fade"}], "name": "Exporting", "num": "12"}, {"id": "13-camera-permission", "hotspots": [{"sel": ".cta", "to": "01-camera", "fx": "fade"}, {"sel": ".alt", "to": "03-studio", "fx": "pop"}, {"sel": ".bar [aria-label='Close']", "to": "03-studio", "fx": "pop"}], "name": "Camera access needed", "num": "13"}, {"id": "14-analysis-failed", "hotspots": [{"sel": ".cta", "to": "03-studio", "fx": "pop"}, {"sel": ".bar .rbtn", "to": "03-studio", "fx": "pop"}, {"sel": ".opt[style*='594']", "to": "05-breakdown"}, {"sel": ".opt[style*='664']", "to": "04-reference"}], "name": "Couldn't break down this clip", "num": "14"}, {"id": "15-library-empty", "hotspots": [{"sel": ".tabbar > :nth-child(1)", "to": "03-studio", "fx": "fade"}, {"sel": ".tabbar .cam", "to": "01-camera"}, {"sel": ".tabbar > :nth-child(4)", "to": "07-editor", "fx": "fade"}, {"sel": ".tabbar > :nth-child(5)", "to": "10-settings", "fx": "fade"}, {"sel": ".cta", "to": "04-reference"}], "name": "Library, empty", "num": "15"}]}</script>
 <script>
 (window.MOVA_SCRIPTS=window.MOVA_SCRIPTS||{})["01-camera"]=function(document){
 /* Reference ghost: outline traced by hand over the photo (source px, 462×640),
@@ -2361,13 +2362,32 @@
       s.shadow.querySelectorAll('.rail .lk').forEach(function(n){ n.classList.toggle('on', n === el); });
       var pill = s.shadow.querySelector('.lookpill'); if (pill) pill.textContent = el.querySelector('small').textContent;
     },
-    save: function(s, el, h){
+    toggle: function(s, el){                       // settings switches
+      var on = el.classList.toggle('on'); el.setAttribute('aria-checked', on);
+    },
+    select: function(s, el, h){                    // radio-style rows
+      s.shadow.querySelectorAll(h.sel).forEach(function(n){
+        n.classList.toggle('on', n === el); n.setAttribute('aria-checked', n === el);
+      });
+    },
+    save: function(s, el, h, rendered){
       if (el.classList.contains('saved')) { go(h.to, 'pop'); return; }
+      var via = byId[h.via];
+      if (via && !rendered) {                      // pass through the Exporting screen, then come back saved
+        go(via.id, 'fade');
+        var t = setTimeout(function(){
+          via.reset = null; busy = false; go(s.id, 'fade');
+          ACTIONS.save(s, el, h, true);
+        }, 1900);
+        via.reset = function(){ clearTimeout(t); via.reset = null; };
+        return;
+      }
       var label = el.lastChild, keep = label.textContent;
       el.classList.add('saved'); label.textContent = 'Saved to Photos';
       toast.classList.add('is-on');
+      var hide = setTimeout(function(){ toast.classList.remove('is-on'); }, 4000);
       document.getElementById('mv-toast-btn').onclick = function(){ go(h.to, 'pop'); };
-      s.reset = function(){ el.classList.remove('saved'); label.textContent = keep; toast.classList.remove('is-on'); s.reset = null; };
+      s.reset = function(){ clearTimeout(hide); el.classList.remove('saved'); label.textContent = keep; toast.classList.remove('is-on'); s.reset = null; };
     }
   };
 
@@ -2454,7 +2474,7 @@
   var list = document.getElementById('mv-list'), btns = {};
   ORDER.forEach(function(id){
     var s = byId[id], li = document.createElement('li'), b = document.createElement('button');
-    b.type = 'button'; b.innerHTML = '<span>' + s.num + '</span>'; b.appendChild(document.createTextNode(s.name));
+    b.type = 'button'; b.innerHTML = '<span>' + s.num + '</span>'; var nm = document.createElement('b'); nm.textContent = s.name; b.appendChild(nm); b.title = s.name;
     b.addEventListener('click', function(){ go(id, ORDER.indexOf(id) < ORDER.indexOf(current.id) ? 'pop' : 'push'); });
     li.appendChild(b); list.appendChild(li); btns[id] = b;
   });
