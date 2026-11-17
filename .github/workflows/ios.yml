@@ -1,0 +1,49 @@
+name: iOS build and test
+
+on:
+  push:
+    paths: ["app/**", ".github/workflows/ios.yml"]
+  pull_request:
+    paths: ["app/**", ".github/workflows/ios.yml"]
+  workflow_dispatch:
+
+jobs:
+  core:
+    name: MovaCore tests
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test MovaCore
+        working-directory: app/Packages/MovaCore
+        run: swift test
+
+  app:
+    name: Build app and run tests (Simulator)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate project
+        working-directory: app
+        run: xcodegen generate
+      - name: Pick a simulator
+        id: sim
+        run: |
+          UDID=$(xcrun simctl list devices available -j | python3 -c "import json,sys; d=json.load(sys.stdin)['devices']; print(next(x['udid'] for k,v in d.items() if 'iOS' in k for x in v if x['name'].startswith('iPhone')))")
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+      - name: Build and test
+        working-directory: app
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project MOVA.xcodeproj -scheme MOVA \
+            -destination "id=${{ steps.sim.outputs.udid }}" \
+            CODE_SIGNING_ALLOWED=NO | tee build.log | grep -E "error:|warning: .*MOVA|Test Suite|Executed|BUILD|\*\*" || true
+          grep -q "TEST SUCCEEDED" build.log
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xcodebuild-log
+          path: app/build.log
