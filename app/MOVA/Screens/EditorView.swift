@@ -22,6 +22,7 @@ struct EditorView: View {
         VStack(spacing: Space.s) {
             topBar(plan)
             preview(plan)
+                .layoutPriority(-1)   // the preview gives up height first so the timeline and tools always fit
             transport(plan)
             timeline(plan)
             toolRow
@@ -81,7 +82,8 @@ struct EditorView: View {
                     .padding(.bottom, Space.l)
             }
         }
-        .frame(width: 236, height: 320)
+        .aspectRatio(236.0 / 320.0, contentMode: .fit)
+        .frame(maxWidth: 236, maxHeight: 320)
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
     }
 
@@ -138,7 +140,7 @@ struct EditorView: View {
                         .background(Color.white.opacity(0.12), in: RoundedRectangle(cornerRadius: 6))
                         .offset(x: w * CGFloat(1 / total))
                 }
-                Rectangle().fill(Color.coral).frame(width: 2, height: 150)
+                Rectangle().fill(Color.coral).frame(width: 2, height: 132)
                     .offset(x: w * CGFloat(playhead / total) - 1, y: -6)
                     .accessibilityHidden(true)
             }
@@ -158,7 +160,7 @@ struct EditorView: View {
                 }
             }
         }
-        .frame(height: 150)
+        .frame(height: 132)
         .padding(.horizontal, Space.gutter)
     }
 

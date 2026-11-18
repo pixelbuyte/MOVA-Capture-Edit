@@ -303,9 +303,15 @@ struct MainTabBar: View {
 struct SamplePhoto: View {
     var name: String
     var body: some View {
-        Image(name)
-            .resizable()
-            .scaledToFill()
+        // Fill whatever frame we're given without changing the layout size: an aspect-fill image
+        // reports its own (wider) size, which pushed whole screens off the left edge.
+        Color.clear
+            .overlay {
+                Image(name)
+                    .resizable()
+                    .scaledToFill()
+            }
+            .clipped()
             .accessibilityHidden(true)
     }
 }

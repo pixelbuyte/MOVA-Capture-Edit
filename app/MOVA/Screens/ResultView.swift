@@ -62,7 +62,7 @@ struct ResultView: View {
             }
             .padding(.horizontal, Space.gutter)
             .padding(.top, Space.xs)
-            .padding(.bottom, Space.xl)
+            .padding(.bottom, 60)
         }
         .scrollIndicators(.hidden)
         .background(Color.ink)
