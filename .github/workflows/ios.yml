@@ -47,3 +47,46 @@ jobs:
         with:
           name: xcodebuild-log
           path: app/build.log
+
+  screenshots:
+    name: Simulator screenshots
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate project
+        working-directory: app
+        run: xcodegen generate
+      - name: Boot a simulator
+        id: sim
+        run: |
+          UDID=$(xcrun simctl list devices available -j | python3 -c "import json,sys; d=json.load(sys.stdin)['devices']; print(next(x['udid'] for k,v in d.items() if 'iOS' in k for x in v if x['name'] == 'iPhone 16 Pro'))")
+          xcrun simctl boot "$UDID"
+          xcrun simctl status_bar "$UDID" override --time 9:41 --batteryState charged --batteryLevel 100 --cellularBars 4 --wifiBars 3
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+      - name: Build for the simulator
+        working-directory: app
+        run: |
+          set -o pipefail
+          xcodebuild build -project MOVA.xcodeproj -scheme MOVA \
+            -destination "id=${{ steps.sim.outputs.udid }}" -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO | grep -E "error:|BUILD" || true
+          test -d build/Build/Products/Debug-iphonesimulator/MOVA.app
+      - name: Capture every screen
+        working-directory: app
+        run: |
+          UDID=${{ steps.sim.outputs.udid }}
+          xcrun simctl install "$UDID" build/Build/Products/Debug-iphonesimulator/MOVA.app
+          mkdir -p shots
+          for s in welcome studio reference breakdown camera result editor export library settings paywall exporting permission failed empty; do
+            xcrun simctl launch --terminate-running-process "$UDID" space.playlocal.mova -MOVAScreen "$s"
+            sleep 5
+            xcrun simctl io "$UDID" screenshot "shots/$s.png"
+          done
+          ls -la shots
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: simulator-screenshots
+          path: app/shots

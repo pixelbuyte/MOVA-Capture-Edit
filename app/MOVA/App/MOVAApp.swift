@@ -2,13 +2,29 @@ import SwiftUI
 
 @main
 struct MOVAApp: App {
-    @State private var model = AppModel()
+    @State private var model: AppModel
     @AppStorage("hasOnboarded") private var hasOnboarded = false
+    private let demoScreen: String?
+
+    init() {
+        let m = AppModel()
+        #if DEBUG
+        demoScreen = DemoLaunch.screen
+        if let s = demoScreen { DemoLaunch.apply(s, to: m) }
+        #else
+        demoScreen = nil
+        #endif
+        _model = State(initialValue: m)
+    }
 
     var body: some Scene {
         WindowGroup {
             Group {
-                if hasOnboarded {
+                if demoScreen == "permission" {
+                    CameraPermissionView(onAllow: {}, onClose: {})                      // 13
+                } else if demoScreen == "welcome" {
+                    WelcomeView {}                                                     // 02
+                } else if hasOnboarded || demoScreen != nil {
                     RootView()
                 } else {
                     WelcomeView { withAnimation(Motion.soft) { hasOnboarded = true } }   // 02

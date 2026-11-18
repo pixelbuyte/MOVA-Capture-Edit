@@ -27,6 +27,8 @@ struct CameraView: View {
         .background(Color.black)
         .statusBarHidden()
         .task {
+            // No camera (Simulator): skip the permission prompt and show the demo frame.
+            guard camera.isAvailable else { return }
             camera.refreshAccess()
             if camera.access == .unknown { await camera.requestAccess() }
             camera.start()
