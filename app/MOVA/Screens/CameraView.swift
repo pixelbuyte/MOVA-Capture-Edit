@@ -38,7 +38,8 @@ struct CameraView: View {
 
     private var shotIndex: Int { min(model.shotsCaptured, model.plan.shots.count - 1) }
     private var shot: Shot { model.plan.shots[shotIndex] }
-    private var match: Int { Int((liveBox.iou(referenceBox) * 100 + 30).rounded()).clamped(0, 99) }
+    /// Overlap with the reference box (IoU 0.73 for the demo boxes), eased so a near-match reads in the 80s.
+    private var match: Int { Int((pow(liveBox.iou(referenceBox), 0.5) * 100).rounded()).clamped(0, 99) }
 
     // MARK: Viewfinder
 
