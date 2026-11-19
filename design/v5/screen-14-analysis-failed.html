@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MOVA · Couldn't break down this clip</title>
+<meta name="viewport" content="width=1200">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1116;          /* app background, glass, tray */
+    --ink-2:#1B2028;        /* raised surfaces */
+    --paper:#F4EEE3;        /* board */
+    --coral:#FF5A36;        /* brand, reference, primary action */
+    --coral-deep:#E2401D;
+    --mint:#3DF0A8;         /* match only */
+    --sun:#FFC53D;          /* small accent */
+    --lagoon:#1F8A9E;       /* small accent */
+    --white:#FFFFFF;
+    --w70:rgba(255,255,255,.72);
+    --w50:rgba(255,255,255,.52);
+    --hair:rgba(255,255,255,.14);
+    --display:"Bricolage Grotesque",system-ui,sans-serif;
+    --mono:"DM Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1200px;height:1000px}
+  body{
+    background:var(--paper);
+    font-family:var(--display);
+    color:var(--ink);
+    position:relative;overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ───────── Board ───────── */
+  .disc{position:absolute;left:320px;top:220px;width:560px;height:560px;border-radius:50%;background:var(--coral)}
+  .col{position:absolute;top:66px;bottom:66px;width:236px;display:flex;flex-direction:column}
+  .col.l{left:64px}
+  .col.r{left:900px;justify-content:center;gap:28px}
+  .brand{font-weight:800;font-size:28px;letter-spacing:-.02em;font-variation-settings:"opsz" 96;display:flex;align-items:center;gap:10px}
+  .brand i{width:14px;height:14px;border-radius:50%;background:var(--coral);display:block}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(14,17,22,.56)}
+  .l .eyebrow{margin-top:auto}
+  h1{font-weight:700;font-size:44px;line-height:1;letter-spacing:-.03em;font-variation-settings:"opsz" 96;margin-top:12px}
+  .lede{font-size:16px;line-height:1.45;color:rgba(14,17,22,.72);margin-top:16px;font-weight:400}
+  .swatches{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+  .sw{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:rgba(14,17,22,.72)}
+  .sw b{width:20px;height:20px;border-radius:6px;display:block;flex:none;box-shadow:inset 0 0 0 1px rgba(14,17,22,.08)}
+  .note{padding-left:16px;border-left:2px solid rgba(14,17,22,.14)}
+  .note.c{border-color:var(--coral)} .note.m{border-color:#17B67B} .note.s{border-color:var(--sun)} .note.g{border-color:var(--lagoon)}
+  .note h3{font-size:16px;font-weight:700;letter-spacing:-.01em}
+  .note p{font-size:14px;line-height:1.4;color:rgba(14,17,22,.68);margin-top:4px}
+
+  /* ───────── Phone ───────── */
+  .phone{
+    position:absolute;left:393px;top:66px;width:414px;height:868px;border-radius:66px;
+    background:#0A0B0D;padding:12px;
+    box-shadow:0 0 0 1.5px #2E3138, inset 0 0 0 1.5px #3B3F47,
+               0 50px 90px -30px rgba(60,20,8,.55), 0 18px 36px -12px rgba(14,17,22,.35);
+  }
+  .screen{position:relative;width:390px;height:844px;border-radius:54px;overflow:hidden;background:var(--ink);color:var(--white)}
+  .island{position:absolute;left:133px;top:12px;width:124px;height:36px;border-radius:20px;background:#000;z-index:9}
+  .home{position:absolute;left:128px;top:827px;width:134px;height:5px;border-radius:3px;background:rgba(255,255,255,.9);z-index:9}
+  svg.ic{display:block;fill:#fff;flex:none}
+  .segs{display:flex;gap:4px}
+  .segs i{height:4px;border-radius:2px;background:rgba(255,255,255,.38);display:block}
+  .segs i.on{background:var(--coral)}
+
+  .bar{position:absolute;left:16px;right:16px;top:72px;height:44px;display:flex;align-items:center;justify-content:space-between;z-index:5}
+  .rbtn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--ink-2);border:1px solid var(--hair)}
+  .rbtn.glass{background:rgba(14,17,22,.46);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4)}
+  .rbtn.off{opacity:.4}
+  .title{text-align:center}
+  .title small{display:block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--w70);line-height:14px}
+  .title small b{color:var(--coral);font-weight:500}
+  .title strong{display:block;font-size:21px;font-weight:700;letter-spacing:-.02em;line-height:26px;margin-top:2px;font-variation-settings:"opsz" 40}
+  .cta{position:absolute;left:16px;right:16px;height:56px;border-radius:28px;background:var(--coral);color:#1C0B05;
+    font-size:17px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;justify-content:center;gap:10px;
+    box-shadow:0 10px 28px -8px rgba(255,90,54,.55), inset 0 1px 0 rgba(255,255,255,.25)}
+  .cta svg{fill:#1C0B05}
+  .media{position:absolute;left:0;top:0;width:390px;height:296px;overflow:hidden}
+  .media .sky{position:absolute;left:0;top:0;width:390px;height:65px;overflow:hidden}
+  .media .sky img{position:absolute;left:0;top:0;width:390px;height:3000px}
+  .media .main{position:absolute;left:0;top:64px;width:390px;height:540.3px;display:block}
+  .media img{filter:saturate(.45) brightness(.8)}
+  .scrim-t{position:absolute;left:0;top:0;width:100%;height:150px;background:linear-gradient(180deg,rgba(14,17,22,.78) 0%,rgba(14,17,22,.5) 50%,rgba(14,17,22,0) 100%)}
+  .scrim-b{position:absolute;left:0;top:140px;width:100%;height:156px;background:linear-gradient(180deg,rgba(14,17,22,0) 0%,rgba(14,17,22,.55) 45%,rgba(14,17,22,.92) 82%,var(--ink) 100%)}
+  .pill{height:24px;padding:0 9px;border-radius:12px;font-size:12px;font-weight:700;line-height:22px;letter-spacing:.01em;white-space:nowrap;
+    background:rgba(14,17,22,.6);color:#fff;border:1px solid var(--hair);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+  .meta{position:absolute;left:16px;right:16px;top:232px;height:44px;display:flex;align-items:center;gap:12px;z-index:5}
+  .pbtn{width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+  .pbtn svg{fill:var(--ink);margin-left:2px}
+  .tc{font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.02em;color:#fff}
+  .tc span{color:var(--w70)}
+  .meta .pill{margin-left:auto}
+  .head{position:absolute;left:16px;right:16px;top:304px}
+  .head small{display:block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--w70);line-height:14px}
+  .head small b{color:var(--coral);font-weight:500}
+  .head strong{display:block;font-size:26px;font-weight:700;letter-spacing:-.025em;line-height:30px;margin-top:4px;font-variation-settings:"opsz" 48}
+  .cuts{position:absolute;left:16px;right:16px;top:396px}
+  .cuts i{display:block;height:6px;border-radius:3px;background:rgba(255,255,255,.38)}
+  .cuts div{display:flex;justify-content:space-between;margin-top:7px;font-family:var(--mono);font-size:11px;line-height:14px;color:var(--w70);white-space:nowrap}
+  .cuts div b{color:#fff;font-weight:500;margin-right:6px}
+  .cuts div em{font-style:normal;color:var(--sun)}
+  .lab{position:absolute;left:16px;top:564px;font-size:17px;font-weight:700;letter-spacing:-.015em;line-height:20px}
+  .why{position:absolute;left:16px;right:16px;top:440px;border-radius:20px;background:var(--ink-2);border:1px solid var(--hair);padding:14px 16px 14px 14px;display:flex;gap:12px}
+  .tile{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;flex:none}
+  .why .tile{background:rgba(255,197,61,.14)} .why .tile svg{fill:var(--sun)}
+  .why small{display:block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--w70);line-height:14px}
+  .why small b{color:var(--sun);font-weight:500}
+  .why strong{display:block;font-size:17px;font-weight:700;letter-spacing:-.015em;line-height:22px;margin-top:2px}
+  .why p{font-size:13px;line-height:18px;color:var(--w70);margin-top:4px}
+  .opt{position:absolute;left:16px;right:16px;height:60px;border-radius:20px;background:var(--ink-2);border:1px solid var(--hair);padding:0 12px 0 10px;display:flex;align-items:center;gap:12px}
+  .opt .tile{background:rgba(255,255,255,.1)}
+  .opt .tx{flex:1;min-width:0}
+  .opt strong{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:19px}
+  .opt small{display:block;font-size:12px;line-height:15px;color:var(--w70);margin-top:1px;white-space:nowrap}
+  .opt>svg{fill:var(--w50)}
+  .cta{top:744px}
+
+  /* board: offline variant of the reason card */
+  .variant{margin-top:4px}
+  .variant .eyebrow{margin-bottom:8px}
+  .variant .v{border-radius:16px;background:var(--ink);color:#fff;padding:12px;display:flex;gap:10px}
+  .variant .tile{width:32px;height:32px;border-radius:10px;background:rgba(255,197,61,.14)} .variant .tile svg{fill:var(--sun)}
+  .variant strong{display:block;font-size:14px;font-weight:700;letter-spacing:-.01em;line-height:18px}
+  .variant p{font-size:12px;line-height:16px;color:var(--w70);margin-top:2px}
+</style>
+</head>
+<body>
+
+<div class="disc"></div>
+
+<div class="col l">
+  <div class="brand"><i></i>MOVA</div>
+  <div class="eyebrow">Screen 14</div>
+  <h1>Couldn’t break down this clip</h1>
+  <p class="lede">The link loaded, but MOVA found nothing to split. The screen names the reason and offers three ways to keep going.</p>
+  <div class="swatches">
+    <div class="sw"><b style="background:#FF5A36"></b>#FF5A36</div>
+    <div class="sw"><b style="background:#3DF0A8"></b>#3DF0A8</div>
+    <div class="sw"><b style="background:#FFC53D"></b>#FFC53D</div>
+    <div class="sw"><b style="background:#1F8A9E"></b>#1F8A9E</div>
+    <div class="sw"><b style="background:#0E1116"></b>#0E1116</div>
+    <div class="sw"><b style="background:#F4EEE3"></b>#F4EEE3</div>
+  </div>
+</div>
+
+<div class="col r">
+  <div class="note s"><h3>The reason, exactly</h3><p>One card, one cause: no cuts, private clip, or under 2 seconds. Sun marks it, never red.</p></div>
+  <div class="note"><h3>One bar, no cuts</h3><p>The shot bar from Reference is shown unsplit, so the problem is visible before it is read.</p></div>
+  <div class="note c"><h3>Never a dead end</h3><p>Another link is the coral step. Photos and marking shots by hand sit right above it.</p></div>
+  <div class="variant">
+    <div class="eyebrow">Variant · offline</div>
+    <div class="v"><div class="tile"><svg class="ic" viewBox="0 0 256 256" width="18" height="18" aria-hidden="true"><path d="M213.92,210.62a8,8,0,1,1-11.84,10.76l-52-57.15a60,60,0,0,0-57.41,7.24,8,8,0,1,1-9.42-12.93A75.43,75.43,0,0,1,128,144c1.28,0,2.55,0,3.82.1L104.9,114.49A108,108,0,0,0,61,135.31,8,8,0,0,1,49.73,134,8,8,0,0,1,51,122.77a124.27,124.27,0,0,1,41.71-21.66L69.37,75.4a155.43,155.43,0,0,0-40.29,24A8,8,0,0,1,18.92,87,171.87,171.87,0,0,1,58,62.86L42.08,45.38A8,8,0,1,1,53.92,34.62ZM128,192a12,12,0,1,0,12,12A12,12,0,0,0,128,192ZM237.08,87A172.3,172.3,0,0,0,106,49.4a8,8,0,1,0,2,15.87A158.33,158.33,0,0,1,128,64a156.25,156.25,0,0,1,98.92,35.37A8,8,0,0,0,237.08,87ZM195,135.31a8,8,0,0,0,11.24-1.3,8,8,0,0,0-1.3-11.24,124.25,124.25,0,0,0-51.73-24.2A8,8,0,1,0,150,114.24,108.12,108.12,0,0,1,195,135.31Z"/></svg></div><div><strong>You’re offline</strong><p>MOVA can’t open links without a connection. It retries when you’re back online.</p></div></div>
+  </div>
+</div>
+
+<div class="phone">
+  <div class="screen">
+    <!-- the pasted clip: real photograph (Unsplash) standing in for the video frame, muted because it is not usable yet -->
+    <div class="media">
+      <div class="sky"><img src="../v3/img/fashion_yellow.jpg" alt=""></div>
+      <img class="main" src="../v3/img/fashion_yellow.jpg" alt="Pasted clip: a dancer in a yellow tracksuit on a seaside court">
+      <div class="scrim-t"></div>
+      <div class="scrim-b"></div>
+    </div>
+    <div class="island"></div>
+
+    <div class="bar">
+      <div class="rbtn glass" aria-label="Back"><svg class="ic" viewBox="0 0 256 256" width="22" height="22" aria-hidden="true"><path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"/></svg></div>
+      <div class="rbtn glass" aria-label="Close"><svg class="ic" viewBox="0 0 256 256" width="22" height="22" aria-hidden="true"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></svg></div>
+    </div>
+
+    <div class="meta">
+      <div class="pbtn" aria-label="Play clip"><svg class="ic" viewBox="0 0 256 256" width="20" height="20" aria-hidden="true"><path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"/></svg></div>
+      <div class="tc">0:00.0 <span>/ 0:09.0</span></div>
+      <div class="pill">9:16 · 30 fps</div>
+    </div>
+
+    <div class="head">
+      <small><b>Reference</b> · TikTok link</small>
+      <strong>Couldn’t break down “Yellow on the court”</strong>
+    </div>
+
+    <div class="cuts" aria-label="One shot, no cuts found">
+      <i></i><div><span><b>1</b>0:00.0</span><em>No cuts found</em><span>0:09.0</span></div>
+    </div>
+
+    <div class="why">
+      <div class="tile"><svg class="ic" viewBox="0 0 256 256" width="22" height="22" aria-hidden="true"><path d="M157.73,113.13A8,8,0,0,1,159.82,102L227.48,55.7a8,8,0,0,1,9,13.21l-67.67,46.3a7.92,7.92,0,0,1-4.51,1.4A8,8,0,0,1,157.73,113.13Zm80.87,85.09a8,8,0,0,1-11.12,2.08L136,137.7,93.49,166.78a36,36,0,1,1-9-13.19L121.83,128,84.44,102.41a35.86,35.86,0,1,1,9-13.19l143,97.87A8,8,0,0,1,238.6,198.22ZM80,180a20,20,0,1,0-5.86,14.14A19.85,19.85,0,0,0,80,180ZM74.14,90.13a20,20,0,1,0-28.28,0A19.85,19.85,0,0,0,74.14,90.13Z"/></svg></div>
+      <div>
+        <small><b>Why</b> · one continuous take</small>
+        <strong>No cuts to split</strong>
+        <p>The clip runs 9.0s without a cut. MOVA needs at least two shots to coach you through.</p>
+      </div>
+    </div>
+
+    <div class="lab">Keep going</div>
+
+    <div class="opt" style="top:594px">
+      <div class="tile"><svg class="ic" viewBox="0 0 256 256" width="22" height="22" aria-hidden="true"><path d="M56,76a60,60,0,0,1,120,0,8,8,0,0,1-16,0,44,44,0,0,0-88,0,8,8,0,1,1-16,0Zm140,44a27.9,27.9,0,0,0-13.36,3.39A28,28,0,0,0,144,106.7V76a28,28,0,0,0-56,0v80l-3.82-6.13a28,28,0,0,0-48.41,28.17l29.32,50A8,8,0,1,0,78.89,220L49.6,170a12,12,0,1,1,20.78-12l.14.23,18.68,30A8,8,0,0,0,104,184V76a12,12,0,0,1,24,0v68a8,8,0,1,0,16,0V132a12,12,0,0,1,24,0v20a8,8,0,0,0,16,0v-4a12,12,0,0,1,24,0v36c0,21.61-7.1,36.3-7.16,36.42a8,8,0,0,0,3.58,10.73A7.9,7.9,0,0,0,208,232a8,8,0,0,0,7.16-4.42c.37-.73,8.85-18,8.85-43.58V148A28,28,0,0,0,196,120Z"/></svg></div>
+      <div class="tx"><strong>Mark shots myself</strong><small>Tap where each shot should start</small></div>
+      <svg class="ic" viewBox="0 0 256 256" width="18" height="18" aria-hidden="true"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg>
+    </div>
+    <div class="opt" style="top:664px">
+      <div class="tile"><svg class="ic" viewBox="0 0 256 256" width="22" height="22" aria-hidden="true"><path d="M216,40H72A16,16,0,0,0,56,56V72H40A16,16,0,0,0,24,88V200a16,16,0,0,0,16,16H184a16,16,0,0,0,16-16V184h16a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM72,56H216v62.75l-10.07-10.06a16,16,0,0,0-22.63,0l-20,20-44-44a16,16,0,0,0-22.62,0L72,109.37ZM184,200H40V88H56v80a16,16,0,0,0,16,16H184Zm32-32H72V132l36-36,49.66,49.66a8,8,0,0,0,11.31,0L194.63,120,216,141.38V168ZM160,84a12,12,0,1,1,12,12A12,12,0,0,1,160,84Z"/></svg></div>
+      <div class="tx"><strong>Pick from Photos</strong><small>Use a clip saved on this iPhone</small></div>
+      <svg class="ic" viewBox="0 0 256 256" width="18" height="18" aria-hidden="true"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg>
+    </div>
+
+    <div class="cta"><svg class="ic" viewBox="0 0 256 256" width="22" height="22" aria-hidden="true"><path d="M87.5,151.52l64-64a12,12,0,0,1,17,17l-64,64a12,12,0,0,1-17-17Zm131-114a60.08,60.08,0,0,0-84.87,0L103.51,67.61a12,12,0,0,0,17,17l30.07-30.06a36,36,0,0,1,50.93,50.92L171.4,135.52a12,12,0,1,0,17,17l30.08-30.06A60.09,60.09,0,0,0,218.45,37.55ZM135.52,171.4l-30.07,30.08a36,36,0,0,1-50.92-50.93l30.06-30.07a12,12,0,0,0-17-17L37.55,133.58a60,60,0,0,0,84.88,84.87l30.06-30.07a12,12,0,0,0-17-17Z"/></svg>Try another link</div>
+
+    <div class="home"></div>
+  </div>
+</div>
+
+</body>
+</html>

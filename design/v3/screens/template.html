@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Night Drive template</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens/primitives.css">
+<link rel="stylesheet" href="../tokens/semantic.css">
+<link rel="stylesheet" href="../tokens/component.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .hero { position: absolute; left: 0; right: 0; top: 0; height: 392px; }
+  .hero img { width: 100%; height: 100%; object-fit: cover; }
+  .hero__fade { position: absolute; inset: 0; background: linear-gradient(var(--overlay), transparent 25%, transparent 60%, var(--surface-1)); }
+  .bar { position: absolute; top: var(--safe-top); left: var(--sp-3); right: var(--sp-3); display: flex; justify-content: space-between; }
+  .body-wrap { position: absolute; left: 0; right: 0; top: 330px; }
+  .steps { margin: var(--sp-4) var(--gutter) 0; display: grid; gap: 0; }
+  .st { display: grid; grid-template-columns: 54px 1fr auto; gap: var(--sp-3); align-items: center; padding: var(--sp-2) 0; box-shadow: inset 0 -1px 0 var(--hairline); }
+  .st .media { height: 40px; border-radius: var(--r-1); }
+  .need { display: flex; gap: var(--sp-3); align-items: center; margin: var(--sp-4) var(--gutter) 0; }
+  .slot { width: 54px; height: 54px; border-radius: var(--r-2); display: grid; place-items: center; color: var(--text-2); background: repeating-linear-gradient(135deg, var(--surface-2) 0 5px, var(--surface-3) 5px 10px); }
+</style>
+</head>
+<body>
+<main class="screen">
+  <div class="hero"><img src="../img/porsche.jpg" alt="Template preview: a car on a coastal highway at dusk"><div class="hero__fade"></div></div>
+  <div class="bar">
+    <a class="ibtn ibtn--glass" href="discover.html" aria-label="Back"><svg class="ic" aria-hidden="true"><use href="../icons.svg#back"/></svg></a>
+    <div class="row">
+      <button class="ibtn ibtn--glass" aria-label="Save to favourites"><svg class="ic" aria-hidden="true"><use href="../icons.svg#heart"/></svg></button>
+      <button class="ibtn ibtn--glass" data-playtoggle aria-pressed="false" aria-label="Play"><svg class="ic" aria-hidden="true"><use href="../icons.svg#play"/></svg></button>
+    </div>
+  </div>
+
+  <div class="body-wrap">
+    <div class="pad">
+      <span class="label">Automotive ad · MOVA Studio · 12.4k uses</span>
+      <h1 class="display" style="margin-top: var(--sp-2)">Night Drive</h1>
+      <p class="body" style="margin-top: var(--sp-2)">A low tracking shot, light streaks, then a slow hero reveal. Turns one photo into a moody 15-second spot.</p>
+    </div>
+
+    <div class="steps" role="list" aria-label="Recipe">
+      <div class="st" role="listitem"><div class="media"><img src="../img/porsche.jpg" alt="" style="object-position: 85% 50%"></div><div><div class="headline" style="font-size: var(--t-callout)">Low tracking shot</div><div class="caption">Camera glides beside, wheel height</div></div><span class="tc">0:00</span></div>
+      <div class="st" role="listitem"><div class="media"><img src="../img/skyline.jpg" alt=""></div><div><div class="headline" style="font-size: var(--t-callout)">Light streaks</div><div class="caption">Speed ramp, city lights smear</div></div><span class="tc">0:05</span></div>
+      <div class="st" role="listitem"><div class="media"><img src="../img/mustang.jpg" alt=""></div><div><div class="headline" style="font-size: var(--t-callout)">Hero reveal</div><div class="caption">Crane down, headlights on beat</div></div><span class="tc">0:08</span></div>
+    </div>
+
+    <div class="need">
+      <div class="slot" aria-hidden="true"><svg class="ic" ><use href="../icons.svg#photo"/></svg></div>
+      <div class="grow"><div class="headline" style="font-size: var(--t-callout)">You'll need 1 photo</div><div class="caption">A car or product, side or three-quarter view</div></div>
+      <span class="tc">9:16 · 16:9</span>
+    </div>
+  </div>
+
+  <div class="actionbar">
+    <a class="btn btn--primary" href="select-media.html">Use this recipe <span class="btn__cost">· 30 cr</span></a>
+  </div>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script src="../motion.js"></script>
+</body>
+</html>

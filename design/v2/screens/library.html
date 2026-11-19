@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Library</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .mosaic { display: flex; flex-direction: column; gap: 2px; margin-top: var(--sp-2); }
+  .mrow { display: flex; gap: 2px; height: 150px; }
+  .mrow a, .mrow div.m { position: relative; overflow: hidden; display: block; }
+  .mrow img { width: 100%; height: 100%; object-fit: cover; }
+  .mark { position: absolute; left: 6px; top: 6px; font: 700 9px/1 var(--font-ui); letter-spacing: var(--track-caps); color: var(--text-1); text-shadow: 0 1px 3px var(--overlay); display: flex; gap: 4px; align-items: center; }
+  .mark--ai { color: var(--accent); }
+  .mrow .tc { position: absolute; right: 6px; bottom: 6px; color: var(--text-1); text-shadow: 0 1px 3px var(--overlay); }
+  .sect { display: flex; justify-content: space-between; align-items: baseline; padding: var(--sp-5) var(--gutter) 0; }
+  .tplrow { display: flex; align-items: center; gap: var(--sp-3); margin: var(--sp-3) var(--gutter) 0; padding: var(--sp-2) 0; box-shadow: inset 0 -1px 0 var(--hairline), inset 0 1px 0 var(--hairline); }
+  .stack3 { position: relative; width: 44px; height: 36px; }
+  .stack3 img { position: absolute; width: 30px; height: 36px; object-fit: cover; border-radius: 5px; box-shadow: 0 0 0 1.5px var(--surface-1); }
+</style>
+</head>
+<body>
+<main class="screen top">
+  <div class="pad row row--between" style="height: 44px">
+    <h1 class="title1">Library</h1>
+    <div class="row">
+      <button class="ibtn ibtn--fill" aria-label="Search library"><svg class="ic" aria-hidden="true"><use href="../icons.svg#search"/></svg></button>
+      <button class="btn btn--secondary btn--sm" style="height: 36px">Select</button>
+    </div>
+  </div>
+  <div class="pad" style="margin-top: var(--sp-2)">
+    <div class="rail" role="tablist" aria-label="Show" data-choice="aria-selected">
+      <button role="tab" data-opt aria-selected="true">All</button>
+      <button role="tab" data-opt aria-selected="false">Photos</button>
+      <button role="tab" data-opt aria-selected="false">Videos</button>
+      <button role="tab" data-opt aria-selected="false">Made with AI</button>
+      <button role="tab" data-opt aria-selected="false">Projects</button>
+      <button role="tab" data-opt aria-selected="false">Drafts</button>
+    </div>
+  </div>
+
+  <a class="tplrow" href="template.html">
+    <div class="stack3" aria-hidden="true"><img src="../img/dj.jpg" alt="" style="left: 0; top: 0"><img src="../img/watch.jpg" alt="" style="left: 7px; top: 0"><img src="../img/fashion_dress.jpg" alt="" style="left: 14px; top: 0"></div>
+    <div class="grow"><div class="headline" style="font-size: var(--t-callout)">My recipes</div><div class="caption">4 saved from references</div></div>
+    <svg class="ic ic--sm t-3" aria-hidden="true"><use href="../icons.svg#chev"/></svg>
+  </a>
+
+  <div class="sect"><h2 class="headline">Today</h2><span class="tc">6 items</span></div>
+  <div class="mosaic" role="list">
+    <div class="mrow">
+      <a href="result.html" role="listitem" style="flex: 0.62" aria-label="Golden hour walk, AI recreation, 12 seconds"><img src="../img/port_smile.jpg" alt="" style="filter: sepia(.28) saturate(1.15)"><span class="mark mark--ai"><svg class="ic ic--xs" aria-hidden="true"><use href="../icons.svg#spark"/></svg>AI</span><span class="tc">0:12</span></a>
+      <a href="video-editor.html" role="listitem" style="flex: 1.2" aria-label="Desert drive project, 24 seconds"><img src="../img/road.jpg" alt=""><span class="mark">PROJECT</span><span class="tc">0:24</span></a>
+      <a href="photo-editor.html" role="listitem" style="flex: 0.9" aria-label="Summit, ProRAW photo"><img src="../img/hiker.jpg" alt=""><span class="mark">RAW</span></a>
+    </div>
+    <div class="mrow" style="height: 128px">
+      <a href="direction.html" role="listitem" style="flex: 1" aria-label="Biscuit, draft recreation"><img src="../img/dog.jpg" alt=""><span class="mark" style="color: var(--caution)">DRAFT · STEP 4</span></a>
+      <div class="m" role="listitem" style="flex: 1.3" aria-label="Imported reference video, 15 seconds"><img src="../img/fashion_dress.jpg" alt="" style="object-position: 50% 40%"><span class="mark">IMPORTED</span><span class="tc">0:15</span></div>
+      <div class="m" role="listitem" style="flex: 0.8" aria-label="Cat photo, favourite"><img src="../img/cat.jpg" alt=""><svg class="ic ic--xs ic--fill" style="position: absolute; left: 6px; bottom: 6px; color: var(--text-1)" aria-label="Favourite"><use href="../icons.svg#heart"/></svg></div>
+    </div>
+  </div>
+  <div class="sect"><h2 class="headline">This week</h2><span class="tc">38 items</span></div>
+  <div class="mosaic">
+    <div class="mrow" style="height: 140px">
+      <div class="m" style="flex: 1.4"><img src="../img/mustang.jpg" alt="Car video"><span class="tc">0:31</span></div>
+      <div class="m" style="flex: 1"><img src="../img/stars.jpg" alt="Night sky photo"></div>
+      <div class="m" style="flex: 0.7"><img src="../img/port_red.jpg" alt="Portrait"></div>
+    </div>
+  </div>
+
+  <nav class="tabbar" aria-label="Main">
+    <div class="tabbar__tabs">
+      <a href="home.html"><svg class="ic" aria-hidden="true"><use href="../icons.svg#home"/></svg>Home</a>
+      <a href="discover.html"><svg class="ic" aria-hidden="true"><use href="../icons.svg#discover"/></svg>Discover</a>
+      <a href="ref-import.html"><svg class="ic" aria-hidden="true"><use href="../icons.svg#studio"/></svg>Studio</a>
+      <a href="library.html" aria-current="page"><svg class="ic" aria-hidden="true"><use href="../icons.svg#library"/></svg>Library</a>
+    </div>
+    <a class="tabbar__shutter" href="camera.html" aria-label="Open camera"><span></span></a>
+  </nav>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+</body>
+</html>

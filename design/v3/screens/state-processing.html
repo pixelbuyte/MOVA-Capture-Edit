@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Reading your reference</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens/primitives.css">
+<link rel="stylesheet" href="../tokens/semantic.css">
+<link rel="stylesheet" href="../tokens/component.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .stage { position: relative; height: 300px; margin: var(--sp-4) var(--gutter) 0; border-radius: var(--r-3); overflow: hidden; }
+  .stage img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: saturate(.6) brightness(.7); }
+  .scan { position: absolute; left: 0; right: 0; height: 2px; background: var(--accent); box-shadow: 0 0 18px 4px var(--accent-line); animation: scan 2.6s var(--ease-standard) infinite alternate; }
+  @keyframes scan { from { top: 8%; } to { top: 92%; } }
+  .found { position: absolute; left: 30%; top: 12%; width: 40%; height: 70%; }
+  .found.vf::after { opacity: 1; transform: none; inset: 0; --c: var(--accent); }
+  .shots { display: flex; gap: 3px; height: 64px; margin: var(--sp-4) var(--gutter) 0; }
+  .shots > div { border-radius: var(--r-1); overflow: hidden; }
+  .shots img { width: 100%; height: 100%; object-fit: cover; }
+  .steps { margin: var(--sp-5) var(--gutter) 0; display: grid; gap: var(--sp-3); }
+  .s { display: grid; grid-template-columns: 22px 1fr auto; gap: var(--sp-3); align-items: center; font-size: var(--t-callout); }
+  .s--wait { color: var(--text-3); }
+  .spinner { width: 16px; height: 16px; border-radius: 50%; border: 1.6px solid var(--surface-4); border-top-color: var(--accent); animation: spin .9s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .scan, .spinner { animation: none; } .scan { top: 50%; } }
+</style>
+</head>
+<body>
+<main class="screen top">
+  <div class="flowhead">
+    <a class="ibtn" href="ref-import.html" aria-label="Cancel analysis"><svg class="ic" aria-hidden="true"><use href="../icons.svg#close"/></svg></a>
+    <div class="flowsteps" role="img" aria-label="Step 2 of 6"><i class="done"></i><i class="now"></i><i></i><i></i><i></i><i></i></div>
+    <span></span>
+  </div>
+  <div class="pad" style="margin-top: var(--sp-2)">
+    <h1 class="title1">Reading your reference</h1>
+    <p class="body" style="margin-top: var(--sp-1)" aria-live="polite">Found 2 shots so far. About 10 seconds left.</p>
+  </div>
+  <div class="stage">
+    <img src="../img/fashion_dress.jpg" alt="Reference being analysed">
+    <div class="found vf" aria-hidden="true"></div>
+    <div class="scan" aria-hidden="true"></div>
+    <span class="src src--ref src--chip" style="position: absolute; left: var(--sp-3); bottom: var(--sp-3)">Subject tracked</span>
+  </div>
+  <div class="shots" aria-label="Shots found">
+    <div style="flex: 3" class="rise"><img src="../img/fashion_dress.jpg" alt="Shot 1" style="object-position: 50% 22%"></div>
+    <div style="flex: 4" class="rise rise-2"><img src="../img/fashion_dress.jpg" alt="Shot 2" style="object-position: 50% 78%"></div>
+    <div style="flex: 5" class="skeleton" aria-label="Looking for more shots"></div>
+  </div>
+  <div class="steps" role="list">
+    <div class="s" role="listitem"><svg class="ic ic--sm" style="color: var(--positive)" aria-hidden="true"><use href="../icons.svg#check"/></svg><span>Uploaded · 38 MB</span><span class="tc">0:04</span></div>
+    <div class="s" role="listitem"><span class="spinner" aria-hidden="true"></span><span>Finding cuts and shots</span><span class="tc t-1">0:07 of 0:12</span></div>
+    <div class="s s--wait" role="listitem"><span></span><span>Camera, light, colour, pacing</span><span class="tc">—</span></div>
+  </div>
+  <div class="actionbar"><button class="btn btn--primary" disabled>Use this direction</button></div>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script src="../motion.js"></script>
+</body>
+</html>

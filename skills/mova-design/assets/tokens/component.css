@@ -1,0 +1,33 @@
+/* ─────────────────────────────────────────────────────────────
+   MOVA tokens · layer 3 of 3 · COMPONENT
+   Per-component decisions, expressed in semantic tokens.
+   Tune a component here without touching its CSS or any screen.
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --tap-min: 44px;                         /* HIG minimum, every control */
+
+  --button-height: 52px;
+  --button-radius: var(--r-3);
+  --button-font: 600 var(--t-headline)/1 var(--font-ui);
+  --button-primary-bg: var(--select);       /* continue, save */
+  --button-primary-fg: var(--on-select);
+  --button-ai-bg: var(--accent-fill);       /* spends credits · max one per screen */
+  --button-ai-fg: var(--gray-0);
+
+  --tabbar-height: 62px;
+  --tabbar-inset: var(--sp-4);
+  --tabbar-bottom: 22px;
+
+  --lane-label-size: var(--t-micro);        /* v3: raised from 10.5px to the 11px floor */
+  --lane-cell-height: 30px;
+  --lane-cell-radius: 5px;
+
+  --bracket-length: 12px;                   /* viewfinder brackets */
+  --bracket-weight: 1.5px;
+  --bracket-color: var(--select);
+
+  --shot-height: 64px;
+  --ruler-needle: var(--cam);
+  --wipe-knob: 34px;
+  --sheet-radius: var(--r-4);
+}

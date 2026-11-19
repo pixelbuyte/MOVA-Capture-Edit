@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Video editor</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens/primitives.css">
+<link rel="stylesheet" href="../tokens/semantic.css">
+<link rel="stylesheet" href="../tokens/component.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .viewer { height: 300px; display: grid; place-items: center; background: var(--canvas); margin-top: var(--sp-1); }
+  .viewer__frame { position: relative; width: 169px; height: 300px; overflow: hidden; }
+  .viewer__frame img { width: 100%; height: 100%; object-fit: cover; filter: sepia(.12) saturate(1.08); }
+  .title-ov { position: absolute; left: 0; right: 0; bottom: 64px; text-align: center; font: 400 22px/1 var(--font-display); }
+  .cap-ov { position: absolute; left: 10px; right: 10px; bottom: 26px; text-align: center; font: 600 11px/1.3 var(--font-ui); }
+  .cap-ov span { background: var(--overlay); padding: 2px 4px; border-radius: 3px; }
+  .transport { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: var(--sp-2) var(--sp-4); }
+  .tl { position: relative; background: var(--surface-1); padding: var(--sp-2) 0 0; overflow: hidden; height: 236px; }
+  .ticks { display: flex; padding-left: 36px; height: 18px; }
+  .ticks span { width: 80px; flex: none; font: 500 11px/1 var(--font-mono); color: var(--text-3); }
+  .track { display: flex; align-items: center; gap: var(--sp-2); height: 30px; margin-top: 6px; }
+  .track > b { width: 28px; flex: none; text-align: right; font: 600 11px/1 var(--font-mono); color: var(--text-3); }
+  .lanebody { position: relative; flex: 1; height: 100%; display: flex; gap: 3px; }
+  .blk { height: 100%; border-radius: 5px; display: flex; align-items: center; padding: 0 7px; font: 500 11px/1 var(--font-ui); color: var(--text-1); white-space: nowrap; overflow: hidden; flex: none; }
+  .blk--title { background: var(--surface-4); }
+  .blk--cc { background: var(--surface-3); color: var(--text-2); }
+  .track--v { height: 52px; }
+  .clip { position: relative; height: 100%; border-radius: 5px; overflow: hidden; flex: none; display: flex; }
+  .clip img { height: 100%; width: 52px; object-fit: cover; flex: none; }
+  .clip--sel { box-shadow: 0 0 0 2px var(--select); z-index: 2; overflow: visible; }
+  .clip--sel::before, .clip--sel::after { content: ""; position: absolute; top: 0; bottom: 0; width: 10px; background: var(--select); z-index: 3; }
+  .clip--sel::before { left: -2px; border-radius: 5px 0 0 5px; } .clip--sel::after { right: -2px; border-radius: 0 5px 5px 0; }
+  .speed { position: absolute; right: 14px; bottom: 4px; font: 600 11px/1 var(--font-mono); padding: 2px 4px; border-radius: 3px; background: var(--overlay); z-index: 4; }
+  .xfade { position: absolute; top: 50%; width: 18px; height: 18px; margin-top: -9px; border-radius: 5px; background: var(--select); color: var(--on-select); display: grid; place-items: center; z-index: 5; }
+  .wave { height: 100%; border-radius: 5px; background: var(--surface-2); flex: none; overflow: hidden; position: relative; }
+  .wave svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .wave span { position: absolute; left: 6px; top: 4px; font: 500 11px/1 var(--font-ui); color: var(--text-2); }
+  .tl .playhead { left: 190px; top: 22px; bottom: 0; }
+  .ctx { position: absolute; left: 0; right: 0; bottom: 0; padding: var(--sp-2) var(--sp-2) calc(var(--safe-bottom) + 2px); background: var(--surface-2); border-radius: var(--r-4) var(--r-4) 0 0; }
+  .ctx__tools { display: flex; justify-content: space-between; }
+  .ctx__tools a, .ctx__tools button { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 52px; padding: 6px 0; font: 500 11px/1 var(--font-ui); color: var(--text-2); }
+</style>
+</head>
+<body>
+<main class="screen screen--media top">
+  <div class="navbar" style="grid-template-columns: 44px 1fr 80px">
+    <a class="ibtn" href="library.html" aria-label="Back to Library"><svg class="ic" aria-hidden="true"><use href="../icons.svg#back"/></svg></a>
+    <div class="navbar__title">Desert drive<span class="navbar__sub tc">Saved · 9:16 · 4K 24</span></div>
+    <button class="btn btn--primary btn--sm" style="justify-self: end; padding: 0 var(--sp-3)">Export</button>
+  </div>
+  <div class="viewer">
+    <div class="viewer__frame"><img src="../img/road.jpg" alt="Preview: desert road"><div class="title-ov">Into the desert</div><div class="cap-ov"><span>We drove until the road ran out.</span></div></div>
+  </div>
+  <div class="transport">
+    <span class="tc t-1">00:08:12 <span class="t-3">/ 00:24</span></span>
+    <button class="ibtn" data-playtoggle aria-pressed="false" aria-label="Play"><svg class="ic ic--lg" aria-hidden="true"><use href="../icons.svg#play"/></svg></button>
+    <div class="row" style="justify-content: flex-end; gap: 0">
+      <button class="ibtn" aria-label="Undo"><svg class="ic ic--sm" aria-hidden="true"><use href="../icons.svg#undo"/></svg></button>
+      <a class="ibtn t-accent" href="assistant.html" aria-label="Ask the assistant"><svg class="ic ic--sm" aria-hidden="true"><use href="../icons.svg#spark"/></svg></a>
+    </div>
+  </div>
+
+  <div class="tl" aria-label="Timeline">
+    <div class="ticks" aria-hidden="true"><span>00:04</span><span>00:06</span><span>00:08</span><span>00:10</span><span>00:12</span></div>
+    <div class="track"><b>T</b><div class="lanebody"><span style="width: 60px; flex: none"></span><div class="blk blk--title" style="width: 150px">Into the desert</div></div></div>
+    <div class="track"><b>CC</b><div class="lanebody"><div class="blk blk--cc" style="width: 118px">We drove until…</div><div class="blk blk--cc" style="width: 110px">…the road ran out</div></div></div>
+    <div class="track track--v"><b>V1</b><div class="lanebody" style="gap: 3px">
+      <div class="clip" style="width: 72px"><img src="../img/valley.jpg" alt=""><img src="../img/valley.jpg" alt="" style="object-position: 80%"></div>
+      <div class="clip clip--sel" style="width: 120px" aria-label="Clip 2 selected, 1.5 times speed"><img src="../img/road.jpg" alt=""><img src="../img/road.jpg" alt="" style="object-position: 30%"><img src="../img/road.jpg" alt="" style="object-position: 70%"><span class="speed">1.5×</span></div>
+      <div class="clip" style="width: 104px"><img src="../img/mustang.jpg" alt=""><img src="../img/mustang.jpg" alt="" style="object-position: 80%"></div>
+      <div class="clip" style="width: 80px"><img src="../img/stars.jpg" alt=""><img src="../img/stars.jpg" alt="" style="object-position: 80%"></div>
+      <span class="xfade" style="left: 186px" aria-label="Cross dissolve"><svg class="ic ic--xs" aria-hidden="true"><use href="../icons.svg#transition"/></svg></span>
+    </div></div>
+    <div class="track"><b>A1</b><div class="lanebody"><div class="wave" style="width: 360px"><svg viewBox="0 0 360 30" preserveAspectRatio="none" aria-hidden="true"><g fill="var(--positive)" opacity=".55"><rect x="0.0" y="11.1" width="2.2" height="7.8" rx="1"/><rect x="4.0" y="8.2" width="2.2" height="13.6" rx="1"/><rect x="8.0" y="4.5" width="2.2" height="21.0" rx="1"/><rect x="12.0" y="3.9" width="2.2" height="22.2" rx="1"/><rect x="16.0" y="2.5" width="2.2" height="25.0" rx="1"/><rect x="20.0" y="3.6" width="2.2" height="22.8" rx="1"/><rect x="24.0" y="5.9" width="2.2" height="18.2" rx="1"/><rect x="28.0" y="7.3" width="2.2" height="15.3" rx="1"/><rect x="32.0" y="10.6" width="2.2" height="8.7" rx="1"/><rect x="36.0" y="10.0" width="2.2" height="10.1" rx="1"/><rect x="40.0" y="9.4" width="2.2" height="11.1" rx="1"/><rect x="44.0" y="9.0" width="2.2" height="12.0" rx="1"/><rect x="48.0" y="8.7" width="2.2" height="12.5" rx="1"/><rect x="52.0" y="8.9" width="2.2" height="12.3" rx="1"/><rect x="56.0" y="11.3" width="2.2" height="7.5" rx="1"/><rect x="60.0" y="10.8" width="2.2" height="8.3" rx="1"/><rect x="64.0" y="9.9" width="2.2" height="10.2" rx="1"/><rect x="68.0" y="9.9" width="2.2" height="10.2" rx="1"/><rect x="72.0" y="9.3" width="2.2" height="11.4" rx="1"/><rect x="76.0" y="7.9" width="2.2" height="14.2" rx="1"/><rect x="80.0" y="5.0" width="2.2" height="19.9" rx="1"/><rect x="84.0" y="5.6" width="2.2" height="18.9" rx="1"/><rect x="88.0" y="3.5" width="2.2" height="23.0" rx="1"/><rect x="92.0" y="5.3" width="2.2" height="19.4" rx="1"/><rect x="96.0" y="7.3" width="2.2" height="15.3" rx="1"/><rect x="100.0" y="10.1" width="2.2" height="9.9" rx="1"/><rect x="104.0" y="9.5" width="2.2" height="11.1" rx="1"/><rect x="108.0" y="5.4" width="2.2" height="19.3" rx="1"/><rect x="112.0" y="4.1" width="2.2" height="21.8" rx="1"/><rect x="116.0" y="2.0" width="2.2" height="26.0" rx="1"/><rect x="120.0" y="2.0" width="2.2" height="26.0" rx="1"/><rect x="124.0" y="3.2" width="2.2" height="23.6" rx="1"/><rect x="128.0" y="5.1" width="2.2" height="19.9" rx="1"/><rect x="132.0" y="8.8" width="2.2" height="12.4" rx="1"/><rect x="136.0" y="11.5" width="2.2" height="6.9" rx="1"/><rect x="140.0" y="8.8" width="2.2" height="12.5" rx="1"/><rect x="144.0" y="6.2" width="2.2" height="17.7" rx="1"/><rect x="148.0" y="6.0" width="2.2" height="18.0" rx="1"/><rect x="152.0" y="6.5" width="2.2" height="16.9" rx="1"/><rect x="156.0" y="7.0" width="2.2" height="15.9" rx="1"/><rect x="160.0" y="8.7" width="2.2" height="12.7" rx="1"/><rect x="164.0" y="10.2" width="2.2" height="9.5" rx="1"/><rect x="168.0" y="10.1" width="2.2" height="9.9" rx="1"/><rect x="172.0" y="10.4" width="2.2" height="9.3" rx="1"/><rect x="176.0" y="10.6" width="2.2" height="8.7" rx="1"/><rect x="180.0" y="8.9" width="2.2" height="12.2" rx="1"/><rect x="184.0" y="7.7" width="2.2" height="14.5" rx="1"/><rect x="188.0" y="6.0" width="2.2" height="17.9" rx="1"/><rect x="192.0" y="6.0" width="2.2" height="18.0" rx="1"/><rect x="196.0" y="7.4" width="2.2" height="15.1" rx="1"/><rect x="200.0" y="7.6" width="2.2" height="14.7" rx="1"/><rect x="204.0" y="11.4" width="2.2" height="7.3" rx="1"/><rect x="208.0" y="8.0" width="2.2" height="14.0" rx="1"/><rect x="212.0" y="4.6" width="2.2" height="20.7" rx="1"/><rect x="216.0" y="3.7" width="2.2" height="22.6" rx="1"/><rect x="220.0" y="2.0" width="2.2" height="26.0" rx="1"/><rect x="224.0" y="3.0" width="2.2" height="23.9" rx="1"/><rect x="228.0" y="3.3" width="2.2" height="23.4" rx="1"/><rect x="232.0" y="5.7" width="2.2" height="18.7" rx="1"/><rect x="236.0" y="9.2" width="2.2" height="11.6" rx="1"/><rect x="240.0" y="8.2" width="2.2" height="13.5" rx="1"/><rect x="244.0" y="6.6" width="2.2" height="16.8" rx="1"/><rect x="248.0" y="4.0" width="2.2" height="21.9" rx="1"/><rect x="252.0" y="3.6" width="2.2" height="22.9" rx="1"/><rect x="256.0" y="4.0" width="2.2" height="21.9" rx="1"/><rect x="260.0" y="5.7" width="2.2" height="18.7" rx="1"/><rect x="264.0" y="6.8" width="2.2" height="16.4" rx="1"/><rect x="268.0" y="8.5" width="2.2" height="13.0" rx="1"/><rect x="272.0" y="10.7" width="2.2" height="8.5" rx="1"/><rect x="276.0" y="9.5" width="2.2" height="10.9" rx="1"/><rect x="280.0" y="10.7" width="2.2" height="8.7" rx="1"/><rect x="284.0" y="10.0" width="2.2" height="10.0" rx="1"/><rect x="288.0" y="9.9" width="2.2" height="10.2" rx="1"/><rect x="292.0" y="8.3" width="2.2" height="13.4" rx="1"/><rect x="296.0" y="8.1" width="2.2" height="13.7" rx="1"/><rect x="300.0" y="9.4" width="2.2" height="11.1" rx="1"/><rect x="304.0" y="10.3" width="2.2" height="9.4" rx="1"/><rect x="308.0" y="9.3" width="2.2" height="11.4" rx="1"/><rect x="312.0" y="8.4" width="2.2" height="13.3" rx="1"/><rect x="316.0" y="5.3" width="2.2" height="19.3" rx="1"/><rect x="320.0" y="4.3" width="2.2" height="21.5" rx="1"/><rect x="324.0" y="3.7" width="2.2" height="22.7" rx="1"/><rect x="328.0" y="4.3" width="2.2" height="21.5" rx="1"/><rect x="332.0" y="4.6" width="2.2" height="20.8" rx="1"/><rect x="336.0" y="8.5" width="2.2" height="12.9" rx="1"/><rect x="340.0" y="11.0" width="2.2" height="8.1" rx="1"/><rect x="344.0" y="7.4" width="2.2" height="15.2" rx="1"/><rect x="348.0" y="3.8" width="2.2" height="22.5" rx="1"/><rect x="352.0" y="3.6" width="2.2" height="22.8" rx="1"/><rect x="356.0" y="2.4" width="2.2" height="25.2" rx="1"/></g></svg><span>Dusk · ambient</span></div></div></div>
+    <div class="track"><b>A2</b><div class="lanebody"><span style="width: 40px; flex: none"></span><div class="wave" style="width: 140px"><svg viewBox="0 0 140 30" preserveAspectRatio="none" aria-hidden="true"><g fill="var(--temp-cool)" opacity=".6"><rect x="0.0" y="10.7" width="2.3" height="8.6" rx="1"/><rect x="4.1" y="6.8" width="2.3" height="16.5" rx="1"/><rect x="8.2" y="4.2" width="2.3" height="21.7" rx="1"/><rect x="12.4" y="2.4" width="2.3" height="25.3" rx="1"/><rect x="16.5" y="3.0" width="2.3" height="24.0" rx="1"/><rect x="20.6" y="3.5" width="2.3" height="23.0" rx="1"/><rect x="24.7" y="5.3" width="2.3" height="19.4" rx="1"/><rect x="28.8" y="6.6" width="2.3" height="16.8" rx="1"/><rect x="32.9" y="8.8" width="2.3" height="12.3" rx="1"/><rect x="37.1" y="10.5" width="2.3" height="9.0" rx="1"/><rect x="41.2" y="9.2" width="2.3" height="11.6" rx="1"/><rect x="45.3" y="8.7" width="2.3" height="12.5" rx="1"/><rect x="49.4" y="9.1" width="2.3" height="11.8" rx="1"/><rect x="53.5" y="9.5" width="2.3" height="10.9" rx="1"/><rect x="57.6" y="10.4" width="2.3" height="9.3" rx="1"/><rect x="61.8" y="10.8" width="2.3" height="8.5" rx="1"/><rect x="65.9" y="11.1" width="2.3" height="7.7" rx="1"/><rect x="70.0" y="10.9" width="2.3" height="8.2" rx="1"/><rect x="74.1" y="9.7" width="2.3" height="10.6" rx="1"/><rect x="78.2" y="7.6" width="2.3" height="14.8" rx="1"/><rect x="82.4" y="5.1" width="2.3" height="19.8" rx="1"/><rect x="86.5" y="4.3" width="2.3" height="21.4" rx="1"/><rect x="90.6" y="4.2" width="2.3" height="21.6" rx="1"/><rect x="94.7" y="4.6" width="2.3" height="20.7" rx="1"/><rect x="98.8" y="6.3" width="2.3" height="17.4" rx="1"/><rect x="102.9" y="10.2" width="2.3" height="9.6" rx="1"/><rect x="107.1" y="8.3" width="2.3" height="13.4" rx="1"/><rect x="111.2" y="5.4" width="2.3" height="19.1" rx="1"/><rect x="115.3" y="2.7" width="2.3" height="24.5" rx="1"/><rect x="119.4" y="2.0" width="2.3" height="26.0" rx="1"/><rect x="123.5" y="2.0" width="2.3" height="25.9" rx="1"/><rect x="127.6" y="3.2" width="2.3" height="23.7" rx="1"/><rect x="131.8" y="5.9" width="2.3" height="18.1" rx="1"/><rect x="135.9" y="7.7" width="2.3" height="14.6" rx="1"/></g></svg><span>Voice</span></div></div></div>
+    <div class="playhead" aria-hidden="true"></div>
+  </div>
+
+  <div class="ctx" role="toolbar" aria-label="Clip 2 tools">
+    <div class="ctx__tools">
+      <button><svg class="ic" aria-hidden="true"><use href="../icons.svg#scissors"/></svg>Split</button>
+      <button><svg class="ic" aria-hidden="true"><use href="../icons.svg#trim"/></svg>Trim</button>
+      <button style="color: var(--text-1)"><svg class="ic" aria-hidden="true"><use href="../icons.svg#speed"/></svg>1.5×</button>
+      <button><svg class="ic" aria-hidden="true"><use href="../icons.svg#crop"/></svg>Crop</button>
+      <button><svg class="ic" aria-hidden="true"><use href="../icons.svg#drop"/></svg>Color</button>
+      <button><svg class="ic" aria-hidden="true"><use href="../icons.svg#text"/></svg>Text</button>
+      <a href="restyle.html" style="color: var(--accent)"><svg class="ic" aria-hidden="true"><use href="../icons.svg#spark"/></svg>Restyle</a>
+    </div>
+  </div>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script src="../motion.js"></script>
+</body>
+</html>

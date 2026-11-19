@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MOVA · Doberg</title>
+<meta name="description" content="MOVA is a professional iPhone camera, editor and AI studio. Show it a reference video and it builds a new one from your own photo or footage.">
+<meta property="og:title" content="MOVA by Doberg">
+<meta property="og:description" content="Show it a video. Make it yours.">
+<meta property="og:image" content="assets/mova-demo-wide-poster.jpg">
+<meta name="theme-color" content="#FAF8F3">
+<link rel="icon" type="image/png" href="assets/mova-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#FAF8F3;--paper2:#F1ECE3;--ink:#1F1F21;--ink2:#4A4743;--ink3:#6E6962;--violet:#5B47F0;--violet-ink:#4A38D4;--ease:cubic-bezier(.32,.72,0,1)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img,video{display:block;max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+@media (min-width:768px){.wrap{padding:0 40px}}
+.serif{font-family:'Fraunces',Georgia,serif;font-weight:400;letter-spacing:-.025em}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(91,71,240,.1);font:500 11px/1 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--violet-ink)}
+.nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:30;display:flex;align-items:center;gap:6px;padding:6px 6px 6px 14px;border-radius:999px;background:rgba(250,248,243,.8);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 10px 30px -12px rgba(31,31,33,.18),inset 0 0 0 1px rgba(31,31,33,.06);white-space:nowrap}
+.nav .brand{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:17px;margin-right:8px}
+.nav .brand img{width:28px;height:28px;border-radius:7px}
+.nav a.l{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:999px;text-decoration:none;font-size:15px;font-weight:500;color:var(--ink2)}
+.nav a.l:hover{background:rgba(31,31,33,.06);color:var(--ink)}
+@media (max-width:560px){.nav .hide-s{display:none}}
+.hero{padding-top:128px;padding-bottom:48px;display:grid;gap:40px;align-items:center}
+@media (min-width:960px){.hero{grid-template-columns:1.1fr .9fr;padding-top:150px}}
+.hero h1{margin:20px 0 0;font-size:clamp(44px,7.4vw,96px);line-height:.98}
+.hero h1 em{font-style:italic;color:var(--violet-ink)}
+.hero p{margin:24px 0 0;font-size:clamp(18px,2vw,21px);color:var(--ink2);max-width:30em}
+.status{margin-top:22px;font-size:14px;font-weight:600;color:var(--violet-ink)}
+.phone{width:min(300px,78vw);aspect-ratio:390/844;margin:0 auto;border-radius:46px;padding:10px;background:#141417;box-shadow:0 0 0 1px #2c2c34,0 40px 80px -30px rgba(31,31,33,.55)}
+.phone video{width:100%;height:100%;object-fit:cover;border-radius:37px;background:#000}
+.bezel{padding:7px;border-radius:2rem;background:rgba(31,31,33,.04);box-shadow:inset 0 0 0 1px rgba(31,31,33,.06)}
+.film{border-radius:calc(2rem - 7px);overflow:hidden;background:#0A0A0C;aspect-ratio:16/9}
+.film video{width:100%;height:100%;object-fit:cover}
+section{padding:72px 0}
+.head h2{margin:16px 0 0;font-size:clamp(32px,4.6vw,56px);line-height:1.02}
+.grid3{display:grid;gap:16px;margin-top:36px}
+@media (min-width:768px){.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.card{padding:28px;border-radius:1.6rem;background:#fff;box-shadow:inset 0 0 0 1px rgba(31,31,33,.07)}
+.card .n{font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.18em;color:var(--ink3)}
+.card h3{margin:14px 0 8px;font-size:22px;font-weight:600}
+.card p{margin:0;color:var(--ink2);font-size:16px}
+.card.v{background:#0B0B0E;color:#F5F5F7;box-shadow:none}
+.card.v .n{color:#A79BFF}.card.v p{color:#A9A9B3}
+.steps{list-style:none;margin:36px 0 0;padding:0;display:grid;gap:12px}
+@media (min-width:768px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.steps li{display:flex;gap:18px;padding:22px 24px;border-radius:1.4rem;background:var(--paper2)}
+.steps .k{flex:none;width:34px;height:34px;border-radius:50%;background:var(--violet);color:#fff;display:flex;align-items:center;justify-content:center;font:500 13px/1 'IBM Plex Mono',monospace}
+.steps b{display:block;font-size:17px}
+.steps span{color:var(--ink2);font-size:15px}
+.rules{list-style:none;margin:36px 0 0;padding:0;display:grid;gap:0}
+.rules li{display:grid;grid-template-columns:56px 1fr;gap:8px 16px;padding:22px 0;border-top:1px solid rgba(31,31,33,.12)}
+.rules .n{font:500 12px/1.9 'IBM Plex Mono',monospace;color:var(--ink3)}
+.rules h3{margin:0;font-size:20px;font-weight:600}
+.rules p{grid-column:2;margin:0;color:var(--ink2)}
+.contact{text-align:center}
+.contact a.mail{display:inline-block;margin-top:18px;font-family:'Fraunces',Georgia,serif;font-size:clamp(24px,4vw,40px);text-decoration:none;border-bottom:1px solid rgba(31,31,33,.25)}
+footer{padding:36px 0 48px;color:var(--ink3);font-size:14px}
+footer .row{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="nav" aria-label="Main">
+  <a class="brand" href="./" aria-label="Doberg home"><img src="assets/doberg-mark.png" alt="" width="28" height="28">Doberg</a>
+  <a class="l hide-s" href="#how">How it works</a>
+  <a class="l hide-s" href="#film">Demo</a>
+  <a class="l" href="./#apps">All apps</a>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div>
+      <span class="eyebrow"><img src="assets/mova-icon.png" alt="" width="16" height="16" style="border-radius:4px">MOVA · camera &amp; creative studio</span>
+      <h1 class="serif">Show it a video. <em>Make it yours.</em></h1>
+      <p>MOVA is a professional iPhone camera and editor. Give it a reference video and it learns how that video was made, scene by scene, then builds a new one from your own photo or footage.</p>
+      <div class="status">iPhone · in design</div>
+    </div>
+    <div class="phone"><video src="assets/mova-demo.mp4" poster="assets/mova-demo-poster.jpg" autoplay muted loop playsinline aria-label="MOVA app walkthrough"></video></div>
+  </div>
+
+  <section id="film" aria-labelledby="film-t">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Demo</span><h2 id="film-t" class="serif">A 49-second walk through the app.</h2></div>
+      <div class="bezel" style="margin-top:32px"><div class="film"><video src="assets/mova-demo-wide.mp4" poster="assets/mova-demo-wide-poster.jpg" controls playsinline preload="metadata" aria-label="MOVA demo video"></video></div></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="what-t">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">What it is</span><h2 id="what-t" class="serif">Three tools that work as one.</h2></div>
+      <div class="grid3">
+        <div class="card"><span class="n">01 · CAPTURE</span><h3>A real pro camera</h3><p>Manual focus, exposure and white balance, RAW, histogram, zebras and Log where your iPhone supports it. Free, with no credits needed.</p></div>
+        <div class="card v"><span class="n">02 · RECREATE</span><h3>Reference to your version</h3><p>Camera moves, light, pacing and transitions from a video you love, rebuilt around your own media.</p></div>
+        <div class="card"><span class="n">03 · EDIT</span><h3>Finish it properly</h3><p>A multitrack timeline with captions, color and audio, plus an assistant that suggests changes you can preview first.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" aria-labelledby="how-t">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">How recreation works</span><h2 id="how-t" class="serif">Six steps from reference to your film.</h2></div>
+      <ol class="steps">
+        <li><span class="k">1</span><div><b>Import a reference</b><span>From Photos, Files or your MOVA Library.</span></div></li>
+        <li><span class="k">2</span><div><b>MOVA analyzes it</b><span>Shots, camera moves, lighting, grade, transitions and pacing.</span></div></li>
+        <li><span class="k">3</span><div><b>Add your media</b><span>A selfie, a pet, a product, a landscape or your own footage.</span></div></li>
+        <li><span class="k">4</span><div><b>Choose what carries over</b><span>Keep the moves, change the light, and direct the rest in plain words.</span></div></li>
+        <li><span class="k">5</span><div><b>See the cost, then generate</b><span>Duration, aspect, resolution and credits are shown before you tap.</span></div></li>
+        <li><span class="k">6</span><div><b>Edit, save or export</b><span>A new video, not a filter over the original.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section aria-labelledby="rules-t">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">How we build it</span><h2 id="rules-t" class="serif">The same honest rules.</h2></div>
+      <ol class="rules">
+        <li><span class="n">01</span><h3>Capture is free</h3><p>The camera and editor never need credits or a subscription.</p></li>
+        <li><span class="n">02</span><h3>Costs up front</h3><p>Every AI action shows its credit cost before you start, and failed generations are refunded.</p></li>
+        <li><span class="n">03</span><h3>No fake progress</h3><p>Real stages and real bytes, never invented percentages. Unsupported camera features are shown as unavailable.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="ct-t">
+    <div class="wrap contact">
+      <span class="eyebrow">Early access</span>
+      <h2 id="ct-t" class="serif" style="margin:18px 0 0;font-size:clamp(28px,3.6vw,40px)">Want to try MOVA first?</h2>
+      <a class="mail" href="mailto:drava@playlocal.space?subject=MOVA">drava@playlocal.space</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <a href="./" style="text-decoration:none;font-weight:700;color:var(--ink)">Doberg</a>
+    <span>MOVA is in design. Screens shown are design previews, not a shipping app.</span>
+    <span>© 2026 Doberg</span>
+  </div>
+</footer>
+</body>
+</html>

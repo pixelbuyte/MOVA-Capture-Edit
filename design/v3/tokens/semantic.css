@@ -1,0 +1,123 @@
+/* ─────────────────────────────────────────────────────────────
+   MOVA tokens · layer 2 of 3 · SEMANTIC
+   Roles, not values. Components and screens read ONLY these
+   (and layer 3). A design direction = a different mapping of
+   the same roles onto primitives, so one switch re-themes the app.
+
+   A · Monitor  (default, chosen)  :root
+   B · Darkroom (explored)          [data-direction="darkroom"]
+   C · Lumen    (explored)          [data-direction="lumen"]
+   ───────────────────────────────────────────────────────────── */
+:root {
+  /* Surfaces: depth by fill, not outlines */
+  --canvas: var(--gray-975);
+  --surface-1: var(--gray-950);
+  --surface-2: var(--gray-925);
+  --surface-3: var(--gray-900);
+  --surface-4: var(--gray-875);
+  --hairline: rgba(255, 255, 255, .07);
+  --hairline-strong: rgba(255, 255, 255, .13);
+  --material: rgba(22, 22, 26, .62);              /* Liquid Glass stand-in over media */
+  --material-border: rgba(255, 255, 255, .10);
+  --material-sheen: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,0) 42%);
+  --overlay: rgba(0, 0, 0, .55);
+  --tab-selected: rgba(255, 255, 255, .08);
+  --scrim-top: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,0));
+  --scrim-bottom: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.82));
+  --shadow-float: 0 12px 32px -8px rgba(0, 0, 0, .6);
+  --shadow-thumb: 0 2px 10px rgba(0, 0, 0, .45);
+  --shadow-sheet: 0 -20px 40px rgba(0, 0, 0, .4);
+
+  /* Text (contrast measured on surface-1 / surface-4) */
+  --text-1: var(--gray-50);       /* 17.4:1 */
+  --text-2: var(--gray-400);      /* 7.6:1 */
+  --text-3: var(--gray-500);      /* 5.9:1 · 4.5:1 on surface-4 */
+  --text-disabled: var(--gray-700);
+
+  /* Selection: white + viewfinder brackets */
+  --select: var(--gray-0);
+  --on-select: var(--gray-975);
+
+  /* Text over photos and video: stays light in every direction, always on a dark scrim or --overlay */
+  --on-media: var(--gray-50);
+  --on-media-accent: var(--peri-300);
+
+  /* Accent = MOVA's intelligence only */
+  --accent: var(--peri-300);      /* 8.7:1 */
+  --accent-fill: var(--peri-500); /* white text 4.5:1 */
+  --accent-wash: rgba(169, 164, 255, .10);
+  --accent-line: rgba(169, 164, 255, .38);
+
+  /* Signals: one meaning each */
+  --rec: var(--red-500);
+  --cam: var(--yellow-400);
+  --positive: var(--green-400);
+  --caution: var(--orange-300);
+  --critical: var(--coral-400);
+  --temp-cool: var(--blue-300);
+  --temp-warm: var(--amber-300);
+  --glow-warm: rgba(255, 196, 120, .35);
+
+  /* Type roles */
+  --font-ui: var(--family-sans);
+  --font-display: var(--family-serif);
+  --font-mono: var(--family-mono);
+  --t-display: var(--size-40);  --lh-display: 42px;
+  --t-title1: var(--size-28);   --lh-title1: 32px;
+  --t-title2: var(--size-21);   --lh-title2: 26px;
+  --t-headline: var(--size-16); --lh-headline: 21px;
+  --t-body: var(--size-15);     --lh-body: 21px;
+  --t-callout: var(--size-13);  --lh-callout: 18px;
+  --t-caption: var(--size-12);  --lh-caption: 16px;
+  --t-micro: var(--size-11);    --lh-micro: 14px;   /* the floor: nothing smaller ships */
+  --track-tight: -0.02em;
+  --track-caps: 0.08em;
+
+  /* Space, shape, layout */
+  --sp-1: var(--space-1); --sp-2: var(--space-2); --sp-3: var(--space-3); --sp-4: var(--space-4);
+  --sp-5: var(--space-5); --sp-6: var(--space-6); --sp-8: var(--space-8); --sp-10: var(--space-10); --sp-12: var(--space-12);
+  --gutter: var(--space-5);
+  --safe-top: 54px;
+  --safe-bottom: 34px;
+  --r-1: var(--radius-6); --r-2: var(--radius-10); --r-3: var(--radius-16); --r-4: var(--radius-24); --r-round: var(--radius-full);
+
+  /* Motion roles */
+  --dur-1: var(--ms-120);   /* press */
+  --dur-2: var(--ms-220);   /* select, toggle */
+  --dur-3: var(--ms-380);   /* screen, sheet */
+  --dur-4: var(--ms-700);   /* AI reveal */
+  --ease-standard: var(--curve-out);
+  --ease-emphasized: var(--curve-spring);
+  --ease-linear: linear;
+}
+
+/* B · Darkroom: a film lab. Warm blacks, safelight accent, analogue warmth. */
+[data-direction="darkroom"] {
+  --canvas: var(--umber-975); --surface-1: var(--umber-950); --surface-2: var(--umber-925);
+  --surface-3: var(--umber-900); --surface-4: var(--umber-875);
+  --hairline: rgba(255, 220, 200, .08); --hairline-strong: rgba(255, 220, 200, .14);
+  --material: rgba(28, 23, 20, .66);
+  --text-1: var(--umber-50); --text-2: var(--umber-400); --text-3: var(--umber-500);
+  --accent: var(--safelight-300); --accent-fill: var(--safelight-500);
+  --accent-wash: rgba(255, 160, 122, .10); --accent-line: rgba(255, 160, 122, .4);
+  --select: var(--umber-50);
+}
+
+/* C · Lumen: a bright studio. Paper ground, ink type, glass over media. */
+[data-direction="lumen"] {
+  --canvas: var(--gray-975); --surface-1: var(--paper-50); --surface-2: var(--gray-0);
+  --surface-3: var(--paper-100); --surface-4: var(--paper-200);
+  --hairline: rgba(19, 19, 22, .08); --hairline-strong: rgba(19, 19, 22, .14);
+  --material: rgba(255, 255, 255, .72); --material-border: rgba(19, 19, 22, .08);
+  --tab-selected: rgba(19, 19, 22, .06);
+  --text-1: var(--ink-900); --text-2: var(--ink-700); --text-3: var(--ink-500); --text-disabled: var(--gray-200);
+  --select: var(--ink-900); --on-select: var(--gray-0);
+  --accent: var(--peri-600); --accent-fill: var(--peri-600);
+  --accent-wash: rgba(80, 71, 214, .08); --accent-line: rgba(80, 71, 214, .35);
+  --positive: var(--green-600);
+  --shadow-float: 0 12px 32px -12px rgba(19, 19, 22, .25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-1: 0ms; --dur-2: 0ms; --dur-3: 0ms; --dur-4: 0ms; }
+}

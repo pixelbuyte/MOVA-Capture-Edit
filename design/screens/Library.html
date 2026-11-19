@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Library</title>
+<link rel="stylesheet" href="../mova.css">
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#000}</style>
+<div class="scr safe">
+  <div class="pad" style="display: flex; justify-content: space-between; align-items: center; height: 44px">
+    <h1 class="lt" style="font-size: 38px">Library</h1>
+    <div class="row2" style="gap: 8px">
+      <button class="ib e" aria-label="Sort and filter"><svg class="i" viewBox="0 0 24 24"><path d="M7 4v16M3 16l4 4 4-4M17 20V4M13 8l4-4 4 4"></path></svg></button>
+      <button class="chip" style="height: 36px">Select</button>
+    </div>
+  </div>
+  <div class="pad" style="margin-top: 14px">
+    <label class="field" style="height: 44px; padding: 0 14px; align-items: center; border-radius: 14px; color: #8B8B96; font-size: 15px"><svg class="i s" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>Search “beach”, “dog”, “4K”…</label>
+  </div>
+  <div style="display: flex; gap: 8px; margin-top: 12px; padding-left: 20px; overflow: hidden">
+    <span class="chip on">All</span><span class="chip">Photos</span><span class="chip">Videos</span><span class="chip acc">AI</span><span class="chip">Projects</span><span class="chip">Drafts</span><span class="chip">Imported</span>
+  </div>
+
+  <div class="pad" style="margin-top: 14px">
+    <a href="TemplateFactory.html" class="row2" style="padding: 10px 12px; border-radius: 14px; background: #1B1B20">
+      <span class="ico" style="background: rgba(143,127,255,.16); color: #8F7FFF"><svg class="i s" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"></path><path d="M3 13l9 5 9-5"></path></svg></span>
+      <span style="flex: 1; font-size: 14px; font-weight: 600">Saved templates</span><span class="xs">4</span>
+      <svg class="i s" viewBox="0 0 24 24" style="color: #8B8B96"><path d="M9 6l6 6-6 6"></path></svg>
+    </a>
+  </div>
+
+  <div class="row2 pad" style="justify-content: space-between; margin-top: 16px"><span class="t3">Today</span><span class="xs">12 items</span></div>
+  <div style="margin-top: 8px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px">
+    <a href="Result.html" class="m" style="height: 128px; border-radius: 0"><img src="../assets/img/port_smile.jpg" alt="" style="filter: sepia(.28) saturate(1.15)"><span class="badge tag" style="background: rgba(91,71,240,.85); left: 6px; top: 6px"><svg class="i xs" viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18.5 9.5l-4.7 1.9L12 16l-1.8-4.6L5.5 9.5l4.7-1.9z"></path></svg>AI</span><span class="dur">0:12</span></a>
+    <a href="VideoEditor.html" class="m" style="height: 128px; border-radius: 0"><img src="../assets/img/road.jpg" alt=""><span class="badge tag" style="left: 6px; top: 6px">Project</span><span class="dur">0:24</span></a>
+    <a href="PhotoEditor.html" class="m" style="height: 128px; border-radius: 0"><img src="../assets/img/hiker.jpg" alt=""><span class="badge tag" style="left: 6px; top: 6px">RAW</span></a>
+    <div class="m" style="height: 128px; border-radius: 0"><img src="../assets/img/dog.jpg" alt=""><span class="badge tag" style="left: 6px; top: 6px; background: rgba(255,179,64,.85); color: #000">Draft</span></div>
+    <div class="m" style="height: 128px; border-radius: 0"><img src="../assets/img/fashion_dress.jpg" alt=""><span class="badge tag" style="left: 6px; top: 6px">Imported</span><span class="dur">0:12</span></div>
+    <div class="m" style="height: 128px; border-radius: 0"><img src="../assets/img/cat.jpg" alt=""><svg class="i s f" viewBox="0 0 24 24" style="position: absolute; left: 8px; bottom: 8px; color: #fff"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"></path></svg></div>
+  </div>
+  <div class="row2 pad" style="justify-content: space-between; margin-top: 16px"><span class="t3">This week</span><span class="xs">38 items</span></div>
+  <div style="margin-top: 8px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px">
+    <div class="m" style="height: 128px; border-radius: 0"><img src="../assets/img/mustang.jpg" alt=""><span class="dur">0:31</span></div>
+    <div class="m" style="height: 128px; border-radius: 0"><img src="../assets/img/stars.jpg" alt=""></div>
+    <div class="m" style="height: 128px; border-radius: 0"><img src="../assets/img/port_red.jpg" alt=""></div>
+  </div>
+
+  <nav class="tabs glass" aria-label="Tabs">
+    <a href="Home.html"><svg class="i" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"></path></svg>Home</a>
+    <a href="Discover.html"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M15.5 8.5l-2 5-5 2 2-5z"></path></svg>Discover</a>
+    <a href="CameraPhoto.html" class="cam" aria-label="Camera"><span class="shut"><svg class="i" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"></path><circle cx="12" cy="13.5" r="3.5"></circle></svg></span></a>
+    <a href="RefImport.html"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18.5 9.5l-4.7 1.9L12 16l-1.8-4.6L5.5 9.5l4.7-1.9z"></path><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"></path></svg>Studio</a>
+    <a href="Library.html" class="on"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="7" width="14" height="14" rx="2"></rect><path d="M7 3h12a2 2 0 0 1 2 2v12"></path></svg>Library</a>
+  </nav>
+  <div class="home-ind"></div>
+</div>
+</body>
+</html>

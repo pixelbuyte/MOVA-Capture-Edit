@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MOVA · Editor</title>
+<meta name="viewport" content="width=1200">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1116;--ink-2:#1B2028;--paper:#F4EEE3;--coral:#FF5A36;--coral-deep:#E2401D;--mint:#3DF0A8;--sun:#FFC53D;--lagoon:#1F8A9E;
+    --white:#FFFFFF;--w70:rgba(255,255,255,.72);--w50:rgba(255,255,255,.52);--hair:rgba(255,255,255,.14);
+    --display:"Bricolage Grotesque",system-ui,sans-serif;--mono:"DM Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1200px;height:1000px}
+  body{background:var(--paper);font-family:var(--display);color:var(--ink);position:relative;overflow:hidden;-webkit-font-smoothing:antialiased}
+
+  /* ───────── Board ───────── */
+  .disc{position:absolute;left:320px;top:220px;width:560px;height:560px;border-radius:50%;background:var(--coral)}
+  .col{position:absolute;top:66px;bottom:66px;width:236px;display:flex;flex-direction:column}
+  .col.l{left:64px}
+  .col.r{left:900px;justify-content:center;gap:28px}
+  .brand{font-weight:800;font-size:28px;letter-spacing:-.02em;font-variation-settings:"opsz" 96;display:flex;align-items:center;gap:10px}
+  .brand i{width:14px;height:14px;border-radius:50%;background:var(--coral);display:block}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(14,17,22,.56)}
+  .l .eyebrow{margin-top:auto}
+  h1{font-weight:700;font-size:44px;line-height:1;letter-spacing:-.03em;font-variation-settings:"opsz" 96;margin-top:12px}
+  .lede{font-size:16px;line-height:1.45;color:rgba(14,17,22,.72);margin-top:16px;font-weight:400}
+  .swatches{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+  .sw{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:rgba(14,17,22,.72)}
+  .sw b{width:20px;height:20px;border-radius:6px;display:block;flex:none;box-shadow:inset 0 0 0 1px rgba(14,17,22,.08)}
+  .note{padding-left:16px;border-left:2px solid rgba(14,17,22,.14)}
+  .note.c{border-color:var(--coral)} .note.m{border-color:#17B67B} .note.s{border-color:var(--sun)} .note.g{border-color:var(--lagoon)}
+  .note h3{font-size:16px;font-weight:700;letter-spacing:-.01em}
+  .note p{font-size:14px;line-height:1.4;color:rgba(14,17,22,.68);margin-top:4px}
+
+  /* ───────── Phone ───────── */
+  .phone{position:absolute;left:393px;top:66px;width:414px;height:868px;border-radius:66px;background:#0A0B0D;padding:12px;
+    box-shadow:0 0 0 1.5px #2E3138, inset 0 0 0 1.5px #3B3F47,0 50px 90px -30px rgba(60,20,8,.55), 0 18px 36px -12px rgba(14,17,22,.35)}
+  .screen{position:relative;width:390px;height:844px;border-radius:54px;overflow:hidden;background:var(--ink);color:var(--white)}
+  .island{position:absolute;left:133px;top:12px;width:124px;height:36px;border-radius:20px;background:#000;z-index:9}
+  .home{position:absolute;left:128px;top:827px;width:134px;height:5px;border-radius:3px;background:rgba(255,255,255,.9);z-index:9}
+  svg{display:block}
+  .bar{position:absolute;left:16px;right:16px;top:58px;height:44px;display:flex;align-items:center;justify-content:space-between}
+  .rbtn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--ink-2);border:1px solid var(--hair)}
+  .rbtn svg{width:22px;height:22px;fill:#fff}
+  .title{position:absolute;left:60px;right:60px;top:0;height:44px;text-align:center;display:flex;flex-direction:column;justify-content:center}
+  .title strong{display:block;font-size:17px;font-weight:700;letter-spacing:-.015em;line-height:22px;font-variation-settings:"opsz" 40}
+  .title small{display:block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--w70);line-height:14px;margin-top:1px}
+  .mono{font-family:var(--mono)}
+
+  /* ───────── Editor ───────── */
+  .export{height:36px;padding:0 16px;border-radius:18px;background:var(--coral);color:#1C0B05;font-size:15px;font-weight:700;line-height:36px;letter-spacing:-.005em}
+  .title{left:52px;right:88px}
+  .preview{position:absolute;left:68px;top:112px;width:254px;height:352px;border-radius:18px;overflow:hidden;background:#000}
+  .preview img{width:254px;height:352px;display:block;filter:saturate(1.18) sepia(.28) contrast(1.06) brightness(1.03)}
+  .preview::after{content:"";position:absolute;left:0;right:0;bottom:0;height:120px;background:linear-gradient(180deg,rgba(14,17,22,0),rgba(14,17,22,.62))}
+  .cap{position:absolute;left:0;right:0;bottom:22px;text-align:center;z-index:2;font-size:20px;font-weight:700;letter-spacing:-.02em;line-height:24px;text-shadow:0 1px 10px rgba(14,17,22,.5)}
+  .lookpill{position:absolute;left:10px;top:10px;z-index:2;height:24px;padding:0 9px;border-radius:12px;background:rgba(14,17,22,.6);border:1px solid var(--hair);font-size:12px;font-weight:600;line-height:22px}
+  .transport{position:absolute;left:16px;right:16px;top:474px;height:44px;display:flex;align-items:center;justify-content:space-between}
+  .tc{font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:-.01em;width:126px;white-space:nowrap}
+  .tc b{font-weight:500;color:var(--w50)}
+  .tcenter{position:absolute;left:0;right:0;top:0;height:44px;display:flex;justify-content:center;align-items:center;gap:14px}
+  .tcenter>svg,.hist svg{width:22px;height:22px;fill:var(--w70)}
+  .play{width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center}
+  .play svg{width:20px;height:20px;fill:var(--ink);margin-left:2px}
+  .hist{display:flex;gap:16px;width:112px;justify-content:flex-end}
+  .hist svg:last-child{fill:rgba(255,255,255,.32)}
+
+  .tl{position:absolute;left:16px;top:528px;width:358px;height:132px}
+  .lbl{position:absolute;left:0;top:0;width:100%;height:16px}
+  .lbl span{position:absolute;top:0;font-family:var(--mono);font-size:11px;line-height:16px;color:var(--w50);letter-spacing:.02em;white-space:nowrap}
+  .lbl span.on{color:#FF8466}
+  .video{position:absolute;left:0;top:20px;height:48px;display:flex;gap:2px}
+  .clip{position:relative;height:48px;border-radius:8px;overflow:hidden;display:flex;flex:none}
+  .clip i{flex:1;height:48px;display:block;filter:saturate(1.18) sepia(.28) contrast(1.06) brightness(1.03)}
+  .clip i+i{box-shadow:inset 1px 0 0 rgba(14,17,22,.35)}
+  .clip.sel{box-shadow:inset 0 0 0 2px #fff;overflow:visible}
+  .clip.sel i:first-child{border-radius:8px 0 0 8px}.clip.sel i:nth-last-of-type(1){border-radius:0 8px 8px 0}
+  .clip.sel::after{content:"";position:absolute;inset:0;border-radius:8px;border:2px solid #fff}
+  .hl,.hr{position:absolute;top:0;width:10px;height:48px;background:#fff;z-index:2}
+  .hl{left:0;border-radius:8px 0 0 8px}.hr{right:0;border-radius:0 8px 8px 0}
+  .hl::after,.hr::after{content:"";position:absolute;left:4px;top:17px;width:2px;height:14px;border-radius:1px;background:var(--ink)}
+  .audio{position:absolute;left:0;top:76px;width:100%;height:32px;border-radius:8px;background:rgba(31,138,158,.26);overflow:hidden}
+  .audio svg{position:absolute;left:0;top:0;width:358px;height:32px;fill:#6FD0E2}
+  .audio .name{position:absolute;left:0;top:0;height:32px;padding:0 14px 0 8px;display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;line-height:32px;
+    background:linear-gradient(90deg,#12303A 78%,rgba(18,48,58,0))}
+  .audio .name svg{position:static;width:13px;height:13px;fill:#fff}
+  .beats{position:absolute;left:0;top:70px;width:100%;height:4px}
+  .beats i{position:absolute;top:0;width:2px;height:4px;border-radius:1px;background:var(--sun);margin-left:-1px}
+  .text{position:absolute;left:7.8px;top:112px;width:113.4px;height:20px;border-radius:6px;background:var(--ink-2);border:1px solid rgba(255,255,255,.28);
+    font-size:11px;font-weight:600;line-height:18px;padding:0 7px;white-space:nowrap;overflow:hidden}
+  .lane-empty{position:absolute;left:0;top:112px;width:100%;height:20px;border-radius:6px;background:rgba(255,255,255,.05)}
+  .head{position:absolute;left:100.7px;top:14px;width:2px;height:122px;border-radius:1px;background:var(--coral);box-shadow:0 0 0 1px rgba(14,17,22,.5);z-index:3}
+  .head::before{content:"";position:absolute;left:-5px;top:-6px;width:12px;height:12px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 1.5px var(--ink)}
+
+  .rail{position:absolute;left:16px;top:676px;width:358px;display:flex;justify-content:space-between}
+  .lk{width:52px;text-align:center}
+  .lk i{display:block;width:52px;height:52px;border-radius:13px;background:url(../v3/img/fashion_yellow.jpg) -37px -4px/126px auto no-repeat}
+  .lk small{display:block;font-size:11px;font-weight:500;line-height:14px;color:var(--w70);margin-top:6px}
+  .lk.on i{box-shadow:0 0 0 2px var(--ink),0 0 0 4px var(--coral)}
+  .lk.on small{color:#fff;font-weight:700}
+  .tools{position:absolute;left:8px;right:8px;top:756px;height:60px;border-top:1px solid var(--hair);display:flex;justify-content:space-between;padding-top:10px}
+  .tool{width:62px;display:flex;flex-direction:column;align-items:center;gap:5px}
+  .tool svg{width:24px;height:24px;fill:#fff}
+  .tool small{font-size:11px;font-weight:500;line-height:13px;color:var(--w70);white-space:nowrap}
+  .tool.on svg{fill:#FF8466}.tool.on small{color:#FF9A80;font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="disc"></div>
+
+<div class="col l">
+  <div class="brand"><i></i>MOVA</div>
+  <div class="eyebrow">Screen 07</div>
+  <h1>Editor</h1>
+  <p class="lede">Your four takes, already cut to the reference. Trim, grade and add sound on one timeline.</p>
+  <div class="swatches">
+    <div class="sw"><b style="background:#FF5A36"></b>#FF5A36</div>
+    <div class="sw"><b style="background:#3DF0A8"></b>#3DF0A8</div>
+    <div class="sw"><b style="background:#FFC53D"></b>#FFC53D</div>
+    <div class="sw"><b style="background:#1F8A9E"></b>#1F8A9E</div>
+    <div class="sw"><b style="background:#0E1116"></b>#0E1116</div>
+    <div class="sw"><b style="background:#F4EEE3"></b>#F4EEE3</div>
+  </div>
+</div>
+
+<div class="col r">
+  <div class="note c"><h3>Clips keep their length</h3><p>Each clip is as wide as its shot, so the cut reads the same as in the camera.</p></div>
+  <div class="note s"><h3>Beats you can see</h3><p>Sun ticks mark the beat. Beat sync snaps every cut to the nearest one.</p></div>
+  <div class="note g"><h3>Text has its own lane</h3><p>Captions sit under the audio and trim like any other clip.</p></div>
+  <div class="note "><h3>Looks on your footage</h3><p>Every look is previewed on the frame you are on, not on a stock photo.</p></div>
+</div>
+
+<div class="phone">
+  <div class="screen">
+    <div class="bar">
+      <div class="rbtn" aria-label="Back"><svg viewBox="0 0 256 256" ><path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"/></svg></div>
+      <div class="title"><strong>Seaside recreate</strong><small>4 clips · 9.0s</small></div>
+      <div class="export">Export</div>
+    </div>
+
+    <!-- preview: the user's own take (real photograph, Unsplash) with the selected look applied -->
+    <div class="preview">
+      <img src="../v3/img/fashion_yellow.jpg" alt="Preview frame: dancer in a yellow tracksuit on a seaside court">
+      <div class="lookpill">Golden</div>
+      <div class="cap">Seaside, 6 pm</div>
+    </div>
+
+    <div class="transport">
+      <div class="tc">0:02.6 <b>/ 0:09.0</b></div>
+      <div class="tcenter"><svg viewBox="0 0 256 256" ><path d="M199.81,34a16,16,0,0,0-16.24.43L64,109.23V40a8,8,0,0,0-16,0V216a8,8,0,0,0,16,0V146.77l119.57,74.78A15.95,15.95,0,0,0,208,208.12V47.88A15.86,15.86,0,0,0,199.81,34ZM192,208,64.16,128,192,48.07Z"/></svg><div class="play" aria-label="Play"><svg viewBox="0 0 256 256" ><path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"/></svg></div><svg viewBox="0 0 256 256" ><path d="M200,32a8,8,0,0,0-8,8v69.23L72.43,34.45A15.95,15.95,0,0,0,48,47.88V208.12a16,16,0,0,0,24.43,13.43L192,146.77V216a8,8,0,0,0,16,0V40A8,8,0,0,0,200,32ZM64,207.93V48.05l127.84,80Z"/></svg></div>
+      <div class="hist"><svg viewBox="0 0 256 256" ><path d="M232,144a64.07,64.07,0,0,1-64,64H80a8,8,0,0,1,0-16h88a48,48,0,0,0,0-96H51.31l34.35,34.34a8,8,0,0,1-11.32,11.32l-48-48a8,8,0,0,1,0-11.32l48-48A8,8,0,0,1,85.66,45.66L51.31,80H168A64.07,64.07,0,0,1,232,144Z"/></svg><svg viewBox="0 0 256 256" ><path d="M170.34,130.34,204.69,96H88a48,48,0,0,0,0,96h88a8,8,0,0,1,0,16H88A64,64,0,0,1,88,80H204.69L170.34,45.66a8,8,0,0,1,11.32-11.32l48,48a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32-11.32Z"/></svg></div>
+    </div>
+
+    <!-- timeline: clip widths = shot durations 3.2 / 1.8 / 2.4 / 1.6 s -->
+    <div class="tl">
+      <div class="lbl"><span class="on" style="left:0.0px">1 · 3.2s</span><span class="" style="left:127.2px">1.8s</span><span class="" style="left:199.6px">2.4s</span><span class="" style="left:295.4px">1.6s</span></div>
+      <div class="video"><div class="clip sel" style="width:125.2px"><i style="background:url(../v3/img/fashion_yellow.jpg) -3px -2px/37px auto no-repeat #2a2f38"></i><i style="background:url(../v3/img/fashion_yellow.jpg) -4px -3px/39px auto no-repeat #2a2f38"></i><i style="background:url(../v3/img/fashion_yellow.jpg) -5px -4px/41px auto no-repeat #2a2f38"></i><i style="background:url(../v3/img/fashion_yellow.jpg) -6px -5px/43px auto no-repeat #2a2f38"></i><b class="hl"></b><b class="hr"></b></div><div class="clip" style="width:70.4px"><i style="background:url(../v3/img/fashion_yellow.jpg) -49px -1px/128px auto no-repeat #2a2f38"></i><i style="background:url(../v3/img/fashion_yellow.jpg) -52px -2px/134px auto no-repeat #2a2f38"></i></div><div class="clip" style="width:93.9px"><i style="background:url(../v3/img/fashion_yellow.jpg) -20px -3px/70px auto no-repeat #2a2f38"></i><i style="background:url(../v3/img/fashion_yellow.jpg) -19px -3px/70px auto no-repeat #2a2f38"></i><i style="background:url(../v3/img/fashion_yellow.jpg) -21px -4px/72px auto no-repeat #2a2f38"></i></div><div class="clip" style="width:62.6px"><i style="background:url(../v3/img/fashion_yellow.jpg) -26px -64px/82px auto no-repeat #2a2f38"></i><i style="background:url(../v3/img/fashion_yellow.jpg) -27px -66px/84px auto no-repeat #2a2f38"></i></div></div>
+      <div class="beats"><i style="left:0.0px"></i><i style="left:23.5px"></i><i style="left:46.9px"></i><i style="left:70.4px"></i><i style="left:93.9px"></i><i style="left:117.3px"></i><i style="left:140.8px"></i><i style="left:164.3px"></i><i style="left:187.7px"></i><i style="left:211.2px"></i><i style="left:234.7px"></i><i style="left:258.1px"></i><i style="left:281.6px"></i><i style="left:305.1px"></i><i style="left:328.5px"></i><i style="left:352.0px"></i></div>
+      <div class="audio"><svg viewBox="0 0 358 32"><rect x="0.0" y="9.3" width="2" height="13.4" rx="1"/><rect x="3.5" y="8.9" width="2" height="14.2" rx="1"/><rect x="7.0" y="12.3" width="2" height="7.5" rx="1"/><rect x="10.5" y="13.4" width="2" height="5.2" rx="1"/><rect x="14.0" y="12.4" width="2" height="7.2" rx="1"/><rect x="17.5" y="13.3" width="2" height="5.3" rx="1"/><rect x="21.0" y="14.2" width="2" height="3.7" rx="1"/><rect x="24.5" y="7.8" width="2" height="16.3" rx="1"/><rect x="28.0" y="9.9" width="2" height="12.2" rx="1"/><rect x="31.5" y="11.8" width="2" height="8.4" rx="1"/><rect x="35.0" y="12.2" width="2" height="7.7" rx="1"/><rect x="38.5" y="12.8" width="2" height="6.4" rx="1"/><rect x="42.0" y="12.6" width="2" height="6.9" rx="1"/><rect x="45.5" y="14.4" width="2" height="3.1" rx="1"/><rect x="49.0" y="9.7" width="2" height="12.6" rx="1"/><rect x="52.5" y="10.4" width="2" height="11.1" rx="1"/><rect x="56.0" y="11.6" width="2" height="8.8" rx="1"/><rect x="59.5" y="14.2" width="2" height="3.6" rx="1"/><rect x="63.0" y="12.8" width="2" height="6.5" rx="1"/><rect x="66.5" y="13.7" width="2" height="4.7" rx="1"/><rect x="70.0" y="12.4" width="2" height="7.1" rx="1"/><rect x="73.5" y="9.0" width="2" height="14.0" rx="1"/><rect x="77.0" y="12.6" width="2" height="6.8" rx="1"/><rect x="80.5" y="12.4" width="2" height="7.2" rx="1"/><rect x="84.0" y="11.8" width="2" height="8.5" rx="1"/><rect x="87.5" y="12.8" width="2" height="6.3" rx="1"/><rect x="91.0" y="13.2" width="2" height="5.6" rx="1"/><rect x="94.5" y="8.1" width="2" height="15.8" rx="1"/><rect x="98.0" y="9.3" width="2" height="13.5" rx="1"/><rect x="101.5" y="10.6" width="2" height="10.8" rx="1"/><rect x="105.0" y="13.0" width="2" height="6.0" rx="1"/><rect x="108.5" y="13.7" width="2" height="4.7" rx="1"/><rect x="112.0" y="12.4" width="2" height="7.1" rx="1"/><rect x="115.5" y="14.2" width="2" height="3.6" rx="1"/><rect x="119.0" y="10.1" width="2" height="11.8" rx="1"/><rect x="122.5" y="11.6" width="2" height="8.9" rx="1"/><rect x="126.0" y="11.3" width="2" height="9.4" rx="1"/><rect x="129.5" y="12.4" width="2" height="7.1" rx="1"/><rect x="133.0" y="10.9" width="2" height="10.1" rx="1"/><rect x="136.5" y="12.3" width="2" height="7.3" rx="1"/><rect x="140.0" y="12.1" width="2" height="7.9" rx="1"/><rect x="143.5" y="7.6" width="2" height="16.8" rx="1"/><rect x="147.0" y="11.7" width="2" height="8.7" rx="1"/><rect x="150.5" y="12.1" width="2" height="7.9" rx="1"/><rect x="154.0" y="11.8" width="2" height="8.4" rx="1"/><rect x="157.5" y="12.3" width="2" height="7.3" rx="1"/><rect x="161.0" y="12.8" width="2" height="6.3" rx="1"/><rect x="164.5" y="7.9" width="2" height="16.2" rx="1"/><rect x="168.0" y="8.1" width="2" height="15.9" rx="1"/><rect x="171.5" y="12.0" width="2" height="8.0" rx="1"/><rect x="175.0" y="11.9" width="2" height="8.1" rx="1"/><rect x="178.5" y="12.6" width="2" height="6.8" rx="1"/><rect x="182.0" y="11.9" width="2" height="8.1" rx="1"/><rect x="185.5" y="11.4" width="2" height="9.2" rx="1"/><rect x="189.0" y="7.8" width="2" height="16.5" rx="1"/><rect x="192.5" y="10.8" width="2" height="10.5" rx="1"/><rect x="196.0" y="11.3" width="2" height="9.5" rx="1"/><rect x="199.5" y="12.4" width="2" height="7.2" rx="1"/><rect x="203.0" y="12.7" width="2" height="6.7" rx="1"/><rect x="206.5" y="12.8" width="2" height="6.5" rx="1"/><rect x="210.0" y="13.2" width="2" height="5.6" rx="1"/><rect x="213.5" y="8.3" width="2" height="15.3" rx="1"/><rect x="217.0" y="9.8" width="2" height="12.3" rx="1"/><rect x="220.5" y="12.1" width="2" height="7.9" rx="1"/><rect x="224.0" y="10.7" width="2" height="10.6" rx="1"/><rect x="227.5" y="12.4" width="2" height="7.1" rx="1"/><rect x="231.0" y="11.5" width="2" height="9.0" rx="1"/><rect x="234.5" y="12.3" width="2" height="7.3" rx="1"/><rect x="238.0" y="8.7" width="2" height="14.7" rx="1"/><rect x="241.5" y="10.5" width="2" height="11.0" rx="1"/><rect x="245.0" y="11.4" width="2" height="9.1" rx="1"/><rect x="248.5" y="11.5" width="2" height="9.0" rx="1"/><rect x="252.0" y="11.1" width="2" height="9.8" rx="1"/><rect x="255.5" y="12.9" width="2" height="6.1" rx="1"/><rect x="259.0" y="6.8" width="2" height="18.3" rx="1"/><rect x="262.5" y="10.3" width="2" height="11.3" rx="1"/><rect x="266.0" y="10.6" width="2" height="10.8" rx="1"/><rect x="269.5" y="12.2" width="2" height="7.7" rx="1"/><rect x="273.0" y="12.7" width="2" height="6.6" rx="1"/><rect x="276.5" y="12.8" width="2" height="6.4" rx="1"/><rect x="280.0" y="11.8" width="2" height="8.4" rx="1"/><rect x="283.5" y="7.1" width="2" height="17.8" rx="1"/><rect x="287.0" y="11.2" width="2" height="9.6" rx="1"/><rect x="290.5" y="11.2" width="2" height="9.6" rx="1"/><rect x="294.0" y="14.1" width="2" height="3.8" rx="1"/><rect x="297.5" y="13.6" width="2" height="4.9" rx="1"/><rect x="301.0" y="14.6" width="2" height="2.8" rx="1"/><rect x="304.5" y="14.6" width="2" height="2.8" rx="1"/><rect x="308.0" y="8.3" width="2" height="15.3" rx="1"/><rect x="311.5" y="12.3" width="2" height="7.5" rx="1"/><rect x="315.0" y="12.0" width="2" height="8.0" rx="1"/><rect x="318.5" y="14.1" width="2" height="3.9" rx="1"/><rect x="322.0" y="13.5" width="2" height="5.0" rx="1"/><rect x="325.5" y="13.3" width="2" height="5.3" rx="1"/><rect x="329.0" y="9.3" width="2" height="13.5" rx="1"/><rect x="332.5" y="9.1" width="2" height="13.8" rx="1"/><rect x="336.0" y="10.6" width="2" height="10.8" rx="1"/><rect x="339.5" y="11.4" width="2" height="9.1" rx="1"/><rect x="343.0" y="12.0" width="2" height="8.0" rx="1"/><rect x="346.5" y="12.3" width="2" height="7.5" rx="1"/><rect x="350.0" y="12.9" width="2" height="6.2" rx="1"/><rect x="353.5" y="9.6" width="2" height="12.8" rx="1"/></svg><div class="name"><svg viewBox="0 0 256 256" ><path d="M210.3,56.34l-80-24A8,8,0,0,0,120,40V148.26A48,48,0,1,0,136,184V98.75l69.7,20.91A8,8,0,0,0,216,112V64A8,8,0,0,0,210.3,56.34ZM88,216a32,32,0,1,1,32-32A32,32,0,0,1,88,216ZM200,101.25l-64-19.2V50.75L200,70Z"/></svg>Low tide</div></div>
+      <div class="lane-empty"></div>
+      <div class="text">Seaside, 6 pm</div>
+      <div class="head"></div>
+    </div>
+
+    <div class="rail">
+      <div class="lk"><i style="filter:none"></i><small>Original</small></div>
+      <div class="lk on"><i style="filter:saturate(1.18) sepia(.28) contrast(1.06) brightness(1.03)"></i><small>Golden</small></div>
+      <div class="lk"><i style="filter:hue-rotate(-12deg) saturate(1.15) contrast(.94) brightness(1.08)"></i><small>Coast</small></div>
+      <div class="lk"><i style="filter:contrast(.86) saturate(.72) sepia(.2) brightness(1.08)"></i><small>Film</small></div>
+      <div class="lk"><i style="filter:hue-rotate(-24deg) saturate(1.35) brightness(.86) contrast(1.12)"></i><small>Dusk</small></div>
+      <div class="lk"><i style="filter:grayscale(1) contrast(1.18)"></i><small>Mono</small></div>
+    </div>
+
+    <div class="tools">
+      <div class="tool"><svg viewBox="0 0 256 256" ><path d="M157.73,113.13A8,8,0,0,1,159.82,102L227.48,55.7a8,8,0,0,1,9,13.21l-67.67,46.3a7.92,7.92,0,0,1-4.51,1.4A8,8,0,0,1,157.73,113.13Zm80.87,85.09a8,8,0,0,1-11.12,2.08L136,137.7,93.49,166.78a36,36,0,1,1-9-13.19L121.83,128,84.44,102.41a35.86,35.86,0,1,1,9-13.19l143,97.87A8,8,0,0,1,238.6,198.22ZM80,180a20,20,0,1,0-5.86,14.14A19.85,19.85,0,0,0,80,180ZM74.14,90.13a20,20,0,1,0-28.28,0A19.85,19.85,0,0,0,74.14,90.13Z"/></svg><small>Split</small></div>
+      <div class="tool on"><svg viewBox="0 0 256 256" ><path d="M200.77,53.89A103.27,103.27,0,0,0,128,24h-1.07A104,104,0,0,0,24,128c0,43,26.58,79.06,69.36,94.17A32,32,0,0,0,136,192a16,16,0,0,1,16-16h46.21a31.81,31.81,0,0,0,31.2-24.88,104.43,104.43,0,0,0,2.59-24A103.28,103.28,0,0,0,200.77,53.89Zm13,93.71A15.89,15.89,0,0,1,198.21,160H152a32,32,0,0,0-32,32,16,16,0,0,1-21.31,15.07C62.49,194.3,40,164,40,128a88,88,0,0,1,87.09-88h.9a88.35,88.35,0,0,1,88,87.25A88.86,88.86,0,0,1,213.81,147.6ZM140,76a12,12,0,1,1-12-12A12,12,0,0,1,140,76ZM96,100A12,12,0,1,1,84,88,12,12,0,0,1,96,100Zm0,56a12,12,0,1,1-12-12A12,12,0,0,1,96,156Zm88-56a12,12,0,1,1-12-12A12,12,0,0,1,184,100Z"/></svg><small>Looks</small></div>
+      <div class="tool"><svg viewBox="0 0 256 256" ><path d="M40,88H73a32,32,0,0,0,62,0h81a8,8,0,0,0,0-16H135a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16Zm64-24A16,16,0,1,1,88,80,16,16,0,0,1,104,64ZM216,168H199a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16h97a32,32,0,0,0,62,0h17a8,8,0,0,0,0-16Zm-48,24a16,16,0,1,1,16-16A16,16,0,0,1,168,192Z"/></svg><small>Adjust</small></div>
+      <div class="tool"><svg viewBox="0 0 256 256" ><path d="M208,56V88a8,8,0,0,1-16,0V64H136V192h24a8,8,0,0,1,0,16H96a8,8,0,0,1,0-16h24V64H64V88a8,8,0,0,1-16,0V56a8,8,0,0,1,8-8H200A8,8,0,0,1,208,56Z"/></svg><small>Text</small></div>
+      <div class="tool"><svg viewBox="0 0 256 256" ><path d="M212.92,17.69a8,8,0,0,0-6.86-1.45l-128,32A8,8,0,0,0,72,56V166.08A36,36,0,1,0,88,196V110.25l112-28v51.83A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.69ZM52,216a20,20,0,1,1,20-20A20,20,0,0,1,52,216ZM88,93.75V62.25l112-28v31.5ZM180,184a20,20,0,1,1,20-20A20,20,0,0,1,180,184Z"/></svg><small>Audio</small></div>
+      <div class="tool"><svg viewBox="0 0 256 256" ><path d="M187.14,114.84l26.78-29.46a8,8,0,0,0-11.84-10.76l-20.55,22.6-17.2-54.07A15.94,15.94,0,0,0,149.08,32H106.91A15.94,15.94,0,0,0,91.66,43.15l-50.91,160A16,16,0,0,0,56,224H200a16,16,0,0,0,15.25-20.85ZM184.72,160H146.08l28.62-31.48ZM106.91,48h42.17l20,62.9L124.46,160H71.27ZM56,208l10.18-32H189.81L200,208Z"/></svg><small>Beat sync</small></div>
+    </div>
+    <div class="island"></div>
+    <div class="home"></div>
+  </div>
+</div>
+</body>
+</html>

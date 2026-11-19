@@ -1,0 +1,30 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>MOVA key visual</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#050E10}
+.p{position:relative;width:1080px;height:1350px;overflow:hidden;background:#071416;color:#FBF3E8;font-family:"Instrument Sans",sans-serif}
+.a,.b{position:absolute;top:0;height:1000px;width:1080px;background-size:cover;background-position:50% 30%}
+.a{background-image:url(../img/street.jpg);clip-path:polygon(0 0,58% 0,42% 100%,0 100%)}
+.b{background-image:url(../img/recreated.jpg);clip-path:polygon(58% 0,100% 0,100% 100%,42% 100%)}
+.cut{position:absolute;top:0;height:1000px;left:0;width:1080px;background:linear-gradient(100deg,transparent calc(50% - 2px),#FBF3E8 0 calc(50% + 2px),transparent 0);clip-path:polygon(57.8% 0,58.2% 0,42.2% 100%,41.8% 100%)}
+.fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,20,22,.25),transparent 20%,transparent 55%,#071416 74%)}
+.tag{position:absolute;top:56px;font:600 18px "JetBrains Mono";letter-spacing:.16em;text-transform:uppercase;padding:10px 16px;border-radius:999px;background:rgba(5,14,16,.6);backdrop-filter:blur(10px)}
+.mark{position:absolute;left:72px;top:60px;display:flex;align-items:center;gap:14px;font:800 44px "Bricolage Grotesque";letter-spacing:-.05em}
+.mark i{width:18px;height:18px;border-radius:50%;background:#FF7A2F;box-shadow:0 0 30px #FF7A2F}
+h1{position:absolute;left:72px;bottom:250px;margin:0;font:800 150px/.86 "Bricolage Grotesque";letter-spacing:-.055em}
+h1 em{font-style:normal;color:#FF7A2F}
+.segs{position:absolute;left:72px;right:72px;bottom:180px;display:flex;gap:8px;height:12px}
+.segs i{border-radius:6px}
+.foot{position:absolute;left:72px;right:72px;bottom:72px;display:flex;justify-content:space-between;align-items:flex-end;font:500 22px/1.4 "Instrument Sans";color:#B3C6C1}
+.sw{display:flex;gap:10px}.sw i{width:44px;height:44px;border-radius:12px}
+.grain{position:absolute;inset:0;opacity:.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+</style></head><body><div class="p">
+<div class="a"></div><div class="b"></div><div class="cut"></div><div class="fade"></div>
+<div class="mark"><i></i>MOVA</div>
+<span class="tag" style="left:360px">Reference</span><span class="tag" style="right:72px;background:#FF7A2F;color:#2B0F03">Your take · 86%</span>
+<h1>Shoot it<br>like you <em>saw</em> it.</h1>
+<div class="segs"><i style="flex:3.2;background:#FF7A2F"></i><i style="flex:2.1;background:#FFC65E"></i><i style="flex:3.4;background:#4FE0D0"></i><i style="flex:3.3;background:#FF7A9A"></i></div>
+<div class="foot"><div>Reference recreation for iPhone.<br><span style="font-family:'JetBrains Mono';font-size:18px;color:#7E9A95">4 SHOTS · 0:12 · DOLLY + PAN · 96 BPM</span></div>
+<div class="sw"><i style="background:#071416;border:1px solid #275259"></i><i style="background:#143036"></i><i style="background:#2BC6B5"></i><i style="background:#FF7A2F"></i><i style="background:#FFC65E"></i><i style="background:#FBF3E8"></i></div></div>
+<div class="grain"></div>
+</div></body></html>

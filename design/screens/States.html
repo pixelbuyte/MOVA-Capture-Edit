@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>States and edge cases</title>
+<link rel="stylesheet" href="../mova.css">
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#000}</style>
+<div class="scr" style="width: 1440px; height: 1240px; padding: 56px 80px; display: flex; flex-direction: column; gap: 24px">
+  <div style="display: flex; justify-content: space-between; align-items: flex-end">
+    <div>
+      <span class="cap acc">States &amp; edge cases</span>
+      <h2 style="margin: 10px 0 0; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 48px; line-height: 1">Honest at every step.</h2>
+    </div>
+    <p class="body" style="max-width: 460px; font-size: 14px">Progress shows real stages and real bytes, never invented percentages. Failed or cancelled AI work refunds its credits automatically. Nothing claims success before it has happened.</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px">
+
+    <div class="card" style="padding: 18px; height: 192px; display: flex; flex-direction: column; gap: 8px">
+      <span class="ico"><svg class="i s" viewBox="0 0 24 24"><rect x="3" y="7" width="14" height="14" rx="2"></rect><path d="M7 3h12a2 2 0 0 1 2 2v12"></path></svg></span>
+      <div class="t3">Empty Library</div><div class="sm">Nothing here yet. Your captures, imports and AI videos will collect here.</div>
+      <div style="display: flex; gap: 6px; margin-top: auto"><span class="chip on">Open camera</span><span class="chip">Import</span></div>
+    </div>
+    <div class="card" style="padding: 18px; height: 192px; display: flex; flex-direction: column; gap: 8px">
+      <span class="ico"><svg class="i s" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"></path><circle cx="12" cy="13.5" r="3.5"></circle></svg></span>
+      <div class="t3">Camera access</div><div class="sm">MOVA needs the camera to take photos and video. Nothing is uploaded unless you choose an AI feature.</div>
+      <div style="display: flex; gap: 6px; margin-top: auto"><span class="chip on">Allow camera</span></div>
+    </div>
+    <div class="card" style="padding: 18px; height: 192px; display: flex; flex-direction: column; gap: 8px">
+      <span class="ico"><svg class="i s" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="10" r="1.5"></circle><path d="M21 16l-5-5-9 8"></path></svg></span>
+      <div class="t3">Photos access</div><div class="sm">Choose specific items or your whole library. You can change this anytime in Settings.</div>
+      <div style="display: flex; gap: 6px; margin-top: auto"><span class="chip on">Select photos</span><span class="chip">Allow all</span></div>
+    </div>
+    <div class="card" style="padding: 18px; height: 192px; display: flex; flex-direction: column; gap: 8px">
+      <span class="ico"><svg class="i s" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 19h14"></path></svg></span>
+      <div class="t3">Importing video</div><div class="sm">IMG_4021.MOV from iCloud</div>
+      <div style="height: 4px; border-radius: 2px; background: #30303A; margin-top: auto"><div style="width: 56%; height: 4px; border-radius: 2px; background: #F5F5F7"></div></div>
+      <div class="xs mono">214 MB of 380 MB</div>
+    </div>
+
+    <div class="card" style="padding: 18px; height: 192px; display: flex; flex-direction: column; gap: 8px">
+      <span class="ico" style="color: #FFB340"><svg class="i s" viewBox="0 0 24 24"><path d="M12 3l10 18H2z"></path><path d="M12 10v5M12 18h.01"></path></svg></span>
+      <div class="t3">Unsupported file</div><div class="sm">“clip.webm” can't be opened. Try MOV, MP4, HEIC, JPEG or DNG.</div>
+      <div style="display: flex; gap: 6px; margin-top: auto"><span class="chip">Choose another</span></div>
+    </div>
+    <div class="card" style="padding: 18px; height: 192px; display: flex; flex-direction: column; gap: 8px">
+      <span class="ico" style="color: #FFB340"><svg class="i s" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"></rect><rect x="3" y="13" width="18" height="7" rx="2"></rect></svg></span>
+      <div class="t3">Storage almost full</div><div class="sm">1.2 GB left ≈ 4 min of 4K24 Log. Switch to 1080p or free up space.</div>
+      <div style="display: flex; gap: 6px; margin-top: auto"><span class="chip on">Use 1080p</span><span class="chip">Manage</span></div>
+    </div>
+    <div class="card" style="padding: 18px; height: 192px; display: flex; flex-direction: column; gap: 8px">
+      <span class="ico"><svg class="i s" viewBox="0 0 24 24"><path d="M7 18a5 5 0 0 1-.5-10A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9"></path><path d="M12 12v8M9 15l3-3 3 3"></path></svg></span>
+      <div class="t3">Uploading media</div><div class="sm">Your photo is uploading for generation. Keep MOVA open on Wi-Fi.</div>
+      <div style="height: 4px; border-radius: 2px; background: #30303A; margin-top: auto"><div style="width: 30%; height: 4px; border-radius: 2px; background: #8F7FFF"></div></div>
+      <div class="xs mono">3.1 MB of 10.4 MB</div>
+    </div>
+    <div class="card" style="padding: 18px; height: 192px; display: flex; flex-direction: column; gap: 8px; box-shadow: inset 0 0 0 1px rgba(143,127,255,.4)">
+      <span class="ico" style="background: rgba(143,127,255,.16); color: #8F7FFF"><svg class="i s" viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18.5 9.5l-4.7 1.9L12 16l-1.8-4.6L5.5 9.5l4.7-1.9z"></path></svg></span>
+      <div class="t3">Processing reference</div>
+      <div style="display: flex; flex-direction: column; gap: 5px; font-size: 13px; margin-top: 2px">
+        <span class="row2" style="gap: 6px"><svg class="i xs" viewBox="0 0 24 24" style="color: #32D74B"><path d="M5 12l5 5 9-10"></path></svg>Finding shots · 3 found</span>
+        <span class="row2" style="gap: 6px"><span class="ring" style="width: 14px; height: 14px"></span>Reading camera moves</span>
+        <span class="row2" style="gap: 6px; color: #8B8B96"><span style="width: 14px; height: 14px; border-radius: 50%; box-shadow: inset 0 0 0 2px #30303A"></span>Light, color &amp; pacing</span>
+      </div>
+    </div>
+
+    <div class="card" style="padding: 18px; height: 192px; display: flex; flex-direction: column; gap: 8px">
+      <span class="ico"><svg class="i s" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>
+      <div class="t3">Generation queued</div><div class="sm">You're 3rd in line. We'll notify you when it starts and when it's ready.</div>
+      <div style="display: flex; gap: 6px; margin-top: auto"><span class="chip">Cancel · refund 36</span></div>
+    </div>
+    <div class="card" style="padding: 18px; height: 192px; display: flex; flex-direction: column; gap: 8px">
+      <div class="row2"><div class="m" style="width: 44px; height: 44px; border-radius: 10px"><img src="../assets/img/sea_clouds.jpg" alt=""></div><span class="badge" style="background: rgba(50,215,75,.16); color: #32D74B">Ready</span></div>
+      <div class="t3">Generation complete</div><div class="sm">“Golden hour walk” is ready to watch. Saved to Library as a draft.</div>
+      <div style="display: flex; gap: 6px; margin-top: auto"><span class="chip on">Watch</span></div>
+    </div>
+    <div class="card" style="padding: 18px; height: 192px; display: flex; flex-direction: column; gap: 8px">
+      <span class="ico" style="color: #FF453A"><svg class="i s" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9 9l6 6M15 9l-6 6"></path></svg></span>
+      <div class="t3">Generation failed</div><div class="sm">The face in your photo was too small to animate. 36 credits returned.</div>
+      <div style="display: flex; gap: 6px; margin-top: auto"><span class="chip on">Try a closer photo</span><span class="chip">Retry</span></div>
+    </div>
+    <div class="card" style="padding: 18px; height: 192px; display: flex; flex-direction: column; gap: 8px">
+      <span class="ico"><svg class="i s" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"></rect></svg></span>
+      <div class="t3">Generation cancelled</div><div class="sm">Stopped before rendering. 36 credits returned. Your settings are saved.</div>
+      <div style="display: flex; gap: 6px; margin-top: auto"><span class="chip">Start again</span></div>
+    </div>
+
+    <div class="card" style="padding: 18px; height: 192px; display: flex; flex-direction: column; gap: 8px">
+      <span class="ico"><svg class="i s" viewBox="0 0 24 24"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0M12 19h.01M3 3l18 18"></path></svg></span>
+      <div class="t3">No internet</div><div class="sm">Camera and editing work offline. AI features will be ready when you reconnect.</div>
+      <div style="display: flex; gap: 6px; margin-top: auto"><span class="chip">Retry</span></div>
+    </div>
+    <div class="card" style="padding: 18px; height: 192px; display: flex; flex-direction: column; gap: 8px">
+      <span class="ico" style="background: rgba(143,127,255,.16); color: #8F7FFF"><svg class="i s" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"></path><path d="M2 9h20"></path></svg></span>
+      <div class="t3">Not enough credits</div><div class="sm">This needs 36 credits and you have 12. Shorter 6s version costs 18.</div>
+      <div style="display: flex; gap: 6px; margin-top: auto"><span class="chip on">Get credits</span><span class="chip">Make 6s</span></div>
+    </div>
+    <div class="card" style="padding: 18px; height: 192px; display: flex; flex-direction: column; gap: 8px">
+      <span class="ico"><svg class="i s" viewBox="0 0 24 24"><path d="M12 3v12M7 8l5-5 5 5"></path><path d="M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"></path></svg></span>
+      <div class="t3">Exporting</div><div class="sm">Desert drive · 4K · HEVC</div>
+      <div style="height: 4px; border-radius: 2px; background: #30303A; margin-top: auto"><div style="width: 64%; height: 4px; border-radius: 2px; background: #F5F5F7"></div></div>
+      <div class="xs mono">Frame 368 of 576</div>
+    </div>
+    <div class="card" style="padding: 18px; height: 192px; display: flex; flex-direction: column; gap: 8px">
+      <div style="align-self: flex-start; display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border-radius: 20px; background: #F5F5F7; color: #0A0A0C; font-size: 13px; font-weight: 600"><svg class="i xs" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"></path></svg>Project saved</div>
+      <div class="t3" style="margin-top: 6px">Saved project</div><div class="sm">A toast, never a modal. Auto-save runs after every edit.</div>
+    </div>
+
+    <div class="card" style="padding: 18px; height: 192px; display: flex; flex-direction: column; gap: 8px; grid-column: span 2">
+      <div class="row2" style="gap: 14px">
+        <div class="m" style="width: 72px; height: 72px; border-radius: 12px; background: repeating-linear-gradient(135deg, #25252C 0 6px, #1B1B20 6px 12px); display: flex; align-items: center; justify-content: center"><svg class="i" viewBox="0 0 24 24" style="color: #8B8B96"><path d="M4 4l16 16"></path><rect x="3" y="5" width="18" height="14" rx="2"></rect></svg></div>
+        <div style="flex: 1"><div class="t3">Missing original media</div><div class="sm" style="margin-top: 4px">Clip 3 in “Desert drive” was deleted from Photos. The rest of the project is fine.</div></div>
+      </div>
+      <div style="display: flex; gap: 6px; margin-top: auto"><span class="chip on">Relink clip</span><span class="chip">Replace</span><span class="chip">Remove from timeline</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Discover</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens/primitives.css">
+<link rel="stylesheet" href="../tokens/semantic.css">
+<link rel="stylesheet" href="../tokens/component.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .feature { position: relative; display: block; height: 268px; margin: var(--sp-4) var(--gutter) 0; border-radius: var(--r-4); overflow: hidden; }
+  .feature > img { width: 100%; height: 100%; object-fit: cover; }
+  .feature__copy { position: absolute; left: var(--sp-4); right: var(--sp-4); bottom: var(--sp-4); }
+  .recipe { display: flex; gap: 2px; height: 26px; margin-top: var(--sp-3); }
+  .recipe span { border-radius: 3px; background-size: cover; background-position: center; position: relative; }
+  .recipe span::after { content: attr(data-l); position: absolute; left: 4px; bottom: 3px; font: 600 11px/1 var(--font-ui); color: var(--text-1); text-shadow: 0 1px 2px var(--overlay); }
+  .list { margin: var(--sp-2) var(--gutter) 0; }
+  .item { display: grid; grid-template-columns: 62px 1fr auto; gap: var(--sp-3); align-items: center; padding: var(--sp-3) 0; box-shadow: inset 0 -1px 0 var(--hairline); }
+  .item .media { height: 82px; border-radius: var(--r-2); }
+  .flow { font: 500 var(--t-caption)/1.3 var(--font-ui); color: var(--text-2); margin-top: 3px; }
+  .flow i { font-style: normal; color: var(--text-3); padding: 0 3px; }
+</style>
+</head>
+<body>
+<main class="screen top">
+  <div class="pad row row--between" style="height: 44px">
+    <h1 class="title1">Discover</h1>
+    <button class="ibtn ibtn--fill" aria-label="Search templates"><svg class="ic" aria-hidden="true"><use href="../icons.svg#search"/></svg></button>
+  </div>
+  <div class="pad" style="margin-top: var(--sp-2)">
+    <div class="rail" role="tablist" aria-label="Categories" data-choice="aria-selected" style="overflow: hidden">
+      <button role="tab" data-opt aria-selected="true">For you</button>
+      <button role="tab" data-opt aria-selected="false">Cinematic</button>
+      <button role="tab" data-opt aria-selected="false">Product</button>
+      <button role="tab" data-opt aria-selected="false">Fashion</button>
+      <button role="tab" data-opt aria-selected="false">Motion</button>
+      <button role="tab" data-opt aria-selected="false">Pets</button>
+    </div>
+  </div>
+
+  <a class="feature" href="template.html" aria-label="Night Drive, automotive ad template. 3 shots, 15 seconds, 30 credits">
+    <img src="../img/porsche.jpg" alt="">
+    <div class="media__scrim" style="height: 75%"></div>
+    <span class="label src--chip" style="position: absolute; left: var(--sp-4); top: var(--sp-4); color: var(--text-1)">Featured recipe</span>
+    <div class="feature__copy">
+      <div class="row row--between" style="align-items: flex-end">
+        <div>
+          <div class="display" style="font-size: 32px; line-height: 34px">Night Drive</div>
+          <div class="callout" style="color: var(--text-1); opacity: .8; margin-top: 2px">1 photo of a car or product · 0:15</div>
+        </div>
+        <span class="credits" style="background: var(--overlay)"><svg class="ic" aria-hidden="true"><use href="../icons.svg#credit"/></svg>30</span>
+      </div>
+      <div class="recipe" aria-hidden="true">
+        <span style="flex: 5; background-image: url(../img/porsche.jpg); background-position: 80% 50%" data-l="LOW TRACK"></span>
+        <span style="flex: 3; background-image: url(../img/skyline.jpg)" data-l="STREAKS"></span>
+        <span style="flex: 7; background-image: url(../img/mustang.jpg)" data-l="HERO REVEAL"></span>
+      </div>
+    </div>
+  </a>
+
+  <div class="pad row row--between" style="margin-top: var(--sp-5)"><h2 class="title2">Trending recipes</h2><a class="callout" href="#">See all</a></div>
+  <div class="list">
+    <a class="item" href="template.html">
+      <div class="media"><img src="../img/fashion_yellow.jpg" alt=""><span class="media__tc tc">0:08</span></div>
+      <div><div class="headline">Runway Turn</div><div class="flow">Walk in<i>→</i>Spin<i>→</i>Freeze</div><div class="caption" style="margin-top: 3px">Motion transfer · 1 photo</div></div>
+      <span class="tc t-2">20 cr</span>
+    </a>
+    <a class="item" href="template.html">
+      <div class="media"><img src="../img/dj.jpg" alt=""><span class="media__tc tc">0:10</span></div>
+      <div><div class="headline">Bass Drop</div><div class="flow">Strobe cuts<i>→</i>Speed ramp<i>→</i>Glow</div><div class="caption" style="margin-top: 3px">Music visual · 1 video</div></div>
+      <span class="tc t-2">24 cr</span>
+    </a>
+  </div>
+
+  <nav class="tabbar" aria-label="Main">
+    <div class="tabbar__tabs">
+      <a href="home.html"><svg class="ic" aria-hidden="true"><use href="../icons.svg#home"/></svg>Home</a>
+      <a href="discover.html" aria-current="page"><svg class="ic" aria-hidden="true"><use href="../icons.svg#discover"/></svg>Discover</a>
+      <a href="ref-import.html"><svg class="ic" aria-hidden="true"><use href="../icons.svg#studio"/></svg>Studio</a>
+      <a href="library.html"><svg class="ic" aria-hidden="true"><use href="../icons.svg#library"/></svg>Library</a>
+    </div>
+    <a class="tabbar__shutter" href="camera.html" aria-label="Open camera"><span></span></a>
+  </nav>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script src="../motion.js"></script>
+</body>
+</html>

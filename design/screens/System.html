@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MOVA design system</title>
+<link rel="stylesheet" href="../mova.css">
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#000}</style>
+<div class="scr" style="width: 1440px; height: 1240px; padding: 64px 80px; display: flex; flex-direction: column; gap: 40px; font-size: 15px">
+  <div style="display: flex; justify-content: space-between; align-items: flex-end">
+    <div>
+      <span class="cap" style="color: #8F7FFF">Design system · v1</span>
+      <h2 style="margin: 10px 0 0; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 56px; line-height: 1">Dark, cinematic, content first.</h2>
+    </div>
+    <p class="body" style="max-width: 440px">Charcoal and near-black surfaces let media carry the color. Violet appears only where MOVA's intelligence is involved. Glass is reserved for floating controls over media.</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <span class="cap">Color tokens</span>
+      <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px">
+        <div><div style="height: 72px; border-radius: 14px; background: #0A0A0C; box-shadow: inset 0 0 0 1px rgba(255,255,255,.14)"></div><div class="sm" style="margin-top: 8px; color: #F5F5F7">Workspace</div><div class="xs mono">#0A0A0C</div></div>
+        <div><div style="height: 72px; border-radius: 14px; background: #121215; box-shadow: inset 0 0 0 1px rgba(255,255,255,.1)"></div><div class="sm" style="margin-top: 8px; color: #F5F5F7">Surface</div><div class="xs mono">#121215</div></div>
+        <div><div style="height: 72px; border-radius: 14px; background: #1B1B20"></div><div class="sm" style="margin-top: 8px; color: #F5F5F7">Elevated</div><div class="xs mono">#1B1B20</div></div>
+        <div><div style="height: 72px; border-radius: 14px; background: #25252C"></div><div class="sm" style="margin-top: 8px; color: #F5F5F7">Graphite</div><div class="xs mono">#25252C</div></div>
+        <div><div style="height: 72px; border-radius: 14px; background: #30303A"></div><div class="sm" style="margin-top: 8px; color: #F5F5F7">Control</div><div class="xs mono">#30303A</div></div>
+        <div><div style="height: 72px; border-radius: 14px; background: #F5F5F7"></div><div class="sm" style="margin-top: 8px; color: #F5F5F7">Text</div><div class="xs mono">#F5F5F7</div></div>
+        <div><div style="height: 72px; border-radius: 14px; background: #A9A9B3"></div><div class="sm" style="margin-top: 8px; color: #F5F5F7">Secondary</div><div class="xs mono">#A9A9B3 · 8.9:1</div></div>
+        <div><div style="height: 72px; border-radius: 14px; background: #8F7FFF"></div><div class="sm" style="margin-top: 8px; color: #F5F5F7">Violet (AI)</div><div class="xs mono">#8F7FFF · 6.0:1</div></div>
+        <div><div style="height: 72px; border-radius: 14px; background: #5B47F0"></div><div class="sm" style="margin-top: 8px; color: #F5F5F7">Violet action</div><div class="xs mono">#5B47F0 · w 5.6:1</div></div>
+        <div><div style="height: 72px; border-radius: 14px; background: #FF453A"></div><div class="sm" style="margin-top: 8px; color: #F5F5F7">Record only</div><div class="xs mono">#FF453A</div></div>
+      </div>
+      <span class="cap" style="margin-top: 18px">Typography</span>
+      <div class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: baseline; gap: 20px"><span class="xs mono" style="width: 120px">Editorial 42</span><span class="lt">Create something.</span></div>
+        <div style="display: flex; align-items: baseline; gap: 20px"><span class="xs mono" style="width: 120px">Title 28 / 700</span><span class="t1">Now make it yours</span></div>
+        <div style="display: flex; align-items: baseline; gap: 20px"><span class="xs mono" style="width: 120px">Heading 20 / 650</span><span class="t2">Continue creating</span></div>
+        <div style="display: flex; align-items: baseline; gap: 20px"><span class="xs mono" style="width: 120px">Body 15 / 400</span><span class="body">Capture moments. Reimagine them.</span></div>
+        <div style="display: flex; align-items: baseline; gap: 20px"><span class="xs mono" style="width: 120px">Label mono 10.5</span><span class="cap">Scene 02 · 0:03–0:07</span></div>
+        <div class="xs" style="margin-top: 4px">In SwiftUI: editorial = New York (.serif design), UI = SF Pro with Dynamic Type, labels and timecode = SF Mono. Shown here with Instrument Serif, Inter and JetBrains Mono.</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <span class="cap">Components</span>
+      <div class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; gap: 10px">
+          <button class="btn" style="flex: 1"><svg class="i s" viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18.5 9.5l-4.7 1.9L12 16l-1.8-4.6L5.5 9.5l4.7-1.9z"></path></svg>Generate video</button>
+          <button class="btn w" style="flex: 1">Continue</button>
+          <button class="btn sec" style="flex: 1">Save draft</button>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center">
+          <span class="chip on">Cinematic</span><span class="chip">Fashion</span><span class="chip acc"><span class="dot"></span>Recreating</span><span class="chip dis">ProRes · not on this iPhone</span>
+          <span class="credit"><svg class="i s" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"></path><path d="M2 9h20"></path></svg>240</span>
+        </div>
+        <div class="seg"><span class="on">9:16</span><span>1:1</span><span>4:5</span><span>16:9</span></div>
+        <div style="display: flex; align-items: center; gap: 16px">
+          <div class="sld" style="flex: 1"><div class="tr"></div><div class="fi" style="width: 62%"></div><div class="kn" style="left: 62%"></div></div>
+          <span class="tog on"></span><span class="tog"></span>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center">
+          <span class="ib g"><svg class="i" viewBox="0 0 24 24"><path d="M13 3L5 14h6l-1 7 8-11h-6z"></path></svg></span>
+          <span class="ib e"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></span>
+          <span class="ib e"><svg class="i" viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"></path><path d="M4 9h10a6 6 0 0 1 0 12h-3"></path></svg></span>
+          <div class="step" style="flex: 1"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+        </div>
+        <div class="tl" style="padding: 10px; border-radius: 12px; position: relative">
+          <div class="trk">
+            <div class="clip" style="flex: 3"><img src="../assets/img/fashion_dress.jpg" alt=""></div>
+            <div class="clip sel" style="flex: 2"><img src="../assets/img/road.jpg" alt=""></div>
+            <div class="clip" style="flex: 4"><img src="../assets/img/sea_clouds.jpg" alt=""></div>
+          </div>
+          <div class="wave" style="margin-top: 4px"></div>
+          <div class="ph" style="left: 46%"></div>
+        </div>
+      </div>
+      <span class="cap" style="margin-top: 18px">Rules</span>
+      <div class="card" style="padding: 18px 22px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; font-size: 13px; color: #A9A9B3">
+        <div><b style="color: #F5F5F7">Violet = AI.</b> Never decoration; it marks generation, analysis and credits.</div>
+        <div><b style="color: #F5F5F7">Glass over media only.</b> Tab bar, camera controls, player chrome.</div>
+        <div><b style="color: #F5F5F7">Media is the hero.</b> Thumbnails bleed; cards hold one level of depth.</div>
+        <div><b style="color: #F5F5F7">Honest states.</b> Stages, not fake percentages. Unsupported = shown unavailable.</div>
+        <div><b style="color: #F5F5F7">44 pt targets.</b> Every control, including camera chrome.</div>
+        <div><b style="color: #F5F5F7">Credits up front.</b> Every AI action shows its cost before you tap.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

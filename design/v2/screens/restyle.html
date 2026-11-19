@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Restyle video</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .cmp { height: 318px; margin: var(--sp-3) var(--gutter) 0; border-radius: var(--r-4); }
+  .cmp > img { filter: hue-rotate(200deg) saturate(2.2) contrast(1.35) brightness(.55); }
+  .night { position: absolute; inset: 0; background: linear-gradient(180deg, var(--accent-fill), transparent 55%, var(--rec)); mix-blend-mode: overlay; opacity: 1; }
+  .tags { position: absolute; left: var(--sp-3); right: var(--sp-3); top: var(--sp-3); display: flex; justify-content: space-between; pointer-events: none; }
+  .looks { padding-left: var(--gutter); margin-top: var(--sp-3); }
+  .g-future { filter: hue-rotate(200deg) saturate(2.2) contrast(1.35) brightness(.55); }
+  .g-noir { filter: grayscale(1) contrast(1.4) brightness(.85); }
+  .g-gold { filter: sepia(.45) saturate(1.3) contrast(1.05); }
+  .g-teal { filter: hue-rotate(-20deg) saturate(1.3) contrast(1.15) brightness(.92); }
+  .g-film { filter: sepia(.2) contrast(.88) brightness(1.08) saturate(.8); }
+</style>
+</head>
+<body>
+<main class="screen top">
+  <div class="navbar">
+    <a class="ibtn" href="home.html" aria-label="Close"><svg class="ic" aria-hidden="true"><use href="../icons.svg#close"/></svg></a>
+    <div class="navbar__title">Restyle<span class="navbar__sub tc">City walk · 0:24</span></div>
+    <a class="credits" href="subscription.html" aria-label="240 credits" style="justify-self: end"><svg class="ic" aria-hidden="true"><use href="../icons.svg#credit"/></svg>240</a>
+  </div>
+
+  <div class="cmp wipe" data-wipe role="slider" tabindex="0" aria-label="Compare original footage with restyled preview frame" aria-valuemin="0" aria-valuemax="100" aria-valuenow="42">
+    <img src="../img/street.jpg" alt="Restyled preview frame: neon future city">
+    <div class="night" aria-hidden="true"></div>
+    <div class="wipe__top"><img src="../img/street.jpg" alt="Original footage: city street by day"></div>
+    <div class="wipe__bar"></div>
+    <div class="wipe__knob" aria-hidden="true"><svg class="ic ic--sm"><use href="../icons.svg#compare"/></svg></div>
+    <div class="tags"><span class="src src--yours src--chip">Original</span><span class="src src--ref src--chip">Preview frame</span></div>
+  </div>
+
+  <div class="pad" style="margin-top: var(--sp-4)">
+    <div class="field"><svg class="ic ic--sm t-accent" aria-hidden="true" style="margin-top: 2px"><use href="../icons.svg#spark"/></svg><span style="font-size: var(--t-callout); line-height: var(--lh-callout)">Turn the street into a future city at night. Keep the traffic moving.</span></div>
+  </div>
+
+  <div class="pad row row--between" style="margin-top: var(--sp-4)"><h2 class="headline">Look</h2><span class="caption">Rendered on your footage</span></div>
+  <div class="looks" role="radiogroup" aria-label="Look" data-choice>
+    <button class="look vf" role="radio" data-opt aria-checked="true"><div class="look__img"><img class="g-future" src="../img/street.jpg" alt=""></div><div class="look__name">Future city</div></button>
+    <button class="look vf" role="radio" data-opt aria-checked="false"><div class="look__img"><img class="g-noir" src="../img/street.jpg" alt=""></div><div class="look__name">Noir</div></button>
+    <button class="look vf" role="radio" data-opt aria-checked="false"><div class="look__img"><img class="g-gold" src="../img/street.jpg" alt=""></div><div class="look__name">Golden hour</div></button>
+    <button class="look vf" role="radio" data-opt aria-checked="false"><div class="look__img"><img class="g-teal" src="../img/street.jpg" alt=""></div><div class="look__name">Teal &amp; orange</div></button>
+    <button class="look vf" role="radio" data-opt aria-checked="false"><div class="look__img"><img class="g-film" src="../img/street.jpg" alt=""></div><div class="look__name">16mm film</div></button>
+  </div>
+
+  <div class="pad" style="margin-top: var(--sp-3)">
+    <div class="row row--between"><span class="callout">Strength</span><output class="tc t-1" id="str">75%</output></div>
+    <div class="slider" data-slider data-min="0" data-max="100" data-step="5" data-unit="%" data-out="str" role="slider" tabindex="0" aria-label="Restyle strength" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75"><div class="slider__track"></div><div class="slider__fill"></div><div class="slider__thumb"></div></div>
+  </div>
+
+  <div class="actionbar">
+    <button class="btn btn--secondary" style="width: 132px; flex: none; font-size: var(--t-callout)">Preview · free</button>
+    <a class="btn btn--ai" href="generating.html">Restyle <span class="btn__cost">· 48 cr</span></a>
+  </div>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+</body>
+</html>

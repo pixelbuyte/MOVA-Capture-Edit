@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Recording</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .live { position: absolute; left: 0; right: 0; top: 0; height: 680px; overflow: hidden; }
+  .live img { width: 100%; height: 100%; object-fit: cover; }
+  .frame169 { position: absolute; left: 0; right: 0; top: 232px; height: 219px; box-shadow: inset 0 1px 0 var(--hairline-strong), inset 0 -1px 0 var(--hairline-strong); }
+  .zebra { position: absolute; left: 150px; top: 250px; width: 110px; height: 60px; border-radius: 30px; background: repeating-linear-gradient(45deg, var(--text-1) 0 2px, transparent 2px 7px); opacity: .5; -webkit-mask: radial-gradient(closest-side, black 55%, transparent); mask: radial-gradient(closest-side, black 55%, transparent); }
+  .rtop { position: absolute; top: var(--safe-top); left: var(--sp-3); right: var(--sp-3); display: flex; justify-content: space-between; align-items: center; }
+  .rec { display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: 18px; background: var(--rec); font: 600 15px/1 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--select); }
+  .rec i { width: 8px; height: 8px; border-radius: 50%; background: var(--select); }
+  .meta { height: 36px; padding: 0 12px; border-radius: 18px; display: flex; align-items: center; gap: 6px; font: 500 11px/1 var(--font-mono); color: var(--text-1); }
+  .meters { position: absolute; left: var(--sp-3); top: 108px; width: 124px; padding: 8px 10px; border-radius: 12px; }
+  .meter { height: 4px; border-radius: 2px; background: var(--surface-4); position: relative; overflow: hidden; margin-top: 5px; }
+  .meter i { position: absolute; inset: 0 auto 0 0; background: linear-gradient(90deg, var(--positive) 0 72%, var(--caution) 72% 88%, var(--critical) 88%); }
+  .assists { position: absolute; right: var(--sp-3); top: 108px; display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+  .assists span { font: 600 10px/1 var(--font-ui); letter-spacing: .06em; text-transform: uppercase; padding: 6px 8px; border-radius: 6px; background: var(--overlay); color: var(--text-1); }
+  .dock { position: absolute; left: 0; right: 0; bottom: 0; height: 200px; background: var(--canvas); }
+  .readline { position: absolute; left: 0; right: 0; bottom: 156px; display: flex; justify-content: center; gap: var(--sp-4); font: 500 12px/1 var(--font-mono); color: var(--text-2); }
+  .readline b { color: var(--text-1); font-weight: 500; }
+  .row3 { position: absolute; left: 28px; right: 28px; bottom: 40px; display: flex; justify-content: space-between; align-items: center; }
+  .stop { width: 80px; height: 80px; border-radius: 50%; box-shadow: inset 0 0 0 4px var(--select); display: grid; place-items: center; }
+  .stop span { width: 30px; height: 30px; border-radius: 8px; background: var(--rec); }
+</style>
+</head>
+<body>
+<main class="screen screen--media">
+  <div class="live"><img src="../img/road.jpg" alt="Live preview: desert road at dusk"></div>
+  <div class="frame169" aria-hidden="true"></div>
+  <div class="zebra" role="img" aria-label="Zebra stripes: sky near clipping"></div>
+
+  <div class="rtop">
+    <div class="meta ibtn--glass">4K · 24 · HEVC · <span style="color: var(--cam)">LOG</span></div>
+    <div class="rec" role="timer" aria-label="Recording, 1 minute 24 seconds"><i class="live-dot" style="background: var(--select)"></i>00:01:24</div>
+    <div class="meta ibtn--glass" aria-label="About 2 hours 6 minutes of storage left">2h 06m</div>
+  </div>
+
+  <div class="meters ibtn--glass" role="img" aria-label="Audio from USB-C microphone, peaking around minus 8 decibels">
+    <div class="row" style="gap: 6px; font: 600 10px/1 var(--font-ui); color: var(--text-2)"><svg class="ic ic--xs" aria-hidden="true"><use href="../icons.svg#mic"/></svg>USB-C MIC</div>
+    <div class="meter"><i style="width: 70%"></i></div>
+    <div class="meter"><i style="width: 64%"></i></div>
+    <div class="row row--between tc" style="margin-top: 5px; font-size: 9px; color: var(--text-3)"><span>-36</span><span>-18</span><span>-6</span><span>0</span></div>
+  </div>
+  <div class="assists" aria-label="Active assists"><span>Zebra 95%</span><span>Peaking</span><span>Stab · Standard</span></div>
+
+  <div class="dock"></div>
+  <div class="readline"><span>ISO <b>400</b></span><span>180°</span><span>WB <b>4300K</b></span><span>MF <b>2.4m</b></span></div>
+  <div class="row3">
+    <button class="ibtn ibtn--fill" style="width: 52px; height: 52px" aria-label="Pause recording"><svg class="ic" aria-hidden="true"><use href="../icons.svg#pause"/></svg></button>
+    <button class="stop" aria-label="Stop recording"><span></span></button>
+    <button aria-label="Take a still while recording" style="width: 52px; height: 52px; border-radius: 50%; box-shadow: inset 0 0 0 2px var(--select); display: grid; place-items: center"><span style="width: 40px; height: 40px; border-radius: 50%; background: var(--select)"></span></button>
+  </div>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+</body>
+</html>

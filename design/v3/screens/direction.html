@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Direct your version</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens/primitives.css">
+<link rel="stylesheet" href="../tokens/semantic.css">
+<link rel="stylesheet" href="../tokens/component.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .preview { height: 108px; margin: var(--sp-4) var(--gutter) 0; border-radius: var(--r-3); }
+  .preview .wipe__knob { width: 28px; height: 28px; margin: -14px 0 0 -14px; }
+  .preview-tags { position: absolute; left: var(--sp-2); right: var(--sp-2); top: var(--sp-2); display: flex; justify-content: space-between; pointer-events: none; }
+  .lanes { margin: var(--sp-3) var(--gutter) 0; grid-template-columns: 66px 1fr 44px; }
+  .lane__cells { grid-template-columns: 3fr 4fr 5fr; padding: 5px 0; }
+  .lane__cell { height: 28px; }
+  .lane__name { padding: 0; min-height: 38px; }
+  .lane__toggle { width: 44px; height: 38px; }
+  .lanehead { display: contents; }
+  .lanehead > * { padding-bottom: 6px; }
+  .thumbs { display: grid; grid-template-columns: 3fr 4fr 5fr; gap: 3px; }
+  .thumbs div { height: 22px; border-radius: 4px; background-size: cover; background-position: center; position: relative; }
+  .thumbs span { position: absolute; left: 4px; top: 4px; font: 600 11px/1 var(--font-mono); color: var(--text-1); text-shadow: 0 1px 2px var(--overlay); }
+  .span-all { grid-column: 1 / -1; }
+  .lightedit { grid-column: 1 / -1; display: grid; grid-template-columns: 96px 1fr; gap: var(--sp-4); align-items: center; padding: var(--sp-3) 0 var(--sp-3); box-shadow: inset 0 -1px 0 var(--hairline); }
+  .lightedit .lightdial { width: 96px; height: 96px; }
+  .lightedit .lightdial__subject { width: 36px; height: 36px; margin: -18px 0 0 -18px; }
+  .lightedit .lightdial__sun { width: 26px; height: 26px; margin: -13px 0 0 -13px; }
+  .lightedit .lightdial__beam { width: 38px; }
+  .lightedit { padding: var(--sp-2) 0 !important; }
+  .ctl-label { display: flex; justify-content: space-between; font-size: var(--t-caption); color: var(--text-3); }
+  .ctl-label output { font: 500 var(--t-micro)/1 var(--font-mono); color: var(--text-1); }
+</style>
+</head>
+<body>
+<main class="screen top">
+  <div class="flowhead">
+    <a class="ibtn" href="select-media.html" aria-label="Back"><svg class="ic" aria-hidden="true"><use href="../icons.svg#back"/></svg></a>
+    <div class="flowsteps" role="img" aria-label="Step 4 of 6"><i class="done"></i><i class="done"></i><i class="done"></i><i class="now"></i><i></i><i></i></div>
+    <span></span>
+  </div>
+  <div class="pad row row--between" style="margin-top: var(--sp-2); align-items: flex-end">
+    <div>
+      <h1 class="title1">Direct your version</h1>
+      <p class="body" style="margin-top: var(--sp-1)"><span data-carry-count>6</span> of 7 carried from the reference</p>
+    </div>
+  </div>
+
+  <div class="preview wipe" data-wipe role="slider" tabindex="0" aria-label="Compare reference with your preview, shot 1" aria-valuemin="0" aria-valuemax="100" aria-valuenow="44">
+    <img src="../img/port_smile.jpg" alt="" style="object-position: 50% 28%; filter: sepia(.32) saturate(1.2) contrast(1.08) brightness(.95)">
+    <div class="wipe__top"><img src="../img/fashion_dress.jpg" alt="" style="object-position: 50% 22%"></div>
+    <div class="wipe__bar"></div>
+    <div class="wipe__knob" aria-hidden="true"><svg class="ic ic--xs"><use href="../icons.svg#compare"/></svg></div>
+    <div class="preview-tags"><span class="src src--ref src--chip">Ref · shot 1</span><span class="src src--yours src--chip">Preview frame</span></div>
+  </div>
+
+  <div class="lanes" role="list" aria-label="What carries over, shot by shot">
+    <div class="lanehead" aria-hidden="true">
+      <span class="label" style="align-self: end">Shots</span>
+      <div class="thumbs">
+        <div style="background-image: url(../img/fashion_dress.jpg); background-position: 50% 22%"><span>1</span></div>
+        <div style="background-image: url(../img/fashion_dress.jpg); background-position: 50% 78%"><span>2</span></div>
+        <div style="background-image: url(../img/beach.jpg)"><span>3</span></div>
+      </div>
+      <span></span>
+    </div>
+
+    <div class="lane" data-lane data-state="ref" role="listitem">
+      <div class="lane__name">Camera</div>
+      <div class="lane__cells">
+        <a class="lane__cell" href="direction-camera.html"><svg class="ic" aria-hidden="true"><use href="../icons.svg#pushin"/></svg>Push</a>
+        <a class="lane__cell" href="direction-camera.html"><svg class="ic" aria-hidden="true"><use href="../icons.svg#track"/></svg>Track</a>
+        <a class="lane__cell" href="direction-camera.html"><svg class="ic" aria-hidden="true"><use href="../icons.svg#crane"/></svg>Crane</a>
+      </div>
+      <div class="lane__state"><button class="lane__toggle" aria-pressed="true" aria-label="Camera: recreating from reference"><svg class="ic on" aria-hidden="true"><use href="../icons.svg#link"/></svg><svg class="ic off t-3" aria-hidden="true"><use href="../icons.svg#plus"/></svg></button></div>
+    </div>
+
+    <div class="lane" data-lane data-state="ref" role="listitem">
+      <div class="lane__name">Subject</div>
+      <div class="lane__cells">
+        <span class="lane__cell"><svg class="ic" aria-hidden="true"><use href="../icons.svg#person-move"/></svg>Turn</span>
+        <span class="lane__cell"><svg class="ic" aria-hidden="true"><use href="../icons.svg#person-move"/></svg>Walk</span>
+        <span class="lane__cell">Still</span>
+      </div>
+      <div class="lane__state"><button class="lane__toggle" aria-pressed="true" aria-label="Subject: recreating from reference"><svg class="ic on" aria-hidden="true"><use href="../icons.svg#link"/></svg><svg class="ic off t-3" aria-hidden="true"><use href="../icons.svg#plus"/></svg></button></div>
+    </div>
+
+    <div class="lane" data-lane data-state="edit" role="listitem">
+      <div class="lane__name" style="flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px">Light <span class="label t-accent">Edited</span></div>
+      <div class="lane__cells">
+        <span class="lane__cell"><span class="lightglyph" style="width: 12px; height: 12px; border-radius: 50%; background: conic-gradient(from 110deg, var(--temp-warm) 0 90deg, var(--surface-4) 90deg)" aria-hidden="true"></span>Warmer</span>
+        <span class="lane__cell">Warmer</span>
+        <span class="lane__cell">Warmer</span>
+      </div>
+      <div class="lane__state"><button class="lane__toggle" aria-pressed="true" aria-label="Light: recreating from reference"><svg class="ic on" aria-hidden="true"><use href="../icons.svg#link"/></svg><svg class="ic off t-3" aria-hidden="true"><use href="../icons.svg#plus"/></svg></button></div>
+    </div>
+    <div class="lightedit" role="group" aria-label="Key light">
+      <div class="lightdial" data-dial role="slider" tabindex="0" aria-label="Key light direction" aria-valuemin="0" aria-valuemax="359" aria-valuenow="135">
+        <div class="lightdial__beam" aria-hidden="true"></div>
+        <div class="lightdial__subject"><img src="../img/port_smile.jpg" alt=""></div>
+        <div class="lightdial__sun" aria-hidden="true"><svg class="ic ic--xs"><use href="../icons.svg#sun"/></svg></div>
+      </div>
+      <div class="stack" style="gap: var(--sp-3)">
+        <div><div class="ctl-label"><span>Direction</span><output data-dial-out>Back-right · 135°</output></div></div>
+        <div>
+          <div class="ctl-label"><span>Warmth</span><output id="warm">4,300 K</output></div>
+          <div class="slider slider--temp" data-slider data-min="2500" data-max="7500" data-step="100" data-unit=" K" data-out="warm" role="slider" tabindex="0" aria-label="Warmth" aria-valuemin="2500" aria-valuemax="7500" aria-valuenow="3600"><div class="slider__track"></div><div class="slider__thumb"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lane" data-lane data-state="ref" role="listitem">
+      <div class="lane__name">Look</div>
+      <div class="lane__cells"><span class="lane__cell span-all"><span style="width: 34px; height: 12px; border-radius: 3px; background: linear-gradient(90deg, var(--temp-warm), var(--surface-4))" aria-hidden="true"></span>Golden grade · soft contrast</span></div>
+      <div class="lane__state"><button class="lane__toggle" aria-pressed="true" aria-label="Look: recreating from reference"><svg class="ic on" aria-hidden="true"><use href="../icons.svg#link"/></svg><svg class="ic off t-3" aria-hidden="true"><use href="../icons.svg#plus"/></svg></button></div>
+    </div>
+
+    <div class="lane" data-lane data-state="ref" role="listitem">
+      <div class="lane__name">Framing</div>
+      <div class="lane__cells"><span class="lane__cell"><svg class="ic" aria-hidden="true"><use href="../icons.svg#frame"/></svg>Close</span><span class="lane__cell">Medium</span><span class="lane__cell">Wide</span></div>
+      <div class="lane__state"><button class="lane__toggle" aria-pressed="true" aria-label="Framing: recreating from reference"><svg class="ic on" aria-hidden="true"><use href="../icons.svg#link"/></svg><svg class="ic off t-3" aria-hidden="true"><use href="../icons.svg#plus"/></svg></button></div>
+    </div>
+
+    <div class="lane" data-lane data-state="ref" role="listitem">
+      <div class="lane__name">Cuts</div>
+      <div class="lane__cells"><span class="lane__cell"><svg class="ic" aria-hidden="true"><use href="../icons.svg#transition"/></svg>Mix</span><span class="lane__cell"><svg class="ic" aria-hidden="true"><use href="../icons.svg#scissors"/></svg>Cut</span><span class="lane__cell">Fade out</span></div>
+      <div class="lane__state"><button class="lane__toggle" aria-pressed="true" aria-label="Cuts: recreating from reference"><svg class="ic on" aria-hidden="true"><use href="../icons.svg#link"/></svg><svg class="ic off t-3" aria-hidden="true"><use href="../icons.svg#plus"/></svg></button></div>
+    </div>
+
+    <div class="lane" data-lane data-state="off" role="listitem">
+      <div class="lane__name">Audio</div>
+      <div class="lane__cells"><span class="lane__cell span-all"><svg class="ic" aria-hidden="true"><use href="../icons.svg#wave"/></svg>Ambient bed · 92 BPM</span></div>
+      <div class="lane__state"><button class="lane__toggle" aria-pressed="false" aria-label="Audio: not recreated"><svg class="ic on" aria-hidden="true"><use href="../icons.svg#link"/></svg><svg class="ic off t-3" aria-hidden="true"><use href="../icons.svg#plus"/></svg></button></div>
+    </div>
+  </div>
+
+  <div class="actionbar">
+    <a class="btn btn--primary" href="review.html">Review direction</a>
+  </div>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script src="../motion.js"></script>
+</body>
+</html>

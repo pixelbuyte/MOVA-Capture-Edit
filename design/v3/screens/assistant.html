@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Assistant</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens/primitives.css">
+<link rel="stylesheet" href="../tokens/semantic.css">
+<link rel="stylesheet" href="../tokens/component.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .bg { position: absolute; left: 0; right: 0; top: 0; height: 280px; }
+  .bg img { width: 100%; height: 100%; object-fit: cover; opacity: .55; }
+  .ctx { display: flex; gap: 6px; flex-wrap: wrap; margin-top: var(--sp-3); }
+  .ctx span { font: 500 var(--t-caption)/1 var(--font-ui); color: var(--text-2); padding: 6px 8px; border-radius: 6px; background: var(--surface-3); }
+  .ask { margin-top: var(--sp-4); font: 400 var(--t-title2)/1.25 var(--font-display); font-size: 24px; color: var(--text-1); }
+  .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; height: 88px; margin-top: var(--sp-4); border-radius: var(--r-2); overflow: hidden; }
+  .ba div { position: relative; }
+  .ba img { width: 100%; height: 100%; object-fit: cover; }
+  .ba .label { position: absolute; left: 6px; bottom: 6px; color: var(--text-1); text-shadow: 0 1px 3px var(--overlay); }
+  .chg { display: grid; grid-template-columns: 1fr auto; gap: var(--sp-3); align-items: center; padding: 10px 0; box-shadow: inset 0 -1px 0 var(--hairline); font-size: var(--t-callout); }
+  .chg small { display: block; color: var(--text-3); font-size: var(--t-caption); margin-top: 2px; }
+  .sugg { display: flex; flex-direction: column; margin-top: var(--sp-3); }
+  .sugg button { display: flex; align-items: center; gap: var(--sp-2); min-height: 40px; font-size: var(--t-callout); color: var(--text-2); text-align: left; }
+  .composer { position: absolute; left: var(--gutter); right: var(--gutter); bottom: calc(var(--safe-bottom) + var(--sp-2)); display: flex; gap: var(--sp-2); }
+</style>
+</head>
+<body>
+<main class="screen screen--media">
+  <div class="bg"><img src="../img/road.jpg" alt=""></div>
+  <div style="position: absolute; top: var(--safe-top); left: var(--sp-3)"><a class="ibtn ibtn--glass" href="video-editor.html" aria-label="Back to editor"><svg class="ic" aria-hidden="true"><use href="../icons.svg#back"/></svg></a></div>
+
+  <section class="sheet" style="top: 150px; padding-top: var(--sp-2)" aria-label="Assistant">
+    <div class="sheet__grabber"></div>
+    <div class="row" style="gap: var(--sp-2)"><svg class="ic ic--sm t-accent" aria-hidden="true"><use href="../icons.svg#spark"/></svg><span class="headline">Assistant</span></div>
+    <div class="ctx" aria-label="What the assistant can see"><span>Desert drive · 4 clips</span><span>Clip 2 selected</span><span>Ref: Golden hour walk</span></div>
+
+    <p class="ask" style="margin-top: var(--sp-3)">“Make this more cinematic.”</p>
+
+    <div class="ba" aria-label="Clip 2 before and after the proposed changes">
+      <div><img src="../img/road.jpg" alt="" style="object-position: 50% 96%"><span class="label">Now</span></div>
+      <div><img src="../img/road.jpg" alt="" style="object-position: 50% 96%; filter: hue-rotate(-12deg) saturate(1.25) contrast(1.18) brightness(.9); clip-path: inset(12% 0)"><span class="label">Proposed</span></div>
+    </div>
+
+    <div style="margin-top: var(--sp-2)">
+      <div class="chg"><span>Teal and amber grade<small>Softer highlights, warmer skin</small></span><button class="switch" role="switch" aria-checked="true" aria-label="Teal and amber grade"></button></div>
+      <div class="chg"><span>2.39:1 letterbox</span><button class="switch" role="switch" aria-checked="true" aria-label="Letterbox"></button></div>
+      <div class="chg"><span>Trim clip 3 by 1.2 s<small>Matches the reference's pacing</small></span><button class="switch" role="switch" aria-checked="true" aria-label="Trim clip 3"></button></div>
+      <div class="chg"><span>Slow push-in on clip 2 <span class="t-accent">· 12 cr</span><small>Generated camera move</small></span><button class="switch" role="switch" aria-checked="false" aria-label="Slow push-in on clip 2, 12 credits"></button></div>
+    </div>
+    <div class="row" style="gap: var(--sp-2); margin-top: var(--sp-3)">
+      <button class="btn btn--secondary btn--sm" style="flex: 1">Preview</button>
+      <button class="btn btn--primary btn--sm" style="flex: 1">Apply 3 changes</button>
+    </div>
+
+  </section>
+  <div class="composer" style="z-index: 31">
+    <label class="field field--placeholder grow" style="height: 48px; align-items: center; padding-block: 0; border-radius: 24px; background: var(--surface-3)">Ask for a change…</label>
+    <button class="ibtn ibtn--fill" aria-label="Dictate" style="width: 48px; height: 48px"><svg class="ic" aria-hidden="true"><use href="../icons.svg#mic"/></svg></button>
+  </div>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script src="../motion.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+/* ─────────────────────────────────────────────────────────────
+   MOVA design tokens · v2 "Monitor"
+   Single source of truth. Screens and components read ONLY these.
+   Naming: role first (what it's for), never the raw value.
+   SwiftUI mapping noted per group for the later build phase.
+   ───────────────────────────────────────────────────────────── */
+:root {
+  /* ── Surfaces: a 5-step graphite ladder. Depth comes from fill, not outlines. ── */
+  --canvas: #070709;            /* media workspace, camera, players */
+  --surface-1: #0E0E11;         /* screen background */
+  --surface-2: #16161A;         /* grouped rows, sheets */
+  --surface-3: #1E1E23;         /* controls at rest */
+  --surface-4: #28282E;         /* controls pressed / selected fill */
+  --hairline: rgba(255, 255, 255, .07);
+  --hairline-strong: rgba(255, 255, 255, .13);
+  --scrim-top: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,0));
+  --scrim-bottom: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.82));
+  --material: rgba(22, 22, 26, .64);    /* Liquid Glass stand-in: floating chrome over media */
+  --material-border: rgba(255, 255, 255, .10);
+  --overlay: rgba(0, 0, 0, .55);              /* badges and timecodes over media */
+  --tab-selected: rgba(255, 255, 255, .08);
+  --shadow-float: 0 12px 32px -8px rgba(0, 0, 0, .6);
+  --shadow-thumb: 0 2px 10px rgba(0, 0, 0, .45);
+  --shadow-sheet: 0 -20px 40px rgba(0, 0, 0, .4);
+  --temp-cool: #6BA6FF;         /* white-balance track ends */
+  --temp-warm: #FFB25E;
+  --glow-warm: rgba(255, 196, 120, .35);      /* key-light glow in the light dial */
+
+  /* ── Text ── (contrast on --surface-1) */
+  --text-1: #F3F3F5;            /* 17.4:1 on surface-1 */
+  --text-2: #A2A2AC;            /* 7.6:1 on surface-1, 7.1:1 on surface-2 */
+  --text-3: #8E8E99;            /* 5.9:1 on surface-1, 4.5:1 even on surface-4 */
+  --text-disabled: #4A4A52;
+
+  /* ── Selection: white, framed by viewfinder brackets. Not the accent. ── */
+  --select: #FFFFFF;
+  --on-select: #0A0A0C;
+
+  /* ── Accent: periwinkle. Means "MOVA's intelligence" — AI results, AI actions, credits. ── */
+  --accent: #A9A4FF;            /* marks, glyphs, AI-derived data on dark (8.7:1) */
+  --accent-fill: #6A62F2;       /* the one AI button per screen (white text 4.5:1) */
+  --accent-wash: rgba(169, 164, 255, .10);
+  --accent-line: rgba(169, 164, 255, .38);
+
+  /* ── Signals: each owns exactly one meaning ── */
+  --rec: #FF453A;               /* recording only */
+  --cam: #FFD60A;               /* camera focus / active lens only */
+  --positive: #3BD671;
+  --caution: #FFB547;
+  --critical: #FF6B60;
+
+  /* ── Type ── SwiftUI: display = .system(design: .serif) New York; ui = SF Pro (Dynamic Type); mono = SF Mono */
+  --font-ui: 'Geist', -apple-system, 'SF Pro Text', system-ui, sans-serif;
+  --font-display: 'Instrument Serif', 'New York', Georgia, serif;
+  --font-mono: 'Geist Mono', 'SF Mono', ui-monospace, monospace;
+  --t-display: 40px;    --lh-display: 42px;   /* editorial moments only: Home, a finished film */
+  --t-title1: 28px;     --lh-title1: 32px;    /* screen titles */
+  --t-title2: 21px;     --lh-title2: 26px;    /* section heads */
+  --t-headline: 16px;   --lh-headline: 21px;  /* row titles, buttons */
+  --t-body: 15px;       --lh-body: 21px;
+  --t-callout: 13px;    --lh-callout: 18px;
+  --t-caption: 12px;    --lh-caption: 16px;
+  --t-micro: 11px;      --lh-micro: 14px;     /* timecode, readouts — mono only */
+  --track-tight: -0.02em;
+  --track-caps: 0.08em;
+
+  /* ── Space: 4pt grid ── */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px; --sp-12: 48px;
+  --gutter: 20px;
+  --safe-top: 54px;     /* status bar zone on iPhone 15/16 — left empty, never faked */
+  --safe-bottom: 34px;  /* home indicator zone */
+
+  /* ── Shape: radius follows size, never one radius for everything ── */
+  --r-1: 6px;    /* filmstrip frames, tiny thumbs */
+  --r-2: 10px;   /* controls, small media */
+  --r-3: 16px;   /* buttons, media tiles */
+  --r-4: 24px;   /* sheets, hero media */
+  --r-round: 999px; /* only icon buttons and the shutter */
+
+  /* ── Motion ── SwiftUI: .snappy / .smooth / .bouncy equivalents */
+  --dur-1: 120ms;  /* press feedback */
+  --dur-2: 220ms;  /* selection, toggles */
+  --dur-3: 380ms;  /* screen-level transitions, sheet */
+  --dur-4: 700ms;  /* reveal of AI results */
+  --ease-standard: cubic-bezier(.2, .8, .2, 1);
+  --ease-emphasized: cubic-bezier(.3, 1.35, .55, 1);   /* spring-like overshoot, used sparingly */
+  --ease-linear: linear;
+
+  /* ── Haptics (annotation tokens for the build phase) ──
+     --haptic-select   → .sensoryFeedback(.selection)      lane cycle, shot pick, lens change
+     --haptic-commit   → .sensoryFeedback(.impact(weight: .medium))  shutter, generate
+     --haptic-success  → .sensoryFeedback(.success)        generation ready, saved
+     --haptic-warning  → .sensoryFeedback(.warning)        not enough credits, failed
+     --haptic-detent   → .sensoryFeedback(.selection) at each tick of dials and rulers */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-1: 0ms; --dur-2: 0ms; --dur-3: 0ms; --dur-4: 0ms; }
+}

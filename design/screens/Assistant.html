@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI creative assistant</title>
+<link rel="stylesheet" href="../mova.css">
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#000}</style>
+<div class="scr" style="background: #000">
+  <img src="../assets/img/road.jpg" alt="Current project preview: desert road" style="position: absolute; left: 0; top: 0; width: 390px; height: 330px; object-fit: cover; opacity: .7">
+  <div style="position: absolute; left: 0; right: 0; top: 0; height: 330px; background: linear-gradient(rgba(0,0,0,.5), transparent 40%, #0A0A0C)"></div>
+  <div style="position: absolute; top: 54px; left: 12px; right: 12px; display: flex; justify-content: space-between; align-items: center">
+    <a href="VideoEditor.html" class="ib g" aria-label="Back to editor"><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"></path></svg></a>
+    <span class="badge" style="height: 30px; padding: 0 12px; font-size: 12px">Desert drive · 4 clips · 0:24</span>
+    <span class="ib"></span>
+  </div>
+
+  <div class="sheet" style="top: 236px; background: #0A0A0C; padding: 10px 16px 34px; display: flex; flex-direction: column">
+    <div class="grab"></div>
+    <div class="row2" style="gap: 8px">
+      <span style="width: 28px; height: 28px; border-radius: 8px; background: rgba(143,127,255,.16); color: #8F7FFF; display: flex; align-items: center; justify-content: center"><svg class="i s" viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18.5 9.5l-4.7 1.9L12 16l-1.8-4.6L5.5 9.5l4.7-1.9z"></path></svg></span>
+      <span class="t3">Assistant</span>
+      <span class="xs" style="margin-left: auto">Sees: timeline, clip 2 selected, reference</span>
+    </div>
+
+    <div style="align-self: flex-end; margin-top: 14px; max-width: 250px; padding: 10px 14px; border-radius: 18px 18px 4px 18px; background: #25252C; font-size: 14px">Make this more cinematic.</div>
+
+    <div class="card" style="margin-top: 12px; padding: 14px">
+      <div style="font-size: 14px; line-height: 1.45">Here's what I'd change. Toggle any of these, then preview before applying.</div>
+      <div style="margin-top: 10px; display: flex; flex-direction: column">
+        <div class="kv" style="align-items: center"><span style="color: #F5F5F7">Teal &amp; amber grade, softer highlights</span><span class="tog on" style="transform: scale(.8)"></span></div>
+        <div class="kv" style="align-items: center"><span style="color: #F5F5F7">2.39:1 letterbox</span><span class="tog on" style="transform: scale(.8)"></span></div>
+        <div class="kv" style="align-items: center"><span style="color: #F5F5F7">Trim clip 3 by 1.2s to match pace</span><span class="tog on" style="transform: scale(.8)"></span></div>
+        <div class="kv" style="align-items: center"><span style="color: #F5F5F7">Slow push-in on clip 2 <span class="acc" style="font-size: 12px">· AI · 12 cr</span></span><span class="tog" style="transform: scale(.8)"></span></div>
+      </div>
+      <div style="display: flex; gap: 8px; margin-top: 10px">
+        <button class="btn sec sm" style="flex: 1">Preview</button>
+        <button class="btn w sm" style="flex: 1">Apply 3 changes</button>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap">
+      <span class="chip" style="height: 30px; font-size: 12px">Create three versions · 3 × 36 cr</span>
+      <span class="chip" style="height: 30px; font-size: 12px">Use the reference's pacing</span>
+      <span class="chip" style="height: 30px; font-size: 12px">Warmer light</span>
+    </div>
+
+    <div style="margin-top: auto; display: flex; gap: 8px; align-items: center">
+      <div class="field" style="flex: 1; padding: 0 14px; height: 48px; align-items: center; border-radius: 24px; color: #8B8B96; font-size: 14px">Ask for a change…</div>
+      <button class="ib e" aria-label="Dictate" style="width: 48px; height: 48px"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></button>
+    </div>
+  </div>
+  <div class="home-ind"></div>
+</div>
+</body>
+</html>

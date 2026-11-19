@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Video editor</title>
+<link rel="stylesheet" href="../mova.css">
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#000}</style>
+<div class="scr safe" style="background: #000">
+  <div class="nav">
+    <a href="Library.html" class="ib" aria-label="Back to Library"><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"></path></svg></a>
+    <div class="col" style="align-items: center"><span style="font-size: 15px; font-weight: 600">Desert drive</span><span class="xs">Saved · 9:16 · 4K 24</span></div>
+    <button class="chip on" style="height: 34px">Export</button>
+  </div>
+
+  <div style="height: 318px; margin-top: 6px; background: #0A0A0C; display: flex; align-items: center; justify-content: center; position: relative">
+    <div style="width: 178px; height: 316px; position: relative; overflow: hidden">
+      <img src="../assets/img/road.jpg" alt="Preview: desert road at dusk" style="width: 100%; height: 100%; object-fit: cover; filter: sepia(.15) saturate(1.1)">
+      <div style="position: absolute; left: 0; right: 0; bottom: 56px; text-align: center; font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,.6)">Into the desert</div>
+      <div style="position: absolute; left: 12px; right: 12px; bottom: 24px; text-align: center; font-size: 10px; font-weight: 600; background: rgba(0,0,0,.6); border-radius: 4px; padding: 3px 4px">“We drove until the road ran out.”</div>
+    </div>
+  </div>
+
+  <div class="row2" style="justify-content: space-between; padding: 8px 14px">
+    <span class="mono" style="font-size: 13px">00:08<span style="color: #8B8B96">:12</span> <span style="color: #8B8B96">/ 00:24</span></span>
+    <button class="ib" aria-label="Play"><svg class="i f l" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></button>
+    <div class="row2" style="gap: 0">
+      <button class="ib" aria-label="Undo" style="width: 38px"><svg class="i s" viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"></path><path d="M4 9h10a6 6 0 0 1 0 12h-3"></path></svg></button>
+      <button class="ib" aria-label="Redo" style="width: 38px"><svg class="i s" viewBox="0 0 24 24"><path d="M15 14l5-5-5-5"></path><path d="M20 9H10a6 6 0 0 0 0 12h3"></path></svg></button>
+      <a href="Assistant.html" class="ib" aria-label="Open assistant" style="width: 38px; color: #8F7FFF"><svg class="i s" viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18.5 9.5l-4.7 1.9L12 16l-1.8-4.6L5.5 9.5l4.7-1.9z"></path></svg></a>
+    </div>
+  </div>
+
+  <div class="tl" style="height: 254px; padding-top: 6px; overflow: hidden">
+    <div class="mono" style="display: flex; gap: 0; padding-left: 40px; font-size: 9px; color: #8B8B96; height: 16px"><span style="width: 80px">00:04</span><span style="width: 80px">00:06</span><span style="width: 80px">00:08</span><span style="width: 80px">00:10</span><span>00:12</span></div>
+    <div style="display: flex; flex-direction: column; gap: 6px; padding-left: 8px">
+      <div class="row2" style="gap: 8px"><span class="xs" style="width: 24px">T</span><div style="display: flex; gap: 4px; height: 22px; flex: 1"><div style="width: 60px"></div><div style="width: 150px; border-radius: 5px; background: #6E5BFF; font-size: 10px; font-weight: 600; display: flex; align-items: center; padding-left: 6px">Into the desert</div></div></div>
+      <div class="row2" style="gap: 8px"><span class="xs" style="width: 24px">CC</span><div style="display: flex; gap: 4px; height: 22px; flex: 1"><div style="width: 120px; border-radius: 5px; background: #3A3A44; font-size: 10px; display: flex; align-items: center; padding-left: 6px">We drove until…</div><div style="width: 110px; border-radius: 5px; background: #3A3A44; font-size: 10px; display: flex; align-items: center; padding-left: 6px">…the road ran out</div></div></div>
+      <div class="row2" style="gap: 8px"><span class="xs" style="width: 24px">V1</span>
+        <div class="trk" style="flex: 1; gap: 3px; height: 52px; position: relative">
+          <div class="clip" style="width: 70px; flex: none"><img src="../assets/img/valley.jpg" alt=""></div>
+          <div class="clip sel" style="width: 120px; flex: none"><img src="../assets/img/road.jpg" alt=""><span style="position: absolute; left: 0; top: 0; bottom: 0; width: 8px; background: #FFD60A"></span><span style="position: absolute; right: 0; top: 0; bottom: 0; width: 8px; background: #FFD60A"></span><span class="badge" style="position: absolute; right: 12px; bottom: 4px; height: 18px; font-size: 9px">1.5×</span></div>
+          <div style="position: absolute; left: 186px; top: 16px; width: 20px; height: 20px; border-radius: 5px; background: #fff; color: #000; display: flex; align-items: center; justify-content: center; z-index: 3" aria-label="Dissolve transition"><svg class="i xs" viewBox="0 0 24 24"><path d="M3 5l9 7-9 7zM21 5l-9 7 9 7z"></path></svg></div>
+          <div class="clip" style="width: 100px; flex: none"><img src="../assets/img/mustang.jpg" alt=""></div>
+          <div class="clip" style="width: 80px; flex: none"><img src="../assets/img/stars.jpg" alt=""></div>
+        </div>
+      </div>
+      <div class="row2" style="gap: 8px"><span class="xs" style="width: 24px">A1</span><div style="flex: 1; position: relative"><div class="wave" style="height: 28px; width: 360px"></div><span style="position: absolute; left: 6px; top: 7px; font-size: 10px; font-weight: 600">Dusk · ambient</span></div></div>
+      <div class="row2" style="gap: 8px"><span class="xs" style="width: 24px">A2</span><div style="flex: 1; position: relative"><div class="wave" style="height: 22px; width: 130px; margin-left: 40px; background: repeating-linear-gradient(90deg, rgba(90,169,255,.8) 0 2px, transparent 2px 4px)"></div><span style="position: absolute; left: 46px; top: 4px; font-size: 10px; font-weight: 600">Voice</span></div></div>
+    </div>
+    <div class="ph" style="left: 195px; top: 18px"></div>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; bottom: 26px; display: flex; gap: 4px; padding: 0 8px; overflow: hidden; font-size: 10px; font-weight: 600; color: #A9A9B3">
+    <span class="col" style="align-items: center; gap: 4px; width: 52px; flex: none"><svg class="i" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"></circle><circle cx="6" cy="18" r="2.5"></circle><path d="M8 7.5L20 18M8 16.5L20 6"></path></svg>Split</span>
+    <span class="col" style="align-items: center; gap: 4px; width: 52px; flex: none"><svg class="i" viewBox="0 0 24 24"><path d="M7 4v16M17 4v16"></path><path d="M3 12h4M17 12h4"></path></svg>Trim</span>
+    <span class="col" style="align-items: center; gap: 4px; width: 52px; flex: none; color: #F5F5F7"><svg class="i" viewBox="0 0 24 24"><path d="M4 16a8 8 0 1 1 16 0"></path><path d="M12 16l4-5"></path></svg>Speed</span>
+    <span class="col" style="align-items: center; gap: 4px; width: 52px; flex: none"><svg class="i" viewBox="0 0 24 24"><path d="M3 5l9 7-9 7zM21 5l-9 7 9 7z"></path></svg>Transition</span>
+    <span class="col" style="align-items: center; gap: 4px; width: 52px; flex: none"><svg class="i" viewBox="0 0 24 24"><path d="M5 6V4h14v2M12 4v16M9 20h6"></path></svg>Text</span>
+    <span class="col" style="align-items: center; gap: 4px; width: 52px; flex: none"><svg class="i" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="17" cy="16" r="3"></circle></svg>Audio</span>
+    <span class="col" style="align-items: center; gap: 4px; width: 52px; flex: none"><svg class="i" viewBox="0 0 24 24"><path d="M12 3c4 5 7 8 7 12a7 7 0 0 1-14 0c0-4 3-7 7-12z"></path></svg>Color</span>
+    <a href="Restyle.html" class="col" style="align-items: center; gap: 4px; width: 52px; flex: none; color: #8F7FFF"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18.5 9.5l-4.7 1.9L12 16l-1.8-4.6L5.5 9.5l4.7-1.9z"></path></svg>AI tools</a>
+  </div>
+  <div class="home-ind"></div>
+</div>
+</body>
+</html>

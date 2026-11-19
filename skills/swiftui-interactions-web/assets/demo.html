@@ -1,0 +1,11 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Interactions · demo</title>
+<style>body{margin:0;background:#0B0B0B;color:#EDEAE3;font:14px system-ui;padding:24px;display:flex;gap:28px}.box{position:relative;width:300px;height:300px;border-radius:24px;background:#141414;overflow:hidden;touch-action:none}
+.rm{position:absolute;width:0;height:0;pointer-events:none;opacity:0;transition:opacity .2s}.rm.is-open{opacity:1;pointer-events:auto}.rm__item{position:absolute;left:-28px;top:-28px;width:56px;height:56px;border-radius:50%;border:0;background:#262626;color:#EDEAE3;font:600 11px system-ui;transform:translate(var(--x),var(--y));transition:transform .25s cubic-bezier(.3,1.35,.55,1)}.rm__item.is-sel{background:#EDEAE3;color:#0B0B0B}
+.tp{position:relative;width:240px;height:240px;margin:30px;border-radius:24px;background:radial-gradient(circle at 30% 30%,#2a2420,#14181c);transform:perspective(600px) rotateX(var(--rx,0)) rotateY(var(--ry,0));transition:transform .3s}.tp__knob{position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:#EDEAE3}canvas{width:100%;height:100%;display:block}#out{position:absolute;left:12px;bottom:10px}</style></head><body>
+<div class="box" id="rmhost"><div id="rm"></div><span id="out">press and drag</span></div><div class="box"><div id="tp"></div></div><div class="box"><canvas id="glow"></canvas></div>
+<script src="../../pow-motion-web/assets/pow.js"></script><script src="interactions.js"></script><script>
+const host=document.getElementById('rmhost'),out=document.getElementById('out');
+const rm=Interactions.RadialMenu(document.getElementById('rm'),{items:['Photo','Video','Recreate','Animate','Portrait','Slo-mo'].map(l=>({label:l})),onSelect:it=>out.textContent=it.label});
+host.addEventListener('pointerdown',e=>{const r=host.getBoundingClientRect();host.setPointerCapture(e.pointerId);rm.openAt(e.clientX-r.left,e.clientY-r.top)});host.addEventListener('pointermove',e=>{const r=host.getBoundingClientRect();rm.move(e.clientX-r.left,e.clientY-r.top)});host.addEventListener('pointerup',()=>rm.release());
+Interactions.Trackpad2D(document.getElementById('tp'),{x:.3,y:.6});Interactions.GlowTrail(document.getElementById('glow'));
+</script></body></html>

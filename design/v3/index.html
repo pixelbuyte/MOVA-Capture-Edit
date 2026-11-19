@@ -1,0 +1,409 @@
+<meta charset="utf-8">
+<title>MOVA Design v3</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+/* Layout: a long review that reads top to bottom — process first, then system, motion, screens, the skill, sources. Single dark look by choice. */
+:root {
+  color-scheme: dark;
+  --bg: #070709; --panel: #0E0E11; --panel-2: #16161A; --rule: rgba(255,255,255,.08);
+  --fg: #F3F3F5; --fg-2: #A2A2AC; --fg-3: #8E8E99; --accent: #A9A4FF; --accent-fill: #6A62F2; --good: #3BD671; --warm: #FFA07A;
+  --display: 'Instrument Serif', 'New York', Georgia, serif;
+  --ui: 'Geist', -apple-system, system-ui, sans-serif;
+  --mono: 'Geist Mono', ui-monospace, 'SF Mono', monospace;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 400 16px/1.6 var(--ui); -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+@media (min-width: 760px) { .wrap { padding-left: max(40px, env(safe-area-inset-left, 0px)); padding-right: max(40px, env(safe-area-inset-right, 0px)); } }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; border-radius: 6px; }
+h1, h2, h3 { text-wrap: balance; }
+.eyebrow { font: 600 11px/1 var(--ui); letter-spacing: .14em; text-transform: uppercase; color: var(--fg-3); }
+.lede { color: var(--fg-2); font-size: 18px; max-width: 42em; margin: 18px 0 0; }
+section { padding-block: 72px; border-top: 1px solid var(--rule); }
+section > .wrap > h2 { font: 400 clamp(34px, 4.6vw, 56px)/1.02 var(--display); margin: 14px 0 0; letter-spacing: -.01em; }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font: 500 13px/1.5 var(--mono); color: var(--fg); background: var(--panel-2); padding: 1px 6px; border-radius: 5px; }
+
+.hero { padding-block: 64px 56px; display: grid; gap: 48px; }
+@media (min-width: 1000px) { .hero { grid-template-columns: 1fr 1.2fr; align-items: center; } }
+.mark { display: flex; align-items: center; gap: 12px; font: 700 18px/1 var(--ui); letter-spacing: .3em; }
+.hero h1 { font: 400 clamp(52px, 8vw, 104px)/.95 var(--display); margin: 28px 0 0; letter-spacing: -.02em; }
+.hero h1 em { color: var(--fg-2); }
+.stats { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 22px; font: 500 13px/1.4 var(--mono); color: var(--fg-2); }
+.stats b { color: var(--fg); font-weight: 500; }
+.hero-phones { display: flex; gap: 18px; justify-content: center; align-items: flex-end; }
+.hero-phones .dev:nth-child(2) { transform: translateY(-28px); }
+@media (max-width: 640px) { .hero-phones .dev:nth-child(3) { display: none; } .hero-phones .dev { --w: 40vw !important; } }
+
+.dev { flex: none; width: var(--w, 220px); max-width: 100%; padding: 7px; border-radius: calc(var(--w, 220px) * .16); background: #000; box-shadow: 0 0 0 1px #2a2a30, 0 30px 60px -24px rgba(0,0,0,.8); }
+.dev img { display: block; width: 100%; height: auto; aspect-ratio: 390 / 844; border-radius: calc(var(--w, 220px) * .135); }
+figure { margin: 0; }
+figcaption { margin-top: 12px; font-size: 14px; color: var(--fg-2); max-width: 30ch; }
+figcaption b { display: block; color: var(--fg); font-weight: 600; margin-bottom: 2px; }
+.row { display: flex; flex-wrap: wrap; gap: 36px 26px; margin-top: 40px; }
+@media (max-width: 520px) { .row .dev { --w: min(220px, 42vw) !important; } .row { gap: 24px 14px; } }
+
+/* process */
+.steps { display: grid; gap: 10px; margin-top: 36px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+.step { padding: 18px; border-radius: 14px; background: var(--panel); }
+.step .n { font: 500 12px/1 var(--mono); color: var(--accent); }
+.step b { display: block; margin-top: 10px; font-weight: 600; }
+.step span { display: block; margin-top: 6px; font-size: 14px; color: var(--fg-2); }
+.dirs { display: grid; gap: 28px; margin-top: 44px; }
+@media (min-width: 960px) { .dirs { grid-template-columns: repeat(3, 1fr); } }
+.dir { min-width: 0; }
+.dir .pair { display: flex; gap: 10px; }
+.dir .dev { --w: 48%; flex: 1 1 0; border-radius: 22px; }
+.dir .dev img { border-radius: 17px; }
+.dir h3 { margin: 18px 0 0; font: 600 18px/1.2 var(--ui); display: flex; gap: 10px; align-items: baseline; }
+.dir h3 small { font: 600 11px/1 var(--ui); letter-spacing: .12em; text-transform: uppercase; }
+.dir p { margin: 8px 0 0; font-size: 15px; color: var(--fg-2); }
+.chosen small { color: var(--good); } .explored small { color: var(--fg-3); }
+
+/* critique table */
+.table { margin-top: 36px; overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 680px; font-size: 15px; }
+th { text-align: left; font: 600 11px/1 var(--ui); letter-spacing: .12em; text-transform: uppercase; color: var(--fg-3); padding: 0 16px 12px 0; }
+td { padding: 14px 16px 14px 0; border-top: 1px solid var(--rule); vertical-align: top; color: var(--fg-2); }
+td:first-child { color: var(--fg); font-weight: 600; width: 22%; }
+td .src { display: block; font: 500 12px/1.4 var(--mono); color: var(--fg-3); margin-top: 4px; }
+
+/* tokens */
+.layers { display: grid; gap: 14px; margin-top: 40px; }
+@media (min-width: 900px) { .layers { grid-template-columns: 1fr 1fr 1fr; } }
+.layer { padding: 24px; border-radius: 18px; background: var(--panel); min-width: 0; }
+.layer h3 { margin: 0; font: 600 16px/1.2 var(--ui); }
+.layer .who { font: 500 12px/1.4 var(--mono); color: var(--fg-3); margin-top: 6px; }
+.layer pre { margin: 16px 0 0; font: 500 12.5px/1.75 var(--mono); color: var(--fg-2); white-space: pre-wrap; overflow-wrap: anywhere; }
+.layer pre b { color: var(--accent); font-weight: 500; }
+
+/* motion lab */
+.lab { display: grid; gap: 14px; margin-top: 40px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.fx { position: relative; padding: 22px; border-radius: 18px; background: var(--panel); min-height: 210px; display: flex; flex-direction: column; gap: 14px; overflow: hidden; }
+.fx h3 { margin: 0; font: 600 16px/1.2 var(--ui); }
+.fx p { margin: 0; font-size: 14px; color: var(--fg-2); }
+.fx .meta { font: 500 12px/1.4 var(--mono); color: var(--fg-3); }
+.fx .stage { flex: 1; display: grid; place-items: center; position: relative; min-height: 90px; }
+.fx button.run { align-self: flex-start; font: 600 14px/1 var(--ui); color: var(--fg); background: var(--panel-2); border: 0; border-radius: 10px; padding: 11px 14px; cursor: pointer; }
+.demo-btn { font: 600 15px/1 var(--ui); padding: 16px 22px; border-radius: 14px; border: 0; background: var(--accent-fill); color: #fff; }
+.demo-credit { position: relative; overflow: hidden; font: 500 22px/1 var(--mono); padding: 12px 18px; border-radius: 12px; background: var(--panel-2); color: var(--fg); }
+.demo-dev { position: relative; width: 120px; height: 90px; border-radius: 10px; overflow: hidden; }
+.demo-dev img { width: 100%; height: 100%; object-fit: cover; }
+.demo-dev .raw { position: absolute; inset: 0; filter: sepia(.5) contrast(.8) brightness(.55) blur(1.5px); }
+.demo-dev .done { position: absolute; inset: 0; clip-path: inset(100% 0 0 0); filter: sepia(.3) saturate(1.15); }
+.lanes-demo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; width: 220px; }
+.lanes-demo i { height: 26px; border-radius: 5px; background: var(--panel-2); display: block; }
+.rm-note { margin-top: 16px; font-size: 14px; color: var(--fg-3); }
+
+.live { display: flex; flex-wrap: wrap; gap: 32px; margin-top: 40px; }
+.live .frame { width: 406px; max-width: 100%; padding: 8px; border-radius: 58px; background: #000; box-shadow: 0 0 0 1px #2a2a30; }
+.live iframe { display: block; width: 390px; height: 844px; border: 0; border-radius: 50px; background: #0E0E11; }
+@media (max-width: 440px) { .live .frame { padding: 0; background: none; box-shadow: none; } .live iframe { width: 100%; border-radius: 28px; } }
+
+/* app store */
+.store { display: flex; gap: 18px; margin-top: 40px; overflow-x: auto; padding-bottom: 14px; scroll-snap-type: x mandatory; }
+.store img { flex: none; width: 236px; max-width: 70vw; height: auto; border-radius: 18px; scroll-snap-align: start; box-shadow: 0 0 0 1px #2a2a30; }
+.rules { display: grid; gap: 10px; margin-top: 28px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); font-size: 14px; color: var(--fg-2); }
+.rules div { padding: 14px 16px; border-radius: 12px; background: var(--panel); }
+.rules b { color: var(--fg); display: block; margin-bottom: 4px; font-weight: 600; }
+
+/* skill */
+.skill { display: grid; gap: 28px; margin-top: 40px; }
+@media (min-width: 960px) { .skill { grid-template-columns: 1fr 1fr; } }
+.box { padding: 24px; border-radius: 18px; background: var(--panel); min-width: 0; }
+.box h3 { margin: 0 0 14px; font: 600 16px/1.2 var(--ui); }
+.tree { font: 500 13px/1.75 var(--mono); color: var(--fg-2); white-space: pre; overflow-x: auto; margin: 0; }
+.tree b { color: var(--fg); font-weight: 500; }
+.checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font-size: 15px; color: var(--fg-2); }
+.checks li::before { content: "PASS"; font: 600 11px/1 var(--mono); color: var(--good); margin-right: 12px; }
+.checks.no li::before { content: "NOT TESTED"; color: var(--fg-3); }
+.term { margin-top: 16px; padding: 16px; border-radius: 12px; background: #000; font: 500 12.5px/1.7 var(--mono); color: var(--fg-2); overflow-x: auto; white-space: pre; }
+.term .ok { color: var(--good); }
+
+.refs { display: grid; gap: 12px; margin-top: 36px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.ref { padding: 18px 20px; border-radius: 14px; background: var(--panel); min-width: 0; }
+.ref h3 { margin: 0; font: 600 15px/1.3 var(--ui); overflow-wrap: anywhere; }
+.ref .meta { font: 500 12px/1.4 var(--mono); color: var(--fg-3); margin-top: 4px; }
+.ref p { margin: 8px 0 0; color: var(--fg-2); font-size: 14px; }
+.ref .used { color: var(--good); } .ref .ref-only { color: var(--fg-3); }
+footer { padding-block: 48px 72px; color: var(--fg-3); font-size: 14px; border-top: 1px solid var(--rule); }
+</style>
+
+<header class="wrap hero">
+  <div>
+    <div class="mark"><svg viewBox="0 0 64 64" width="30" height="30" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" id="heroMark"><path d="M14 46V20l18 18 18-18v26" stroke="#A9A4FF" stroke-width="7" opacity=".7" transform="translate(5 5)"/><path d="M14 46V20l18 18 18-18v26" stroke="#F3F3F5" stroke-width="7"/></svg>MOVA</div>
+    <h1>Design v3. <em>Layered, animated, agent-ready.</em></h1>
+    <p class="lede">The Monitor design is now built in three token layers. It has a real motion system, a new animated onboarding, App Store screenshots, and a <b>mova-design</b> skill so any agent can build on-brand MOVA screens. Every step followed the anti-slop process from your saved resources.</p>
+    <div class="stats"><span><b>32</b> screens</span><span><b>3</b> token layers</span><span><b>3</b> directions</span><span><b>9</b> motion effects</span><span><b>5</b> App Store slides</span><span><b>1</b> skill, 2 tests passed</span></div>
+  </div>
+  <div class="hero-phones" aria-label="Three v3 screens">
+    <div class="dev" style="--w: 196px"><img src="shots/welcome.jpg" alt="Welcome screen"></div>
+    <div class="dev" style="--w: 226px"><img src="shots/onboard-recreate.jpg" alt="Onboarding: how recreation works"></div>
+    <div class="dev" style="--w: 196px"><img src="shots/export.jpg" alt="Export sheet"></div>
+  </div>
+</header>
+
+<section aria-labelledby="h-proc">
+  <div class="wrap">
+    <span class="eyebrow">Process</span>
+    <h2 id="h-proc">Concept, three directions, critique, refine.</h2>
+    <p class="lede">This is the workflow from the saved post "How to stop making your apps look like AI slop". The generic answer has to compete with better ones before anything gets built.</p>
+    <div class="steps">
+      <div class="step"><span class="n">01</span><b>Concept</b><span>Make the AI's understanding visible and editable: shots, paths, light, pace.</span></div>
+      <div class="step"><span class="n">02</span><b>Three directions</b><span>Same screens, same components, three semantic mappings.</span></div>
+      <div class="step"><span class="n">03</span><b>Design</b><span>Components first, tokens only. A template for every new screen.</span></div>
+      <div class="step"><span class="n">04</span><b>Render</b><span>Headless renders at 390 × 844 for every screen and direction.</span></div>
+      <div class="step"><span class="n">05</span><b>Critique</b><span>A checklist of generated-looking tells, and a script that enforces the rest.</span></div>
+      <div class="step"><span class="n">06</span><b>Refine</b><span>Fixes go into the system, not single screens.</span></div>
+    </div>
+    <div class="dirs">
+      <div class="dir chosen"><div class="pair"><div class="dev"><img src="shots/home.jpg" alt="Monitor direction, Home" loading="lazy"></div><div class="dev"><img src="shots/direction.jpg" alt="Monitor direction, Direct your version" loading="lazy"></div></div><h3>A · Monitor <small>Chosen</small></h3><p>Graphite, periwinkle only for intelligence, white selection. The picture stays the hero and the AI's work reads at a glance. It has the strongest contrast and fewest competing colors.</p></div>
+      <div class="dir explored"><div class="pair"><div class="dev"><img src="shots/home-darkroom.jpg" alt="Darkroom direction, Home" loading="lazy"></div><div class="dev"><img src="shots/direction-darkroom.jpg" alt="Darkroom direction, Direct your version" loading="lazy"></div></div><h3>B · Darkroom <small>Explored</small></h3><p>Warm umber blacks and a safelight accent, like a film lab. It has character, but warm chrome tints every photo's judgment, and the safelight orange collides with the caution and warm-light signals.</p></div>
+      <div class="dir explored"><div class="pair"><div class="dev"><img src="shots/home-lumen.jpg" alt="Lumen direction, Home" loading="lazy"></div><div class="dev"><img src="shots/direction-lumen.jpg" alt="Lumen direction, Direct your version" loading="lazy"></div></div><h3>C · Lumen <small>Explored</small></h3><p>Paper ground and ink type. It's friendly and clear for settings and plans, but bright chrome fights footage in the camera and editor. Rendering it exposed a real bug: text over photos inherited dark ink. That bug produced the new on-media tokens.</p></div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="h-crit">
+  <div class="wrap">
+    <span class="eyebrow">Critique of v2</span>
+    <h2 id="h-crit">What changed, and what caught it.</h2>
+    <div class="table">
+      <table>
+        <thead><tr><th>Change</th><th>Why</th><th>Found by</th></tr></thead>
+        <tbody>
+          <tr><td>Three token layers</td><td>v2 mixed raw values and roles in one file. Primitives, then semantic, then component tokens: a direction or theme is now one remapping, and one component can be tuned everywhere.</td><td>"Build the design system and skills your agent can follow" (saved guide)</td></tr>
+          <tr><td>11px text floor</td><td>24 declarations sat at 8.5–10.5px: tab labels, shot numbers, media marks, lane cells. All raised; lane cells now ellipsize instead of clipping.</td><td>Critique checklist, now enforced by the checker</td></tr>
+          <tr><td>On-media text tokens</td><td>Tags over photos took the direction's text color, so they turned to dark ink on a dark backing in Lumen. <code>--on-media</code> stays light everywhere.</td><td>Rendering direction C</td></tr>
+          <tr><td>Static labels on lane toggles</td><td>Their accessible names only existed after JavaScript ran.</td><td><code>check_screen.py</code>, first run</td></tr>
+          <tr><td>Button labels never wrap</td><td>"Save to Photos" broke onto two lines in a half-width button.</td><td>Skill test 1 (export sheet)</td></tr>
+          <tr><td>Glass sheen</td><td>Floating chrome gets a specular top edge, closer to Liquid Glass, via <code>--material-sheen</code>.</td><td>swiftui-liquid-glass reference, iOS 26 HIG</td></tr>
+          <tr><td>Motion system</td><td>v2 had scattered CSS keyframes. v3 has one anime.js layer with nine named effects, token durations, and Reduce Motion off-switches.</td><td>anime.js and 60fps.design (saved); Pow and Vortex</td></tr>
+          <tr><td>New: onboarding, export, upload error, App Store</td><td>The product had no first-run story, no export flow, no network-failure state, and no store presence.</td><td>top-welcome-screens and "App Store screenshots convert" (saved)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="h-tok">
+  <div class="wrap">
+    <span class="eyebrow">System</span>
+    <h2 id="h-tok">Three layers, each reading only the one below.</h2>
+    <div class="layers">
+      <div class="layer"><h3>1 · Primitives</h3><div class="who">tokens/primitives.css · read only by layer 2</div><pre>--gray-950: #0E0E11
+--gray-50:  #F3F3F5
+--peri-300: #A9A4FF
+--peri-500: #6A62F2
+--umber-950, --paper-50 …
+--size-11 … --size-40
+--space-1 … --space-12
+--ms-120 … --ms-700</pre></div>
+      <div class="layer"><h3>2 · Semantic</h3><div class="who">tokens/semantic.css · read by components and screens</div><pre>--surface-1: <b>var(--gray-950)</b>
+--text-1:    <b>var(--gray-50)</b>
+--accent:    <b>var(--peri-300)</b>
+--on-media:  <b>var(--gray-50)</b>
+--t-micro:   <b>var(--size-11)</b>
+
+[data-direction="darkroom"] {
+  --accent: <b>var(--safelight-300)</b> }</pre></div>
+      <div class="layer"><h3>3 · Component</h3><div class="who">tokens/component.css · read by components and screens</div><pre>--tap-min:          44px
+--button-height:    52px
+--button-ai-bg:     <b>var(--accent-fill)</b>
+--lane-label-size:  <b>var(--t-micro)</b>
+--bracket-color:    <b>var(--select)</b>
+--tabbar-height:    62px</pre></div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="h-motion">
+  <div class="wrap">
+    <span class="eyebrow">Motion lab</span>
+    <h2 id="h-motion">Every effect has one job.</h2>
+    <p class="lede">These run on anime.js 3.2.2, the same layer the screens use. Effects are web rebuilds of ideas from Pow and Vortex. Press Run to replay each one.</p>
+    <div class="lab">
+      <div class="fx"><h3>Press</h3><p>Confirms the touch. Spring release.</p><div class="stage"><button class="demo-btn" id="pressBtn">Generate</button></div><span class="meta">--dur-1 · haptic: impact</span></div>
+      <div class="fx"><h3>Shine</h3><p>A value changed. After Pow's .shine.</p><div class="stage"><span class="demo-credit" id="credit">240</span></div><button class="run" data-run="shine">Run</button><span class="meta">900 ms · once</span></div>
+      <div class="fx"><h3>Develop</h3><p>A generated shot renders. After Pow's Film Exposure.</p><div class="stage"><div class="demo-dev"><img class="raw" src="img/port_smile.jpg" alt=""><img class="done" id="dev" src="img/port_smile.jpg" alt=""></div></div><button class="run" data-run="develop">Run</button><span class="meta">2400 ms · during real progress only</span></div>
+      <div class="fx"><h3>Sparks</h3><p>Success, once. After Vortex's spark preset.</p><div class="stage" id="sparkStage"><span class="demo-credit">Saved</span></div><button class="run" data-run="sparks">Run</button><span class="meta">12 particles · ~800 ms · haptic: success</span></div>
+      <div class="fx"><h3>Lane settle</h3><p>Shows what a toggle affected.</p><div class="stage"><div class="lanes-demo" id="lanes"><i></i><i></i><i></i></div></div><button class="run" data-run="lanes">Run</button><span class="meta">spring · haptic: selection</span></div>
+      <div class="fx"><h3>Draw</h3><p>The mark and camera paths draw in on first view.</p><div class="stage"><svg viewBox="0 0 64 64" width="70" height="70" fill="none" stroke-linecap="round" stroke-linejoin="round" id="drawMark" aria-hidden="true"><path d="M14 46V20l18 18 18-18v26" stroke="#A9A4FF" stroke-width="5" opacity=".7" transform="translate(5 5)"/><path d="M14 46V20l18 18 18-18v26" stroke="#F3F3F5" stroke-width="5"/></svg></div><button class="run" data-run="draw">Run</button><span class="meta">1100 ms · staggered 220</span></div>
+    </div>
+    <p class="rm-note" id="rmNote">With Reduce Motion on, all of these are skipped and the final state shows immediately. The screens work without any motion.</p>
+
+    <div class="live">
+      <div class="frame"><iframe src="screens/welcome.html" title="Live: Welcome screen with fireflies and drawn mark" loading="lazy"></iframe></div>
+      <div class="frame"><iframe src="screens/onboard-recreate.html" title="Live: onboarding demo of reference plus you" loading="lazy"></iframe></div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="h-new">
+  <div class="wrap">
+    <span class="eyebrow">New in v3</span>
+    <h2 id="h-new">First run, export, and a network failure.</h2>
+    <div class="row">
+      <figure><div class="dev"><img src="shots/welcome.jpg" alt="Welcome" loading="lazy"></div><figcaption><b>Welcome</b>A crossfade reel of three MOVA looks, fireflies, and the mark drawing in.</figcaption></figure>
+      <figure><div class="dev"><img src="shots/onboard-recreate.jpg" alt="Onboarding recreate" loading="lazy"></div><figcaption><b>How recreation works</b>A looping demo: reference plus you, wiping to your version.</figcaption></figure>
+      <figure><div class="dev"><img src="shots/onboard-camera.jpg" alt="Onboarding camera" loading="lazy"></div><figcaption><b>Camera, before permission</b>Explains why the camera is needed before iOS asks.</figcaption></figure>
+      <figure><div class="dev"><img src="shots/export.jpg" alt="Export sheet" loading="lazy"></div><figcaption><b>Export</b>Pickers for resolution, format and frame rate; reference credit; size estimate. Built by the skill.</figcaption></figure>
+      <figure><div class="dev"><img src="shots/state-upload.jpg" alt="Upload paused" loading="lazy"></div><figcaption><b>Upload paused</b>6.2 of 10.4 MB, not charged, resumes where it stopped. Built by the skill.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="h-store">
+  <div class="wrap">
+    <span class="eyebrow">App Store</span>
+    <h2 id="h-store">Five screenshots, one message each.</h2>
+    <p class="lede">Exported at 1290 × 2796, the 6.9" size, following the saved "How to make your App Store screenshots convert" principles.</p>
+    <div class="store" aria-label="App Store screenshots">
+      <img src="appstore/preview-1.jpg" alt="Any video. Starring you." loading="lazy">
+      <img src="appstore/preview-2.jpg" alt="It sees how it was made." loading="lazy">
+      <img src="appstore/preview-3.jpg" alt="Keep the moves. Change the light." loading="lazy">
+      <img src="appstore/preview-4.jpg" alt="A real camera. Free, always." loading="lazy">
+      <img src="appstore/preview-5.jpg" alt="See the cost before you tap." loading="lazy">
+    </div>
+    <div class="rules">
+      <div><b>Value prop first</b>Slide 1 is the whole promise in four words.</div>
+      <div><b>Sell outcomes</b>The result screen leads, not the settings.</div>
+      <div><b>One message each</b>Five slides, five ideas, no bullet lists.</div>
+      <div><b>Humanize</b>Real faces in the first and fourth slides.</div>
+      <div><b>Build trust</b>Free camera, and costs shown up front with refunds.</div>
+      <div><b>Keep copy short</b>Headlines of six words or fewer.</div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="h-all">
+  <div class="wrap">
+    <span class="eyebrow">Every screen</span>
+    <h2 id="h-all">The full product on the v3 system.</h2>
+    <div class="row">
+      <figure><div class="dev"><img src="shots/home.jpg" alt="Home" loading="lazy"></div><figcaption><b>Home</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/discover.jpg" alt="Discover" loading="lazy"></div><figcaption><b>Discover</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/template.jpg" alt="Template details" loading="lazy"></div><figcaption><b>Template details</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/camera.jpg" alt="Camera" loading="lazy"></div><figcaption><b>Camera</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/camera-record.jpg" alt="Recording" loading="lazy"></div><figcaption><b>Recording</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/ref-import.jpg" alt="Reference import" loading="lazy"></div><figcaption><b>1 · Choose a reference</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/state-processing.jpg" alt="Reading reference" loading="lazy"></div><figcaption><b>Reading it</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/ref-analysis.jpg" alt="Analysis" loading="lazy"></div><figcaption><b>2 · How it was made</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/select-media.jpg" alt="Select media" loading="lazy"></div><figcaption><b>3 · Add your media</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/direction.jpg" alt="Direction" loading="lazy"></div><figcaption><b>4 · Direct your version</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/direction-camera.jpg" alt="Camera move" loading="lazy"></div><figcaption><b>4a · Camera move</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/review.jpg" alt="Review" loading="lazy"></div><figcaption><b>5 · Review</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/generating.jpg" alt="Generating" loading="lazy"></div><figcaption><b>Developing</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/result.jpg" alt="Result" loading="lazy"></div><figcaption><b>6 · Your version</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/animate.jpg" alt="Animate" loading="lazy"></div><figcaption><b>Animate</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/restyle.jpg" alt="Restyle" loading="lazy"></div><figcaption><b>Restyle</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/photo-editor.jpg" alt="Photo editor" loading="lazy"></div><figcaption><b>Photo editor</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/video-editor.jpg" alt="Video editor" loading="lazy"></div><figcaption><b>Video editor</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/library.jpg" alt="Library" loading="lazy"></div><figcaption><b>Library</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/assistant.jpg" alt="Assistant" loading="lazy"></div><figcaption><b>Assistant</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/profile.jpg" alt="Profile" loading="lazy"></div><figcaption><b>Profile &amp; settings</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/subscription.jpg" alt="Plans" loading="lazy"></div><figcaption><b>Plans &amp; credits</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/state-empty.jpg" alt="Empty" loading="lazy"></div><figcaption><b>Empty</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/state-failed.jpg" alt="Failed" loading="lazy"></div><figcaption><b>Failed</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/state-offline.jpg" alt="Offline" loading="lazy"></div><figcaption><b>Offline</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/state-credits.jpg" alt="Not enough credits" loading="lazy"></div><figcaption><b>Not enough credits</b></figcaption></figure>
+      <figure><div class="dev"><img src="shots/state-saved.jpg" alt="Saved" loading="lazy"></div><figcaption><b>Saved · exporting</b></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="h-skill">
+  <div class="wrap">
+    <span class="eyebrow">Agent skill</span>
+    <h2 id="h-skill">mova-design: the system, packaged for agents.</h2>
+    <p class="lede">Made with skill-creator. It triggers on any MOVA screen, state, onboarding, App Store or motion request, and carries the tokens, components, motion layer, a screen template, the process, and a checker that enforces the rules.</p>
+    <div class="skill">
+      <div class="box"><h3>What's inside</h3><pre class="tree"><b>mova-design/</b>
+  SKILL.md              workflow and the rules that make it MOVA
+  <b>assets/</b>  tokens/ (3 layers) · components.css · icons.svg
+           proto.js · motion.js · screen-template.html
+  <b>references/</b>  tokens.md · components.md · motion.md · process.md
+  <b>scripts/</b>  check_screen.py
+  <b>evals/</b>  export-sheet-for-finished-video · failed-upload-state</pre></div>
+      <div class="box"><h3>Tested</h3>
+        <ul class="checks">
+          <li>Test 1, export sheet: links all token layers, checker clean, pickers not chips, no AI button (4 of 4)</li>
+          <li>Test 2, upload paused: real numbers (6.2 of 10.4 MB), says no credits charged, checker clean (3 of 3)</li>
+          <li>Skill validates with skill-creator's quick_validate and packages to mova-design.skill</li>
+        </ul>
+        <div class="term">$ python scripts/check_screen.py design/v3/screens
+PASS  animate.html … welcome.html
+<span class="ok">32 file(s), 0 error(s)</span></div>
+        <p style="font-size: 14px; color: var(--fg-3); margin: 14px 0 0">The tests were run by following the skill directly, not with independent subagents or a with/without-skill benchmark. That fuller evaluation loop is available whenever you want it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="h-refs">
+  <div class="wrap">
+    <span class="eyebrow">Sources</span>
+    <h2 id="h-refs">What came from where.</h2>
+    <div class="refs">
+      <div class="ref"><h3>Build the design system and skills your agent can follow</h3><div class="meta">X saves · @_heyrico</div><p class="used">Used: the primitives → semantic → component layering and the idea of shipping it as a skill.</p></div>
+      <div class="ref"><h3>How to stop making your apps look like AI slop</h3><div class="meta">X saves · @tobiadonadon_</div><p class="used">Used: concept, three directions, render, critique, refine. It became process.md and this page's structure.</p></div>
+      <div class="ref"><h3>How to make your App Store screenshots convert</h3><div class="meta">X saves · @scrnshtstudio</div><p class="used">Used: the principles behind the five store slides.</p></div>
+      <div class="ref"><h3>Appllama/top-welcome-screens</h3><div class="meta">X saves · 613★</div><p class="used">Used as inspiration for an animated, paged onboarding. Nothing copied.</p></div>
+      <div class="ref"><h3>juliangarnier/anime</h3><div class="meta">X saves · 74.8k★ · MIT · v3.2.2 via cdnjs</div><p class="used">Used: the motion layer's engine (timelines, stagger, springs).</p></div>
+      <div class="ref"><h3>60fps.design</h3><div class="meta">X saves · mobile motion gallery</div><p class="ref-only">Reference for motion restraint and timing.</p></div>
+      <div class="ref"><h3>anthropics/skills · skill-creator, frontend-design</h3><div class="meta">X saves · loaded skills</div><p class="used">Used: skill-creator's structure, tests, validation and packaging. Frontend-design and artifact-design guidance shaped this page.</p></div>
+      <div class="ref"><h3>EmergeTools/Pow</h3><div class="meta">MIT · iOS 15+</div><p class="used">Used as ideas: shine, film-exposure develop, press feedback, rebuilt for the web.</p></div>
+      <div class="ref"><h3>twostraws/Vortex</h3><div class="meta">MIT · iOS 15+</div><p class="used">Used as ideas: spark burst and welcome fireflies, rebuilt and capped.</p></div>
+      <div class="ref"><h3>mikelikesdesign/SwiftUI-experiments</h3><div class="meta">MIT</div><p class="used">Draggable and particle sliders behind the rulers and the light dial (since v2).</p></div>
+      <div class="ref"><h3>meliwat/awesome-ios-design-md</h3><div class="meta">MIT · markdown</div><p class="used">Content-first color, hairlines and mono readouts (since v2). Its nine-section DESIGN.md shape informed the skill's references.</p></div>
+      <div class="ref"><h3>muhittincamdali/SwiftUI-Design-System-Pro</h3><div class="meta">MIT · iOS 17</div><p class="used">Role-based token naming (since v2). Not a dependency.</p></div>
+      <div class="ref"><h3>anthropic-skills:animation-libraries</h3><div class="meta">Loaded skill</div><p class="ref-only">Loaded as asked. It only defines a reply format and offered no technique, so the motion work rests on anime.js and the sources above.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">MOVA design v3 · design phase, no app code · Photography from Unsplash · Prices are [PRICE] placeholders</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const A = window.anime;
+  const dev = document.getElementById('dev');
+  if (reduce || !A) { if (dev) dev.style.clipPath = 'inset(0 0 0 0)'; return; }
+  document.getElementById('rmNote').hidden = false;
+  const press = document.getElementById('pressBtn');
+  press.addEventListener('pointerdown', () => A({ targets: press, scale: .95, duration: 120, easing: 'easeOutQuad' }));
+  press.addEventListener('pointerup', () => A({ targets: press, scale: 1, duration: 380, easing: 'spring(1, 120, 12, 0)' }));
+  press.addEventListener('pointerleave', () => A({ targets: press, scale: 1, duration: 220, easing: 'easeOutQuad' }));
+  const credit = document.getElementById('credit');
+  const runs = {
+    shine() {
+      const s = document.createElement('i');
+      s.style.cssText = 'position:absolute;top:0;bottom:0;width:40%;left:-50%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent)';
+      credit.appendChild(s);
+      const v = { n: 240 };
+      A({ targets: v, n: 204, round: 1, duration: 700, easing: 'easeOutCubic', update: () => credit.firstChild.nodeValue = v.n, complete: () => setTimeout(() => credit.firstChild.nodeValue = '240', 1400) });
+      A({ targets: s, left: ['-50%', '130%'], duration: 900, easing: 'easeInOutQuad', complete: () => s.remove() });
+    },
+    develop() {
+      const st = { v: 100 };
+      A({ targets: st, v: 0, duration: 2400, easing: 'easeInOutSine', update: () => dev.style.clipPath = `inset(${st.v}% 0 0 0)` });
+    },
+    sparks() {
+      const host = document.getElementById('sparkStage'), parts = [];
+      for (let i = 0; i < 12; i++) { const p = document.createElement('i'); p.style.cssText = 'position:absolute;left:50%;top:50%;width:5px;height:5px;border-radius:50%;background:#A9A4FF'; host.appendChild(p); parts.push(p); }
+      A({ targets: parts, translateX: () => A.random(-100, 100), translateY: () => A.random(-60, 50), scale: [1, .3], opacity: [1, 0], duration: () => A.random(600, 900), easing: 'easeOutCubic', complete: () => parts.forEach(p => p.remove()) });
+    },
+    lanes() { A({ targets: '#lanes i', scale: [.9, 1], opacity: [.35, 1], delay: A.stagger(50), duration: 420, easing: 'spring(1, 160, 14, 0)' }); },
+    draw() { A({ targets: '#drawMark path', strokeDashoffset: [A.setDashoffset, 0], duration: 1100, delay: A.stagger(220), easing: 'easeInOutCubic' }); },
+  };
+  document.querySelectorAll('[data-run]').forEach(b => b.addEventListener('click', () => runs[b.dataset.run]()));
+  // first view: play each once when scrolled into view
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { ['shine', 'develop', 'lanes', 'draw'].forEach(k => runs[k]()); io.disconnect(); } }), { threshold: .3 });
+  io.observe(document.getElementById('credit'));
+  A({ targets: '#heroMark path', strokeDashoffset: [A.setDashoffset, 0], duration: 1100, delay: A.stagger(220, { start: 200 }), easing: 'easeInOutCubic' });
+})();
+</script>

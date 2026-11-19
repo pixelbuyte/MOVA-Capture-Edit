@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>MOVA · Camera</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  .live { position: absolute; left: 0; right: 0; top: 0; height: 652px; overflow: hidden; }
+  .live img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .thirds { position: absolute; inset: 0; background:
+    linear-gradient(90deg, transparent calc(33.33% - .5px), var(--hairline-strong) 0 calc(33.33% + .5px), transparent 0 calc(66.66% - .5px), var(--hairline-strong) 0 calc(66.66% + .5px), transparent 0),
+    linear-gradient(transparent calc(33.33% - .5px), var(--hairline-strong) 0 calc(33.33% + .5px), transparent 0 calc(66.66% - .5px), var(--hairline-strong) 0 calc(66.66% + .5px), transparent 0); }
+  .topbar { position: absolute; top: var(--safe-top); left: var(--sp-3); right: var(--sp-3); display: flex; justify-content: space-between; align-items: center; }
+  .chipbar { display: flex; align-items: center; height: 44px; padding: 0 var(--sp-2); border-radius: 22px; }
+  .chipbar button { height: 44px; min-width: 36px; padding: 0 6px; font: 600 11px/1 var(--font-ui); letter-spacing: .04em; color: var(--text-1); }
+  .chipbar button[aria-pressed="true"] { color: var(--cam); }
+  .focus { position: absolute; left: 132px; top: 168px; width: 100px; height: 100px; }
+  .focus.vf::after { --c: var(--cam); inset: 0; opacity: 1; transform: none; --l: 14px; }
+  .ev { position: absolute; left: 244px; top: 162px; display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--cam); }
+  .ev i { width: 1.5px; height: 40px; background: var(--cam); opacity: .7; }
+  .level { position: absolute; left: 95px; right: 95px; top: 326px; display: flex; align-items: center; gap: 10px; }
+  .level i { flex: 1; height: 1.5px; background: var(--text-1); opacity: .85; }
+  .level b { width: 10px; height: 10px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--positive); }
+  .hud { position: absolute; top: 108px; left: var(--sp-3); right: var(--sp-3); display: flex; justify-content: space-between; align-items: flex-start; }
+  .histo { width: 92px; height: 40px; border-radius: 8px; background: var(--overlay); padding: 5px; }
+  .readouts { position: absolute; left: var(--sp-3); right: var(--sp-3); top: 556px; height: 44px; border-radius: 22px; display: grid; grid-template-columns: repeat(5, 1fr); }
+  .readouts button { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+  .readouts b { font: 600 9.5px/1 var(--font-ui); letter-spacing: .05em; color: var(--text-2); }
+  .readouts span { font: 500 12px/1 var(--font-mono); color: var(--text-1); }
+  .readouts [aria-expanded="true"] span, .readouts [aria-expanded="true"] b { color: var(--cam); }
+  .dock { position: absolute; left: 0; right: 0; bottom: 0; height: 244px; background: var(--canvas); }
+  .lenses { position: absolute; left: 0; right: 0; top: 500px; display: flex; justify-content: center; gap: var(--sp-1); }
+  .lenses button { width: 40px; height: 40px; border-radius: 50%; font: 600 12px/1 var(--font-ui); color: var(--text-1); background: var(--overlay); }
+  .lenses [aria-checked="true"] { color: var(--cam); font-size: 13px; }
+  .modes { position: absolute; left: 0; right: 0; bottom: 140px; display: flex; justify-content: center; gap: var(--sp-6); }
+  .modes button { font: 600 13px/1 var(--font-ui); letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); min-height: 36px; }
+  .modes [aria-checked="true"] { color: var(--cam); }
+  .shutterrow { position: absolute; left: 28px; right: 28px; bottom: 40px; display: flex; justify-content: space-between; align-items: center; }
+  .shutter { width: 80px; height: 80px; border-radius: 50%; box-shadow: inset 0 0 0 4px var(--select); display: grid; place-items: center; transition: transform var(--dur-1); }
+  .shutter:active { transform: scale(.94); }
+  .shutter span { width: 66px; height: 66px; border-radius: 50%; background: var(--select); }
+  .rulerpanel { position: absolute; left: 0; right: 0; top: 612px; padding: 0 var(--sp-3); }
+</style>
+</head>
+<body>
+<main class="screen screen--media">
+  <div class="live">
+    <img src="../img/port_denim.jpg" alt="Live camera preview: a portrait in a denim jacket">
+    <div class="thirds" aria-hidden="true"></div>
+    <div style="position: absolute; inset: 0 0 auto; height: 180px; background: var(--scrim-top)"></div>
+  </div>
+
+  <div class="topbar">
+    <a class="ibtn ibtn--glass" href="home.html" aria-label="Close camera"><svg class="ic" aria-hidden="true"><use href="../icons.svg#chevdown"/></svg></a>
+    <div class="chipbar glass ibtn--glass" role="toolbar" aria-label="Capture options">
+      <button aria-pressed="true" aria-label="Flash auto"><svg class="ic ic--sm" aria-hidden="true"><use href="../icons.svg#bolt"/></svg></button>
+      <button aria-pressed="false" aria-label="Timer off"><svg class="ic ic--sm" aria-hidden="true"><use href="../icons.svg#timer"/></svg></button>
+      <button aria-pressed="false">HEIF 48</button>
+      <button aria-pressed="true" aria-label="Apple ProRAW on">RAW</button>
+      <button aria-pressed="false" aria-label="Aspect ratio 4 by 3">4:3</button>
+    </div>
+    <button class="ibtn ibtn--glass" aria-label="Switch to front camera"><svg class="ic" aria-hidden="true"><use href="../icons.svg#flip"/></svg></button>
+  </div>
+
+  <div class="hud">
+    <svg class="histo" viewBox="0 0 82 30" role="img" aria-label="Histogram: well exposed, highlights not clipped"><path d="M0 30 L0 26 C8 22 12 14 20 13 S32 18 40 9 S56 2 62 8 S74 22 82 27 L82 30Z" fill="var(--text-1)" opacity=".75"/></svg>
+    <span class="tc" style="padding: 5px 8px; border-radius: 8px; background: var(--overlay); color: var(--cam)">AE/AF LOCK</span>
+  </div>
+
+  <div class="focus vf" aria-hidden="true"></div>
+  <div class="ev" aria-hidden="true"><svg class="ic ic--xs"><use href="../icons.svg#sun"/></svg><i></i><span class="tc" style="color: var(--cam)">+0.3</span></div>
+  <div class="level" role="img" aria-label="Level: straight"><i></i><b></b><i></i></div>
+
+  <div class="lenses" role="radiogroup" aria-label="Lens" data-choice>
+    <button role="radio" data-opt aria-checked="false">.5</button>
+    <button role="radio" data-opt aria-checked="true">1×</button>
+    <button role="radio" data-opt aria-checked="false">2</button>
+    <button role="radio" data-opt aria-checked="false">5</button>
+  </div>
+  <div class="readouts ibtn--glass" role="group" aria-label="Exposure readouts">
+    <button aria-expanded="false"><b>ISO</b><span>125</span></button>
+    <button aria-expanded="true"><b>SHUTTER</b><span id="sh">1/250</span></button>
+    <button aria-expanded="false"><b>WB</b><span>5200K</span></button>
+    <button aria-expanded="false"><b>FOCUS</b><span>AF</span></button>
+    <button aria-expanded="false"><b>EV</b><span>+0.3</span></button>
+  </div>
+
+  <div class="dock"></div>
+  <div class="rulerpanel">
+    <div class="ruler" data-ruler data-values="1/30,1/45,1/60,1/90,1/125,1/180,1/250,1/350,1/500,1/750,1/1000,1/2000" data-index="6" data-out="sh" role="slider" tabindex="0" aria-label="Shutter speed"><div class="ruler__ticks"></div><div class="ruler__needle"></div></div>
+  </div>
+  <div class="modes" role="radiogroup" aria-label="Mode" data-choice>
+    <button role="radio" data-opt aria-checked="false">Video</button>
+    <button role="radio" data-opt aria-checked="true">Photo</button>
+    <button role="radio" data-opt aria-checked="false">Portrait</button>
+  </div>
+  <div class="shutterrow">
+    <a href="library.html" aria-label="Last capture" style="width: 52px; height: 52px; border-radius: var(--r-2); overflow: hidden; box-shadow: 0 0 0 1.5px var(--hairline-strong)"><img src="../img/hiker.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover"></a>
+    <button class="shutter" aria-label="Take photo"><span></span></button>
+    <a href="ref-import.html" class="ibtn ibtn--fill" aria-label="Send last capture to Studio" style="width: 52px; height: 52px"><svg class="ic t-accent" aria-hidden="true"><use href="../icons.svg#spark"/></svg></a>
+  </div>
+  <div class="home-indicator"></div>
+</main>
+<script src="../proto.js"></script>
+</body>
+</html>
